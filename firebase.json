@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "DA-Bubble",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}
