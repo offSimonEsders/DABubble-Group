@@ -36,7 +36,7 @@
             width: 0px; // 470
             height: 72px;
             overflow: hidden;
-            animation: animate-lettering 1s ease-in-out forwards;
+            animation: animate-lettering 1s ease-in-out 0.5s forwards;
 
             .text-animation-content {
                 display: flex;
@@ -45,7 +45,7 @@
                 position: absolute;
                 transform: translateX(-110%);
 
-                animation: animate-text 3s ease-in-out 0.5s forwards;
+                animation: animate-text 2s ease-in-out 1s forwards;
                 svg {
 
                     flex-shrink: 0;
