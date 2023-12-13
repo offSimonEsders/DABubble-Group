@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './channels.component.scss'
 })
 export class ChannelsComponent {
-
+  changelName:string = 'EntwicklerteamertzuiwegfkuzegfukzgkZGFUZgefkeuzgZEGUZGEZGEZGFZ<GFKZUGSUZ<GFZGS<ZGFZSG<ZGFZUG';
 }
