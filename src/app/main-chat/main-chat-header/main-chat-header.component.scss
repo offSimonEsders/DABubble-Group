@@ -86,3 +86,43 @@
   width: 40px;
   height: 40px;
 }
+
+.new-chat-header {
+  width: 100%;
+  padding-block: 32px 20px;
+  @include displayFlex($fd: column, $ai: flex-start, $g: 20px);
+
+  span {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .search-chat {
+    width: 100%;
+    padding: 15px 20px;
+    border: 1px solid $lightPurple;
+    border-radius: 30px;
+
+    input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 18px;
+    }
+  }
+}
+
+.private-chat-header {
+  padding-block: 32px 20px;
+  @include displayFlex($g: 15px);
+
+  .avatar-container {
+    width: 50px;
+    height: 50px;
+  }
+
+  span {
+    font-size: 24px;
+    font-weight: 700;
+  }
+}

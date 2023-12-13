@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class MainChatHeaderComponent {
   members = [1, 2, 3];
+  accountStatus = 'online';
 
   translateAvatarElements(index: number) {
     if (index < 2 && this.members.length > 2) {
