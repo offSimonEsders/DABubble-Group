@@ -20,5 +20,27 @@
     width: 100%;
     height: 40px;
     @include displayFlex($jc: space-between);
+
+    .left-icons {
+      @include displayFlex();
+
+      .vektor {
+        width: 1px;
+        height: 40px;
+        background-color: $lightPurple;
+        margin-inline: 5px;
+      }
+
+      .icon-container {
+        width: 40px;
+        height: 40px;
+        @include centerElement();
+      }
+    }
+
+    .send-message-icon {
+      width: 40px;
+      height: 40px;
+    }
   }
 }
