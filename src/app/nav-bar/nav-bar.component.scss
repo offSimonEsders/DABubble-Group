@@ -6,9 +6,39 @@
 
 .head{
     @include displayFlex($g: 10px,$jc: space-between);   
+
+
+}
+
+.edit-button{
+    width: 45px;
+    height: 45px;
+    padding: 4px;
+    border-radius: 100%;
+    @include displayFlex($g: 10px,$jc: center);
+    &:active {
+        background-color: $bgr;
+
+        svg path{
+            fill: black !important;
+        }
+    }
+
+    svg{
+        @include displayFlex($jc: center);
+
+    }
+    &:hover{
+        cursor: pointer;
+        background-color: $bgr;
+        svg path {
+            fill: $purple2;
+        }
+    }
 }
 
 .logo{
+    cursor: pointer;
     @include displayFlex($g: 10px,$jc: center);
     border-radius: 100px;
     height: 64px;
@@ -22,7 +52,7 @@
         color: black;
         font-size: 24px;
         font-weight: 700;
-        padding-right: 30px;
+        padding-right: 20px;
         padding-left: 15px;
     }
 
@@ -33,8 +63,6 @@
         color: $purple2;
         }
 
-        svg path {
-        fill: $purple2;
-        }
+
     }
 }
