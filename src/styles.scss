@@ -65,7 +65,7 @@
   src: url("./assets/fonts/nunito-v26-latin-900.woff2") format("woff2");
 }
 
-//----------------------------------Global---------------------------------------
+//--------------------------------- Global --------------------------------------
 * {
   box-sizing: border-box;
   padding: 0;
@@ -73,14 +73,14 @@
   font-family: "Nunito", sans-serif;
 }
 
-//--------------------------------- Colors---------------------------------------
+//--------------------------------- Colors ---------------------------------------
 $bgr: #eceefe;
 $lightPurple: #adb0d9;
 $purple2: #797ef3;
 $onlineGreen: #92c83e;
 $textGrey: #686868;
 
-//--------------------------------- Mixins---------------------------------------
+//--------------------------------- Mixins ---------------------------------------
 @mixin displayFlex($fd: row, $jc: flex-start, $ai: center, $g: 0px) {
   display: flex;
   flex-direction: $fd;

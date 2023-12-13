@@ -1,0 +1,81 @@
+@import "../../../styles.scss";
+
+.overdiv{
+    @include displayFlex($jc: space-between); 
+    margin-top: 20px;
+    padding: 8px;
+}
+
+.head{
+    @include displayFlex($jc: center); 
+
+    &:hover{
+        cursor: pointer;
+        svg path {
+            fill: $purple2;
+        }
+        span{
+            color: $purple2;
+        }
+    }
+}
+
+.name{
+    margin-left: 20px;
+    @include displayFlex($jc: center); 
+    span{
+        padding-left: 10px;
+        color: black;
+        font-size: 18px;
+        font-weight: 700;
+    }
+}
+
+.plus{
+    @include displayFlex($jc: center); 
+    border-radius: 100%;
+    padding: 8px;
+    cursor: pointer;
+    svg{
+        &:active {
+            path{
+                fill: black !important;
+            }
+        }
+    }
+    &:hover{
+        background-color: $bgr;
+
+        svg path {
+            fill: $purple2;
+        }
+    }
+}
+
+.channels{
+    margin-top: 10px;
+    @include displayFlex($jc: flex-start); 
+    border-radius: 100px;
+    padding: 8px;
+    padding-left: 12%;
+    cursor: pointer;
+    &:hover{
+        background-color: $bgr;
+        svg path{
+            fill: $purple2;
+        }
+        span{
+            color: $purple2;
+        }
+    }
+    span{
+        overflow-x: hidden;
+        max-width: 80%;
+        padding-left: 10px;
+        color: black;
+        font-size: 18px;
+        font-weight: 500;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
