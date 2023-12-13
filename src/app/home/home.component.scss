@@ -1,0 +1,32 @@
+@import "../../styles.scss";
+
+.home {
+  width: 100vw;
+  height: 100vh;
+  padding: 25px 20px;
+  background-color: $lightPurple;
+
+  header {
+    width: 100%;
+    padding-left: 25px;
+    margin-bottom: 20px;
+  }
+
+  section {
+    width: 100%;
+    height: calc(100% - 116px);
+    @include displayFlex($g: 20px);
+
+    .menu-chanel {
+      @include componentMaxWidth(366px);
+    }
+
+    .main-chat {
+      @include componentMaxWidth(989px);
+    }
+
+    .secondary-chat {
+      @include componentMaxWidth(485px);
+    }
+  }
+}

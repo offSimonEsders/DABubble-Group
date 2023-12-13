@@ -1,0 +1,51 @@
+@import "../../styles.scss";
+
+header {
+  width: 100%;
+  @include displayFlex($jc: space-between);
+
+  .logo {
+    width: 242.11px;
+    height: 70px;
+  }
+}
+
+.searchbar {
+  width: calc(100% - 891px);
+  max-width: 989px;
+  padding: 17.5px 45px;
+  @include displayFlex($jc: space-between, $g: 45px);
+  border-radius: 42px;
+  background-color: $bgr;
+
+  input {
+    border: none;
+    outline: none;
+    font-size: 24px;
+    width: clamp(293px, 100%, 100%);
+    background-color: $bgr;
+
+    &::placeholder {
+      color: $textGrey;
+    }
+  }
+}
+
+.profil-menu-container {
+  max-width: 468px;
+  @include displayFlex($g: 20px);
+
+  span {
+    font-size: 32px;
+    font-weight: 700;
+    max-width: calc(100% - 140px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .avatar-container {
+    width: 70px;
+    height: 70px;
+  }
+}
