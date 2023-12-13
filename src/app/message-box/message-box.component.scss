@@ -1,0 +1,24 @@
+@import "../../styles.scss";
+
+.message-box {
+  width: 100%;
+  height: 145px;
+  padding: 20px;
+  border: 1px solid $lightPurple;
+  border-radius: 20px;
+
+  textarea {
+    width: 100%;
+    height: 65px;
+    font-size: 18px;
+    resize: none;
+    border: none;
+    outline: none;
+  }
+
+  .icons-text-box-container {
+    width: 100%;
+    height: 40px;
+    @include displayFlex($jc: space-between);
+  }
+}

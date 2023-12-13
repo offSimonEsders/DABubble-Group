@@ -16,14 +16,14 @@ header {
   padding: 17.5px 45px;
   @include displayFlex($jc: space-between, $g: 45px);
   border-radius: 42px;
-  background-color: $bgr;
+  background-color: white;
 
   input {
     border: none;
     outline: none;
     font-size: 24px;
     width: clamp(293px, 100%, 100%);
-    background-color: $bgr;
+    background-color: white;
 
     &::placeholder {
       color: $textGrey;
@@ -34,6 +34,7 @@ header {
 .profil-menu-container {
   max-width: 468px;
   @include displayFlex($g: 20px);
+  cursor: pointer;
 
   span {
     font-size: 32px;
@@ -47,5 +48,13 @@ header {
   .avatar-container {
     width: 70px;
     height: 70px;
+  }
+
+  &:hover span {
+    color: $purple2;
+  }
+
+  &:hover .arrow-down-icon path {
+    fill: $purple2;
   }
 }

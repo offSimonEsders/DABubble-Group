@@ -1,0 +1,59 @@
+@import "../../styles.scss";
+
+.main-chat {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  @include displayFlex($fd: column);
+}
+
+header {
+  width: 100%;
+  height: 96px;
+  padding: 25px 45px;
+  @include displayFlex($jc: space-between);
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+
+  .current-channel {
+    padding: 6px 10px;
+    @include displayFlex($g: 10px);
+    border-radius: 100px;
+    cursor: pointer;
+
+    span {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    svg:first-child {
+      margin-inline: 5px;
+    }
+
+    svg:last-child {
+      margin-inline: 8px;
+    }
+
+    &:hover {
+      background-color: $bgr;
+
+      span {
+        color: $purple2;
+      }
+
+      svg path {
+        fill: $purple2;
+      }
+    }
+  }
+}
+
+.chat-container {
+  width: 100%;
+  height: calc(100% - 319px);
+}
+
+.message-box {
+  width: 100%;
+  height: 223px;
+  padding: 38px 35px 40px;
+}
