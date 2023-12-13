@@ -96,3 +96,8 @@ $textGrey: #686868;
   border-radius: 30px;
   background-color: white;
 }
+
+@mixin centerElement() {
+  display: grid;
+  place-items: center;
+}
