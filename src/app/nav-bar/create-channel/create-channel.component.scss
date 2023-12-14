@@ -12,6 +12,7 @@
 }
 
 .crate-overdiv{
+    position: relative;
     border-radius: 40px;
     width: 800px;
     height: 500px;
@@ -20,6 +21,7 @@
     margin-left: 10px;
 
     h1{
+        font-size: 26px;
         margin-top: 10px;
         margin-bottom: 20px;
     }
@@ -33,5 +35,77 @@
     span{
         font-size: 18px;
         margin-right: 20px;
+    }
+
+    button{
+        background-color: $buttonPurple;
+        padding: 16px;
+        border: none;
+        border-radius: 30px;
+        color: white;
+        font-size: 18px;
+        width: 150px;
+        &:hover{
+            cursor: pointer;
+            background-color: $purple2;
+        }
+        &:active {
+            background-color: $buttonPurple !important;
+        }
+    }
+}
+
+.button{
+    margin-top: 30px;
+    width: 100%;
+    @include displayFlex($jc: flex-end); 
+}
+
+.input-div{
+    margin-top: 20px;
+    @include displayFlex($jc: flex-start); 
+    border: 1px solid $textGrey;
+    padding: 16px;
+    border-radius: 30px;
+
+
+    span{
+        padding-left: 10px;
+        font-weight: 500;
+        font-size: 20px;
+        color: $textGrey;
+    }
+
+    input{
+        font-weight: 500;
+        font-size: 18px;
+        border: none; 
+        outline: none;
+        width: calc(100% - 40px);
+    }
+}
+
+.close-button{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+    @include displayFlex($jc: center); 
+    border-radius: 100%;
+    padding: 8px;
+    cursor: pointer;
+    svg{
+        &:active {
+            path{
+                fill: black !important;
+            }
+        }
+    }
+    &:hover{
+        background-color: $bgr;
+
+        svg path {
+            fill: $purple2;
+        }
     }
 }
