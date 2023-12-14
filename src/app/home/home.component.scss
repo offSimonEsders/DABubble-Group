@@ -19,6 +19,7 @@
 
     .menu-chanel {
       @include componentMaxWidth(366px);
+      overflow-y: scroll;
     }
 
     .main-chat {
