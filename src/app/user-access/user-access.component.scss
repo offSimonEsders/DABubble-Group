@@ -1,0 +1,24 @@
+.background-element {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--Bg-color, #ECEEFE);
+    z-index: -2;
+}
+
+.disappearing-background-element {
+    z-index: -1;
+    background: linear-gradient(1deg, #313AE5 1.22%, #797EF3 98.76%);
+    animation: change-background-color 4s linear 0.5s forwards;
+}
+
+@keyframes change-background-color {
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
