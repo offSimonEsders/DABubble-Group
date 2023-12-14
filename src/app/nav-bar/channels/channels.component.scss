@@ -1,5 +1,10 @@
 @import "../../../styles.scss";
 
+.scroll{
+    overflow-y: scroll !important;
+    max-height: 100% !important;
+}
+
 .overdiv{
     @include displayFlex($jc: space-between); 
     margin-top: 20px;
@@ -59,6 +64,12 @@
     padding: 8px;
     padding-left: 12%;
     cursor: pointer;
+
+    img{
+        height: 50px;
+        width: 50px;
+        object-fit: cover;
+    }
     &:hover{
         background-color: $bgr;
         svg path{
@@ -78,4 +89,8 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+}
+
+.personName{
+    margin-left: 10px;
 }

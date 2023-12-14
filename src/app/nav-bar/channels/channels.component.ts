@@ -10,9 +10,19 @@ import { CommonModule } from '@angular/common';
 })
 export class ChannelsComponent {
   changelName:string = 'EntwicklerteamertzuiwegfkuzegfukzgkZGFUZgefkeuzgZEGUZGEZGEZGFZ<GFKZUGSUZ<GFZGS<ZGFZSG<ZGFZUG';
-  open:boolean = true;
+  PersonlName:string = 'Frederick Beck (Du)';
+  openCh:boolean = true;
+  rotateCh:boolean = false;
+  openPe:boolean = true;
+  rotatePe:boolean = false;
 
   hideChannels(){
-    this.open = !this.open;
+    this.openCh = !this.openCh;
+    this.rotateCh = !this.rotateCh;
+  }
+
+  hidePersonal(){
+    this.openPe = !this.openPe;
+    this.rotatePe = !this.rotatePe;
   }
 }
