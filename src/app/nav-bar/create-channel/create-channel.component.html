@@ -1,5 +1,5 @@
-<div *ngIf="true" class="overdiv">
-    <div *ngIf="false" class="crate-overdiv">
+<div (click)="close()" *ngIf="openCreate" class="overdiv">
+    <div (click)="$event.stopPropagation()" *ngIf="whichCreate == 1" class="crate-overdiv">
         <h1>Channel erstellen</h1>
         <span>Channels dienen deinem Team zur Kommunikation. Am besten sollen sie themenbezogen sein #marketing zum Beispiel.</span>
         <h2>
@@ -22,7 +22,7 @@
         </div>
         
         <div class="close-button">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg (click)="close()" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_813_12181" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                 <rect width="24" height="24" fill="#D9D9D9"/>
                 </mask>

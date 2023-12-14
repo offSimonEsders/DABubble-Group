@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CreateChannelComponent } from '../create-channel/create-channel.component';
 
 @Component({
   selector: 'app-channels',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,CreateChannelComponent],
   templateUrl: './channels.component.html',
   styleUrl: './channels.component.scss'
 })
@@ -16,6 +17,8 @@ export class ChannelsComponent {
   openPe:boolean = true;
   rotatePe:boolean = false;
 
+  constructor(private ChannelEdit: CreateChannelComponent){}
+
   hideChannels(){
     this.openCh = !this.openCh;
     this.rotateCh = !this.rotateCh;
@@ -24,5 +27,10 @@ export class ChannelsComponent {
   hidePersonal(){
     this.openPe = !this.openPe;
     this.rotatePe = !this.rotatePe;
+  }
+
+
+  openNewChannelDiv(){
+      this.ChannelEdit.open();
   }
 }
