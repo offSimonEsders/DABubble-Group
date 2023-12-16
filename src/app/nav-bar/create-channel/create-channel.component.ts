@@ -16,11 +16,12 @@ export class CreateChannelComponent {
   openCreate:boolean = false;
   whichCreate: 1 | 2 = 1;
   openEditChannel = inject(ChatService);
-
+  inputOpen:boolean = false;
 
   open(){
-    this.openCreate = this.openEditChannel.openEditChannel;
+    this.inputOpen = this.openEditChannel.openEditChannel;
     this.whichCreate = 1;
+    this.openCreate = this.inputOpen;
   } 
   
   close(){

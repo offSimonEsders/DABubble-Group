@@ -21,7 +21,7 @@ export class ChatService {
   chats!: Array<Chat>;
   channelSnap!: Function;
   channels!: Array<Channel>;
-  openEditChannel:any = new Subject<boolean>();
+  openEditChannel:boolean = false;
 
   constructor() {
     this.chatSnap = this.onSnap('chats');

@@ -34,7 +34,7 @@ export class ChannelsComponent {
   }
 
   openNewChannelDiv() {
-    this.openEdit.openEditChannel.next(true);
+    this.openEdit.openEditChannel = true;
     this.ChannelEdit.open();
   }
 }
