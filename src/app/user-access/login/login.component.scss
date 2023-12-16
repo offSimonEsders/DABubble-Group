@@ -2,6 +2,8 @@
     display: flex;
     justify-self: center;
     align-self: center;
+    flex-direction: column;
+    gap: 43px;
     width: 606px;
     height: 769px;
     padding: 50px 60px;
@@ -9,35 +11,231 @@
     border-radius: 30px;
     background: var(--White, #FFF);
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
-}
 
-.login-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
+    .login-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
 
-    h1 {
-        margin: 0;
-        color: var(--Purple-1, #444DF2);
-        text-align: center;
-        /* Bold Display */
-        font-size: 46px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 120%;
-        /* 55.2px */
+        h1 {
+            margin: 0;
+            color: var(--Purple-1, #444DF2);
+            text-align: center;
+            /* Bold Display */
+            font-size: 46px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 120%;
+            /* 55.2px */
+        }
+
+        p {
+            margin: 0;
+            color: var(--Black, #000);
+            text-align: center;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 120%;
+            /* 24px */
+        }
+
     }
 
-    p {
-        margin: 0;
-        color: var(--Black, #000);
-        text-align: center;
-        font-size: 20px;
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .login-input {
+            position: relative;
+
+            input {
+                cursor: pointer;
+                display: flex;
+                width: 486px;
+                flex-direction: column;
+                align-items: center;
+                border: none;
+                outline: none;
+                align-self: stretch;
+                gap: 6px;
+                padding: 18px 32px 18px 86px;
+                gap: 10px;
+                border-radius: 100px;
+                background: var(--Bg-color, #ECEEFE);
+                color: var(--Text-gray, #686868);
+                font-family: Nunito;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 120%;
+                /* 21.6px */
+
+                &:hover {
+                    outline: 1px solid var(--Text-gray, #686868);
+                }
+
+                &:focus {
+                    caret-color: black;
+                    outline: 1px solid var(--Purple-3, #535AF1);
+                }
+
+            }
+
+            svg {
+                position: absolute;
+                height: 24px;
+                width: 24px;
+                z-index: 0;
+                top: 50%;
+                left: 32px;
+                transform: translateY(-50%);
+            }
+
+        }
+
+    }
+
+    .decision-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 33px;
+
+
+
+        .forgot-password {
+            display: inline-flex;
+            padding: 5px 15px;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--Purple-2, #797EF3);
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 120%;
+
+        }
+
+        .or-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+
+            p {
+                display: inline-flex;
+                padding: 5px 15px;
+                align-items: flex-start;
+                gap: 10px;
+                border-radius: 30px;
+                background: var(--White, #FFF);
+                z-index: 1;
+            }
+
+            svg {
+                position: absolute;
+            }
+
+        }
+
+    }
+
+    .sign-in-with-google {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        outline: none;
+        padding: 11px 32px;
+        gap: 20px;
+        border-radius: 100px;
+        background: var(--Bg-color, #ECEEFE);
+        color: var(--Purple-1, #444DF2);
+        font-family: Nunito;
+        font-size: 18px;
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
-        /* 24px */
+        /* 21.6px */
+
+        &:hover {
+            font-weight: 700;
+            outline: 1px solid var(--Purple-3, #535AF1);
+        }
+
+        &:active {
+            font-weight: 500 !important;
+            outline: 1px solid var(--Text-gray, #686868) !important;
+        }
+
+    }
+
+    .login-or-guest {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+
+        .login-button {
+            cursor: pointer;
+            display: flex;
+            padding: 12px 25px;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            gap: 10px;
+            border-radius: 25px;
+            background: var(--Purple-1, #444DF2);
+            color: var(--White, #FFF);
+            font-family: Nunito;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+
+            &:hover {
+                background: var(--Purple-2, #797EF3);
+            }
+
+            &:active {
+                background: var(--Purple-1, #444DF2);
+            }
+
+        }
+
+        .guest-button {
+            cursor: pointer;
+            display: flex;
+            padding: 12px 25px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 25px;
+            border: 1px solid var(--Purple-2, #797EF3);
+            background-color: #FFF;
+            color: var(--Purple-1, #444DF2);
+            text-align: center;
+            font-family: Nunito;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+
+            &:hover {
+                background: var(--Purple-3, #535AF1);
+                color: var(--White, #FFF);
+            }
+
+            &:active {
+                background: var(--Purple-1, #444DF2);
+            }
+
+        }
+
     }
 
 }
