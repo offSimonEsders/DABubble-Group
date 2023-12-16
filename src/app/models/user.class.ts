@@ -6,6 +6,7 @@ export class User {
     private _tokenExpirationDate: Date // Ablaufdatum des Loginstatus nach der Anmeldung, bei Firebase nach einer Stunde
   ) {}
 
+  // Für Auto-Login
   get token() {
     if (!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
       return null;
