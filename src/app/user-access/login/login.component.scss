@@ -1,0 +1,43 @@
+.login-frame {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    width: 606px;
+    height: 769px;
+    padding: 50px 60px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: var(--White, #FFF);
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+}
+
+.login-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    h1 {
+        margin: 0;
+        color: var(--Purple-1, #444DF2);
+        text-align: center;
+        /* Bold Display */
+        font-size: 46px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+        /* 55.2px */
+    }
+
+    p {
+        margin: 0;
+        color: var(--Black, #000);
+        text-align: center;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+        /* 24px */
+    }
+
+}

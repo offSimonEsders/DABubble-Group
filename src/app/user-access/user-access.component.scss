@@ -1,7 +1,8 @@
 .background-element {
     position: fixed;
     top: 0;
-    width: 100vw;
+    max-width: 100vw;
+    width: 100%;
     height: 100vh;
     background: var(--Bg-color, #ECEEFE);
     z-index: -2;
@@ -11,6 +12,15 @@
     z-index: -1;
     background: linear-gradient(1deg, #313AE5 1.22%, #797EF3 98.76%);
     animation: change-background-color 2s linear 0.5s forwards;
+}
+
+.user-access-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100vw;
+    width: 100%;
+    height: 100vh;
 }
 
 @keyframes change-background-color {
