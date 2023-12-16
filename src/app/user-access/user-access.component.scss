@@ -10,7 +10,7 @@
 .disappearing-background-element {
     z-index: -1;
     background: linear-gradient(1deg, #313AE5 1.22%, #797EF3 98.76%);
-    animation: change-background-color 4s linear 0.5s forwards;
+    animation: change-background-color 3s linear 0.5s forwards;
 }
 
 @keyframes change-background-color {
