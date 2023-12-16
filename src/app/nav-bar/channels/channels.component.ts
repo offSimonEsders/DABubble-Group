@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 
@@ -8,7 +8,6 @@ import { CreateChannelComponent } from '../create-channel/create-channel.compone
   templateUrl: './channels.component.html',
   styleUrl: './channels.component.scss',
   imports: [CommonModule, CreateChannelComponent],
-  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ChannelsComponent {
   changelName: string =
@@ -18,9 +17,8 @@ export class ChannelsComponent {
   rotateCh: boolean = false;
   openPe: boolean = true;
   rotatePe: boolean = false;
-  openCreate = false;
 
-  constructor() {}
+  constructor(private ChannelEdit: CreateChannelComponent) {}
 
   hideChannels() {
     this.openCh = !this.openCh;
@@ -33,6 +31,6 @@ export class ChannelsComponent {
   }
 
   openNewChannelDiv() {
-    this.openCreate = true;
+    this.ChannelEdit.open();
   }
 }
