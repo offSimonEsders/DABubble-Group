@@ -1,27 +1,53 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import {
+  doc,
+  setDoc,
+  onSnapshot,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
+  DocumentData,
+} from '@angular/fire/firestore';
+
 import { Account } from '../models/accounts.class';
+import { FirestoreService } from './firestore.service';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
+  firestore = inject(FirestoreService);
+  accSnap!: Function;
   accounts!: Array<Account>;
 
-  addAccount(account: Account) {
-    this.accounts.push(account);
+  constructor() {
+    this.accSnap = onSnapshot(
+      this.firestore.getCollectionRef('accounts'),
+      (data) => {
+        this.accounts = [];
+        this.getAccounts(data);
+      }
+    );
   }
 
-  getAccounts() {
-    return this.accounts.slice(); // Gibt Kopie des Account Arrays zurück
+  async addAccount(account: Account) {
+    await setDoc(
+      doc(this.firestore.db, 'accounts', account.accountId),
+      account.toJson()
+    ).catch((err) => {
+      // show an Errormessage
+    });
   }
 
-  getAccount(index: number) {
-    return this.accounts[index];
-  }
-
-  updateAccount(index: number, account: Account) {
-    this.accounts[index] = account;
-  }
-
-  deleteAccount(index: number) {
-    this.accounts.splice(index, 1);
+  getAccounts(data: QuerySnapshot<DocumentData, DocumentData>) {
+    data.forEach((acc: QueryDocumentSnapshot<DocumentData, DocumentData>) => {
+      this.accounts.push(
+        new Account(
+          acc.get('name'),
+          acc.get('email'),
+          acc.get('photoUrl'),
+          acc.get('onlineStatus'),
+          acc.get('id'),
+          acc.get('chatIds')
+        )
+      );
+    });
   }
 }

@@ -1,27 +1,58 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import {
+  DocumentData,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
+  addDoc,
+  collection,
+  onSnapshot,
+  updateDoc,
+} from '@angular/fire/firestore';
+
 import { Channel } from '../models/channel.class';
+import { FirestoreService } from './firestore.service';
 
 @Injectable({ providedIn: 'root' })
 export class ChannelService {
+  firestore = inject(FirestoreService);
+  channelSnap!: Function;
   channels!: Array<Channel>;
 
-  addChannel(channel: Channel) {
-    this.channels.push(channel);
+  constructor() {
+    this.channelSnap = onSnapshot(
+      this.firestore.getCollectionRef('accounts'),
+      (data) => {
+        this.channels = [];
+        this.getChannels(data);
+      }
+    );
   }
 
-  getChannels() {
-    return this.channels.slice(); // Gibt Kopie des Channel Arrays zurück
+  async addChannel(channel: Channel) {
+    await addDoc(collection(this.firestore.db, 'channels'), channel.toJson())
+      .catch((err) => {
+        // show an Errormessage
+      })
+      .then((doc: any) => {
+        updateDoc(doc, { id: doc.id });
+      });
   }
 
-  getChannel(index: number) {
-    return this.channels[index];
-  }
-
-  updateChannel(index: number, channel: Channel) {
-    this.channels[index] = channel;
-  }
-
-  deleteChannel(index: number) {
-    this.channels.splice(index, 1);
+  getChannels(data: QuerySnapshot<DocumentData, DocumentData>) {
+    data.forEach(
+      (channel: QueryDocumentSnapshot<DocumentData, DocumentData>) => {
+        this.channels.push(
+          new Channel(
+            channel.get('name'),
+            channel.get('description'),
+            channel.get('members'),
+            channel.get('access'),
+            channel.get('creater'),
+            channel.get('messages'),
+            channel.get('id')
+          )
+        );
+      }
+    );
   }
 }
