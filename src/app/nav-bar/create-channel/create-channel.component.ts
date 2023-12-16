@@ -1,4 +1,4 @@
-import { Component, Injectable, inject } from '@angular/core';
+import { Component, Injectable, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../../services/chat.service';
 
@@ -7,24 +7,21 @@ import { ChatService } from '../../services/chat.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './create-channel.component.html',
-  styleUrl: './create-channel.component.scss'
+  styleUrl: './create-channel.component.scss',
 })
 @Injectable({
   providedIn: 'root',
 })
 export class CreateChannelComponent {
-  openCreate:boolean = false;
+  openCreate: boolean = false;
   whichCreate: 1 | 2 = 1;
-  openEditChannel = inject(ChatService);
+  @Input() emittedSignal!: any;
 
-
-  open(){
-    this.openCreate = this.openEditChannel.openEditChannel;
+  open() {
     this.whichCreate = 1;
-  } 
-  
-  close(){
-    this.openCreate = false;
   }
 
+  close() {
+    this.openCreate = false;
+  }
 }

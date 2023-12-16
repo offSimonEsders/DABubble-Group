@@ -1,15 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
-import { ChatService } from '../../services/chat.service';
-
+import { AvatarComponent } from '../../avatar/avatar.component';
 
 @Component({
   selector: 'app-channels',
   standalone: true,
   templateUrl: './channels.component.html',
   styleUrl: './channels.component.scss',
-  imports: [CommonModule, CreateChannelComponent],
+  imports: [CommonModule, CreateChannelComponent, AvatarComponent],
 })
 export class ChannelsComponent {
   changelName: string =
@@ -19,7 +18,7 @@ export class ChannelsComponent {
   rotateCh: boolean = false;
   openPe: boolean = true;
   rotatePe: boolean = false;
-  openEdit = inject(ChatService);
+  @Output() serverCreated = new EventEmitter<boolean>();
 
   constructor(private ChannelEdit: CreateChannelComponent) {}
 
@@ -34,7 +33,6 @@ export class ChannelsComponent {
   }
 
   openNewChannelDiv() {
-    this.openEdit.openEditChannel.next(true);
-    this.ChannelEdit.open();
+    this.serverCreated.emit(true);
   }
 }

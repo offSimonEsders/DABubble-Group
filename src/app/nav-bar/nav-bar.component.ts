@@ -6,14 +6,14 @@ import { CreateChannelComponent } from './create-channel/create-channel.componen
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [
-    NavHeadComponent,
-    ChannelsComponent,
-    CreateChannelComponent,
-  ],
+  imports: [NavHeadComponent, ChannelsComponent, CreateChannelComponent],
   templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.scss'
+  styleUrl: './nav-bar.component.scss',
 })
 export class NavBarComponent {
+  signal!: any;
 
+  getSignal(bool: any) {
+    this.signal = bool;
+  }
 }
