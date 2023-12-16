@@ -44,6 +44,7 @@ export class AccountService {
           acc.get('email'),
           acc.get('photoUrl'),
           acc.get('onlineStatus'),
+          acc.get('chatIds'),
           acc.get('id')
         )
       );
