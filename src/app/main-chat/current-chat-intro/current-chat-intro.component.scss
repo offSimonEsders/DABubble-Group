@@ -1,0 +1,33 @@
+@import "../../../styles.scss";
+
+.current-channel {
+  padding: 6px 10px;
+  @include displayFlex($g: 10px);
+  border-radius: 100px;
+  cursor: pointer;
+
+  span {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  svg:first-child {
+    margin-inline: 5px;
+  }
+
+  svg:last-child {
+    margin-inline: 8px;
+  }
+
+  &:hover {
+    background-color: $bgr;
+
+    span {
+      color: $purple2;
+    }
+
+    svg path {
+      fill: $purple2;
+    }
+  }
+}

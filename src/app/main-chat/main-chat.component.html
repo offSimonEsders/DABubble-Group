@@ -2,6 +2,11 @@
     <header>
         <app-main-chat-header></app-main-chat-header>
     </header>
-    <div class="chat-container"></div>
+    <div class="chat-container">
+        <div class="Chat-intro-container">
+            <app-current-chat-intro></app-current-chat-intro>
+            <p>Du hast diesen Channel heute erstellt. Das ist der Anfang des Channels <span># Entwicklerteam</span></p>
+        </div>
+    </div>
     <app-message-box class="message-box" [currentChanel]="currentChanel"></app-message-box>
 </div>

@@ -1,7 +1,7 @@
 export class User {
   constructor(
-    public email: string,
-    public id: string,
+    email: string,
+    id: string,
     private _token: string, // Firebase Auth-Aktualisierungstoken
     private _tokenExpirationDate: Date // Ablaufdatum des Loginstatus nach der Anmeldung, bei Firebase nach einer Stunde
   ) {}

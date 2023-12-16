@@ -1,46 +1,34 @@
-import { Account } from './accounts.class';
-import { Message } from './message.class';
+import { Chat } from './chat.class';
 
-export class Channel {
-  public name: string;
-  public description: string;
-  public members: Array<Account>;
-  public access: 'public' | 'private';
-  public creater: string;
-  public messages: Array<Message>;
-  private id: string;
+export class Channel extends Chat {
+  name: string;
+  description: string;
+  access: 'public' | 'private';
+  creater: string;
 
   constructor(
+    id: string,
+    memberIds: Array<string>,
     name: string,
     description: string,
-    members: Array<Account>,
     access: 'public' | 'private',
-    creater: string,
-    messages: Array<Message>,
-    id: string
+    creater: string
   ) {
-    (this.name = name),
+    super(id, memberIds),
+      (this.name = name),
       (this.description = description),
-      (this.members = members),
       (this.access = access),
-      (this.creater = creater),
-      (this.messages = messages),
-      (this.id = id);
+      (this.creater = creater);
   }
 
-  get channelId() {
-    return this.id;
-  }
-
-  toJson() {
+  override toJson() {
     return {
+      id: this.id,
       name: this.name,
       description: this.description,
-      members: this.members,
       access: this.access,
       creater: this.creater,
-      messages: this.messages,
-      id: this.id,
+      memberIds: this.memberIds,
     };
   }
 }
