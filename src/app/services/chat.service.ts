@@ -12,7 +12,6 @@ import {
 import { Chat } from '../models/chat.class';
 import { Channel } from '../models/channel.class';
 import { FirestoreService } from './firestore.service';
-import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
@@ -21,7 +20,6 @@ export class ChatService {
   chats!: Array<Chat>;
   channelSnap!: Function;
   channels!: Array<Channel>;
-  openEditChannel:any = new Subject<boolean>();
 
   constructor() {
     this.chatSnap = this.onSnap('chats');

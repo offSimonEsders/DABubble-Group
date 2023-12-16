@@ -1,6 +1,5 @@
-import { Component, Injectable, Input, inject } from '@angular/core';
+import { Component, Injectable, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-create-channel',
