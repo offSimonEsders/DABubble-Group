@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { AvatarComponent } from '../../avatar/avatar.component';
 import { CommonModule } from '@angular/common';
+import { CurrentChatIntroComponent } from '../current-chat-intro/current-chat-intro.component';
 
 @Component({
   selector: 'app-main-chat-header',
   standalone: true,
   templateUrl: './main-chat-header.component.html',
   styleUrl: './main-chat-header.component.scss',
-  imports: [AvatarComponent, CommonModule],
+  imports: [AvatarComponent, CommonModule, CurrentChatIntroComponent],
 })
 export class MainChatHeaderComponent {
   members = [1, 2, 3];

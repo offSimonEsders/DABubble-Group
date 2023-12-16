@@ -1,11 +1,9 @@
-import { Account } from './accounts.class';
-
 export class Reaction {
-  public photoUrl!: string; // Url für Reaction Icon
-  public reactors!: Array<Account>;
+  photoUrl: string; // Url für Reaction Icon
+  reactorIds: Array<string>;
 
-  constructor(url: string, reactors: Array<Account>) {
+  constructor(url: string, reactors: Array<string>) {
     this.photoUrl = url;
-    this.reactors = reactors;
+    this.reactorIds = reactors;
   }
 }

@@ -8,7 +8,7 @@ import {
   DocumentData,
 } from '@angular/fire/firestore';
 
-import { Account } from '../models/accounts.class';
+import { Account } from '../models/account.class';
 import { FirestoreService } from './firestore.service';
 
 @Injectable({ providedIn: 'root' })
@@ -44,8 +44,7 @@ export class AccountService {
           acc.get('email'),
           acc.get('photoUrl'),
           acc.get('onlineStatus'),
-          acc.get('id'),
-          acc.get('chatIds')
+          acc.get('id')
         )
       );
     });
