@@ -10,7 +10,7 @@
     gap: 37px;
     height: 184px;
     width: 700px;
-    animation: animate-Logo 3s ease-in-out 0.5s forwards;
+    animation: animate-Logo 2s ease-in-out 0.5s forwards;
 
 
     .start-animation-logo {
@@ -40,7 +40,7 @@
 
                 path {
                     fill: white;
-                    animation: change-text-color 3s ease-in-out 0.5s forwards;
+                    animation: change-text-color 2s ease-in-out 0.5s forwards;
                 }
 
             }
