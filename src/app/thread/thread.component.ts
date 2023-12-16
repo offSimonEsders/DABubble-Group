@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import { MessageBoxComponent } from '../message-box/message-box.component';
+import { MainChatHeaderComponent } from '../main-chat/main-chat-header/main-chat-header.component';
+import { ThreadChatHeaderComponent } from './thread-chat-header/thread-chat-header.component';
 
 @Component({
   selector: 'app-thread',
   standalone: true,
-  imports: [],
   templateUrl: './thread.component.html',
-  styleUrl: './thread.component.scss'
+  styleUrl: './thread.component.scss',
+  imports: [MessageBoxComponent, ThreadChatHeaderComponent],
 })
 export class ThreadComponent {
 

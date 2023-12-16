@@ -1,0 +1,94 @@
+@import "../../../styles.scss";
+
+.channel-header {
+  width: 100%;
+  padding-block: 25px;
+  @include displayFlex($jc: space-between);
+}
+
+.current-channel {
+  padding: 6px 10px;
+  @include displayFlex($g: 10px);
+  border-radius: 100px;
+  cursor: pointer;
+
+  span {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  svg:first-child {
+    margin-inline: 5px;
+  }
+
+  svg:last-child {
+    margin-inline: 8px;
+  }
+
+  &:hover {
+    background-color: $bgr;
+
+    span {
+      color: $purple2;
+    }
+
+    svg path {
+      fill: $purple2;
+    }
+  }
+}
+
+.chat-members-info-container {
+  @include displayFlex($g: 10px);
+
+  .icon-container {
+    width: 42px;
+    height: 42px;
+    @include centerElement();
+    background-color: $bgr;
+    border-radius: 20px;
+
+    &:hover {
+      cursor: pointer;
+
+      svg path {
+        fill: $purple2;
+      }
+    }
+  }
+}
+
+.new-chat-header {
+  width: 100%;
+  padding-block: 32px 20px;
+  @include displayFlex($fd: column, $ai: flex-start, $g: 20px);
+
+  span {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .search-chat {
+    width: 100%;
+    padding: 15px 20px;
+    border: 1px solid $lightPurple;
+    border-radius: 30px;
+
+    input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 18px;
+    }
+  }
+}
+
+.private-chat-header {
+  padding-block: 32px 20px;
+  @include displayFlex($g: 15px);
+
+  span {
+    font-size: 24px;
+    font-weight: 700;
+  }
+}
