@@ -1,6 +1,5 @@
-import { Component, Injectable, inject } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-create-channel',
@@ -15,16 +14,16 @@ import { ChatService } from '../../services/chat.service';
 export class CreateChannelComponent {
   openCreate:boolean = false;
   whichCreate: 1 | 2 = 1;
-  openEditChannel = inject(ChatService);
-  inputOpen:boolean = false;
+
 
   open(){
-    this.inputOpen = this.openEditChannel.openEditChannel;
+    this.openCreate = true;
     this.whichCreate = 1;
-    this.openCreate = this.inputOpen;
   } 
   
   close(){
+    console.log('click');
+    //this.whichCreate = this.whichCreate === 1 ? 2 : 1;
     this.openCreate = false;
   }
 
