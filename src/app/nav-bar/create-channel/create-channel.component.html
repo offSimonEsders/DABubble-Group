@@ -1,4 +1,4 @@
-<div (click)="close()" *ngIf="true" class="overdiv">
+<div (click)="close()" *ngIf="openCreate" class="overdiv">
     <div (click)="$event.stopPropagation()" *ngIf="whichCreate == 1" class="crate-overdiv">
         <h1>Channel erstellen</h1>
         <span>Channels dienen deinem Team zur Kommunikation. Am besten sollen sie themenbezogen sein #marketing zum
@@ -19,7 +19,7 @@
         </div>
 
         <div class="button">
-            <button>Erstellen</button>
+            <button (click)="nextpage()">Erstellen</button>
         </div>
 
         <div class="close-button">
@@ -37,7 +37,7 @@
             </svg>
         </div>
     </div>
-    <div class="crate-overdiv" *ngIf="whichCreate == 2">
+    <div class="crate-overdiv" *ngIf="whichCreate != 1">
         <h1>Leute hinzufügen</h1>
         
         <div class="checkbox-div">

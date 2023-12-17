@@ -14,7 +14,7 @@ import { ChatService } from '../../services/chat.service';
 })
 export class CreateChannelComponent {
   openCreate: boolean = false;
-  whichCreate: 1 | 2 = 2;
+  whichCreate: number = 1;
   choose:boolean = false
   @Input() emittedSignal!: any;
   subscription: any;
@@ -33,5 +33,10 @@ export class CreateChannelComponent {
 
   close() {
     this.openCreate = false;
+  }
+
+  nextpage(){
+    this.whichCreate = 2;
+    console.log(this.choose, this.openCreate, this.whichCreate);
   }
 }
