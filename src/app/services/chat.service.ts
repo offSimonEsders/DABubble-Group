@@ -28,6 +28,11 @@ export class ChatService {
     chatId: string;
   }>();
 
+  channelCreatedSource = new Subject<boolean>();
+  channelCreated(state: boolean) {
+    this.channelCreatedSource.next(state);
+  }
+  channelCreated$ = this.channelCreatedSource.asObservable();
   constructor() {
     this.chatSnap = this.onSnap('chats');
     this.channelSnap = this.onSnap('channels');

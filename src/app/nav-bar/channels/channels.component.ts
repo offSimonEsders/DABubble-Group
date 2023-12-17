@@ -37,8 +37,7 @@ export class ChannelsComponent {
   }
 
   openNewChannelDiv() {
-    this.signalCreated.emit(true);
-    this.ChannelEdit.emittedSignal = true;
+    this.chatService.channelCreated(true);
   }
 
   openChat(chatColl: string, chatId: string) {
