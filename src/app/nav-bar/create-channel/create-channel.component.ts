@@ -17,10 +17,11 @@ export class CreateChannelComponent {
   @Input() emittedSignal!: any;
 
   open() {
+    
     this.whichCreate = 1;
   }
 
   close() {
-    this.openCreate = false;
+    this.emittedSignal = false;
   }
 }
