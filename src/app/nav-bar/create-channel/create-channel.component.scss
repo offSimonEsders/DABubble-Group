@@ -16,6 +16,7 @@
     border-radius: 40px;
     max-width: 800px;
     max-height: 500px;
+    min-width: 700px;
     background-color: white;
     padding: 22px;
     margin-left: 10px;
@@ -107,5 +108,48 @@
         svg path {
             fill: $purple2;
         }
+    }
+}
+
+
+$input-bg-color: white;
+$input-border-color: grey;
+$checked-bg-color: white;
+
+.checkbox-div{
+    padding: 8px;
+    padding-left: 0;
+    @include displayFlex($jc: flex-start); 
+    input[type="checkbox"] {
+        cursor: pointer;
+        appearance: none;
+        background-color: $input-bg-color;
+        border: 1px solid $input-border-color;
+        border-radius: 100%;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        
+        &:checked {
+          background-color:$checked-bg-color; 
+          border-radius:100%;
+      
+          &:before {
+            content:'';
+            display:block; 
+            width:12px; 
+            height:12px; 
+            background: $purple2; 
+            position:absolute; 
+            left:50%; 
+            top:50%; 
+            transform: translate(-50%, -50%);
+            border-radius :100%;
+          }
+         }
+    }
+
+    span{
+        margin-left: 20px;
     }
 }

@@ -14,7 +14,8 @@ import { ChatService } from '../../services/chat.service';
 })
 export class CreateChannelComponent {
   openCreate: boolean = false;
-  whichCreate: 1 | 2 = 1;
+  whichCreate: 1 | 2 = 2;
+  choose:boolean = false
   @Input() emittedSignal!: any;
   subscription: any;
   constructor(private chatService: ChatService) {}
@@ -26,9 +27,8 @@ export class CreateChannelComponent {
     );
   }
 
-  open() {
-    
-    this.whichCreate = 1;
+  toggleChoose(){
+    this.choose = !this.choose;
   }
 
   close() {

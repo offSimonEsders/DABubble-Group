@@ -10,25 +10,12 @@
     padding: 4px;
     border-radius: 100%;
     @include displayFlex($jc: center);
-    cursor: pointer;
     svg{
         @include displayFlex($jc: center);
-        &:active {
-            path{
-                fill: black !important;
-            }
-        }
-    }
-    &:hover{
-        background-color: $bgr;
-        svg path {
-            fill: $purple2;
-        }
     }
 }
 
 .logo{
-    cursor: pointer;
     @include displayFlex($jc: center);
     border-radius: 100px;
     height: 64px;
@@ -44,12 +31,5 @@
         font-weight: 700;
         padding-right: 20px;
         padding-left: 15px;
-    }
-
-    &:hover{
-        background-color: $bgr;
-        span {
-        color: $purple2;
-        }
     }
 }
