@@ -1,21 +1,29 @@
 @import "../../../styles.scss";
 
 .current-channel {
-  padding: 6px 10px;
   @include displayFlex($g: 10px);
   border-radius: 100px;
+  padding: 6px 10px;
   cursor: pointer;
+  transition: all 0.5s ease-in-out;
+
+  .svg-container {
+    width: 32px;
+    @include displayFlex();
+
+    &:first-child {
+      svg {
+        margin-inline: 5px;
+      }
+    }
+  }
 
   span {
     font-size: 24px;
     font-weight: 700;
   }
 
-  svg:first-child {
-    margin-inline: 5px;
-  }
-
-  svg:last-child {
+  svg:last-of-type {
     margin-inline: 8px;
   }
 
