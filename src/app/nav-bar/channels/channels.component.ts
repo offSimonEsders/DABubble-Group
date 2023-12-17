@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { AvatarComponent } from '../../avatar/avatar.component';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-channels',
@@ -18,9 +19,12 @@ export class ChannelsComponent {
   rotateCh: boolean = false;
   openPe: boolean = true;
   rotatePe: boolean = false;
-  @Output() serverCreated = new EventEmitter<boolean>();
+  @Output() signalCreated = new EventEmitter<boolean>();
+  chatService!: ChatService;
 
-  constructor(private ChannelEdit: CreateChannelComponent) {}
+  constructor(private ChannelEdit: CreateChannelComponent) {
+    this.chatService = inject(ChatService);
+  }
 
   hideChannels() {
     this.openCh = !this.openCh;
@@ -33,6 +37,13 @@ export class ChannelsComponent {
   }
 
   openNewChannelDiv() {
-    this.serverCreated.emit(true);
+    this.signalCreated.emit(true);
+  }
+
+  openChat(chatColl: string, chatId: string) {
+    this.chatService.openChatEmitter.next({
+      chatColl: chatColl,
+      chatId: chatId,
+    });
   }
 }

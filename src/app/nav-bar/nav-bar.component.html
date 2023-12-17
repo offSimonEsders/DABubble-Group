@@ -1,5 +1,5 @@
 <div class="overdiv">
     <app-nav-head></app-nav-head>
-    <app-channels (serverCreated)="getSignal($event)"></app-channels>
+    <app-channels (signalCreated)="getSignal($event)"></app-channels>
 </div>
 <app-create-channel [emittedSignal]="signal"></app-create-channel>

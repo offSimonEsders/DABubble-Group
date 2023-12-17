@@ -5,8 +5,12 @@
     <div class="chat-container">
         <div class="Chat-intro-container">
             <app-current-chat-intro></app-current-chat-intro>
-            <p>Du hast diesen Channel heute erstellt. Das ist der Anfang des Channels <span># Entwicklerteam</span></p>
+            <div class="intro">Du hast diesen Channel heute erstellt. Das ist der Anfang des Channels
+                <span [ngStyle]="{color: '#797ef3'}"><span *ngIf="currentChat.access === 'public'">#</span><span
+                        *ngIf="currentChat.access === 'private'"><i class='bx bxs-lock-alt'></i></span>
+                    Entwicklerteam</span>
+            </div>
         </div>
     </div>
-    <app-message-box class="message-box" [currentChanel]="currentChanel"></app-message-box>
+    <app-message-box class="message-box" [currentChanel]="currentChat.name"></app-message-box>
 </div>

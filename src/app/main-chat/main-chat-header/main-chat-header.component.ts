@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { AvatarComponent } from '../../avatar/avatar.component';
 import { CommonModule } from '@angular/common';
 import { CurrentChatIntroComponent } from '../current-chat-intro/current-chat-intro.component';
+import { ChatService } from '../../services/chat.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main-chat-header',
@@ -10,9 +12,26 @@ import { CurrentChatIntroComponent } from '../current-chat-intro/current-chat-in
   styleUrl: './main-chat-header.component.scss',
   imports: [AvatarComponent, CommonModule, CurrentChatIntroComponent],
 })
-export class MainChatHeaderComponent {
+export class MainChatHeaderComponent implements OnInit, OnDestroy {
+  chatService!: ChatService;
+  private openChatSub!: Subscription;
+  headerSelected = 'channel';
   members = [1, 2, 3];
   accountStatus = 'online';
+
+  constructor() {
+    this.chatService = inject(ChatService);
+  }
+
+  ngOnInit(): void {
+    this.openChatSub = this.chatService.openChatEmitter.subscribe({
+      next: (data) => (this.headerSelected = data.chatColl),
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.openChatSub.unsubscribe();
+  }
 
   translateAvatarElements(index: number) {
     if (index < 2 && this.members.length > 2) {

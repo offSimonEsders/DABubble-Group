@@ -3,9 +3,9 @@ import {
   doc,
   setDoc,
   onSnapshot,
-  QueryDocumentSnapshot,
   QuerySnapshot,
   DocumentData,
+  getDoc,
 } from '@angular/fire/firestore';
 
 import { Account } from '../models/account.class';
@@ -15,14 +15,14 @@ import { FirestoreService } from './firestore.service';
 export class AccountService {
   firestore = inject(FirestoreService);
   accSnap!: Function;
-  accounts!: Array<Account>;
+  accounts!: Array<DocumentData>;
+  account!: DocumentData | undefined;
 
   constructor() {
     this.accSnap = onSnapshot(
       this.firestore.getCollectionRef('accounts'),
       (data) => {
-        this.accounts = [];
-        this.getAccounts(data);
+        this.getAllAccounts(data);
       }
     );
   }
@@ -36,18 +36,15 @@ export class AccountService {
     });
   }
 
-  getAccounts(data: QuerySnapshot<DocumentData, DocumentData>) {
-    data.forEach((acc: QueryDocumentSnapshot<DocumentData, DocumentData>) => {
-      this.accounts.push(
-        new Account(
-          acc.get('name'),
-          acc.get('email'),
-          acc.get('photoUrl'),
-          acc.get('onlineStatus'),
-          acc.get('chatIds'),
-          acc.get('id')
-        )
-      );
+  async getAccount(collId: string, docId: string) {
+    const docSnap = await getDoc(this.firestore.getDocumentRef(collId, docId));
+    this.account = docSnap.data();
+  }
+
+  getAllAccounts(data: QuerySnapshot<DocumentData, DocumentData>) {
+    this.accounts = [];
+    data.forEach((doc) => {
+      this.accounts.push(doc.data());
     });
   }
 }

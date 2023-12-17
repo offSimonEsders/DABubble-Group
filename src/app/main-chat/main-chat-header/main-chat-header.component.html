@@ -1,4 +1,4 @@
-<div class="channel-header">
+<div *ngIf="headerSelected === 'channel'" class="channel-header">
     <app-current-chat-intro></app-current-chat-intro>
     <div class="chat-members-info-container">
         <div class="chat-members-info">
@@ -26,16 +26,16 @@
     </div>
 </div>
 
-<!-- <div class="new-chat-header">
+<div *ngIf="headerSelected === ''" class="new-chat-header">
     <span>Neue Nachricht</span>
     <div class="search-chat">
         <input type="text" placeholder="An: #channel, oder @jemand oder E-Mail Adresse">
     </div>
-</div> -->
+</div>
 
-<!-- <div class="private-chat-header">
+<div *ngIf="headerSelected === 'chat'" class="private-chat-header">
     <div class="avatar-container">
         <app-avatar [status]="accountStatus"></app-avatar>
     </div>
     <span>Sofia Müller</span>
-</div> -->
+</div>

@@ -23,7 +23,7 @@
     }
 
     .main-chat {
-      @include componentMaxWidth(989px);
+      @include componentMaxWidth(100%);
     }
 
     .secondary-chat {
