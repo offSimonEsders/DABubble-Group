@@ -2,13 +2,11 @@ import { Component } from '@angular/core';
 import { MessageBoxComponent } from '../message-box/message-box.component';
 import { MainChatHeaderComponent } from './main-chat-header/main-chat-header.component';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
-//import 'boxicons';
-=======
 import { ChatIntroComponent } from './chat-intro/chat-intro.component';
 import { TimeSeparatorComponent } from './time-separator/time-separator.component';
 import { MessageComponent } from './message/message.component';
->>>>>>> cbe70c9b0b7953f070aecec322976f5b29a29e74
+//import 'boxicons';
+
 
 @Component({
   selector: 'app-main-chat',
