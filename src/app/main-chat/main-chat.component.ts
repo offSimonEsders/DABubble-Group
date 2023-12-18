@@ -5,7 +5,7 @@ import { CurrentChatIntroComponent } from './current-chat-intro/current-chat-int
 import { ChatService } from '../services/chat.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import 'boxicons';
+//import 'boxicons';
 
 @Component({
   selector: 'app-main-chat',

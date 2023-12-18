@@ -1,11 +1,12 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { ChooseACharacterComponent } from "./choose-acharacter/choose-acharacter.component";
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+    selector: 'app-register',
+    standalone: true,
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.scss',
+    imports: [ChooseACharacterComponent]
 })
 export class RegisterComponent implements AfterViewInit {
 
@@ -27,6 +28,11 @@ export class RegisterComponent implements AfterViewInit {
     this.loginFrame.style.display = 'flex';
     this.registerFrame.style.display = 'none';
     this.newatbubble.style.display = 'flex';
+  }
+
+  loadChooseACharacter(event: Event) {
+    event.preventDefault();
+    
   }
 
 }
