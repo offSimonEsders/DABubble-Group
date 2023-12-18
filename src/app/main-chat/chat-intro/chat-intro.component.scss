@@ -1,0 +1,29 @@
+@import "../../../styles.scss";
+
+.channel-intro-container {
+  @include displayFlex($fd: column, $ai: flex-start);
+  margin-bottom: 35px;
+}
+
+.chat-intro-container {
+  @include displayFlex($fd: column, $ai: flex-start, $g: 24px);
+
+  .chat-member {
+    @include displayFlex($ai: flex-end, $g: 25px);
+
+    .avatar-container {
+      width: 100px;
+      height: 100px;
+    }
+
+    span {
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+}
+
+.intro {
+  font-size: 20px;
+  color: $textGrey;
+}

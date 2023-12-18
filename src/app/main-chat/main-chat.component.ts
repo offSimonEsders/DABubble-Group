@@ -1,11 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { MessageBoxComponent } from '../message-box/message-box.component';
 import { MainChatHeaderComponent } from './main-chat-header/main-chat-header.component';
-import { CurrentChatIntroComponent } from './current-chat-intro/current-chat-intro.component';
-import { ChatService } from '../services/chat.service';
-import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import 'boxicons';
+import { ChatIntroComponent } from './chat-intro/chat-intro.component';
+import { TimeSeparatorComponent } from './time-separator/time-separator.component';
+import { MessageComponent } from './message/message.component';
 
 @Component({
   selector: 'app-main-chat',
@@ -15,33 +14,19 @@ import 'boxicons';
   imports: [
     MessageBoxComponent,
     MainChatHeaderComponent,
-    CurrentChatIntroComponent,
     CommonModule,
+    ChatIntroComponent,
+    TimeSeparatorComponent,
+    MessageComponent,
   ],
 })
-export class MainChatComponent implements OnInit {
-  currentChat!: {
-    name: string;
-    description: string;
-    access: 'public' | 'private';
-    creater: string;
+export class MainChatComponent {
+  currentChat = {
+    name: 'Entwicklerteam',
+    description: 'Hier ist eine Beschreibung',
+    access: 'public',
+    creater: 'Frederik Beck',
   };
-  chatService!: ChatService;
-  toOpenedChat!: { chatColl: string; chatId: string };
-  private openChatSub!: Subscription;
-
-  constructor() {
-    this.chatService = inject(ChatService);
-  }
-  ngOnInit(): void {
-    this.currentChat = {
-      name: 'Entwicklerteam',
-      description: 'Hier ist eine Beschreibung',
-      access: 'public',
-      creater: 'Frederik Beck',
-    };
-    this.openChatSub = this.chatService.openChatEmitter.subscribe({
-      next: (data) => (this.toOpenedChat = data),
-    });
-  }
+  transmittedDate = new Date('Jan 14 2023 07:52:22 GMT+0200');
+  transmittedDate2 = new Date();
 }
