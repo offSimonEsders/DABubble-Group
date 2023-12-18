@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AvatarComponent } from '../../avatar/avatar.component';
+import { AvatarComponent } from '../avatar/avatar.component';
 
 @Component({
   selector: 'app-message',

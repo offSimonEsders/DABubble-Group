@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
-import { AvatarComponent } from '../../avatar/avatar.component';
+import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { ChatService } from '../../services/chat.service';
 
 @Component({
