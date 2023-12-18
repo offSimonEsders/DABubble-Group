@@ -15,7 +15,8 @@ export class Message {
     name: string,
     photoUrl: string,
     transmittedDate: Date,
-    message: string
+    message: string,
+    reactions: Array<Reaction>
   ) {
     (this.id = id),
       (this.chatId = chatId),
@@ -23,7 +24,7 @@ export class Message {
       (this.photoUrl = photoUrl),
       (this.transmittedDate = transmittedDate),
       (this.message = message),
-      (this.reactions = []);
+      (this.reactions = reactions);
   }
 
   toJson() {

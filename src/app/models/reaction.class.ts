@@ -1,9 +1,9 @@
 export class Reaction {
   photoUrl: string; // Url für Reaction Icon
-  reactorIds: Array<string>;
+  reactor: string;
 
-  constructor(url: string, reactors: Array<string>) {
+  constructor(url: string, reactor: string) {
     this.photoUrl = url;
-    this.reactorIds = reactors;
+    this.reactor = reactor;
   }
 }
