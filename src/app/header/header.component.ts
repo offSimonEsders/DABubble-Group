@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AvatarComponent } from '../avatar/avatar.component';
+import { AvatarComponent } from '../shared/avatar/avatar.component';
 
 @Component({
   selector: 'app-header',

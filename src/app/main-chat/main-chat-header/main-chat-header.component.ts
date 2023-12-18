@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { AvatarComponent } from '../../avatar/avatar.component';
+import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../../services/chat.service';
 import { Subscription } from 'rxjs';
