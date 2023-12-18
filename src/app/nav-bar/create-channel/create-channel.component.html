@@ -37,7 +37,10 @@
             </svg>
         </div>
     </div>
-    <div class="crate-overdiv" *ngIf="whichCreate != 1">
+</div>
+
+<div (click)="close2()" *ngIf="openCreate2" class="overdiv">
+    <div (click)="$event.stopPropagation()" class="crate-overdiv" *ngIf="whichCreate != 1">
         <h1>Leute hinzufügen</h1>
         
         <div class="checkbox-div">
@@ -59,7 +62,7 @@
             <button>Erstellen</button>
         </div>
         <div class="close-button">
-            <svg (click)="close()" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            <svg (click)="close2()" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_813_12181" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                     height="24">

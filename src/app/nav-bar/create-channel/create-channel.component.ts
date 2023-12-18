@@ -18,6 +18,7 @@ export class CreateChannelComponent {
   choose:boolean = false
   @Input() emittedSignal!: any;
   subscription: any;
+  openCreate2!:boolean;
   constructor(private chatService: ChatService) {}
 
   ngOnInit() {
@@ -35,8 +36,15 @@ export class CreateChannelComponent {
     this.openCreate = false;
   }
 
+  close2(){
+    this.openCreate2 = false;
+    this.whichCreate = 1;
+  }
+
   nextpage(){
     this.whichCreate = 2;
+
+    this.openCreate2 = true;
     console.log(this.choose, this.openCreate, this.whichCreate);
   }
 }
