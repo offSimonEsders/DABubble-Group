@@ -1,0 +1,57 @@
+@import "../../../styles.scss";
+
+.message-container {
+  width: 100%;
+  padding: 10px 45px;
+  @include displayFlex($ai: flex-start, $g: 30px);
+
+  .avatar-container {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+.message-subcontainer {
+  width: calc(100% - 100px);
+  @include displayFlex($fd: column, $ai: flex-start, $g: 8px);
+
+  .message-header {
+    @include displayFlex($g: 20px);
+
+    .name {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .time {
+      font-size: 14px;
+      color: $textGrey;
+    }
+  }
+
+  .message {
+    max-width: 698px;
+    padding: 15px;
+    border-radius: 0px 30px 30px 30px;
+    background-color: $bgr;
+
+    p {
+      width: 100%;
+      font-size: 18px;
+    }
+
+    .answer-container {
+      @include displayFlex($g: 20px);
+
+      .ansers {
+        font-size: 18px;
+        color: $purple3;
+      }
+
+      .last-answer {
+        font-size: 14px;
+        color: $textGrey;
+      }
+    }
+  }
+}

@@ -1,16 +1,16 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { AvatarComponent } from '../../avatar/avatar.component';
 import { CommonModule } from '@angular/common';
-import { CurrentChatIntroComponent } from '../current-chat-intro/current-chat-intro.component';
 import { ChatService } from '../../services/chat.service';
 import { Subscription } from 'rxjs';
+import { ChannelBoxComponent } from '../channel-box/channel-box.component';
 
 @Component({
   selector: 'app-main-chat-header',
   standalone: true,
   templateUrl: './main-chat-header.component.html',
   styleUrl: './main-chat-header.component.scss',
-  imports: [AvatarComponent, CommonModule, CurrentChatIntroComponent],
+  imports: [AvatarComponent, CommonModule, ChannelBoxComponent],
 })
 export class MainChatHeaderComponent implements OnInit, OnDestroy {
   chatService!: ChatService;

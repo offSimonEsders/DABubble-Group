@@ -3,14 +3,11 @@
         <app-main-chat-header></app-main-chat-header>
     </header>
     <div class="chat-container">
-        <div class="Chat-intro-container">
-            <app-current-chat-intro [introStyle]="'mainChat'"></app-current-chat-intro>
-            <div class="intro">Du hast diesen Channel heute erstellt. Das ist der Anfang des Channels
-                <span [ngStyle]="{color: '#797ef3'}"><span *ngIf="currentChat.access === 'public'">#</span><span
-                        *ngIf="currentChat.access === 'private'"><i class='bx bxs-lock-alt'></i></span>
-                    Entwicklerteam</span>
-            </div>
-        </div>
+        <app-time-separator class="line" [date]="transmittedDate"></app-time-separator>
+        <app-message></app-message>
+        <app-time-separator class="line" [date]="transmittedDate2"></app-time-separator>
+        <app-message></app-message>
+        <app-chat-intro class="intro-box"></app-chat-intro>
     </div>
     <app-message-box class="message-box" [currentChanel]="currentChat.name"></app-message-box>
 </div>
