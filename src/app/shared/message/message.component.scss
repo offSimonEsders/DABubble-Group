@@ -4,10 +4,24 @@
   width: 100%;
   padding: 10px 45px;
   @include displayFlex($ai: flex-start, $g: 30px);
+  position: relative;
+  cursor: pointer;
 
   .avatar-container {
     width: 70px;
     height: 70px;
+  }
+
+  &:hover {
+    background-color: $bgr;
+
+    .message {
+      background-color: white;
+    }
+
+    .last-answer {
+      color: black !important;
+    }
   }
 }
 
@@ -21,6 +35,10 @@
     .name {
       font-size: 18px;
       font-weight: 700;
+
+      &:hover {
+        color: $purple3;
+      }
     }
 
     .time {
@@ -39,19 +57,111 @@
       width: 100%;
       font-size: 18px;
     }
+  }
 
-    .answer-container {
-      @include displayFlex($g: 20px);
+  .answer-container {
+    @include displayFlex($g: 20px);
 
-      .ansers {
-        font-size: 18px;
+    .answers {
+      font-size: 18px;
+      color: $purple3;
+
+      &:hover {
         color: $purple3;
+        font-weight: 700;
+      }
+    }
+
+    .last-answer {
+      font-size: 14px;
+      color: $textGrey;
+    }
+  }
+}
+
+.reactions-container {
+  position: absolute;
+  top: -18px;
+  @include displayFlex($g: 5px);
+  padding: 3px 15px 3px 20px;
+  border: 1px solid $lightPurple;
+  border-radius: 25px 25px 0px 25px;
+  background-color: white;
+
+  .more-icon {
+    position: relative;
+
+    .btn-container {
+      position: absolute;
+      top: 20px;
+      left: 40px;
+      width: 269px;
+      height: 67px;
+      @include centerElement();
+      border-radius: 0px 30px 30px 30px;
+      background: white;
+      box-shadow: 0px 6px 14px 0px rgba(0, 0, 0, 0.2);
+
+      .edit-message-btn {
+        padding: 10px 20px;
+        border-radius: 100px;
+        font-size: 20px;
+        font-weight: 500;
+        text-wrap: nowrap;
+        z-index: 2;
       }
 
-      .last-answer {
-        font-size: 14px;
-        color: $textGrey;
+      &:hover .edit-message-btn {
+        background-color: $bgr;
+        color: $purple3;
+        font-weight: 700;
       }
+    }
+  }
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  @include centerElement();
+  cursor: pointer;
+
+  &:hover {
+    background-color: $bgr;
+
+    svg path {
+      fill: $purple3;
+    }
+  }
+}
+
+.edit-message-box {
+  width: calc(100% - 100px);
+  @include displayFlex($fd: column, $ai: flex-start, $g: 16px);
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid $lightPurple;
+  background: white;
+
+  p {
+    font-size: 18px;
+    color: $textGrey;
+  }
+
+  .edit-options {
+    width: 100%;
+    @include displayFlex($jc: space-between);
+
+    .btn-container {
+      @include displayFlex($g: 32px);
+    }
+    button {
+      font-size: 18px;
+      padding: 12px 25px;
+      border-radius: 50px;
+      border: 1px solid $purple2;
+      cursor: pointer;
     }
   }
 }
