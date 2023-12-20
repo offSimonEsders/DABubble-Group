@@ -12,8 +12,20 @@ import { ChatService } from '../../services/chat.service';
   imports: [CommonModule, CreateChannelComponent, AvatarComponent],
 })
 export class ChannelsComponent {
-  changelName: string =
-    'EntwicklerteamertzuiwegfkuzegfukzgkZGFUZgefkeuzgZEGUZGEZGEZGFZ<GFKZUGSUZ<GFZGS<ZGFZSG<ZGFZUG';
+  changelName: any = [
+    {
+      name:'Entwicklerteam',
+      svg:true,
+    },
+    {
+      name:'Meeting',
+      svg:false,
+    },
+    {
+      name:'Angular',
+      svg:true,
+    }
+  ];
   PersonlName: string = 'Frederick Beck (Du)';
   openCh: boolean = true;
   rotateCh: boolean = false;
@@ -21,7 +33,7 @@ export class ChannelsComponent {
   rotatePe: boolean = false;
   @Output() signalCreated = new EventEmitter<boolean>();
   chatService!: ChatService;
-
+  
   constructor(private ChannelEdit: CreateChannelComponent) {
     this.chatService = inject(ChatService);
   }
