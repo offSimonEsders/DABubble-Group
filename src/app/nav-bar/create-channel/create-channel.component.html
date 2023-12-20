@@ -41,26 +41,7 @@
 
 <div (click)="close2()" *ngIf="openCreate2" class="overdiv">
     <div (click)="$event.stopPropagation()" class="crate-overdiv" *ngIf="whichCreate != 1">
-        <h1>Leute hinzufügen</h1>
-        
-        <div class="checkbox-div">
-            <input (change)="toggleChoose()" [checked]="!choose" type="checkbox">
-            <span>Alle Mitlieder hinzufügen</span>
-        </div>
-        <div class="checkbox-div">
-            <input (change)="toggleChoose()" [checked]="choose" type="checkbox">
-            <span>Bestimmte Leute hinzufügen</span>
-        </div>
-        
-        <div *ngIf="choose" class="input-div">
-            <input style="width: 100%;" type="text" placeholder="Personen hinzufügen">
-        </div>
-        <!-- <div>
-            tet
-        </div> -->
-        <div class="button">
-            <button>Erstellen</button>
-        </div>
+        <app-add-user></app-add-user>
         <div class="close-button">
             <svg (click)="close2()" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">

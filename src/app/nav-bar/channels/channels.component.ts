@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
@@ -12,16 +12,29 @@ import { ChatService } from '../../services/chat.service';
   imports: [CommonModule, CreateChannelComponent, AvatarComponent],
 })
 export class ChannelsComponent {
-  changelName: string = 'Entwicklerteam';
+  changelName: any = [
+    {
+      name: 'Entwicklerteam',
+      svg: true,
+    },
+    {
+      name: 'Meeting',
+      svg: false,
+    },
+    {
+      name: 'Angular',
+      svg: true,
+    },
+  ];
   PersonlName: string = 'Frederick Beck (Du)';
   openCh: boolean = true;
   rotateCh: boolean = false;
   openPe: boolean = true;
   rotatePe: boolean = false;
-  @Output() signalCreated = new EventEmitter<boolean>();
+
   chatService!: ChatService;
 
-  constructor(private ChannelEdit: CreateChannelComponent) {
+  constructor() {
     this.chatService = inject(ChatService);
   }
 

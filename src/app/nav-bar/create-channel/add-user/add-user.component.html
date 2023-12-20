@@ -1,0 +1,22 @@
+<div class="overdiv-addUser">
+    <h1>Leute hinzufügen</h1>
+        
+    <div class="checkbox-div">
+        <input (change)="toggleChoose()" [checked]="!choose" type="checkbox">
+        <span>Alle Mitlieder hinzufügen</span>
+    </div>
+    <div class="checkbox-div">
+        <input (change)="toggleChoose()" [checked]="choose" type="checkbox">
+        <span>Bestimmte Leute hinzufügen</span>
+    </div>
+            
+    <div *ngIf="choose" class="input-div">
+        <input style="width: 100%;" type="text" placeholder="Personen hinzufügen">
+    </div>
+    <!-- <div>
+        tet
+    </div> -->
+    <div class="button">
+        <button>Erstellen</button>
+    </div>
+</div>
