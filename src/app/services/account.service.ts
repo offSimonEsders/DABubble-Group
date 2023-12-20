@@ -37,7 +37,7 @@ export class AccountService {
   }
 
   async getAccount(collId: string, docId: string) {
-    const docSnap = await getDoc(this.firestore.getDocumentRef(collId, docId));
+    const docSnap = await getDoc(this.firestore.getDocRef(collId, docId));
     this.account = docSnap.data();
   }
 

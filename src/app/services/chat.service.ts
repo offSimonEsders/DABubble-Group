@@ -60,7 +60,7 @@ export class ChatService {
   }
 
   async getChat(collId: string, docId: string) {
-    const docSnap = await getDoc(this.firestore.getDocumentRef(collId, docId));
+    const docSnap = await getDoc(this.firestore.getDocRef(collId, docId));
     this.currentChat = docSnap.data();
   }
 
