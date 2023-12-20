@@ -18,4 +18,35 @@ export class FirestoreService {
       // show an Errormessage
     });
   }
+
+  getMessageCollRef(channelId: string) {
+    return collection(this.db, 'channels', channelId, 'messages');
+  }
+
+  getMessageDocRef(channelId: string, docId: string) {
+    return collection(this.db, 'channels', channelId, 'messages', docId);
+  }
+
+  getAnswerCollRef(channelId: string, messageId: string) {
+    return collection(
+      this.db,
+      'channels',
+      channelId,
+      'messages',
+      messageId,
+      'answers'
+    );
+  }
+
+  getAnswerDocRef(channelId: string, messageId: string, docId: string) {
+    return collection(
+      this.db,
+      'channels',
+      channelId,
+      'messages',
+      messageId,
+      'answers',
+      docId
+    );
+  }
 }

@@ -3,21 +3,21 @@ import { Chat } from './chat.class';
 export class Channel extends Chat {
   name: string;
   description: string;
-  access: 'public' | 'private';
-  creater: string;
+  publicStatus: boolean;
+  creater: string; // User name
 
   constructor(
     id: string,
     memberIds: Array<string>,
     name: string,
     description: string,
-    access: 'public' | 'private',
+    publicStatus: boolean,
     creater: string
   ) {
     super(id, memberIds),
       (this.name = name),
       (this.description = description),
-      (this.access = access),
+      (this.publicStatus = publicStatus),
       (this.creater = creater);
   }
 
@@ -26,7 +26,7 @@ export class Channel extends Chat {
       id: this.id,
       name: this.name,
       description: this.description,
-      access: this.access,
+      access: this.publicStatus,
       creater: this.creater,
       memberIds: this.memberIds,
     };

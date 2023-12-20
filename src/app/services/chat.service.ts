@@ -19,7 +19,7 @@ export class ChatService {
   firestore = inject(FirestoreService);
   chatSnap!: Function;
 
-  currentChat: DocumentData | undefined;
+  currentChat: DocumentData | undefined; // aktiver chat oder channel der im main-chat angezeigt wird
   chats!: Array<DocumentData>;
   channelSnap!: Function;
   channels!: Array<DocumentData>;
@@ -33,6 +33,7 @@ export class ChatService {
     this.channelCreatedSource.next(state);
   }
   channelCreated$ = this.channelCreatedSource.asObservable();
+
   constructor() {
     this.chatSnap = this.onSnap('chats');
     this.channelSnap = this.onSnap('channels');
