@@ -11,9 +11,4 @@ import { CreateChannelComponent } from './create-channel/create-channel.componen
   styleUrl: './nav-bar.component.scss',
 })
 export class NavBarComponent {
-  signal!: any;
-
-  getSignal(bool: any) {
-    this.signal = bool;
-  }
 }

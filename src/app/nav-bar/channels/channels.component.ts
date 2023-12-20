@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
@@ -31,10 +31,10 @@ export class ChannelsComponent {
   rotateCh: boolean = false;
   openPe: boolean = true;
   rotatePe: boolean = false;
-  @Output() signalCreated = new EventEmitter<boolean>();
+  
   chatService!: ChatService;
   
-  constructor(private ChannelEdit: CreateChannelComponent) {
+  constructor() {
     this.chatService = inject(ChatService);
   }
 
