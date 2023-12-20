@@ -75,19 +75,14 @@ export class FirestoreService {
   //---------------------------------- Dritte Ebene um Answers aus Messages auszulesen oder zu löschen----------------------------
   /**
    * The function returns a reference to the "answers" collection within a specific channel and message in the Firestore.
-   * @param {string} collId - Name used to identify a specific collection in the Firestore. Can be 'channels' or 'chats'.
    * @param {string} channelId - ID of the channel where the message is located.
    * @param {string} messageId - ID of a message within a channel.
    * @returns a reference to the 'answers' collection within the 'channels' collection in the Firestore.
    */
-  getChannelAnswerCollRef(
-    collId: string,
-    channelId: string,
-    messageId: string
-  ) {
+  getChannelAnswerCollRef(channelId: string, messageId: string) {
     return collection(
       this.db,
-      collId,
+      'channels',
       channelId,
       'messages',
       messageId,
@@ -97,21 +92,15 @@ export class FirestoreService {
 
   /**
    * The function  returns a reference to a specific answer document within a nested collection structure in Firestore.
-   * @param {string} collId - Name used to identify a specific collection in the Firestore. Can be 'channels' or 'chats'.
    * @param {string} channelId - ID used to locate the specific channel in the Firestore.
    * @param {string} messageId - ID of a message within a channel.
    * @param {string} docId - ID of the answer document you want to retrieve.
    * @returns a reference to a answer in a specific message of a specific channel.
    */
-  getAnswerDocRef(
-    collId: string,
-    channelId: string,
-    messageId: string,
-    docId: string
-  ) {
+  getAnswerDocRef(channelId: string, messageId: string, docId: string) {
     return collection(
       this.db,
-      collId,
+      'channels',
       channelId,
       'messages',
       messageId,
@@ -122,19 +111,21 @@ export class FirestoreService {
 
   /**
    * The function deletes a specific answer from a message in the Firestore.
-   * @param {string} collId - Name used to identify a specific collection in the Firestore. Can be 'channels' or 'chats'.
    * @param {string} channelId - ID of the channel where the message is located.
    * @param {string} messageId - ID of the message that contains the answer you want to delete.
    * @param {string} docId - ID of the answer document that you want to delete.
    */
-  async deleteAnswer(
-    collId: string,
-    channelId: string,
-    messageId: string,
-    docId: string
-  ) {
+  async deleteAnswer(channelId: string, messageId: string, docId: string) {
     await deleteDoc(
-      doc(this.db, collId, channelId, 'messages', messageId, 'answers', docId)
+      doc(
+        this.db,
+        'channels',
+        channelId,
+        'messages',
+        messageId,
+        'answers',
+        docId
+      )
     ).catch((err) => {
       // show an Errormessage
     });

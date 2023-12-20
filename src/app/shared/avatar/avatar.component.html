@@ -2,7 +2,7 @@
     @if(photoUrl) {
     <img class="profil-img" src="{{ photoUrl }}" alt="Hier ist das Profilbild">
     }
-    @if(status) {
+    @if(status === 'online' || status === 'away') {
     <div class="online-status-circle" [ngStyle]="{backgroundColor: getStatusColor()}"></div>
     }
 </div>

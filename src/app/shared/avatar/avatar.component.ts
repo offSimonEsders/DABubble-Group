@@ -23,11 +23,16 @@ export class AvatarComponent implements OnInit {
     this.accountService.getAccountImage(this.accountId).then((url) => {
       this.photoUrl = url;
     });
-  }
-
-  getStatusColor() {
     this.accountService.getAccountStatus(this.accountId).then((status) => {
       this.status = status;
     });
+  }
+
+  getStatusColor() {
+    if (this.status === 'online') {
+      return '#92c83e';
+    } else {
+      return '#686868';
+    }
   }
 }
