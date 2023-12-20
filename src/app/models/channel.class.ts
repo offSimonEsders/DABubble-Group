@@ -26,7 +26,7 @@ export class Channel extends Chat {
       id: this.id,
       name: this.name,
       description: this.description,
-      access: this.publicStatus,
+      publicStatus: this.publicStatus,
       creater: this.creater,
       memberIds: this.memberIds,
     };

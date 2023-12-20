@@ -1,5 +1,7 @@
 <div class="avatar">
-    <img class="profil-img" src="../../assets/img/characters/frederik_beck.svg" alt="Hier ist das Profilbild">
+    @if(photoUrl) {
+    <img class="profil-img" src="{{ photoUrl }}" alt="Hier ist das Profilbild">
+    }
     @if(status) {
     <div class="online-status-circle" [ngStyle]="{backgroundColor: getStatusColor()}"></div>
     }

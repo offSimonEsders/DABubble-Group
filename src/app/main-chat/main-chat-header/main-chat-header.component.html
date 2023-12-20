@@ -1,14 +1,17 @@
-<div *ngIf="headerSelected === 'channel'" class="channel-header">
-    <app-channel-box></app-channel-box>
+@switch(currentCollection) {
+@case('channels') {
+@if(currentChat){
+<div class="channel-header">
+    <app-channel-box [currentChannel]="currentChat"></app-channel-box>
     <div class="chat-members-info-container">
         <div class="chat-members-info">
             <div class="container">
-                <div class="avatar-container" *ngFor="let member of members, let i = index"
+                <div class="avatar-container" *ngFor="let member of currentChat['memberIds'], let i = index"
                     [ngStyle]="{transform: translateAvatarElements(i)}">
-                    <app-avatar></app-avatar>
+                    <app-avatar [accountId]="member"></app-avatar>
                 </div>
             </div>
-            <span>3</span>
+            <span>{{ currentChat['memberIds'].length }}</span>
         </div>
         <div class="icon-container">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -25,17 +28,22 @@
         </div>
     </div>
 </div>
-
-<div *ngIf="headerSelected === ''" class="new-chat-header">
+}
+}
+@case ('chats') {
+<div class="private-chat-header">
+    <div class="avatar-container">
+        <app-avatar [accountId]="'2W6moOnVTy1T8sF3gPRP'"></app-avatar>
+    </div>
+    <span>Frederik Beck</span>
+</div>
+}
+@default {
+<div class="new-chat-header">
     <span>Neue Nachricht</span>
     <div class="search-chat">
         <input type="text" placeholder="An: #channel, oder @jemand oder E-Mail Adresse">
     </div>
 </div>
-
-<div *ngIf="headerSelected === 'chat'" class="private-chat-header">
-    <div class="avatar-container">
-        <app-avatar [status]="accountStatus"></app-avatar>
-    </div>
-    <span>Frederik Beck</span>
-</div>
+}
+}

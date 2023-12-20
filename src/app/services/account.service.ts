@@ -36,9 +36,21 @@ export class AccountService {
     });
   }
 
-  async getAccount(collId: string, docId: string) {
-    const docSnap = await getDoc(this.firestore.getDocRef(collId, docId));
+  async getAccount(docId: string) {
+    const docSnap = await getDoc(this.firestore.getDocRef('accounts', docId));
     this.account = docSnap.data();
+  }
+
+  async getAccountImage(docId: string) {
+    const docSnap = await getDoc(this.firestore.getDocRef('accounts', docId));
+    let photoUrl = docSnap.get('photoUrl');
+    return photoUrl;
+  }
+
+  async getAccountStatus(docId: string) {
+    const docSnap = await getDoc(this.firestore.getDocRef('accounts', docId));
+    let status = docSnap.get('onlineStatus');
+    return status;
   }
 
   getAllAccounts(data: QuerySnapshot<DocumentData, DocumentData>) {

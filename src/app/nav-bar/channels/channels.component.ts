@@ -12,8 +12,7 @@ import { ChatService } from '../../services/chat.service';
   imports: [CommonModule, CreateChannelComponent, AvatarComponent],
 })
 export class ChannelsComponent {
-  changelName: string =
-    'EntwicklerteamertzuiwegfkuzegfukzgkZGFUZgefkeuzgZEGUZGEZGEZGFZ<GFKZUGSUZ<GFZGS<ZGFZSG<ZGFZUG';
+  changelName: string = 'Entwicklerteam';
   PersonlName: string = 'Frederick Beck (Du)';
   openCh: boolean = true;
   rotateCh: boolean = false;
@@ -41,6 +40,7 @@ export class ChannelsComponent {
   }
 
   openChat(chatColl: string, chatId: string) {
+    this.chatService.getChat(chatColl, chatId);
     this.chatService.openChatEmitter.next({
       chatColl: chatColl,
       chatId: chatId,

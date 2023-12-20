@@ -19,7 +19,7 @@ export class ChatService {
   firestore = inject(FirestoreService);
   chatSnap!: Function;
 
-  currentChat: DocumentData | undefined; // aktiver chat oder channel der im main-chat angezeigt wird
+  currentChat: any; // aktiver chat oder channel der im main-chat angezeigt wird
   chats!: Array<DocumentData>;
   channelSnap!: Function;
   channels!: Array<DocumentData>;
@@ -62,6 +62,8 @@ export class ChatService {
   async getChat(collId: string, docId: string) {
     const docSnap = await getDoc(this.firestore.getDocRef(collId, docId));
     this.currentChat = docSnap.data();
+    // console.log(this.currentChat);
+    return this.currentChat;
   }
 
   getAllChats(data: QuerySnapshot<DocumentData, DocumentData>) {

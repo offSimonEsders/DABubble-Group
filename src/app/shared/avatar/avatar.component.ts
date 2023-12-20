@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-avatar',
@@ -8,10 +9,25 @@ import { Component, Input } from '@angular/core';
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.scss',
 })
-export class AvatarComponent {
-  @Input() status!: string | null;
+export class AvatarComponent implements OnInit {
+  accountService!: AccountService;
+  @Input() accountId!: string;
+  status!: string;
+  photoUrl!: string;
+
+  constructor() {
+    this.accountService = inject(AccountService);
+  }
+
+  ngOnInit(): void {
+    this.accountService.getAccountImage(this.accountId).then((url) => {
+      this.photoUrl = url;
+    });
+  }
 
   getStatusColor() {
-    return this.status === 'online' ? '#92c83e' : '#686868';
+    this.accountService.getAccountStatus(this.accountId).then((status) => {
+      this.status = status;
+    });
   }
 }

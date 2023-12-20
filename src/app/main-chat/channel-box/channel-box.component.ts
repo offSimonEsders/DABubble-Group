@@ -11,11 +11,6 @@ import { HoverStyleDirective } from './hover-style.directive';
 })
 export class ChannelBoxComponent {
   @Input() introStyle!: string;
+  @Input() currentChannel!: any;
   onHover = false;
-  currentChat = {
-    name: 'Entwicklerteam',
-    description: 'Hier ist eine Beschreibung',
-    access: 'public',
-    creater: 'Frederik Beck',
-  };
 }
