@@ -1,0 +1,135 @@
+@import "../../../../styles.scss";
+
+.overdiv-addUser{
+    h1{
+        font-size: 26px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    h2{
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    span{
+        font-size: 18px;
+        margin-right: 20px;
+    }
+
+    button{
+        background-color: $buttonPurple;
+        padding: 16px;
+        border: none;
+        border-radius: 30px;
+        color: white;
+        font-size: 18px;
+        width: 150px;
+        &:hover{
+            cursor: pointer;
+            background-color: $purple2;
+        }
+        &:active {
+            background-color: $buttonPurple !important;
+        }
+    }
+}
+
+.button{
+    margin-top: 30px;
+    width: 100%;
+    @include displayFlex($jc: flex-end); 
+}
+
+.input-div{
+    margin-top: 20px;
+    @include displayFlex($jc: flex-start); 
+    border: 1px solid $textGrey;
+    padding: 16px;
+    border-radius: 30px;
+
+
+    span{
+        padding-left: 10px;
+        font-weight: 500;
+        font-size: 20px;
+        color: $textGrey;
+    }
+
+    input{
+        font-weight: 500;
+        font-size: 18px;
+        border: none; 
+        outline: none;
+        width: calc(100% - 40px);
+    }
+}
+
+.close-button{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+    @include displayFlex($jc: center); 
+    border-radius: 100%;
+    padding: 8px;
+    cursor: pointer;
+    svg{
+        &:active {
+            path{
+                fill: black !important;
+            }
+        }
+    }
+    &:hover{
+        background-color: $bgr;
+
+        svg path {
+            fill: $purple2;
+        }
+    }
+}
+
+
+$input-bg-color: white;
+$input-border-color: grey;
+$checked-bg-color: white;
+
+.checkbox-div{
+    padding: 8px;
+    padding-left: 0;
+    @include displayFlex($jc: flex-start); 
+    input[type="checkbox"] {
+        cursor: pointer;
+        appearance: none;
+        background-color: $input-bg-color;
+        border: 1px solid $input-border-color;
+        border-radius: 100%;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        
+        &:checked {
+          background-color:$checked-bg-color; 
+          border-radius:100%;
+      
+          &:before {
+            content:'';
+            display:block; 
+            width:12px; 
+            height:12px; 
+            background: $purple2; 
+            position:absolute; 
+            left:50%; 
+            top:50%; 
+            transform: translate(-50%, -50%);
+            border-radius :100%;
+          }
+         }
+    }
+
+    span{
+        margin-left: 20px;
+    }
+}
