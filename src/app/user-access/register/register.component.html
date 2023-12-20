@@ -1,12 +1,12 @@
 <section class="register-frame" style="display: none;">
     
-    <button class="register-go-back" (click)="showRegistration()"></button>
+    <button class="register-go-back" (click)="showLogin()"></button>
 
     <div class="register-header">
         <h1>Konto erstellen</h1>
         <p>Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues DABubble-Konto.</p>
     </div>
-    <form (submit)="loadChooseACharacter($event)" class="register-form">
+    <form (submit)="showChooseACharacter($event)" class="register-form">
         <div class="register-input-container">
             <input type="text" placeholder="Name und Nachname">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
