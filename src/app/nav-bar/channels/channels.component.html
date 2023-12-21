@@ -128,29 +128,9 @@
         </div>
     </div>
     <div *ngIf="openPe">
-        <div class="channels" (click)="openChat('chats', 'chatlId')">
-            <div class="container"><app-avatar [accountId]="'pesOSpHsgAt97WwG705y'"></app-avatar></div>
-            <span class="personName">{{ PersonlName }}</span>
-        </div>
-        <div class="channels">
-            <div class="container"><app-avatar [accountId]="'2W6moOnVTy1T8sF3gPRP'"></app-avatar></div>
-            <span class="personName">{{ PersonlName }}</span>
-        </div>
-        <div class="channels">
-            <div class="container"><app-avatar [accountId]="'fiRl1gHXHAl3goy8BxKp'"></app-avatar></div>
-            <span class="personName">{{ PersonlName }}</span>
-        </div>
-        <div class="channels">
-            <div class="container"><app-avatar [accountId]="'RLkhMh6TcC9rjmQZSIrI'"></app-avatar></div>
-            <span class="personName">{{ PersonlName }}</span>
-        </div>
-        <div class="channels">
-            <div class="container"><app-avatar [accountId]="'3PkAFPI47OFMwr7xkwkd'"></app-avatar></div>
-            <span class="personName">{{ PersonlName }}</span>
-        </div>
-        <div class="channels">
-            <div class="container"><app-avatar [accountId]="'hXdE40FYTVAJbeAMtMpU'"></app-avatar></div>
-            <span class="personName">{{ PersonlName }}</span>
+        <div *ngFor="let i of PersonlName" class="channels" (click)="openChat('chats', 'chatlId')">
+            <div class="container"><app-avatar [accountId]="i.accountId"></app-avatar></div>
+            <span class="personName">{{ i.name }}</span>
         </div>
     </div>
 </div>

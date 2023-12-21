@@ -26,7 +26,33 @@ export class ChannelsComponent {
       svg: true,
     },
   ];
-  PersonlName: string = 'Frederick Beck (Du)';
+  PersonlName: any = [
+    {
+      name: 'Frederick Beck (Du)',
+      accountId: 'pesOSpHsgAt97WwG705y'
+    },
+    {
+      name: 'Ben Mustermann',
+      accountId:'2W6moOnVTy1T8sF3gPRP'
+    },
+    {
+      name: 'Sofia Müller',
+      accountId:'fiRl1gHXHAl3goy8BxKp'
+    },
+    {
+      name: 'Nora Braun',
+      accountId:'RLkhMh6TcC9rjmQZSIrI'
+    },
+    {
+      name: 'Swen Bauer',
+      accountId:'3PkAFPI47OFMwr7xkwkd'
+    },
+    {
+      name: 'John Wick',
+      accountId:'hXdE40FYTVAJbeAMtMpU'
+    },
+  ];
+
   openCh: boolean = true;
   rotateCh: boolean = false;
   openPe: boolean = true;
