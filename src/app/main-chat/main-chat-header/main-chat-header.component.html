@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="avatar-container" *ngFor="let member of currentChat['memberIds'], let i = index"
                     [ngStyle]="{transform: translateAvatarElements(i)}">
-                    <app-avatar [accountId]="member"></app-avatar>
+                    <app-avatar [accountId]="member" [hideStatus]="true"></app-avatar>
                 </div>
             </div>
             <span>{{ currentChat['memberIds'].length }}</span>
@@ -31,12 +31,14 @@
 }
 }
 @case ('chats') {
+@if(chatWithAccountId) {
 <div class="private-chat-header">
     <div class="avatar-container">
-        <app-avatar [accountId]="'2W6moOnVTy1T8sF3gPRP'"></app-avatar>
+        <app-avatar [accountId]="chatWithAccountId.accountId"></app-avatar>
     </div>
-    <span>Frederik Beck</span>
+    <span>{{ chatWithAccountId.name}}</span>
 </div>
+}
 }
 @default {
 <div class="new-chat-header">

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import {
-  DocumentData,
+  QueryDocumentSnapshot,
   QuerySnapshot,
   addDoc,
   collection,
@@ -17,16 +17,14 @@ import { Subject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class ChatService {
   firestore = inject(FirestoreService);
-  chatSnap!: Function;
-
-  currentChat: any; // aktiver chat oder channel der im main-chat angezeigt wird
-  chats!: Array<DocumentData>;
-  channelSnap!: Function;
-  channels!: Array<DocumentData>;
   openChatEmitter = new Subject<{
     chatColl: string;
-    chatId: string;
+    chatId?: string;
   }>();
+  chatSnap!: Function;
+  channelSnap!: Function;
+  chats: Chat[] = [];
+  channels: Channel[] = [];
 
   channelCreatedSource = new Subject<boolean>();
   channelCreated(state: boolean) {
@@ -49,34 +47,49 @@ export class ChatService {
       });
   }
 
+  async getChat(collId: string, docId: string) {
+    const docSnap = await getDoc(this.firestore.getDocRef(collId, docId));
+    if (collId === 'channels') {
+      let channel = this.createChannel(docSnap);
+      return channel;
+    } else {
+      return new Chat(docSnap.get('id'), docSnap.get('memberIds'));
+    }
+  }
+
   onSnap(collection: string) {
-    return onSnapshot(this.firestore.getCollectionRef(collection), (data) => {
+    return onSnapshot(this.firestore.getCollectionRef(collection), (list) => {
       if (collection === 'chats') {
-        this.getAllChats(data);
+        this.getAllChats(list);
       } else {
-        this.getAllChannels(data);
+        this.getAllChannels(list);
       }
     });
   }
 
-  async getChat(collId: string, docId: string) {
-    const docSnap = await getDoc(this.firestore.getDocRef(collId, docId));
-    this.currentChat = docSnap.data();
-    // console.log(this.currentChat);
-    return this.currentChat;
-  }
-
-  getAllChats(data: QuerySnapshot<DocumentData, DocumentData>) {
+  getAllChats(list: QuerySnapshot) {
     this.chats = [];
-    data.forEach((doc) => {
-      this.chats.push(doc.data());
+    list.forEach((element: QueryDocumentSnapshot) => {
+      this.chats.push(new Chat(element.get('id'), element.get('memberIds')));
     });
   }
 
-  getAllChannels(data: QuerySnapshot<DocumentData, DocumentData>) {
+  getAllChannels(list: QuerySnapshot) {
     this.channels = [];
-    data.forEach((doc) => {
-      this.channels.push(doc.data());
+    list.forEach((element: QueryDocumentSnapshot) => {
+      let channel = this.createChannel(element);
+      this.channels.push(channel);
     });
+  }
+
+  createChannel(data: any) {
+    return new Channel(
+      data.get('id'),
+      data.get('memberIds'),
+      data.get('name'),
+      data.get('description'),
+      data.get('publicStatus'),
+      data.get('creater')
+    );
   }
 }

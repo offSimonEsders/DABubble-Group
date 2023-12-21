@@ -3,7 +3,8 @@ import { AccountService } from './account.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  accountService!: AccountService;
+  private accountService!: AccountService;
+  userId = 'pesOSpHsgAt97WwG705y';
 
   constructor() {
     this.accountService = inject(AccountService);
