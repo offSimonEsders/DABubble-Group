@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { AccountService } from './account.service';
-import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, signInAnonymously, signInWithEmailAndPassword, signInWithPopup } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, signInAnonymously, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
@@ -16,7 +16,7 @@ export class AuthService {
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
   }
 
-  signUp(user_email: string, user_password: string) {
+  authServiceSignUp(user_email: string, user_password: string) {
     createUserWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
         console.log(userCredential);
@@ -26,7 +26,7 @@ export class AuthService {
       });
   }
 
-  signIn(user_email: string, user_password: string) {
+  authServiceSignIn(user_email: string, user_password: string) {
     signInWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
         console.log(userCredential);
@@ -36,11 +36,7 @@ export class AuthService {
       });
   }
 
-  signOut() {
-    this.auth.signOut();
-  }
-
-  signInWithGoogle() {
+  authServiceSignInWithGoogle() {
     signInWithPopup(this.auth, this.provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
@@ -66,9 +62,15 @@ export class AuthService {
   signInAnonymously() {
     signInAnonymously(this.auth)
       .then((userCredential) => {
-        console.log(userCredential);
+        console.log(this.auth.currentUser);
         this.router.navigate(['/test'])
       })
+  }
+
+  authServiceSignOut() {
+    signOut(this.auth).then(() => {
+      console.log(this.auth.currentUser);
+    });
   }
 
   // Sign up, login, auto-login, logout, auto-logout, forgot-password functions
