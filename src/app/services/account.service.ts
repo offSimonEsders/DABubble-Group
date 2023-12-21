@@ -25,6 +25,10 @@ export class AccountService {
     this.accSnap();
   }
 
+  /**
+   * The addAccount function asynchronously adds an account to a Firestore database.
+   * @param {Account} account - Object of type `Account`.
+   */
   async addAccount(account: Account) {
     await setDoc(
       doc(this.firestore.db, 'accounts', account.accountId),
@@ -34,12 +38,21 @@ export class AccountService {
     });
   }
 
+  /**
+   * The function retrieves an account document from Firestore and creates an account object from the document snapshot.
+   * @param {string} docId - Id of the document in the "accounts" collection that you want to retrieve.
+   * @returns Returning an account object.
+   */
   async getAccount(docId: string) {
     const docSnap = await getDoc(this.firestore.getDocRef('accounts', docId));
     let account = this.createAccount(docSnap);
     return account;
   }
 
+  /**
+   * The function retrieves all accounts from a Firestore collection and updates the local accounts array.
+   * @returns Returning a snapshot listener.
+   */
   getAllAccounts() {
     return onSnapshot(this.firestore.getCollectionRef('accounts'), (list) => {
       this.accounts = [];
@@ -50,6 +63,7 @@ export class AccountService {
     });
   }
 
+  /* The function that takes in a `QueryDocumentSnapshot` or `DocumentSnapshot` object and creates a new `Account` object using the data from the snapshot. */
   createAccount(data: QueryDocumentSnapshot | DocumentSnapshot) {
     return new Account(
       data.get('name'),
