@@ -1,5 +1,5 @@
-@import "./../../styles.scss";
-
+//@import "./../../styles.scss";
+/*
 .overdiv{
     height: 100vh;
     width: 100%;
@@ -8,11 +8,12 @@
     left: 0;
     background-color: rgba(0,0,0,0.2);
     z-index: 5;
-    @include displayFlex($jc: center); 
+    //@include displayFlex($jc: center); 
 }
 
 .headAndClose{
-    @include displayFlex($jc: ); 
+    //@include displayFlex($jc: ); 
+    display: flex; //Weg machen
 }
 
 .crate-overdiv{
@@ -58,4 +59,4 @@
             background-color: $buttonPurple !important;
         }
     }
-}
+}*/

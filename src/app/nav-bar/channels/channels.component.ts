@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { ChatService } from '../../services/chat.service';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-channels',
@@ -26,32 +27,7 @@ export class ChannelsComponent {
       svg: true,
     },
   ];
-  PersonlName: any = [
-    {
-      name: 'Frederick Beck (Du)',
-      accountId: 'pesOSpHsgAt97WwG705y'
-    },
-    {
-      name: 'Ben Mustermann',
-      accountId:'2W6moOnVTy1T8sF3gPRP'
-    },
-    {
-      name: 'Sofia Müller',
-      accountId:'fiRl1gHXHAl3goy8BxKp'
-    },
-    {
-      name: 'Nora Braun',
-      accountId:'RLkhMh6TcC9rjmQZSIrI'
-    },
-    {
-      name: 'Swen Bauer',
-      accountId:'3PkAFPI47OFMwr7xkwkd'
-    },
-    {
-      name: 'John Wick',
-      accountId:'hXdE40FYTVAJbeAMtMpU'
-    },
-  ];
+  
 
   openCh: boolean = true;
   rotateCh: boolean = false;
@@ -59,12 +35,16 @@ export class ChannelsComponent {
   rotatePe: boolean = false;
 
   chatService!: ChatService;
+  accountService!:AccountService;
 
   constructor() {
     this.chatService = inject(ChatService);
+    this.accountService = inject(AccountService);
+
   }
 
   hideChannels() {
+    console.log(this.accountService.accounts);
     this.openCh = !this.openCh;
     this.rotateCh = !this.rotateCh;
   }
