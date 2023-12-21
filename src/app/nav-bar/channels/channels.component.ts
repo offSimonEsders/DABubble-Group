@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
@@ -12,7 +12,7 @@ import { AccountService } from '../../services/account.service';
   styleUrl: './channels.component.scss',
   imports: [CommonModule, CreateChannelComponent, AvatarComponent],
 })
-export class ChannelsComponent {
+export class ChannelsComponent implements OnInit {
   changelName: any = [
     {
       name: 'Entwicklerteam',
@@ -27,7 +27,6 @@ export class ChannelsComponent {
       svg: true,
     },
   ];
-  
 
   openCh: boolean = true;
   rotateCh: boolean = false;
@@ -35,13 +34,14 @@ export class ChannelsComponent {
   rotatePe: boolean = false;
 
   chatService!: ChatService;
-  accountService!:AccountService;
+  accountService!: AccountService;
 
   constructor() {
-    this.chatService = inject(ChatService);
     this.accountService = inject(AccountService);
-
+    this.chatService = inject(ChatService);
   }
+
+  ngOnInit(): void {}
 
   hideChannels() {
     console.log(this.accountService.accounts);
