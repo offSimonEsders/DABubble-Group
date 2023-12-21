@@ -55,7 +55,7 @@
     </div>
 
     <div *ngIf="openCh">
-        <div *ngFor="let i of chatService.channels" class="channels" (click)="openChat('channels', i.id)">
+        <div *ngFor="let i of chatService.channels" class="channels" (click)="openChannel('channels', i.id)">
             <div class="svg-container">
                 <svg *ngIf="!i.publicStatus" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);">
@@ -128,7 +128,7 @@
         </div>
     </div>
     <div *ngIf="openPe">
-        <div *ngFor="let i of accountService.accounts" class="channels" (click)="openChat('chats', 'chatlId')">
+        <div *ngFor="let i of accountService.accounts" class="channels" (click)="openChat('chats', i.accountId)">
             <div class="container"><app-avatar [accountId]="i.accountId" [hideStatus]="false"></app-avatar></div>
             <span class="personName">{{ i.name }}</span>
         </div>

@@ -38,13 +38,12 @@ export class ChatService {
   }
 
   async addChat(chat: Chat | Channel, collId: string) {
-    await addDoc(collection(this.firestore.db, collId), chat.toJson())
-      .catch((err) => {
-        // show an Errormessage
-      })
-      .then((doc: any) => {
-        updateDoc(doc, { id: doc.id });
-      });
+    return await addDoc(
+      collection(this.firestore.db, collId),
+      chat.toJson()
+    ).catch((err) => {
+      // show an Errormessage
+    });
   }
 
   async getChat(collId: string, docId: string) {

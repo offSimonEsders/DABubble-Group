@@ -6,7 +6,7 @@
     <div class="chat-members-info-container">
         <div class="chat-members-info">
             <div class="container">
-                <div class="avatar-container" *ngFor="let member of currentChat['memberIds'], let i = index"
+                <div class="avatar-container" *ngFor="let member of currentChat['memberIds'] | slice:0:3, let i = index"
                     [ngStyle]="{transform: translateAvatarElements(i)}">
                     <app-avatar [accountId]="member" [hideStatus]="true"></app-avatar>
                 </div>
