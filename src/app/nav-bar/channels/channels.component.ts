@@ -16,21 +16,6 @@ import { updateDoc } from '@angular/fire/firestore';
   imports: [CommonModule, CreateChannelComponent, AvatarComponent],
 })
 export class ChannelsComponent implements OnInit {
-  changelName: any = [
-    {
-      name: 'Entwicklerteam',
-      svg: true,
-    },
-    {
-      name: 'Meeting',
-      svg: false,
-    },
-    {
-      name: 'Angular',
-      svg: true,
-    },
-  ];
-
   openCh: boolean = true;
   rotateCh: boolean = false;
   openPe: boolean = true;

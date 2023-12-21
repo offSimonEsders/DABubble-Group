@@ -1,5 +1,5 @@
-//@import "./../../styles.scss";
-/*
+@import "./../../styles.scss";
+
 .overdiv{
     height: 100vh;
     width: 100%;
@@ -8,18 +8,13 @@
     left: 0;
     background-color: rgba(0,0,0,0.2);
     z-index: 5;
-    //@include displayFlex($jc: center); 
-}
-
-.headAndClose{
-    //@include displayFlex($jc: ); 
-    display: flex; //Weg machen
+    @include displayFlex($jc: center); 
 }
 
 .crate-overdiv{
     position: relative;
     border-radius: 40px;
-    max-width: 500px;
+    max-width: 400px;
     max-height: 900px;
     min-width: 700px;
     background-color: white;
@@ -27,7 +22,7 @@
     margin-left: 10px;
 
     h1{
-        font-size: 26px;
+        font-size: 32px;
         margin-top: 10px;
         margin-bottom: 20px;
     }
@@ -59,4 +54,66 @@
             background-color: $buttonPurple !important;
         }
     }
-}*/
+}
+
+.close-button{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+    @include displayFlex($jc: center); 
+    border-radius: 100%;
+    padding: 8px;
+    cursor: pointer;
+    svg{
+        &:active {
+            path{
+                fill: black !important;
+            }
+        }
+    }
+    &:hover{
+        background-color: $bgr;
+
+        svg path {
+            fill: $purple2;
+        }
+    }
+}
+
+.picture{
+    padding-top: 20px;
+    height: 200px;
+    width: 100%;
+    @include displayFlex($jc: center); 
+
+    img{
+        height: 200px;
+        width: 200px;
+        border-radius: 100%;
+    }
+}
+
+.informations{
+    padding-top: 20px;
+    h2{
+        font-size: 34px;
+    }
+}
+
+.status{
+    padding-top: 20px;
+    @include displayFlex($jc: flex-start); 
+    div{
+        height: 20px;
+        width: 20px;
+        border-radius: 100%;
+        background-color: $onlineGreen;
+
+    }
+    span{
+        padding-left: 20px;
+        font-size: 26px;
+        color: $onlineGreen;
+    }
+}
