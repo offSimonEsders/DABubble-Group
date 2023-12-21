@@ -128,7 +128,7 @@
         </div>
     </div>
     <div *ngIf="openPe">
-        <div *ngFor="let i of PersonlName" class="channels" (click)="openChat('chats', 'chatlId')">
+        <div *ngFor="let i of accountService.accounts" class="channels" (click)="openChat('chats', 'chatlId')">
             <div class="container"><app-avatar [accountId]="i.accountId" [hideStatus]="false"></app-avatar></div>
             <span class="personName">{{ i.name }}</span>
         </div>
