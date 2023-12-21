@@ -13,7 +13,7 @@
   }
 
   &:hover {
-    background-color: $bgr;
+    background-color: $bgr !important;
 
     .message {
       background-color: white;
@@ -156,6 +156,7 @@
     .btn-container {
       @include displayFlex($g: 32px);
     }
+
     button {
       font-size: 18px;
       padding: 12px 25px;

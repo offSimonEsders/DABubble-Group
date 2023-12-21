@@ -32,6 +32,10 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
     this.accountService = inject(AccountService);
   }
 
+  /**
+   * The ngOnInit function subscribes to an openChatEmitter and retrieves chat data based on the provided
+   * chat collection and chat ID.
+   */
   ngOnInit(): void {
     this.openChatSub = this.chatService.openChatEmitter.subscribe({
       next: (data) => {
@@ -54,6 +58,8 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
 
   /**
    * The function retrieves the account information of the chat partner based on the memberIds of the current chat.
+   * The ID of the chat partner will be filterd from the current chat memberIDs array and used to retrieve the associated account information
+   * by using the account service
    */
   getChatPartner() {
     let id = this.currentChat.memberIds.filter(
