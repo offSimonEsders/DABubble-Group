@@ -33,17 +33,19 @@ export class AvatarComponent implements OnInit, OnDestroy {
     this.accountService.getAccount(this.accountId).then((account) => {
       this.account = account;
     });
-    this.statusSnap = onSnapshot(
-      this.firestore.getDocRef('accounts', this.accountId),
-      (doc) => {
-        this.account.onlineStatus = doc.get('onlineStatus');
-      }
-    );
+    if (this.account) {
+      this.statusSnap = onSnapshot(
+        this.firestore.getDocRef('accounts', this.accountId),
+        (doc) => {
+          this.account.onlineStatus = doc.get('onlineStatus');
+        }
+      );
+    }
   }
 
   ngOnDestroy(): void {
-    this.statusSnap();
-    this.accountService.ngOnDestroy();
+    // this.statusSnap();
+    // this.accountService.ngOnDestroy();
   }
 
   /* The function determines the color to be used for the online status indicator in the avatar component. */

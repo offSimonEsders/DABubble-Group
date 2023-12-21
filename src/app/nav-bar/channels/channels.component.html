@@ -55,15 +55,15 @@
     </div>
 
     <div *ngIf="openCh">
-        <div *ngFor="let i of changelName" class="channels" (click)="openChat('channels', 'DoyYlhi6FZlk5Bt5T4sD')">
+        <div *ngFor="let i of chatService.channels" class="channels" (click)="openChat('channels', i.id)">
             <div class="svg-container">
-                <svg *ngIf="i.svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    style="fill: rgba(0, 0, 0, 1);">
+                <svg *ngIf="!i.publicStatus" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);">
                     <path
                         d="M20 12c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7z">
                     </path>
                 </svg>
-                <svg *ngIf="!i.svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                <svg *ngIf="i.publicStatus" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_813_12093" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                         height="24">
