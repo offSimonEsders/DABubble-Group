@@ -65,7 +65,7 @@
 
     <div class="login-or-guest">
         <button class="login-button">Anmelden</button>
-        <button class="guest-button">Gäste-Login</button>
+        <button class="guest-button" (click)="this.authservice.signInAnonymously()">Gäste-Login</button>
     </div>
 
 </div>
