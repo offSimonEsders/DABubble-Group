@@ -18,7 +18,6 @@ export class NavHeadComponent {
   openNewChat() {
     this.chatService.openChatEmitter.next({
       chatColl: '',
-      chatId: '',
     });
   }
 }

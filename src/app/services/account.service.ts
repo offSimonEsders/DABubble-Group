@@ -3,9 +3,9 @@ import {
   doc,
   setDoc,
   onSnapshot,
-  QuerySnapshot,
-  DocumentData,
   getDoc,
+  QueryDocumentSnapshot,
+  DocumentSnapshot,
 } from '@angular/fire/firestore';
 
 import { Account } from '../models/account.class';
@@ -15,18 +15,20 @@ import { FirestoreService } from './firestore.service';
 export class AccountService {
   firestore = inject(FirestoreService);
   accSnap!: Function;
-  accounts!: Array<DocumentData>;
-  account!: DocumentData | undefined;
+  accounts: Account[] = [];
 
   constructor() {
-    this.accSnap = onSnapshot(
-      this.firestore.getCollectionRef('accounts'),
-      (data) => {
-        this.getAllAccounts(data);
-      }
-    );
+    this.accSnap = this.getAllAccounts();
   }
 
+  ngOnDestroy() {
+    this.accSnap();
+  }
+
+  /**
+   * The addAccount function asynchronously adds an account to a Firestore database.
+   * @param {Account} account - Object of type `Account`.
+   */
   async addAccount(account: Account) {
     await setDoc(
       doc(this.firestore.db, 'accounts', account.accountId),
@@ -36,27 +38,39 @@ export class AccountService {
     });
   }
 
+  /**
+   * The function retrieves an account document from Firestore and creates an account object from the document snapshot.
+   * @param {string} docId - Id of the document in the "accounts" collection that you want to retrieve.
+   * @returns Returning an account object.
+   */
   async getAccount(docId: string) {
     const docSnap = await getDoc(this.firestore.getDocRef('accounts', docId));
-    this.account = docSnap.data();
+    let account = this.createAccount(docSnap);
+    return account;
   }
 
-  async getAccountImage(docId: string) {
-    const docSnap = await getDoc(this.firestore.getDocRef('accounts', docId));
-    let photoUrl = docSnap.get('photoUrl');
-    return photoUrl;
-  }
-
-  async getAccountStatus(docId: string) {
-    const docSnap = await getDoc(this.firestore.getDocRef('accounts', docId));
-    let status = docSnap.get('onlineStatus');
-    return status;
-  }
-
-  getAllAccounts(data: QuerySnapshot<DocumentData, DocumentData>) {
-    this.accounts = [];
-    data.forEach((doc) => {
-      this.accounts.push(doc.data());
+  /**
+   * The function retrieves all accounts from a Firestore collection and updates the local accounts array.
+   * @returns Returning a snapshot listener.
+   */
+  getAllAccounts() {
+    return onSnapshot(this.firestore.getCollectionRef('accounts'), (list) => {
+      this.accounts = [];
+      list.forEach((element: QueryDocumentSnapshot) => {
+        let account = this.createAccount(element);
+        this.accounts.push(account);
+      });
     });
+  }
+
+  /* The function that takes in a `QueryDocumentSnapshot` or `DocumentSnapshot` object and creates a new `Account` object using the data from the snapshot. */
+  createAccount(data: QueryDocumentSnapshot | DocumentSnapshot) {
+    return new Account(
+      data.get('name'),
+      data.get('email'),
+      data.get('photoUrl'),
+      data.get('onlineStatus'),
+      data.get('id')
+    );
   }
 }

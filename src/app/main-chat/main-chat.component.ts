@@ -36,11 +36,5 @@ export class MainChatComponent implements OnInit {
     this.chatService = inject(ChatService);
   }
 
-  ngOnInit(): void {
-    console.log(this.chatService.currentChat);
-  }
-
-  log() {
-    console.log(this.chatService.currentChat);
-  }
+  ngOnInit(): void {}
 }
