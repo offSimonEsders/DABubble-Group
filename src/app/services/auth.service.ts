@@ -12,7 +12,7 @@ export class AuthService {
 
   provider: GoogleAuthProvider;
 
-  constructor(private auth: Auth, private router: Router, private firestore: Firestore, private storage: Storage) {
+  constructor(private auth: Auth, private router: Router, private firestore: Firestore) {
     this.accountService = inject(AccountService);
     this.provider = new GoogleAuthProvider();
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
