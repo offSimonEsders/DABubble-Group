@@ -1,9 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { AccountService } from './account.service';
 import { Auth, GoogleAuthProvider, UserCredential, createUserWithEmailAndPassword, signInAnonymously, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { Router, UrlTree } from '@angular/router';
 import { Account } from '../models/account.class';
 import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore';
+import { Storage, uploadBytes, ref } from '@angular/fire/storage';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -12,11 +13,36 @@ export class AuthService {
 
   provider: GoogleAuthProvider;
 
-  constructor(private auth: Auth, private router: Router, private firestore: Firestore) {
+  constructor(private auth: Auth, private router: Router, private firestore: Firestore, private storage: Storage) {
     this.accountService = inject(AccountService);
     this.provider = new GoogleAuthProvider();
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    this.uploadFileToFirestorage();
+  }
+  // ...
 
+  uploadFileToFirestorage() {
+    const filePath = 'img/daBubbleLogo.png';
+    const fileUrl = 'assets/img/daBubbleLogo.png'; // Adjust this path if necessary
+
+    fetch(fileUrl)
+      .then(response => response.blob())
+      .then(blob => {
+        const storageRef = ref(this.storage, filePath);
+        uploadBytes(storageRef, blob)
+          .then((snapshot) => {
+            console.log('File uploaded successfully');
+            // Handle success
+          })
+          .catch((error) => {
+            console.log('File upload failed');
+            // Handle error
+          });
+      })
+      .catch((error) => {
+        console.log('Failed to fetch the file');
+        // Handle error
+      });
   }
 
   authServiceSignUpWithEmailAndPassword(user_name: string, user_email: string, user_password: string, photoUrl: any) {
