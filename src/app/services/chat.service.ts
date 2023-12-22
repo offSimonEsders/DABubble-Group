@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import {
+  DocumentSnapshot,
   QueryDocumentSnapshot,
   QuerySnapshot,
   addDoc,
@@ -16,47 +17,71 @@ import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
-  firestore = inject(FirestoreService);
+  firestore: FirestoreService;
   openChatEmitter = new Subject<{
     chatColl: string;
-    chatId?: string;
+    accountId?: string;
   }>();
   chatSnap!: Function;
   channelSnap!: Function;
   chats: Chat[] = [];
+  currentChat!: Chat;
   channels: Channel[] = [];
+  currentChannel!: Channel;
 
   channelCreatedSource = new Subject<boolean>();
-  channelCreated(state: boolean) {
-    this.channelCreatedSource.next(state);
-  }
   channelCreated$ = this.channelCreatedSource.asObservable();
 
   constructor() {
-    this.chatSnap = this.onSnap('chats');
-    this.channelSnap = this.onSnap('channels');
+    this.firestore = inject(FirestoreService);
+    this.chatSnap = this.setChatsOrChannels('chats');
+    this.channelSnap = this.setChatsOrChannels('channels');
   }
 
-  async addChat(chat: Chat | Channel, collId: string) {
-    return await addDoc(
-      collection(this.firestore.db, collId),
-      chat.toJson()
-    ).catch((err) => {
-      // show an Errormessage
-    });
+  channelCreated(state: boolean) {
+    this.channelCreatedSource.next(state);
   }
 
-  async getChat(collId: string, docId: string) {
-    const docSnap = await getDoc(this.firestore.getDocRef(collId, docId));
-    if (collId === 'channels') {
-      let channel = this.createChannel(docSnap);
-      return channel;
+  async addChatOrChannel(chat: Chat | Channel, collId: string) {
+    return await addDoc(collection(this.firestore.db, collId), chat.toJson())
+      .catch((err) => {
+        // show an Errormessage
+      })
+      .then((doc: any) => {
+        updateDoc(doc, { id: doc.id });
+        this.setCurrentChatOrCurrentChannel(collId, doc.id);
+      });
+  }
+
+  async setCurrentChatOrCurrentChannel(collId: string, docId: string) {
+    if (collId === 'chats') {
+      this.getChat(docId).then((chat) => {
+        this.currentChat = chat;
+      });
     } else {
-      return new Chat(docSnap.get('id'), docSnap.get('memberIds'));
+      this.getChannel(docId).then((channel) => {
+        this.currentChannel = channel;
+      });
     }
   }
 
-  onSnap(collection: string) {
+  async getChat(docId: string) {
+    const docSnap: DocumentSnapshot = await getDoc(
+      this.firestore.getDocRef('chats', docId)
+    );
+    const chat = new Chat(docSnap.get('id'), docSnap.get('memberIds'));
+    return chat;
+  }
+
+  async getChannel(docId: string) {
+    const docSnap: DocumentSnapshot = await getDoc(
+      this.firestore.getDocRef('channels', docId)
+    );
+    const channel = this.createChannel(docSnap);
+    return channel;
+  }
+
+  setChatsOrChannels(collection: string) {
     return onSnapshot(this.firestore.getCollectionRef(collection), (list) => {
       if (collection === 'chats') {
         this.getAllChats(list);
@@ -69,19 +94,20 @@ export class ChatService {
   getAllChats(list: QuerySnapshot) {
     this.chats = [];
     list.forEach((element: QueryDocumentSnapshot) => {
-      this.chats.push(new Chat(element.get('id'), element.get('memberIds')));
+      const chat = new Chat(element.get('id'), element.get('memberIds'));
+      this.chats.push(chat);
     });
   }
 
   getAllChannels(list: QuerySnapshot) {
     this.channels = [];
     list.forEach((element: QueryDocumentSnapshot) => {
-      let channel = this.createChannel(element);
+      const channel = this.createChannel(element);
       this.channels.push(channel);
     });
   }
 
-  createChannel(data: any) {
+  createChannel(data: QueryDocumentSnapshot | DocumentSnapshot) {
     return new Channel(
       data.get('id'),
       data.get('memberIds'),

@@ -1,9 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  inject,
+} from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { onSnapshot } from '@angular/fire/firestore';
 import { FirestoreService } from '../../services/firestore.service';
 import { Account } from '../../models/account.class';
+import { Subscription } from 'rxjs';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-avatar',
@@ -12,27 +22,69 @@ import { Account } from '../../models/account.class';
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.scss',
 })
-export class AvatarComponent implements OnInit, OnDestroy {
+export class AvatarComponent implements OnInit, OnChanges, OnDestroy {
   private accountService!: AccountService;
   private firestore!: FirestoreService;
+  private chatService!: ChatService;
   @Input() accountId!: string;
   @Input() hideStatus!: boolean; // hides or displays the onlineStatus
   account!: Account;
   statusSnap!: Function;
+  openChatSub!: Subscription;
 
   constructor() {
     this.accountService = inject(AccountService);
     this.firestore = inject(FirestoreService);
+    this.chatService = inject(ChatService);
   }
 
   /**
-   * The ngOnInit function retrieves an account from the account service and updates the online status of
-   * the account based on changes in the Firestore document.
+   * The ngOnInit function initializes the component by setting the account, updating the online status,
+   * and updating the account ID.
    */
   ngOnInit(): void {
+    this.setAccount();
+    this.updateOnlineStatus();
+    this.updateAccountId();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.setAccount();
+  }
+
+  ngOnDestroy(): void {
+    this.openChatSub.unsubscribe();
+    // this.statusSnap();
+    // this.accountService.ngOnDestroy();
+  }
+
+  /**
+   * The function subscribes to the openChatEmitter and updates the `accountId` property
+   * if the emitted data contains an `accountId` value.
+   */
+  updateAccountId() {
+    this.openChatSub = this.chatService.openChatEmitter.subscribe({
+      next: (data) => {
+        if (data.accountId) {
+          this.accountId = data.accountId;
+        }
+      },
+    });
+  }
+
+  /**
+   * The function retrieves an account using the account ID and assigns it to the "account" property.
+   */
+  setAccount() {
     this.accountService.getAccount(this.accountId).then((account) => {
       this.account = account;
     });
+  }
+
+  /**
+   * The function updates the online status of an account by listening for changes in the onlineStatus field of a document in Firestore.
+   */
+  updateOnlineStatus() {
     if (this.account) {
       this.statusSnap = onSnapshot(
         this.firestore.getDocRef('accounts', this.accountId),
@@ -41,11 +93,6 @@ export class AvatarComponent implements OnInit, OnDestroy {
         }
       );
     }
-  }
-
-  ngOnDestroy(): void {
-    // this.statusSnap();
-    // this.accountService.ngOnDestroy();
   }
 
   /* The function determines the color to be used for the online status indicator in the avatar component. */

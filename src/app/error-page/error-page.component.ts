@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-error-page',
@@ -8,15 +8,12 @@ import { ActivatedRoute, Data } from '@angular/router';
   templateUrl: './error-page.component.html',
   styleUrl: './error-page.component.scss',
 })
-export class ErrorPageComponent {
+export class ErrorPageComponent implements OnInit {
   errorMessage: string = '';
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    // this.errorMessage = this.route.snapshot.data['message']; // without data changes
-    this.route.data.subscribe(
-      (data: Data) => (this.errorMessage = data['message'])
-    );
+    this.errorMessage = this.route.snapshot.data['message'];
   }
 }

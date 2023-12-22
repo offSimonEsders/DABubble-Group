@@ -40,7 +40,7 @@ export class FirestoreService {
   /**
    * The function returns a reference to the collection of messages for a given channel ID.
    * @param {string} collId - Name used to identify a specific collection in the Firestore. Can be 'channels' or 'chats'.
-   * @param {string} channelId - ID of a channel.
+   * @param {string} channelId - ID of a channel or chat.
    * @returns a reference to the 'messages' collection within the 'channels' collection in the Firestore.
    */
   getMessageCollRef(collId: string, channelId: string) {
@@ -50,7 +50,7 @@ export class FirestoreService {
   /**
    * The function returns a reference to a specific document in a messages collection within a specified channel.
    * @param {string} collId - Name used to identify a specific collection in the Firestore. Can be 'channels' or 'chats'.
-   * @param {string} channelId - ID to specify the channel in which the message document is located.
+   * @param {string} channelId - ID to specify the channel or chat in which the message document is located.
    * @param {string} docId - ID of a specific message document within a messages subcollection of a channel document.
    * @returns a document reference to a specific message in a specific channel.
    */
@@ -61,7 +61,7 @@ export class FirestoreService {
   /**
    * The function deletes a specific message from a channel or chat in the Firestore.
    * @param {string} collId - Name used to identify a specific collection in the Firestore. Can be 'channels' or 'chats'.
-   * @param {string} channelId - ID of the channel where the message is located, used to specify the document path in the Firestore.
+   * @param {string} channelId - ID of the channel or chat where the message is located, used to specify the document path in the Firestore.
    * @param {string} docId - ID of the message document that you want to delete.
    */
   async deleteMessage(collId: string, channelId: string, docId: string) {

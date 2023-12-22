@@ -3,11 +3,13 @@
         <app-main-chat-header></app-main-chat-header>
     </header>
     <div class="chat-container">
+        @if(currentCollection !== '') {
         <app-time-separator class="line" [date]="transmittedDate"></app-time-separator>
         <div class="message"><app-message [transmitter]="'id3'"></app-message></div>
         <app-time-separator class="line" [date]="transmittedDate2"></app-time-separator>
         <div class="message"><app-message [transmitter]="'id1'"></app-message></div>
         <app-chat-intro class="intro-box"></app-chat-intro>
+        }
     </div>
     <app-message-box class="message-box" [currentChanel]="currentChat.name"></app-message-box>
 </div>

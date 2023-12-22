@@ -6,6 +6,8 @@ import { ChatIntroComponent } from './chat-intro/chat-intro.component';
 import { TimeSeparatorComponent } from './time-separator/time-separator.component';
 import { MessageComponent } from '../shared/message/message.component';
 import { ChatService } from '../services/chat.service';
+import { Chat } from '../models/chat.class';
+import { Channel } from '../models/channel.class';
 
 @Component({
   selector: 'app-main-chat',
@@ -31,10 +33,24 @@ export class MainChatComponent implements OnInit {
   };
   transmittedDate = new Date('Jan 14 2023 07:52:22 GMT+0200');
   transmittedDate2 = new Date();
+  currentCollection: string = '';
+  activeChat!: Chat;
+  activeChannel!: Channel;
 
   constructor() {
     this.chatService = inject(ChatService);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.chatService.openChatEmitter.subscribe({
+      next: (data) => {
+        this.currentCollection = data.chatColl;
+        if (data.chatColl === 'channels') {
+          this.activeChannel = this.chatService.currentChannel;
+        } else if (data.chatColl === 'chats') {
+          this.activeChat = this.chatService.currentChat;
+        }
+      },
+    });
+  }
 }

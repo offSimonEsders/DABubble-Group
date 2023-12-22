@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
@@ -6,7 +6,7 @@ import { ChatService } from '../../services/chat.service';
 import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
 import { Chat } from '../../models/chat.class';
-import { updateDoc } from '@angular/fire/firestore';
+import { Channel } from '../../models/channel.class';
 
 @Component({
   selector: 'app-channels',
@@ -48,14 +48,18 @@ export class ChannelsComponent implements OnInit {
     this.chatService.channelCreated(true);
   }
 
-  openChannel(collId: string, chatId: string) {
-    this.emitChatInfo(collId, chatId);
+  openChannel(collId: string, channelId: string) {
+    this.chatService.getChannel(channelId).then((channel: Channel) => {
+      this.chatService.currentChannel = channel;
+      this.chatService.openChatEmitter.next({ chatColl: collId });
+    });
   }
 
-  async openChat(chatColl: string, accId: string) {
+  openChat(chatColl: string, accId: string) {
     for (let i = 0; i < this.chatService.chats.length; i++) {
       if (this.privateChatExists(i, accId)) {
-        this.emitChatInfo(chatColl, this.chatService.chats[i].id);
+        this.chatService.currentChat = this.chatService.chats[i];
+        this.emitChatInfo(chatColl, accId);
         break;
       }
       if (this.noPrivateChatExists(i)) {
@@ -76,19 +80,15 @@ export class ChannelsComponent implements OnInit {
   }
 
   createNewPrivateChat(chatColl: string, accId: string) {
-    let newChatId = '';
     let newChat = new Chat('', [this.authService.userId, accId]);
-    this.chatService.addChat(newChat, 'chats').then((doc: any) => {
-      updateDoc(doc, { id: doc.id });
-      newChatId = doc.id;
-    });
-    this.emitChatInfo(chatColl, newChatId);
+    this.chatService.addChatOrChannel(newChat, 'chats');
+    this.emitChatInfo(chatColl, accId);
   }
 
-  emitChatInfo(chatColl: string, chatId: string) {
+  emitChatInfo(chatColl: string, accId: string) {
     this.chatService.openChatEmitter.next({
       chatColl: chatColl,
-      chatId: chatId,
+      accountId: accId,
     });
   }
 }
