@@ -9,17 +9,17 @@
 
         <div class="input-div">
             <span>#</span>
-            <input type="text" placeholder="z.B. Kooperationsprojekte">
+            <input (input)="checkDisabledButton()" [(ngModel)]="ChannelName" type="text" placeholder="z.B. Kooperationsprojekte">
         </div>
         <h2>
             Beschreibung <span>(optional)</span>
         </h2>
         <div class="input-div">
-            <input style="width: 100%;" type="text" placeholder="Dein Text hier">
+            <input [(ngModel)]="ChannelDescription" style="width: 100%;" type="text" placeholder="Dein Text hier">
         </div>
 
         <div class="button">
-            <button (click)="nextpage()">Erstellen</button>
+            <button [disabled]="checkDisabled" (click)="saveNameOfChannel()">Erstellen</button>
         </div>
 
         <div class="close-button">

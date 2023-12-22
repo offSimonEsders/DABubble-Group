@@ -97,7 +97,7 @@
 .informations{
     padding-top: 20px;
     h2{
-        font-size: 34px;
+        font-size: 28px;
     }
 }
 
@@ -105,15 +105,86 @@
     padding-top: 20px;
     @include displayFlex($jc: flex-start); 
     div{
-        height: 20px;
-        width: 20px;
+        height: 12px;
+        width: 12px;
         border-radius: 100%;
         background-color: $onlineGreen;
 
     }
     span{
         padding-left: 20px;
-        font-size: 26px;
+        font-size: 20px;
         color: $onlineGreen;
     }
 }
+
+.Email{
+    position: relative;
+    margin-top: 30px;
+    @include displayFlex($jc: flex-start); 
+
+    svg{
+        position: absolute;
+        top: 0px;
+        left: 0;
+
+        path{
+            height: 20px;
+            width: 25px;
+        }
+    }
+
+    div{
+        display: flex;
+        flex-direction: column;
+        padding-left: 40px;
+
+        span{
+            height: 30px;
+            display: flex ;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        a{
+            padding-top: 20px;
+            font-size: 18px;
+            text-decoration: none;
+            color: $buttonPurple;
+        }
+    }
+}
+
+.button{
+    margin-top: 50px;
+    width: 100%;
+    @include displayFlex($jc: center); 
+    button{
+        background-color: $buttonPurple;
+        padding: 16px;
+        border: none;
+        border-radius: 30px;
+        color: white;
+        width: 200px;
+        max-width: none !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        span{
+            font-size: 22px;
+            padding-left: 10px;
+            margin-right: 0 !important;
+        }
+    
+        &:hover{
+            cursor: pointer;
+            background-color: $purple2;
+        }
+        &:active {
+            background-color: $buttonPurple !important;
+        }
+    }
+}
+
