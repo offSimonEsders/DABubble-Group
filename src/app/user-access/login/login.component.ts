@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,7 +13,5 @@ export class LoginComponent {
   constructor(public authservice: AuthService) {
     
   }
-
-  
 
 }

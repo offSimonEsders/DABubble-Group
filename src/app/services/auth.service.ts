@@ -16,7 +16,7 @@ export class AuthService {
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
   }
 
-  authServiceSignUp(user_email: string, user_password: string) {
+  authServiceSignUpWithEmailAndPassword(user_email: string, user_password: string) {
     createUserWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
         console.log(userCredential);
@@ -26,10 +26,10 @@ export class AuthService {
       });
   }
 
-  authServiceSignIn(user_email: string, user_password: string) {
+  authServiceSignInWithEmailAndPassword(user_email: string, user_password: string) {
     signInWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
-        console.log(userCredential);
+        this.router.navigate(['/test'])
       })
       .catch((error) => {
         console.log("der login ist fehlgeschlagen");
