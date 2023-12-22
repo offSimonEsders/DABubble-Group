@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Message } from '../models/message.class';
 import { FirestoreService } from './firestore.service';
-import { ChatService } from './chat.service';
 import {
   DocumentSnapshot,
   QueryDocumentSnapshot,
@@ -13,7 +12,6 @@ import {
 @Injectable({ providedIn: 'root' })
 export class MessageService {
   firestore!: FirestoreService;
-  chatService!: ChatService;
   messageSnap!: Function;
   messages!: Array<Message>;
   collId!: string;
@@ -21,8 +19,6 @@ export class MessageService {
 
   constructor() {
     this.firestore = inject(FirestoreService);
-    this.chatService = inject(ChatService);
-    this.messageSnap = this.setChats();
   }
 
   async getMessage(docId: string) {
@@ -33,7 +29,7 @@ export class MessageService {
     return message;
   }
 
-  setChats() {
+  setMessages() {
     return onSnapshot(
       this.firestore.getMessageCollRef(this.collId, this.channelId),
       (list: QuerySnapshot) => {
