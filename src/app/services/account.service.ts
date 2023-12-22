@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import {
   doc,
   setDoc,
@@ -12,12 +12,13 @@ import { Account } from '../models/account.class';
 import { FirestoreService } from './firestore.service';
 
 @Injectable({ providedIn: 'root' })
-export class AccountService {
-  firestore = inject(FirestoreService);
+export class AccountService implements OnDestroy {
+  firestore: FirestoreService;
   accSnap!: Function;
   accounts: Account[] = [];
 
   constructor() {
+    this.firestore = inject(FirestoreService);
     this.accSnap = this.getAllAccounts();
   }
 
