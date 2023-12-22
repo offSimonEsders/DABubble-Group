@@ -59,7 +59,8 @@ export class CreateChannelComponent {
   }
 
   saveNameOfChannel(){
-    let JSON =  new Channel('', [''],this.ChannelName,this.ChannelDescription,false, 'test',)
+    let JSON =  new Channel('', [''],this.ChannelName,this.ChannelDescription, true, 'test',)
     console.log(JSON);
+    this.nextpage();
   }
 }
