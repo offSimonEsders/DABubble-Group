@@ -34,8 +34,6 @@ export class MainChatComponent implements OnInit {
   transmittedDate = new Date('Jan 14 2023 07:52:22 GMT+0200');
   transmittedDate2 = new Date();
   currentCollection: string = '';
-  activeChat!: Chat;
-  activeChannel!: Channel;
 
   constructor() {
     this.chatService = inject(ChatService);
@@ -45,11 +43,6 @@ export class MainChatComponent implements OnInit {
     this.chatService.openChatEmitter.subscribe({
       next: (data) => {
         this.currentCollection = data.chatColl;
-        if (data.chatColl === 'channels') {
-          this.activeChannel = this.chatService.currentChannel;
-        } else if (data.chatColl === 'chats') {
-          this.activeChat = this.chatService.currentChat;
-        }
       },
     });
   }

@@ -7,6 +7,7 @@ import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
 import { Chat } from '../../models/chat.class';
 import { Channel } from '../../models/channel.class';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-channels',
@@ -22,13 +23,15 @@ export class ChannelsComponent implements OnInit {
   rotatePe: boolean = false;
 
   authService!: AuthService;
-  chatService!: ChatService;
   accountService!: AccountService;
+  chatService!: ChatService;
+  messageService!: MessageService;
 
   constructor() {
+    this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);
-    this.authService = inject(AuthService);
+    this.messageService = inject(MessageService);
   }
 
   ngOnInit(): void {}
@@ -49,6 +52,8 @@ export class ChannelsComponent implements OnInit {
   }
 
   openChannel(collId: string, channelId: string) {
+    this.messageService.collId = collId;
+    this.messageService.channelId = channelId;
     this.chatService.getChannel(channelId).then((channel: Channel) => {
       this.chatService.currentChannel = channel;
       this.chatService.openChatEmitter.next({ chatColl: collId });
@@ -58,6 +63,8 @@ export class ChannelsComponent implements OnInit {
   openChat(chatColl: string, accId: string) {
     for (let i = 0; i < this.chatService.chats.length; i++) {
       if (this.privateChatExists(i, accId)) {
+        this.messageService.collId = chatColl;
+        this.messageService.channelId = this.chatService.chats[i].id;
         this.chatService.currentChat = this.chatService.chats[i];
         this.emitChatInfo(chatColl, accId);
         break;

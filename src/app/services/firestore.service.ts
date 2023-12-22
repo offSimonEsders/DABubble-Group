@@ -55,7 +55,7 @@ export class FirestoreService {
    * @returns a document reference to a specific message in a specific channel.
    */
   getMessageDocRef(collId: string, channelId: string, docId: string) {
-    return collection(this.db, collId, channelId, 'messages', docId);
+    return doc(this.db, collId, channelId, 'messages', docId);
   }
 
   /**
@@ -98,7 +98,7 @@ export class FirestoreService {
    * @returns a reference to a answer in a specific message of a specific channel.
    */
   getAnswerDocRef(channelId: string, messageId: string, docId: string) {
-    return collection(
+    return doc(
       this.db,
       'channels',
       channelId,

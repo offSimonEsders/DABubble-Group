@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import {
   DocumentSnapshot,
   QueryDocumentSnapshot,
@@ -14,10 +14,12 @@ import { Chat } from '../models/chat.class';
 import { Channel } from '../models/channel.class';
 import { FirestoreService } from './firestore.service';
 import { Subject } from 'rxjs';
+import { MessageService } from './message.service';
 
 @Injectable({ providedIn: 'root' })
-export class ChatService {
+export class ChatService implements OnDestroy {
   firestore: FirestoreService;
+  messageService!: MessageService;
   openChatEmitter = new Subject<{
     chatColl: string;
     accountId?: string;
@@ -34,8 +36,14 @@ export class ChatService {
 
   constructor() {
     this.firestore = inject(FirestoreService);
+    this.messageService = inject(MessageService);
     this.chatSnap = this.setChatsOrChannels('chats');
     this.channelSnap = this.setChatsOrChannels('channels');
+  }
+
+  ngOnDestroy(): void {
+    this.chatSnap();
+    this.channelSnap();
   }
 
   channelCreated(state: boolean) {
@@ -49,6 +57,8 @@ export class ChatService {
       })
       .then((doc: any) => {
         updateDoc(doc, { id: doc.id });
+        this.messageService.collId = collId;
+        this.messageService.channelId = doc.id;
         this.setCurrentChatOrCurrentChannel(collId, doc.id);
       });
   }
