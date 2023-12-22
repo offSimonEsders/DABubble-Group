@@ -46,6 +46,10 @@
         color: white;
         font-size: 18px;
         width: 150px;
+        &:disabled{
+            background-color: $purple2 !important;
+            cursor: default !important;
+        }
         &:hover{
             cursor: pointer;
             background-color: $purple2;
