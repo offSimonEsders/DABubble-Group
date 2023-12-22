@@ -1,7 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { AccountService } from './account.service';
-import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, signInAnonymously, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, UserCredential, createUserWithEmailAndPassword, signInAnonymously, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Account } from '../models/account.class';
+import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -10,16 +12,17 @@ export class AuthService {
 
   provider: GoogleAuthProvider;
 
-  constructor(private auth: Auth, private router: Router) {
+  constructor(private auth: Auth, private router: Router, private firestore: Firestore) {
     this.accountService = inject(AccountService);
     this.provider = new GoogleAuthProvider();
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
   }
 
-  authServiceSignUpWithEmailAndPassword(user_email: string, user_password: string) {
+  authServiceSignUpWithEmailAndPassword(user_name: string, user_email: string, user_password: string, photoUrl: any) {
     createUserWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
-        console.log(userCredential);
+        this.authServiceCreateNewAccount(user_name, user_email, 'test', userCredential);
       })
       .catch((error) => {
         console.log("die registrierung ist fehlgeschlagen");
@@ -61,8 +64,7 @@ export class AuthService {
 
   signInAnonymously() {
     signInAnonymously(this.auth)
-      .then((userCredential) => {
-        console.log(this.auth.currentUser);
+      .then(() => {
         this.router.navigate(['/test'])
       })
   }
@@ -71,6 +73,11 @@ export class AuthService {
     signOut(this.auth).then(() => {
       console.log(this.auth.currentUser);
     });
+  }
+
+  authServiceCreateNewAccount(user_name: string, user_email: string, photoUrl: any, userCredential: UserCredential) {
+    const newAcc = new Account(user_name, user_email, photoUrl, "online", userCredential.user.uid)
+    this.accountService.addAccount(newAcc);
   }
 
   // Sign up, login, auto-login, logout, auto-logout, forgot-password functions
