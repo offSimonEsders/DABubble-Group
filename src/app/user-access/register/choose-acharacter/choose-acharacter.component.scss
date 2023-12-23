@@ -33,6 +33,14 @@
         background-image: url(../../../../assets/img/go_back_arrow_grey.svg);
         background-repeat: no-repeat;
         background-position: center;
+
+        &:hover {
+            background: var(--Bg-color, #ECEEFE);
+            background-image: url(../../../../assets/img/go_back_arrow_purple.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
     }
 
     .choose-a-character-header {
