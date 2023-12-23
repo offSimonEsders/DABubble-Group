@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { ChooseACharacterComponent } from "./choose-acharacter/choose-acharacter.component";
-import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +25,14 @@ export class RegisterComponent implements AfterViewInit {
   registeragreement!: HTMLDivElement;
   choosenamecontainer!: HTMLHeadElement;
 
-  constructor(private storageService: StorageService) {
+  userData = {
+    username: '',
+    useremail: '',
+    userpassword: ''
+  }
+
+  constructor() {
+    
   }
 
   ngAfterViewInit() {
@@ -43,7 +49,7 @@ export class RegisterComponent implements AfterViewInit {
   }
 
   showLogin() {
-    this.resetRegistrationData();
+    this.resetRegistrationForm();
     this.loginFrame.style.display = 'flex';
     this.registerFrame.style.display = 'none';
     this.newatbubble.style.display = 'flex';
@@ -51,10 +57,10 @@ export class RegisterComponent implements AfterViewInit {
 
   showChooseACharacter(event: Event) {
     this.getRegistrationData();
-    event.preventDefault();
     this.validateRegistrationData();
-    //this.registerFrame.style.display = 'none';
-    //this.chosecharacterFrame.style.display = 'flex';
+    this.registerFrame.style.display = 'none';
+    this.chosecharacterFrame.style.display = 'flex';
+    event.preventDefault();
   }
 
   getRegistrationData() {
@@ -74,9 +80,16 @@ export class RegisterComponent implements AfterViewInit {
     if (!this.acceptdsgvo.checked) {
       this.registeragreement.classList.add('invalid-agreement');
     }
+    this.setRegistrationData();
   }
 
-  resetRegistrationData() {
+  setRegistrationData() {
+    this.userData.username = this.registrationusername.value;
+    this.userData.useremail = this.registrationuseremail.value;
+    this.userData.userpassword = this.registrationuserpassword.value;
+  }
+
+  resetRegistrationForm() {
     this.registrationusername.value = '';
     this.registrationuseremail.value = '';
     this.registrationuserpassword.value = '';
@@ -113,7 +126,7 @@ export class RegisterComponent implements AfterViewInit {
   }
 
   isValidUserpassword(password: string): boolean {
-    let regex = /^(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/;
+    let regex = /^(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[a-z\d!@#$%^&*]{8,}$/i;;
     return regex.test(password);
   }
 

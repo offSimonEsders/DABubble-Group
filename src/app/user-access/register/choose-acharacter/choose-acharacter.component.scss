@@ -1,5 +1,5 @@
 .choose-a-character-frame {
-    display: none;
+    display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
@@ -63,15 +63,19 @@
 
         .character-preview {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
+            justify-content: center;
+            width: 168px;
+            height: 168px;
             padding: 16px;
             gap: 10px;
             border-radius: 100px;
             background: var(--Purple-2, #797EF3);
 
             img {
-                width: 136px;
-                height: 136px;
+                width: 168px;
+                height: 168px;
+                border-radius: 100px;
             }
 
         }
