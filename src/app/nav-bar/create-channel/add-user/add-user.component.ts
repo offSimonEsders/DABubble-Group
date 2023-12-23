@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel.component';
+import { ChatService } from '../../../services/chat.service';
 
 @Component({
   selector: 'app-add-user',
@@ -12,6 +13,7 @@ import { CreateChannelComponent } from '../create-channel.component';
 export class AddUserComponent implements OnInit{
   choose:boolean = false;
 
+  constructor(private chatService: ChatService) {}
 
   ngOnInit(): void {
     
@@ -22,6 +24,11 @@ export class AddUserComponent implements OnInit{
   }
 
   Addpeople(){
-    console.log('wert')
+    if(!this.choose){
+      this.chatService.incompleteCreateChannel.publicStatus = true;
+    }else{
+      this.chatService.incompleteCreateChannel.publicStatus = false;
+    }
+    console.log(this.chatService.incompleteCreateChannel);
   }
 }
