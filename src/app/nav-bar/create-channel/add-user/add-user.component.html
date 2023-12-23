@@ -11,7 +11,15 @@
     </div>
             
     <div *ngIf="choose" class="input-div">
-        <input style="width: 100%;" type="text" placeholder="Personen hinzufügen">
+        <input (input)="sortArrayByName()" [(ngModel)]="input" style="width: 100%;" type="text" placeholder="Personen hinzufügen">
+        <div class="popup">
+            <div>
+                <div *ngFor="let i of accountServiceObj.accounts" class="channels">
+                    <div class="container"><app-avatar [accountId]="i.accountId" [hideStatus]="false"></app-avatar></div>
+                    <span class="personName">{{ i.name }}</span>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- <div>
         tet

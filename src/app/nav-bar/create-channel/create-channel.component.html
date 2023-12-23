@@ -39,8 +39,8 @@
     </div>
 </div>
 
-<div (click)="close2()" *ngIf="openCreate2" class="overdiv">
-    <div (click)="$event.stopPropagation()" class="crate-overdiv" *ngIf="whichCreate != 1">
+<div (click)="close2()" *ngIf="true" class="overdiv">
+    <div (click)="$event.stopPropagation()" class="crate-overdiv" *ngIf="whichCreate == 1">
         <app-add-user></app-add-user>
         <div class="close-button">
             <svg (click)="close2()" width="24" height="24" viewBox="0 0 24 24" fill="none"
