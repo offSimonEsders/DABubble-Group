@@ -129,8 +129,60 @@
 
         }
 
+        .invalid-username {
+            &::after {
+                content: "Bitte schreiben Sie einen Namen.";
+                position: absolute;
+                color: var(--Rosa-error, #ED1E79);
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+        }
+
+        .invalid-useremail {
+            &::after {
+                content: "*Diese E-Mail-Adresse ist leider ungültig.";
+                position: absolute;
+                color: var(--Rosa-error, #ED1E79);
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+        }
+
+        .invalid-userpassword {
+            &::after {
+                content: "*Ihr Passwort sollte mindestens 8 Zeichen umfassen und eine Kombination aus Zahlen und Sonderzeichen beinhalten.";
+                position: absolute;
+                color: var(--Rosa-error, #ED1E79);
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+        }
+
+        .invalid-agreement {
+            &::after {
+                content: "Bitte akzeptieren Sie die Datenschutzerklärung.";
+                bottom: 0;
+                width: 100%;
+                transform: translateY(100%);
+                position: absolute;
+                color: var(--Rosa-error, #ED1E79);
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+        }
+
         .register-agreement {
             display: flex;
+            position: relative;
             width: 368px;
             align-items: center;
             gap: 8px;
