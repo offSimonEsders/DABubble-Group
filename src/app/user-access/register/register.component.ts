@@ -58,8 +58,6 @@ export class RegisterComponent implements AfterViewInit {
   showChooseACharacter(event: Event) {
     this.getRegistrationData();
     this.validateRegistrationData();
-    this.registerFrame.style.display = 'none';
-    this.chosecharacterFrame.style.display = 'flex';
     event.preventDefault();
   }
 
@@ -68,19 +66,29 @@ export class RegisterComponent implements AfterViewInit {
   }
 
   validateRegistrationData() {
+    let stop = false;
     if (!this.isValidUsername(this.registrationusername.value)) {
       this.registerinputcontainername.nativeElement.classList.add('invalid-username');
+      stop = true;
     }
     if (!this.isValidUseremail(this.registrationuseremail.value)) {
       this.registerinputcontaineremail.nativeElement.classList.add('invalid-useremail');
+      stop = true;
     }
     if (!this.isValidUserpassword(this.registrationuserpassword.value)) {
       this.registerinputcontainerpassword.nativeElement.classList.add('invalid-userpassword');
+      stop = true;
     }
     if (!this.acceptdsgvo.checked) {
       this.registeragreement.classList.add('invalid-agreement');
+      stop = true;
+    }
+    if (stop) {
+      return;
     }
     this.setRegistrationData();
+    this.registerFrame.style.display = 'none';
+    this.chosecharacterFrame.style.display = 'flex';
   }
 
   setRegistrationData() {

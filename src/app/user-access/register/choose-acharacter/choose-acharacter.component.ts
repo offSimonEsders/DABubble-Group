@@ -11,8 +11,12 @@ import { StorageService } from '../../../services/storage.service';
 })
 export class ChooseACharacterComponent implements AfterViewInit {
   @Input() userData!: any;
+  @Input() isValidUseremail!: Function;
+  @Input() isValidUserpassword!: Function;
+  @Input() resetRegistrationForm!: Function;
   @ViewChild('characterpreviewimg') characterpreviewimg!: any;
   @ViewChild('selectfile') selectfile!: any;
+  @ViewChild('userfeedback') userfeedback!: any;
 
   registerframe!: HTMLDivElement;
   chosecharacterframe!: HTMLDivElement;
@@ -24,12 +28,22 @@ export class ChooseACharacterComponent implements AfterViewInit {
   fileWithNewName!: any;
 
   constructor(private authservice: AuthService, private storageservice: StorageService) {
+    //this.validateUserData();
   }
 
   ngAfterViewInit() {
     this.registerframe = <HTMLDivElement>document.querySelector('.register-frame');
     this.chosecharacterframe = <HTMLDivElement>document.querySelector('.choose-a-character-frame');
   }
+
+  validateUserData(): boolean {
+    if(this.userData.username == '' || !this.isValidUseremail(this.userData.useremail) || !this.isValidUserpassword(this.userData.userpassword)) {
+      this.showRegister();
+      return true;
+    }
+    return false;
+  }
+
 
   showRegister() {
     this.registerframe.style.display = 'flex';
@@ -55,6 +69,10 @@ export class ChooseACharacterComponent implements AfterViewInit {
   }
 
   async registerNewUser() {
+    if(this.validateUserData()) {
+      this.resetRegistrationForm();
+      return;
+    }
     let Uid = await this.authservice.authServiceSignUpWithEmailAndPassword(this.userData.useremail, this.userData.userpassword);
     if (this.loadownimage) {
       this.authservice.authServiceCreateNewAccount(this.userData.username, this.userData.useremail, `userAvatars/individual/${Uid}personalAvatar`, Uid);
@@ -62,6 +80,8 @@ export class ChooseACharacterComponent implements AfterViewInit {
       return;
     }
     this.authservice.authServiceCreateNewAccount(this.userData.username, this.userData.useremail, this.storageUrL, Uid);
+    this.userfeedback.nativeElement.style.display = 'flex';
+    this.resetRegistrationForm();
   }
 
 }
