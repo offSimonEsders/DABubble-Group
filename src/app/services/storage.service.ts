@@ -8,28 +8,14 @@ export class StorageService {
 
   constructor(private storage: Storage) { }
 
-  uploadFileToFirestorage() {
-    const filePath = 'userAvatars/checkbox_checked';
+  uploadFileToFirestorage(file: any, Uid: any) {
+    const filePath = `userAvatars/individual/${Uid}personalAvatar`;
     const fileUrl = 'assets/img/checkbox_checked.svg'; // Adjust this path if necessary
-
-    fetch(fileUrl)
-      .then(response => response.blob())
-      .then(blob => {
-        const storageRef = ref(this.storage, filePath);
-        uploadBytes(storageRef, blob)
-          .then((snapshot) => {
-            console.log('File uploaded successfully');
-            // Handle success
-          })
-          .catch((error) => {
-            console.log('File upload failed');
-            // Handle error
-          });
-      })
+    const storageRef = ref(this.storage, filePath);
+    uploadBytes(storageRef, file)
       .catch((error) => {
-        console.log('Failed to fetch the file');
-        // Handle error
-      });
+        console.log("upload")
+      })
   }
 
 }

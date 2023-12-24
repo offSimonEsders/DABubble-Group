@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { AccountService } from './account.service';
 import { Auth, GoogleAuthProvider, UserCredential, createUserWithEmailAndPassword, signInAnonymously, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
-import { Router, UrlTree } from '@angular/router';
+import { Router } from '@angular/router';
 import { Account } from '../models/account.class';
 import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore';
 
@@ -18,13 +18,15 @@ export class AuthService {
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
   }
 
-  authServiceSignUpWithEmailAndPassword(user_name: string, user_email: string, user_password: string, photoUrl: any) {
-    createUserWithEmailAndPassword(this.auth, user_email, user_password)
+  authServiceSignUpWithEmailAndPassword(user_email: string, user_password: string): any {
+    return createUserWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
-        this.authServiceCreateNewAccount(user_name, user_email, 'test', userCredential);
+        console.log(userCredential.user.uid);
+        return userCredential.user.uid;
       })
       .catch((error) => {
         console.log("die registrierung ist fehlgeschlagen");
+        return;
       });
   }
 
@@ -74,8 +76,8 @@ export class AuthService {
     });
   }
 
-  authServiceCreateNewAccount(user_name: string, user_email: string, photoUrl: any, userCredential: UserCredential) {
-    const newAcc = new Account(user_name, user_email, photoUrl, "online", userCredential.user.uid)
+  authServiceCreateNewAccount(user_name: string, user_email: string, photoUrl: any, Uid: string) {
+    const newAcc = new Account(user_name, user_email, photoUrl, "online", Uid)
     this.accountService.addAccount(newAcc);
   }
 
