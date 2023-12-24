@@ -28,7 +28,6 @@ export class ChooseACharacterComponent implements AfterViewInit {
   fileWithNewName!: any;
 
   constructor(private authservice: AuthService, private storageservice: StorageService) {
-    //this.validateUserData();
   }
 
   ngAfterViewInit() {
@@ -54,10 +53,6 @@ export class ChooseACharacterComponent implements AfterViewInit {
     this.characterpreviewimg.nativeElement.src = path;
     this.storageUrL = UrL;
     console.log(this.storageUrL);
-  }
-
-  test() {
-    console.log(this.userData);
   }
 
   loadimg() {
