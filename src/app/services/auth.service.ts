@@ -1,9 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { AccountService } from './account.service';
-import { Auth, GoogleAuthProvider, UserCredential, createUserWithEmailAndPassword, signInAnonymously, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, signInAnonymously, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Account } from '../models/account.class';
-import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -12,7 +11,7 @@ export class AuthService {
 
   provider: GoogleAuthProvider;
 
-  constructor(private auth: Auth, private router: Router, private firestore: Firestore) {
+  constructor(private auth: Auth, private router: Router) {
     this.accountService = inject(AccountService);
     this.provider = new GoogleAuthProvider();
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
