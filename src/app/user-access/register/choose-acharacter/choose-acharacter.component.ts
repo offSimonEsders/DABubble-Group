@@ -70,7 +70,8 @@ export class ChooseACharacterComponent implements AfterViewInit {
     }
     let Uid = await this.authservice.authServiceSignUpWithEmailAndPassword(this.userData.useremail, this.userData.userpassword);
     if (this.loadownimage) {
-      this.authservice.authServiceCreateNewAccount(this.userData.username, this.userData.useremail, `userAvatars/individual/${Uid}personalAvatar`, Uid);
+      const halfUid = Uid.substring(0, Uid.length / 2);
+      this.authservice.authServiceCreateNewAccount(this.userData.username, this.userData.useremail, `userAvatars/individual/${halfUid}personalAvatar`, Uid);
       this.storageservice.uploadFileToFirestorage(this.fileWithNewName, Uid);
       return;
     }

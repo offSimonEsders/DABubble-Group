@@ -14,6 +14,7 @@ import { FirestoreService } from '../../services/firestore.service';
 import { Account } from '../../models/account.class';
 import { Subscription } from 'rxjs';
 import { ChatService } from '../../services/chat.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-avatar',
@@ -31,8 +32,9 @@ export class AvatarComponent implements OnInit, OnChanges, OnDestroy {
   account!: Account;
   statusSnap!: Function;
   openChatSub!: Subscription;
+  imageurl!: any;
 
-  constructor() {
+  constructor(public storageservcice: StorageService) {
     this.accountService = inject(AccountService);
     this.firestore = inject(FirestoreService);
     this.chatService = inject(ChatService);
@@ -42,7 +44,7 @@ export class AvatarComponent implements OnInit, OnChanges, OnDestroy {
    * The ngOnInit function initializes the component by setting the account, updating the online status,
    * and updating the account ID.
    */
-  ngOnInit(): void {
+  async ngOnInit() {
     this.setAccount();
     this.updateOnlineStatus();
     this.updateAccountId();
@@ -78,6 +80,7 @@ export class AvatarComponent implements OnInit, OnChanges, OnDestroy {
   setAccount() {
     this.accountService.getAccount(this.accountId).then((account) => {
       this.account = account;
+      this.setImageUrl(account);
     });
   }
 
@@ -103,4 +106,9 @@ export class AvatarComponent implements OnInit, OnChanges, OnDestroy {
       return '#686868';
     }
   }
+
+  async setImageUrl(account: Account) {
+    this.imageurl = await this.storageservcice.getImageUrl(account.photoUrl);
+  }
+
 }

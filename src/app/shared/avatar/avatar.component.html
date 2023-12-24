@@ -1,6 +1,6 @@
 <div class="avatar">
     @if(account) {
-    <img class="profil-img" src="{{ account.photoUrl }}" alt="Hier ist das Profilbild">
+    <img class="profil-img" src="{{ imageurl }}" alt="Hier ist das Profilbild">
     @if((account.onlineStatus === 'online' || account.onlineStatus === 'away') && !hideStatus) {
     <div class="online-status-circle" [ngStyle]="{backgroundColor: getStatusColor()}"></div>
     }
