@@ -18,10 +18,8 @@ export class StorageService {
       })
   }
 
-  async getImageUrl(Uid: string) {
-    const halfUid = Uid.substring(0, Uid.length / 2);
-    const fileUrl = `userAvatars/individual/${halfUid}personalAvatar`
-    const storageRef = ref(this.storage, fileUrl)
+  async getImageUrl(fileUrl:string) {
+    const storageRef = ref(this.storage, fileUrl);
     const url = await getDownloadURL(storageRef);
     return url;
   }
