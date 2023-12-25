@@ -73,11 +73,18 @@ export class ChooseACharacterComponent implements AfterViewInit {
       const halfUid = Uid.substring(0, Uid.length / 2);
       this.authservice.authServiceCreateNewAccount(this.userData.username, this.userData.useremail, `userAvatars/individual/${halfUid}personalAvatar`, Uid);
       this.storageservice.uploadFileToFirestorage(this.fileWithNewName, Uid);
+      this.showAnimationAndLoadogin();
       return;
     }
     this.authservice.authServiceCreateNewAccount(this.userData.username, this.userData.useremail, this.storageUrL, Uid);
+    this.showAnimationAndLoadogin();
+  }
+
+  showAnimationAndLoadogin() {
     this.userfeedback.nativeElement.style.display = 'flex';
-    this.resetRegistrationForm();
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   }
 
 }
