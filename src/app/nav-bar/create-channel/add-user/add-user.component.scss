@@ -49,7 +49,7 @@
 .input-div{
     margin-top: 20px;
     @include displayFlex($jc: flex-start); 
-    border: 1px solid $textGrey;
+    border: 1px solid #adb0d9;
     padding: 16px;
     border-radius: 30px;
     position: relative;
