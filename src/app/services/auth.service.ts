@@ -80,5 +80,15 @@ export class AuthService {
     this.accountService.addAccount(newAcc);
   }
 
+  async resetPassword(email: string) {
+    return await sendPasswordResetEmail(this.auth, email)
+      .then(() => {
+        return true;
+      })
+      .catch(() => {
+        return false;
+      });
+  }
+
   // Sign up, login, auto-login, logout, auto-logout, forgot-password functions
 }
