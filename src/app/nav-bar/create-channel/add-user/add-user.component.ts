@@ -37,6 +37,8 @@ export class AddUserComponent implements OnInit{
   settingButton(){
     if(this.choose == false){
       this.ableButton = false;
+    }else if(this.savedUser.length != 0){
+      this.ableButton = false;
     }else{
       this.ableButton = true;
     }
@@ -59,7 +61,8 @@ export class AddUserComponent implements OnInit{
       this.filteredAccounts = this.filteredAccounts.filter(obj => obj.accountId !== id); 
       this.filteredAccounts = this.filteredAccounts.filter(obj => !this.savedUser.includes(obj));
     }
-    this.checkIfFilterAccounsIsNull()
+    this.checkIfFilterAccounsIsNull();
+    this.settingButton();
   }
 
   checkIfFilterAccounsIsNull(){
@@ -99,5 +102,6 @@ export class AddUserComponent implements OnInit{
     this.filteredAccounts.push(User);
     this.savedUser = this.savedUser.filter(obj => !this.filteredAccounts.includes(obj));
     this.checkIfFilterAccounsIsNull();
+    this.settingButton();
   }
 }
