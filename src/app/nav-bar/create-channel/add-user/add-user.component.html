@@ -17,7 +17,7 @@
             <div *ngFor="let i of savedUser" class="channelsForAccounts">
                     <div class="container"><app-avatar [accountId]="i.accountId" [hideStatus]="false"></app-avatar></div>
                     <span class="personName">{{ i.name }}</span>
-                        <svg class="svg-close" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    <svg (click)="remove(i)" class="svg-close" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_813_12181" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                                 height="24">
@@ -38,12 +38,13 @@
                     <span class="personName">{{ i.name }}</span>
                 </div>
             </div>
+            <h3 *ngIf="NoUserFound">Keine Personen gefunden</h3>
         </div>
     </div>
     <!-- <div>
         tet
     </div> -->
     <div class="button">
-        <button (click)="Addpeople()">Erstellen</button>
+        <button [disabled]="ableButton" (click)="Addpeople()">Erstellen</button>
     </div>
 </div>

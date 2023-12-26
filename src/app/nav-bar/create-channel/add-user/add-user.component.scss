@@ -26,6 +26,10 @@
         color: white;
         font-size: 18px;
         width: 150px;
+        &:disabled{
+            background-color: $purple2 !important;
+            cursor: default !important;
+        }
         &:hover{
             cursor: pointer;
             background-color: $purple2;
@@ -172,6 +176,11 @@ $checked-bg-color: white;
     border: 1px solid gray;
     transform: translateY(100%);
     overflow-y: scroll;
+
+    h3{
+        color: red;
+        font-size: 18px;
+    }
 }
 
 .channels {

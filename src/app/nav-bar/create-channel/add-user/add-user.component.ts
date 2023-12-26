@@ -19,9 +19,9 @@ export class AddUserComponent implements OnInit{
   accountService!: AccountService;
   filteredAccounts: Account[] = [];
   fullObj!:AccountService;
-
+  NoUserFound:boolean = false
   search:boolean = false;
-
+  ableButton:boolean = false;
   savedUser:any[] = [];
 
   constructor(private chatService: ChatService) {
@@ -34,8 +34,17 @@ export class AddUserComponent implements OnInit{
     this.filteredAccounts = this.accountService.accounts
   }
 
+  settingButton(){
+    if(this.choose == false){
+      this.ableButton = false;
+    }else{
+      this.ableButton = true;
+    }
+  }
+
   toggleChoose(){
     this.choose = !this.choose;
+    this.settingButton();
   }
 
   sortArray(){
@@ -48,6 +57,16 @@ export class AddUserComponent implements OnInit{
     if (user) {
       this.savedUser.push(user);
       this.filteredAccounts = this.filteredAccounts.filter(obj => obj.accountId !== id); 
+      this.filteredAccounts = this.filteredAccounts.filter(obj => !this.savedUser.includes(obj));
+    }
+    this.checkIfFilterAccounsIsNull()
+  }
+
+  checkIfFilterAccounsIsNull(){
+    if(this.filteredAccounts.length == 0){
+      this.NoUserFound = true;
+    }else{
+      this.NoUserFound = false;
     }
   }
 
@@ -55,23 +74,16 @@ export class AddUserComponent implements OnInit{
     if(this.input != ''){
       this.search = true;
       this.filteredAccounts = this.fullObj.accounts.filter(obj => obj.name.toLowerCase().includes(this.input.toLowerCase())); 
-
+      if(this.savedUser.length != 0){
+        this.filteredAccounts = this.filteredAccounts.filter(obj => !this.savedUser.includes(obj));
+      }
       this.sortArray();
-      console.log(this.filteredAccounts,this.accountService.accounts);
+      this.checkIfFilterAccounsIsNull();
     } else {
       this.filteredAccounts = [...this.fullObj.accounts];
       this.search = false;
     }
   }
-
-  // sortArrayByName(){
-  //   this.accountServiceObj.accounts = [...this.accountService.accounts];
-  //   if(this.input != ''){
-  //     this.accountServiceObj.accounts = this.fullObj.accounts.filter(obj => obj.name.toLowerCase().includes(this.input.toLowerCase())); 
-  //     console.log(this.accountServiceObj.accounts);
-  //   }
-    
-  // }
 
   Addpeople(){
     if(!this.choose){
@@ -80,5 +92,12 @@ export class AddUserComponent implements OnInit{
       this.chatService.incompleteCreateChannel.publicStatus = false;
     }
     console.log(this.accountService.accounts ,this.chatService.incompleteCreateChannel);
+  }
+
+  remove(User:Account){
+    console.log(User);
+    this.filteredAccounts.push(User);
+    this.savedUser = this.savedUser.filter(obj => !this.filteredAccounts.includes(obj));
+    this.checkIfFilterAccounsIsNull();
   }
 }
