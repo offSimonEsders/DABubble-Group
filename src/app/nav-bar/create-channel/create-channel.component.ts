@@ -59,7 +59,7 @@ export class CreateChannelComponent {
   }
 
   saveNameOfChannel(){
-    let JSON =  new Channel('', [''],this.ChannelName,this.ChannelDescription, true, 'test',)
+    let JSON =  new Channel('', [],this.ChannelName,this.ChannelDescription, true, 'test',)
     this.chatService.incompleteCreateChannel = JSON;
     console.log(this.chatService.incompleteCreateChannel)
     this.nextpage();

@@ -31,7 +31,7 @@ export class AddUserComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.filteredAccounts = this.accountService.accounts
+    this.filteredAccounts = this.accountService.accounts;
   }
 
   settingButton(){
@@ -94,7 +94,7 @@ export class AddUserComponent implements OnInit{
     }else{
       this.chatService.incompleteCreateChannel.publicStatus = false;
     }
-    console.log(this.accountService.accounts ,this.chatService.incompleteCreateChannel);
+    //console.log(this.accountService.accounts ,this.chatService.incompleteCreateChannel);
   }
 
   remove(User:Account){
@@ -103,5 +103,20 @@ export class AddUserComponent implements OnInit{
     this.savedUser = this.savedUser.filter(obj => !this.filteredAccounts.includes(obj));
     this.checkIfFilterAccounsIsNull();
     this.settingButton();
+  }
+
+  createChannelByArray(){
+    let JSON = this.chatService.incompleteCreateChannel;
+    if(this.choose == true){
+      for(let i = 0; i < this.savedUser.length; i++){
+        JSON.memberIds.push(this.savedUser[i].id);
+      }
+    }else{
+      JSON.publicStatus = true;
+      for(let i = 0; i < this.accountService.accounts.length; i++){
+        JSON.memberIds.push(this.accountService.accounts[i].accountId);
+      }
+    }
+    console.log(JSON);
   }
 }
