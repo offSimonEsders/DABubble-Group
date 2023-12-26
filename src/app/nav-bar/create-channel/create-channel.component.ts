@@ -45,6 +45,8 @@ export class CreateChannelComponent {
 
   close() {
     this.openCreate = false;
+    this.ChannelName = '';
+    this.ChannelDescription = '';
   }
 
   close2(){
@@ -54,8 +56,9 @@ export class CreateChannelComponent {
 
   nextpage(){
     this.whichCreate = 2;
-
     this.openCreate2 = true;
+    this.ChannelName = '';
+    this.ChannelDescription = '';
   }
 
   saveNameOfChannel(){
