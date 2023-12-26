@@ -5,6 +5,8 @@ import { AccountService } from '../../../services/account.service';
 import { AvatarComponent } from '../../../shared/avatar/avatar.component';
 import { FormsModule } from '@angular/forms';
 import { Account } from '../../../models/account.class';
+import { Channel } from '../../../models/channel.class';
+import { CreateChannelComponent } from '../create-channel.component';
 
 @Component({
   selector: 'app-add-user',
@@ -24,7 +26,7 @@ export class AddUserComponent implements OnInit{
   ableButton:boolean = false;
   savedUser:any[] = [];
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService,private CreateChannel:CreateChannelComponent) {
     this.accountService = inject(AccountService);
     this.fullObj = this.accountService;
   }
@@ -118,5 +120,7 @@ export class AddUserComponent implements OnInit{
       }
     }
     console.log(JSON);
+    this.CreateChannel.close2();
+    //this.chatService.addChatOrChannel( JSON , 'Channel'); //SaveCHannel
   }
 }
