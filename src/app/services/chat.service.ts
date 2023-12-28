@@ -69,6 +69,18 @@ export class ChatService implements OnDestroy {
     }
   }
 
+  async addChannelToFirebase(item:Channel){
+    await addDoc(this.getChannelRef('channels'),item).catch(
+      (err) => { console.warn(err)}
+    ).then(
+      (docRef) => {console.log(docRef?.id)}
+    );
+  }
+
+  getChannelRef(colId:string){
+    return collection(this.firestore.db, colId);
+  }
+
   async getChat(docId: string) {
     const docSnap: DocumentSnapshot = await getDoc(
       this.firestore.getDocRef('chats', docId)
