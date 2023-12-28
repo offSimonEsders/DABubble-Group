@@ -1,15 +1,16 @@
 <header>
     <img class="logo" src="../../assets/img/daBubbleLogo.png" alt="Hier ist das Logo von DaBubble">
     <div class="searchbar">
-        <input type="text" placeholder="Code learning durchsuchen">
+        <span>Code learning durchsuchen</span>
         <img src="../../assets/img/searchIcon.png" alt="Hier ist ein Lupen-Icon">
     </div>
     <div class="profil-menu-container">
-        <span>{{ accountName }}</span>
+        @if(account) {
+        <span>{{ account.name }}</span>
         <div class="avatar-container">
-            <!--Avatar Img ebenfalls in app-avatar übergeben oder die gesamten aktiven Accountdaten-->
-            <app-avatar [accountId]="'pesOSpHsgAt97WwG705y'" [hideStatus]="false"></app-avatar>
+            <app-avatar [accountId]="account.accountId" [hideStatus]="false"></app-avatar>
         </div>
+        }
         <svg class="arrow-down-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
             fill="none">
             <mask id="mask0_23146_1030" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="30"

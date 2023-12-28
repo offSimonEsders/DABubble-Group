@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { Chat } from '../../models/chat.class';
 import { Channel } from '../../models/channel.class';
 import { MessageService } from '../../services/message.service';
+import { updateDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-channels',
@@ -51,20 +52,21 @@ export class ChannelsComponent implements OnInit {
     this.chatService.channelCreated(true);
   }
 
-  openChannel(collId: string, channelId: string) {
-    this.messageService.collId = collId;
-    this.messageService.channelId = channelId;
+  async openChannel(collId: string, channelId: string) {
+    this.messageService.checkForExistingMessages(collId, channelId);
     this.chatService.getChannel(channelId).then((channel: Channel) => {
       this.chatService.currentChannel = channel;
       this.chatService.openChatEmitter.next({ chatColl: collId });
     });
   }
 
-  openChat(chatColl: string, accId: string) {
+  async openChat(chatColl: string, accId: string) {
     for (let i = 0; i < this.chatService.chats.length; i++) {
       if (this.privateChatExists(i, accId)) {
-        this.messageService.collId = chatColl;
-        this.messageService.channelId = this.chatService.chats[i].id;
+        this.messageService.checkForExistingMessages(
+          chatColl,
+          this.chatService.chats[i].id
+        );
         this.chatService.currentChat = this.chatService.chats[i];
         this.emitChatInfo(chatColl, accId);
         break;
@@ -86,9 +88,13 @@ export class ChannelsComponent implements OnInit {
     return i === this.chatService.chats.length - 1;
   }
 
-  createNewPrivateChat(chatColl: string, accId: string) {
+  async createNewPrivateChat(chatColl: string, accId: string) {
     let newChat = new Chat('', [this.authService.userId, accId]);
-    this.chatService.addChatOrChannel(newChat, 'chats');
+    this.chatService.addChatOrChannel(newChat, 'chats').then((doc: any) => {
+      updateDoc(doc, { id: doc.id });
+      this.messageService.checkForExistingMessages(chatColl, doc.id);
+      this.chatService.setCurrentChatOrCurrentChannel(chatColl, doc.id);
+    });
     this.emitChatInfo(chatColl, accId);
   }
 

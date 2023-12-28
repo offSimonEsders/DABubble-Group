@@ -1,7 +1,11 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, inject } from '@angular/core';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { CommonModule } from '@angular/common';
 import { BubbleStyle } from './message-bubble-style.directive';
+import { Message } from '../../models/message.class';
+import { AuthService } from '../../services/auth.service';
+import { Account } from '../../models/account.class';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-message',
@@ -11,22 +15,41 @@ import { BubbleStyle } from './message-bubble-style.directive';
   imports: [AvatarComponent, CommonModule, BubbleStyle],
 })
 export class MessageComponent implements OnInit {
-  @Input() transmitter!: string;
+  authService!: AuthService;
+  accountService!: AccountService;
+  @Input() emitMessage!: Message;
+  account!: Account;
+  dispatchedTime!: Date;
   ownMessage!: boolean;
   onhover = false;
   editMessage = false;
   openedEditMessage = false;
 
   constructor() {
-    // If transmitter = user => onwmessage = true;
+    this.authService = inject(AuthService);
+    this.accountService = inject(AccountService);
   }
 
   ngOnInit(): void {
-    if (this.transmitter === 'id1') {
+    this.checkIfOwnMessage();
+    this.getAccount();
+    this.dispatchedTime = new Date(this.emitMessage.dispatchedDate);
+  }
+
+  checkIfOwnMessage() {
+    if (this.emitMessage.messageFrom === this.authService.userId) {
       this.ownMessage = true;
     } else {
       this.ownMessage = false;
     }
+  }
+
+  getAccount() {
+    this.accountService
+      .getAccount(this.emitMessage.messageFrom)
+      .then((account) => {
+        this.account = account;
+      });
   }
 
   @HostListener('mouseenter') mouseover(eventData: Event) {

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { HoverStyleDirective } from './hover-style.directive';
+import { Channel } from '../../models/channel.class';
 
 @Component({
   selector: 'app-channel-box',
@@ -11,7 +12,7 @@ import { HoverStyleDirective } from './hover-style.directive';
 })
 export class ChannelBoxComponent implements OnInit {
   @Input() introStyle!: string;
-  @Input() currentChannel!: any;
+  @Input() currentChannel!: Channel;
   onHover = false;
 
   ngOnInit(): void {}

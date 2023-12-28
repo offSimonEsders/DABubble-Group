@@ -34,10 +34,12 @@
 @case ('chats') {
 @if(chatWithAccount) {
 <div class="private-chat-header">
-    <div class="avatar-container">
-        <app-avatar [accountId]="chatWithAccount.accountId"></app-avatar>
+    <div class="subcontainer">
+        <div class="avatar-container">
+            <app-avatar [accountId]="chatWithAccount.accountId"></app-avatar>
+        </div>
+        <span>{{ chatWithAccount.name }}</span>
     </div>
-    <span>{{ chatWithAccount.name }}</span>
 </div>
 }
 }

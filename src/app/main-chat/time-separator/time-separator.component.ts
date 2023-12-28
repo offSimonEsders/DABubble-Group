@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DatePipe } from './date.pipe';
 
 @Component({
@@ -9,6 +9,11 @@ import { DatePipe } from './date.pipe';
   templateUrl: './time-separator.component.html',
   styleUrl: './time-separator.component.scss',
 })
-export class TimeSeparatorComponent {
-  @Input() date!: Date;
+export class TimeSeparatorComponent implements OnInit {
+  @Input() dispatchedDate!: number;
+  date!: Date;
+
+  ngOnInit(): void {
+    this.date = new Date(this.dispatchedDate);
+  }
 }

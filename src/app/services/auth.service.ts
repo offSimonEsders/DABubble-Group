@@ -1,6 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { AccountService } from './account.service';
-import { Auth, GoogleAuthProvider, UserCredential, createUserWithEmailAndPassword, signInAnonymously, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
+import {
+  Auth,
+  GoogleAuthProvider,
+  UserCredential,
+  createUserWithEmailAndPassword,
+  signInAnonymously,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Account } from '../models/account.class';
 import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore';
@@ -12,30 +21,46 @@ export class AuthService {
 
   provider: GoogleAuthProvider;
 
-  constructor(private auth: Auth, private router: Router, private firestore: Firestore) {
+  constructor(
+    private auth: Auth,
+    private router: Router,
+    private firestore: Firestore
+  ) {
     this.accountService = inject(AccountService);
     this.provider = new GoogleAuthProvider();
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-
   }
 
-  authServiceSignUpWithEmailAndPassword(user_name: string, user_email: string, user_password: string, photoUrl: any) {
+  authServiceSignUpWithEmailAndPassword(
+    user_name: string,
+    user_email: string,
+    user_password: string,
+    photoUrl: any
+  ) {
     createUserWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
-        this.authServiceCreateNewAccount(user_name, user_email, 'test', userCredential);
+        this.authServiceCreateNewAccount(
+          user_name,
+          user_email,
+          'test',
+          userCredential
+        );
       })
       .catch((error) => {
-        console.log("die registrierung ist fehlgeschlagen");
+        console.log('die registrierung ist fehlgeschlagen');
       });
   }
 
-  authServiceSignInWithEmailAndPassword(user_email: string, user_password: string) {
+  authServiceSignInWithEmailAndPassword(
+    user_email: string,
+    user_password: string
+  ) {
     signInWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
-        this.router.navigate(['/test'])
+        this.router.navigate(['/test']);
       })
       .catch((error) => {
-        console.log("der login ist fehlgeschlagen");
+        console.log('der login ist fehlgeschlagen');
       });
   }
 
@@ -49,8 +74,9 @@ export class AuthService {
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
-      }).catch((error) => {
-        console.log(error)
+      })
+      .catch((error) => {
+        console.log(error);
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -63,10 +89,9 @@ export class AuthService {
   }
 
   signInAnonymously() {
-    signInAnonymously(this.auth)
-      .then(() => {
-        this.router.navigate(['/test'])
-      })
+    signInAnonymously(this.auth).then(() => {
+      this.router.navigate(['/test']);
+    });
   }
 
   authServiceSignOut() {
@@ -75,8 +100,19 @@ export class AuthService {
     });
   }
 
-  authServiceCreateNewAccount(user_name: string, user_email: string, photoUrl: any, userCredential: UserCredential) {
-    const newAcc = new Account(user_name, user_email, photoUrl, "online", userCredential.user.uid)
+  authServiceCreateNewAccount(
+    user_name: string,
+    user_email: string,
+    photoUrl: any,
+    userCredential: UserCredential
+  ) {
+    const newAcc = new Account(
+      user_name,
+      user_email,
+      photoUrl,
+      'online',
+      userCredential.user.uid
+    );
     this.accountService.addAccount(newAcc);
   }
 

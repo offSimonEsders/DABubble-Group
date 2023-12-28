@@ -7,19 +7,16 @@ import {
   collection,
   getDoc,
   onSnapshot,
-  updateDoc,
 } from '@angular/fire/firestore';
 
 import { Chat } from '../models/chat.class';
 import { Channel } from '../models/channel.class';
 import { FirestoreService } from './firestore.service';
 import { Subject } from 'rxjs';
-import { MessageService } from './message.service';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService implements OnDestroy {
   firestore: FirestoreService;
-  messageService!: MessageService;
   openChatEmitter = new Subject<{
     chatColl: string;
     accountId?: string;
@@ -36,7 +33,6 @@ export class ChatService implements OnDestroy {
 
   constructor() {
     this.firestore = inject(FirestoreService);
-    this.messageService = inject(MessageService);
     this.chatSnap = this.setChatsOrChannels('chats');
     this.channelSnap = this.setChatsOrChannels('channels');
   }
@@ -51,19 +47,15 @@ export class ChatService implements OnDestroy {
   }
 
   async addChatOrChannel(chat: Chat | Channel, collId: string) {
-    return await addDoc(collection(this.firestore.db, collId), chat.toJson())
-      .catch((err) => {
-        // show an Errormessage
-      })
-      .then((doc: any) => {
-        updateDoc(doc, { id: doc.id });
-        this.messageService.collId = collId;
-        this.messageService.channelId = doc.id;
-        this.setCurrentChatOrCurrentChannel(collId, doc.id);
-      });
+    return await addDoc(
+      collection(this.firestore.db, collId),
+      chat.toJson()
+    ).catch((err) => {
+      // show an Errormessage
+    });
   }
 
-  async setCurrentChatOrCurrentChannel(collId: string, docId: string) {
+  setCurrentChatOrCurrentChannel(collId: string, docId: string) {
     if (collId === 'chats') {
       this.getChat(docId).then((chat) => {
         this.currentChat = chat;

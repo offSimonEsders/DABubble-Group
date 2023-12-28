@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './error-page.component.scss',
 })
 export class ErrorPageComponent implements OnInit {
-  errorMessage: string = '';
+  errorMessage!: string;
 
   constructor(private route: ActivatedRoute) {}
 

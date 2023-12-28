@@ -58,12 +58,12 @@
     </div>
     }
     <div class="avatar-container">
-        <app-avatar [accountId]="'2W6moOnVTy1T8sF3gPRP'"></app-avatar>
+        <app-avatar [accountId]="emitMessage.messageFrom"></app-avatar>
     </div>
     @switch (openedEditMessage) {
     @case (true) {
     <div class="edit-message-box">
-        <p>Welche Version ist aktuell von Angular?</p>
+        <p>{{ emitMessage.message }}</p>
         <div class="edit-options">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
@@ -89,18 +89,20 @@
     <div class="message-subcontainer"
         [ngStyle]="{alignItems: ownMessage ? 'flex-end' : 'flex-start', paddingInline: ownMessage ? '100px 0px' : '0px 100px'}">
         <div class="message-header" [ngStyle]="{flexDirection: ownMessage ? 'row-reverse' : 'row'}">
-            <span class="name">Noa Braun</span>
-            <span class="time">14:25 Uhr</span>
+            @if(account) {
+            <span class="name">{{ account.name }}</span>
+            }
+            <span class="time">{{ dispatchedTime | date:'hh:mm' }} Uhr</span>
         </div>
         @switch (ownMessage) {
         @case (true) {
         <div class="message" bubbleStyle>
-            <p>Welche Version ist aktuell von Angular?</p>
+            <p>{{ emitMessage.message }}</p>
         </div>
         }
         @default {
         <div class="message">
-            <p>Welche Version ist aktuell von Angular?</p>
+            <p>{{ emitMessage.message }}</p>
         </div>
         }
         }

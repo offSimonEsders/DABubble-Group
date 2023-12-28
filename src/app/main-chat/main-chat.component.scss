@@ -18,8 +18,13 @@ header {
 
 .chat-container {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 317.8px);
   @include displayFlex($fd: column, $jc: flex-end, $ai: flex-start);
+  overflow-y: auto;
+}
+
+.subcontainer {
+  width: 100%;
 }
 
 .line {

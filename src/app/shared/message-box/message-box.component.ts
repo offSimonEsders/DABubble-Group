@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './message-box.component.scss',
 })
 export class MessageBoxComponent {
-  @Input() currentChanel!: string;
+  @Input() currentCollection!: string;
 }

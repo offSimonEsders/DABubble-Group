@@ -82,15 +82,25 @@
 
 .private-chat-header {
   padding-block: 32px 20px;
-  @include displayFlex($g: 15px);
 
-  .avatar-container {
-    width: 50px;
-    height: 50px;
-  }
+  .subcontainer {
+    width: fit-content;
+    padding: 4px 8px;
+    border-radius: 30px;
+    @include displayFlex($g: 15px);
 
-  span {
-    font-size: 24px;
-    font-weight: 700;
+    .avatar-container {
+      width: 50px;
+      height: 50px;
+    }
+
+    span {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    &:hover {
+      background-color: $bgr;
+    }
   }
 }
