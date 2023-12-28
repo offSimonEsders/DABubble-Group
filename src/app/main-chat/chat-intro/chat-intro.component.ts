@@ -19,7 +19,7 @@ import { AuthService } from '../../services/auth.service';
 export class ChatIntroComponent implements OnInit, OnDestroy {
   chatSelected!: string;
   ownChat!: boolean;
-  account!: Account;
+  account: Account | undefined;
   authService!: AuthService;
   accountService!: AccountService;
   chatService!: ChatService;
@@ -49,6 +49,7 @@ export class ChatIntroComponent implements OnInit, OnDestroy {
   }
 
   getAccount(docId: string) {
+    this.account = undefined;
     this.accountService.getAccount(docId).then((account) => {
       this.account = account;
       this.checkIfOwnChat();
@@ -56,7 +57,7 @@ export class ChatIntroComponent implements OnInit, OnDestroy {
   }
 
   checkIfOwnChat() {
-    if (this.account.accountId === this.authService.userId) {
+    if (this.account?.accountId === this.authService.userId) {
       this.ownChat = true;
     } else {
       this.ownChat = false;
