@@ -20,6 +20,7 @@ export class MessageComponent implements OnInit {
   @Input() emitMessage!: Message;
   account!: Account;
   dispatchedTime!: Date;
+  lastAnswer!: Date;
   ownMessage!: boolean;
   onhover = false;
   editMessage = false;
@@ -34,6 +35,7 @@ export class MessageComponent implements OnInit {
     this.checkIfOwnMessage();
     this.getAccount();
     this.dispatchedTime = new Date(this.emitMessage.dispatchedDate);
+    this.lastAnswer = new Date(this.emitMessage.lastAnswer);
   }
 
   checkIfOwnMessage() {

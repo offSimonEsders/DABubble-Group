@@ -71,7 +71,9 @@ export class MessageService {
       data.get('messageFrom'),
       data.get('dispatchedDate'),
       data.get('message'),
-      data.get('reactions')
+      data.get('reactions'),
+      data.get('answerAmount'),
+      data.get('lastAnswer')
     );
   }
 

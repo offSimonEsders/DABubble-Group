@@ -11,9 +11,20 @@ export class answer extends Message {
     messageFrom: string, // Account id
     dispatchedDate: number,
     message: string,
-    reactions: Array<Reaction>
+    reactions: Array<Reaction>,
+    answerAmount: number,
+    lastAnswer: number
   ) {
-    super(id, chatId, messageFrom, dispatchedDate, message, reactions),
+    super(
+      id,
+      chatId,
+      messageFrom,
+      dispatchedDate,
+      message,
+      reactions,
+      answerAmount,
+      lastAnswer
+    ),
       (this.messageId = messageId);
   }
 
@@ -26,6 +37,8 @@ export class answer extends Message {
       dispatchedDate: this.dispatchedDate,
       message: this.message,
       reactions: this.reactions,
+      answerAmount: this.answerAmount,
+      lastAnswer: this.lastAnswer,
     };
   }
 }

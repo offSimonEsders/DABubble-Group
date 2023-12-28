@@ -7,6 +7,8 @@ export class Message {
   dispatchedDate: number; // Absendedatum als Timestamp
   message: string;
   reactions: Array<Reaction>;
+  answerAmount: number;
+  lastAnswer: number;
 
   constructor(
     id: string,
@@ -14,14 +16,18 @@ export class Message {
     messageFrom: string,
     dispatchedDate: number,
     message: string,
-    reactions: Array<Reaction>
+    reactions: Array<Reaction>,
+    answerAmount: number,
+    lastAnswer: number
   ) {
     (this.id = id),
       (this.chatId = chatId),
       (this.messageFrom = messageFrom),
       (this.dispatchedDate = dispatchedDate),
       (this.message = message),
-      (this.reactions = reactions);
+      (this.reactions = reactions),
+      (this.answerAmount = answerAmount),
+      (this.lastAnswer = lastAnswer);
   }
 
   toJson() {
@@ -32,6 +38,8 @@ export class Message {
       dispatchedDate: this.dispatchedDate,
       message: this.message,
       reactions: this.reactions,
+      answerAmount: this.answerAmount,
+      lastAnswer: this.lastAnswer,
     };
   }
 }

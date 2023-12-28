@@ -166,3 +166,30 @@
     }
   }
 }
+
+.reaction-container {
+  @include displayFlex($g: 10px);
+
+  .icon {
+    width: 35.6px;
+    height: 35.6px;
+    background-color: white;
+
+    &:hover {
+      background-color: $bgr;
+    }
+  }
+
+  .reaction {
+    @include displayFlex($g: 10px);
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid $lightPurple;
+    background-color: white;
+
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
