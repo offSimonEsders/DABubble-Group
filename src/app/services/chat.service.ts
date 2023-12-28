@@ -7,6 +7,7 @@ import {
   collection,
   getDoc,
   onSnapshot,
+  updateDoc,
 } from '@angular/fire/firestore';
 
 import { Chat } from '../models/chat.class';
@@ -53,8 +54,9 @@ export class ChatService implements OnDestroy {
       collection(this.firestore.db, collId),
       chat.toJson()
     ).catch((err) => {
-      // show an Errormessage
-    });
+      // show an ErrormessagdeF
+    }).then((doc: any) => updateDoc(doc, { id: doc.id })
+    )
   }
 
   setCurrentChatOrCurrentChannel(collId: string, docId: string) {
