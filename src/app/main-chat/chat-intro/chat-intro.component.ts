@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ChannelBoxComponent } from '../channel-box/channel-box.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './chat-intro.component.scss',
   imports: [ChannelBoxComponent, AvatarComponent, CommonModule],
 })
-export class ChatIntroComponent implements OnDestroy {
+export class ChatIntroComponent implements OnInit, OnDestroy {
   chatSelected!: string;
   ownChat!: boolean;
   account!: Account;
@@ -32,15 +32,13 @@ export class ChatIntroComponent implements OnDestroy {
     this.chatService = inject(ChatService);
     this.messageService = inject(MessageService);
   }
+
   ngOnInit(): void {
     this.openChatSub = this.chatService.openChatEmitter.subscribe({
       next: (data) => {
         this.chatSelected = data.chatColl;
         if (data.accountId) {
-          this.accountService.getAccount(data.accountId).then((account) => {
-            this.account = account;
-            this.checkIfOwnChat();
-          });
+          this.getAccount(data.accountId);
         }
       },
     });
@@ -48,6 +46,13 @@ export class ChatIntroComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.openChatSub.unsubscribe();
+  }
+
+  getAccount(docId: string) {
+    this.accountService.getAccount(docId).then((account) => {
+      this.account = account;
+      this.checkIfOwnChat();
+    });
   }
 
   checkIfOwnChat() {

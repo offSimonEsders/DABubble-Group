@@ -1,3 +1,4 @@
+@if(messageService.messages) {
 @if(chatSelected && messageService.messages.length < 1) { @if(chatSelected==='channels' ) { <div
     class="channel-intro-container">
     <app-channel-box [introStyle]="'mainChat'" [currentChannel]="chatService.currentChannel"></app-channel-box>
@@ -23,10 +24,10 @@
         </div>
         @switch (ownChat) {
         @case (true) {
-        <p *ngIf="ownChat" class="intro"><span [ngStyle]="{fontWeight: '700'}">Dieser Raum ist nur für dich
-                da.</span> Mache dir Notizen, listr deine
-            To-dos auf oder bewahre Links
-            und Dateien griffbereit auf. Du kannst hier auch gerne Dinge mit dir selbst besprechen.</p>
+        <p *ngIf="ownChat" class="intro"><span [ngStyle]="{fontWeight: '700'}">Dieser Raum ist nur für dich da.</span>
+            Mache dir Notizen, liste deine
+            To-dos auf oder bewahre Links und Dateien griffbereit auf. Du kannst hier auch gerne Dinge mit dir selbst
+            besprechen.</p>
         }
         @default {
         <p *ngIf="!ownChat" class="intro">Diese Unterhaltung findet nur zwischen <span class="link-hover"
@@ -34,5 +35,6 @@
         }
         }
     </div>
+    }
     }
     }

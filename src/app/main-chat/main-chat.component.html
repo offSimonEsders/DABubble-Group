@@ -3,12 +3,14 @@
         <app-main-chat-header></app-main-chat-header>
     </header>
     <div class="chat-container">
+        @if(messageService.messages) {
         @if(currentCollection !== '' && messageService.messages.length > 0) {
         <div class="subcontainer" *ngFor="let date of messageService.dispatchedDays, let i = index">
             <app-time-separator class="line" [dispatchedDate]="date "></app-time-separator>
             <div class="message" *ngFor="let message of messageService.filteredMessages[i]"><app-message
                     [emitMessage]="message"></app-message></div>
         </div>
+        }
         }
         <app-chat-intro class="intro-box"></app-chat-intro>
     </div>
