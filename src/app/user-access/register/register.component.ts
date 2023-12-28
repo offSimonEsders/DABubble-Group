@@ -16,7 +16,6 @@ export class RegisterComponent implements AfterViewInit {
 
   loginFrame!: HTMLDivElement;
   registerFrame!: HTMLDivElement;
-  newatbubble!: HTMLDivElement;
   chosecharacterFrame!: HTMLDivElement;
   registrationusername!: HTMLInputElement;
   registrationuseremail!: HTMLInputElement;
@@ -38,7 +37,6 @@ export class RegisterComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.loginFrame = <HTMLDivElement>document.querySelector('.login-frame');
     this.registerFrame = <HTMLDivElement>document.querySelector('.register-frame');
-    this.newatbubble = <HTMLDivElement>document.querySelector('.new-at-bubble');
     this.chosecharacterFrame = <HTMLDivElement>document.querySelector('.choose-a-character-frame');
     this.registrationusername = <HTMLInputElement>document.getElementById('registration-username');
     this.registrationuseremail = <HTMLInputElement>document.getElementById('registration-useremail');
@@ -52,7 +50,6 @@ export class RegisterComponent implements AfterViewInit {
     this.resetRegistrationForm();
     this.loginFrame.style.display = 'flex';
     this.registerFrame.style.display = 'none';
-    this.newatbubble.style.display = 'flex';
   }
 
   showChooseACharacter(event: Event) {
