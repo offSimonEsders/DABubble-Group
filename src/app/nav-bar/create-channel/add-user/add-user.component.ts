@@ -121,6 +121,6 @@ export class AddUserComponent implements OnInit{
     }
     console.log(JSON);
     this.CreateChannel.close2();
-    //this.chatService.addChatOrChannel( JSON , 'Channel'); //SaveCHannel
+    this.chatService.addChatOrChannel(JSON, 'channels');
   }
 }
