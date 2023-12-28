@@ -28,6 +28,8 @@ export class ChatService implements OnDestroy {
   channels: Channel[] = [];
   currentChannel!: Channel;
 
+  incompleteCreateChannel!:Channel;
+
   channelCreatedSource = new Subject<boolean>();
   channelCreated$ = this.channelCreatedSource.asObservable();
 

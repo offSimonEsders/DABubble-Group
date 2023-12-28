@@ -45,6 +45,8 @@ export class CreateChannelComponent {
 
   close() {
     this.openCreate = false;
+    this.ChannelName = '';
+    this.ChannelDescription = '';
   }
 
   close2(){
@@ -54,13 +56,15 @@ export class CreateChannelComponent {
 
   nextpage(){
     this.whichCreate = 2;
-
     this.openCreate2 = true;
+    this.ChannelName = '';
+    this.ChannelDescription = '';
   }
 
   saveNameOfChannel(){
-    let JSON =  new Channel('', [''],this.ChannelName,this.ChannelDescription, true, 'test',)
-    console.log(JSON);
+    let JSON =  new Channel('', [],this.ChannelName,this.ChannelDescription, true, 'test',)
+    this.chatService.incompleteCreateChannel = JSON;
+    console.log(this.chatService.incompleteCreateChannel)
     this.nextpage();
   }
 }

@@ -3,8 +3,8 @@ import { AccountService } from './account.service';
 import {
   Auth,
   GoogleAuthProvider,
-  UserCredential,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInAnonymously,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -12,7 +12,6 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Account } from '../models/account.class';
-import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -21,33 +20,24 @@ export class AuthService {
 
   provider: GoogleAuthProvider;
 
-  constructor(
-    private auth: Auth,
-    private router: Router,
-    private firestore: Firestore
-  ) {
+  constructor(private auth: Auth, private router: Router) {
     this.accountService = inject(AccountService);
     this.provider = new GoogleAuthProvider();
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
   }
 
   authServiceSignUpWithEmailAndPassword(
-    user_name: string,
     user_email: string,
-    user_password: string,
-    photoUrl: any
-  ) {
-    createUserWithEmailAndPassword(this.auth, user_email, user_password)
+    user_password: string
+  ): any {
+    return createUserWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
-        this.authServiceCreateNewAccount(
-          user_name,
-          user_email,
-          'test',
-          userCredential
-        );
+        console.log(userCredential.user.uid);
+        return userCredential.user.uid;
       })
       .catch((error) => {
         console.log('die registrierung ist fehlgeschlagen');
+        return;
       });
   }
 
@@ -104,16 +94,20 @@ export class AuthService {
     user_name: string,
     user_email: string,
     photoUrl: any,
-    userCredential: UserCredential
+    Uid: string
   ) {
-    const newAcc = new Account(
-      user_name,
-      user_email,
-      photoUrl,
-      'online',
-      userCredential.user.uid
-    );
+    const newAcc = new Account(user_name, user_email, photoUrl, 'online', Uid);
     this.accountService.addAccount(newAcc);
+  }
+
+  async resetPassword(email: string) {
+    return await sendPasswordResetEmail(this.auth, email)
+      .then(() => {
+        return true;
+      })
+      .catch(() => {
+        return false;
+      });
   }
 
   // Sign up, login, auto-login, logout, auto-logout, forgot-password functions

@@ -5,25 +5,26 @@
     <h1 class="choose-a-character-header">Wähle deinen Avatar</h1>
     <div class="choosed-container">
         <div class="character-preview">
-            <img src="../../../../assets/img/characters/person.svg" alt="">
+            <img src="../../../../assets/img/characters/person.svg" alt="" #characterpreviewimg>
         </div>
     </div>
     <div class="choose-container">
-        <h2 class="name-container">Name</h2>
+        <h2 class="name-container" id="choose-name-container">Name</h2>
         <h3>Aus der Liste wählen</h3>
         <div class="choosable-container">
-            <img src="../../../../assets/img/characters/elise_roth.svg" alt="">
-            <img src="../../../../assets/img/characters/elias_neumann.svg" alt="">
-            <img src="../../../../assets/img/characters/steffen_hoffmann.svg" alt="">
-            <img src="../../../../assets/img/characters/noah_braun.svg" alt="">
-            <img src="../../../../assets/img/characters/sofia_müller.svg" alt="">
-            <img src="../../../../assets/img/characters/frederik_beck.svg" alt="">
+            <img src="../../../../assets/img/characters/elise_roth.svg" alt="" (click)="this.changeCharacterPreview('../../../../assets/img/characters/elise_roth.svg', 'userAvatars/elise_roth.svg')">
+            <img src="../../../../assets/img/characters/elias_neumann.svg" alt="" (click)="this.changeCharacterPreview('../../../../assets/img/characters/elias_neumann.svg', 'userAvatars/elias_neumann.svg')">
+            <img src="../../../../assets/img/characters/steffen_hoffmann.svg" alt="" (click)="this.changeCharacterPreview('../../../../assets/img/characters/steffen_hoffmann.svg', 'userAvatars/steffen_hoffmann.svg')">
+            <img src="../../../../assets/img/characters/noah_braun.svg" alt="" (click)="this.changeCharacterPreview('../../../../assets/img/characters/noah_braun.svg', 'userAvatars/noah_braun.svg')">
+            <img src="../../../../assets/img/characters/sofia_müller.svg" alt="" (click)="this.changeCharacterPreview('../../../../assets/img/characters/sofia_müller.svg', 'userAvatars/sofia_müller.svg')">
+            <img src="../../../../assets/img/characters/frederik_beck.svg" alt="" (click)="this.changeCharacterPreview('../../../../assets/img/characters/frederik_beck.svg', 'userAvatars/frederik_beck.svg')">
         </div>
     </div>
     <div class="load-own-img">
         <h3>eigenes Bild verwenden</h3>
-        <input type="file" name="" id="select-file" accept=".svg,.png,.jpg,.jpeg">
+        <input type="file" name="" id="select-file" accept=".svg,.png,.jpg,.jpeg" (input)="loadimg()" #selectfile>
         <label for="select-file">Datei hochladen</label>
     </div>
-    <button class="create-acc">Weiter</button>
+    <button class="create-acc" (click)="registerNewUser()">Weiter</button>
+    <div class="registration-choose-userfeedback" #userfeedback>Konto erfolgreich erstellt!</div>
 </section>
