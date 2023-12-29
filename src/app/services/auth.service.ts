@@ -43,14 +43,17 @@ export class AuthService {
 
   authServiceSignInWithEmailAndPassword(
     user_email: string,
-    user_password: string
+    user_password: string,
+    error_function?: Function
   ) {
     signInWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
         this.router.navigate(['/test']);
       })
-      .catch((error) => {
-        console.log('der login ist fehlgeschlagen');
+      .catch(() => {
+        if(error_function) {
+          error_function();
+        }
       });
   }
 

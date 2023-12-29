@@ -25,7 +25,7 @@ export class SendMailForResetPasswordComponent implements AfterViewInit {
     this.loginFrame = <HTMLDivElement>document.querySelector('.login-frame');
   }
 
-  CheckUseremail() {
+  checkUseremail() {
     if (this.checkinputservice.isValidUseremail(this.sendmailinput.nativeElement.value)) {
       this.sendmailsubmitbutton.nativeElement.disabled = false;
     } else {
