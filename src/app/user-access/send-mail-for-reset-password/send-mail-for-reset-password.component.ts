@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { CheckInputService } from '../../services/check-input.service';
 
 @Component({
   selector: 'app-send-mail-for-reset-password',
@@ -15,7 +16,7 @@ export class SendMailForResetPasswordComponent implements AfterViewInit {
   sendmailforresetpasswordframe!: HTMLDivElement;
   loginFrame!: HTMLDivElement;
 
-  constructor(private authservice: AuthService) {
+  constructor(private authservice: AuthService, private checkinputservice: CheckInputService) {
 
   }
 
@@ -24,9 +25,8 @@ export class SendMailForResetPasswordComponent implements AfterViewInit {
     this.loginFrame = <HTMLDivElement>document.querySelector('.login-frame');
   }
 
-  isValidUseremail() {
-    let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (regex.test(this.sendmailinput.nativeElement.value)) {
+  CheckUseremail() {
+    if (this.checkinputservice.isValidUseremail(this.sendmailinput.nativeElement.value)) {
       this.sendmailsubmitbutton.nativeElement.disabled = false;
     } else {
       this.sendmailsubmitbutton.nativeElement.disabled = true;

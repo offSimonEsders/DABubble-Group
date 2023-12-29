@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { StorageService } from '../../../services/storage.service';
+import { CheckInputService } from '../../../services/check-input.service';
 
 @Component({
   selector: 'app-choose-acharacter',
@@ -11,8 +12,6 @@ import { StorageService } from '../../../services/storage.service';
 })
 export class ChooseACharacterComponent implements AfterViewInit {
   @Input() userData!: any;
-  @Input() isValidUseremail!: Function;
-  @Input() isValidUserpassword!: Function;
   @Input() resetRegistrationForm!: Function;
   @ViewChild('characterpreviewimg') characterpreviewimg!: any;
   @ViewChild('selectfile') selectfile!: any;
@@ -27,7 +26,7 @@ export class ChooseACharacterComponent implements AfterViewInit {
   loadownimage: boolean = false;
   fileWithNewName!: any;
 
-  constructor(private authservice: AuthService, private storageservice: StorageService) {
+  constructor(private authservice: AuthService, private storageservice: StorageService, private checkinputservice: CheckInputService) {
   }
 
   ngAfterViewInit() {
@@ -36,7 +35,7 @@ export class ChooseACharacterComponent implements AfterViewInit {
   }
 
   validateUserData(): boolean {
-    if(this.userData.username == '' || !this.isValidUseremail(this.userData.useremail) || !this.isValidUserpassword(this.userData.userpassword)) {
+    if(this.userData.username == '' || !this.checkinputservice.isValidUseremail(this.userData.useremail) || !this.checkinputservice.isValidUserpassword(this.userData.userpassword)) {
       this.showRegister();
       return true;
     }

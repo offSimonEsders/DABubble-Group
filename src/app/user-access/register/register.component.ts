@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { ChooseACharacterComponent } from "./choose-acharacter/choose-acharacter.component";
+import { CheckInputService } from '../../services/check-input.service';
 
 @Component({
   selector: 'app-register',
@@ -30,7 +31,7 @@ export class RegisterComponent implements AfterViewInit {
     userpassword: ''
   }
 
-  constructor() {
+  constructor( private checkinputservice: CheckInputService ) {
     
   }
 
@@ -68,11 +69,11 @@ export class RegisterComponent implements AfterViewInit {
       this.registerinputcontainername.nativeElement.classList.add('invalid-username');
       stop = true;
     }
-    if (!this.isValidUseremail(this.registrationuseremail.value)) {
+    if (!this.checkinputservice.isValidUseremail(this.registrationuseremail.value)) {
       this.registerinputcontaineremail.nativeElement.classList.add('invalid-useremail');
       stop = true;
     }
-    if (!this.isValidUserpassword(this.registrationuserpassword.value)) {
+    if (!this.checkinputservice.isValidUserpassword(this.registrationuserpassword.value)) {
       this.registerinputcontainerpassword.nativeElement.classList.add('invalid-userpassword');
       stop = true;
     }
@@ -123,16 +124,6 @@ export class RegisterComponent implements AfterViewInit {
 
   isValidUsername(username: string): boolean {
     return username.length > 0;
-  }
-
-  isValidUseremail(email: string): boolean {
-    let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  }
-
-  isValidUserpassword(password: string): boolean {
-    let regex = /^(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[a-z\d!@#$%^&*]{8,}$/i;;
-    return regex.test(password);
   }
 
   isValidAgreement() {
