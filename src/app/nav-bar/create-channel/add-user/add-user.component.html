@@ -1,5 +1,12 @@
 <div class="overdiv-addUser">
     <h1>Leute hinzufügen</h1>
+
+    <div class="checkbox-div">
+        <input (change)="togglePrivate()" [checked]="private" type="checkbox">
+        <span>Privater Channel</span>
+    </div>
+
+    <div style="height: 1px; width: 100%; border-radius: 20px; background-color: lightgrey;"></div>
         
     <div class="checkbox-div">
         <input (change)="toggleChoose()" [checked]="!choose" type="checkbox">

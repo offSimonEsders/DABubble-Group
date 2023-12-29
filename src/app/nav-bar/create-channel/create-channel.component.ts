@@ -47,11 +47,13 @@ export class CreateChannelComponent {
     this.openCreate = false;
     this.ChannelName = '';
     this.ChannelDescription = '';
+    this.checkDisabled = true;
   }
 
   close2(){
     this.openCreate2 = false;
     this.whichCreate = 1;
+    this.checkDisabled = true;
   }
 
   nextpage(){
