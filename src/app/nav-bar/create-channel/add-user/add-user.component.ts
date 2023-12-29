@@ -25,6 +25,7 @@ export class AddUserComponent implements OnInit{
   search:boolean = false;
   ableButton:boolean = false;
   savedUser:any[] = [];
+  private:boolean = false;
 
   constructor(private chatService: ChatService,private CreateChannel:CreateChannelComponent) {
     this.accountService = inject(AccountService);
@@ -34,6 +35,10 @@ export class AddUserComponent implements OnInit{
 
   ngOnInit(): void {
     this.filteredAccounts = this.accountService.accounts;
+  }
+
+  togglePrivate(){
+    this.private = !this.private;
   }
 
   settingButton(){
@@ -53,7 +58,6 @@ export class AddUserComponent implements OnInit{
 
   sortArray(){
     this.filteredAccounts.sort((a, b) => a.name.localeCompare(b.name));
-    
   }
 
   renderInDiv(id:string){
