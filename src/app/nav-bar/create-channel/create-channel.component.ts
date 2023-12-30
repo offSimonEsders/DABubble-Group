@@ -68,7 +68,9 @@ export class CreateChannelComponent {
   findLoginAccount(){
     this.presentAccountname = this.accountsJSON.accounts.filter(obj => obj.accountId == this.presentAccount.userId);
     this.presentAccount.userInformation = this.presentAccountname[0];
-    this.presentAccount.userInformation.name += ' (Du)';
+    if(!this.presentAccount.userInformation.name.endsWith(" (Du)")){
+      this.presentAccount.userInformation.name += ' (Du)';
+    }
     return this.presentAccountname[0].name;
   }
 

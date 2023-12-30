@@ -70,8 +70,8 @@
         border: none; 
         outline: none;
         width: calc(100% - 40px);
-        min-width: 250px;
-        max-width: 350px;
+        min-width: 300px;
+        max-width: 300px;
     }
 }
 
@@ -223,7 +223,7 @@ $checked-bg-color: white;
 }
 
 .channelsForAccounts{
-    @include displayFlex($jc: flex-start);
+    @include displayFlex($jc: flex-end);
     border-radius: 100px;
     padding: 4px;
     max-width: 300px;

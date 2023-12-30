@@ -5,7 +5,6 @@ import { AccountService } from '../../../services/account.service';
 import { AvatarComponent } from '../../../shared/avatar/avatar.component';
 import { FormsModule } from '@angular/forms';
 import { Account } from '../../../models/account.class';
-import { Channel } from '../../../models/channel.class';
 import { CreateChannelComponent } from '../create-channel.component';
 import { AuthService } from '../../../services/auth.service';
 
@@ -56,6 +55,16 @@ export class AddUserComponent implements OnInit{
   toggleChoose(){
     this.choose = !this.choose;
     this.settingButton();
+    this.clearsaveUser();
+  }
+
+  clearsaveUser(){
+    this.filteredAccounts = this.accountService.accounts;
+    this.filteredAccounts = this.filteredAccounts.filter(obj => !this.savedUser.includes(obj));
+    this.savedUser = [];
+    this.savedUser.push(this.presentAccount.userInformation);
+    this.input = '';
+    this.NoUserFound = false;
   }
 
   sortArray(){
