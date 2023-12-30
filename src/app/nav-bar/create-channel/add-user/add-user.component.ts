@@ -94,13 +94,8 @@ export class AddUserComponent implements OnInit{
     }
   }
 
-  Addpeople(){
-    if(!this.choose){
-      this.chatService.incompleteCreateChannel.publicStatus = true;
-    }else{
-      this.chatService.incompleteCreateChannel.publicStatus = false;
-    }
-    //console.log(this.accountService.accounts ,this.chatService.incompleteCreateChannel);
+  Addpeople(JSON:any){
+    return JSON.publicStatus = !this.private;
   }
 
   remove(User:Account){
@@ -118,11 +113,11 @@ export class AddUserComponent implements OnInit{
         JSON.memberIds.push(this.savedUser[i].id);
       }
     }else{
-      JSON.publicStatus = true;
       for(let i = 0; i < this.accountService.accounts.length; i++){
         JSON.memberIds.push(this.accountService.accounts[i].accountId);
       }
     }
+    this.Addpeople(JSON)
     console.log(JSON);
     this.CreateChannel.close2();
     this.chatService.addChatOrChannel(JSON, 'channels');

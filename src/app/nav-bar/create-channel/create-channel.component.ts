@@ -4,6 +4,8 @@ import { ChatService } from '../../services/chat.service';
 import { AddUserComponent } from './add-user/add-user.component';
 import { FormsModule } from '@angular/forms';
 import { Channel } from '../../models/channel.class';
+import { AuthService } from '../../services/auth.service';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-create-channel',
@@ -21,13 +23,13 @@ export class CreateChannelComponent {
   subscription: any;
   openCreate2!:boolean;
   checkDisabled:boolean = true;
-
+  presentAccountname!:any;
   ChannelName:string = '';
   ChannelDescription:string = '';
 
   newChannelObject!:Channel;
 
-  constructor(private chatService: ChatService) {}
+  constructor(private chatService: ChatService, private presentAccount:AuthService, private accountsJSON:AccountService) {}
 
   ngOnInit() {
     this.subscription = this.chatService.channelCreated$.subscribe(
@@ -36,7 +38,7 @@ export class CreateChannelComponent {
   }
 
   checkDisabledButton(){
-    if(this.ChannelName.length >= 3){
+    if(this.ChannelName.length >= 2){
       this.checkDisabled = false;
     }else{
       this.checkDisabled = true;
@@ -63,8 +65,13 @@ export class CreateChannelComponent {
     this.ChannelDescription = '';
   }
 
-  saveNameOfChannel(){
-    let JSON =  new Channel('', [],this.ChannelName,this.ChannelDescription, true, 'test',)
+  findLoginAccount(){
+    this.presentAccountname = this.accountsJSON.accounts.filter(obj => obj.accountId == this.presentAccount.userId);
+    return this.presentAccountname[0].name;
+  }
+
+  async saveNameOfChannel(){
+    let JSON =  new Channel('', [],this.ChannelName,this.ChannelDescription, true, await this.findLoginAccount())
     this.chatService.incompleteCreateChannel = JSON;
     console.log(this.chatService.incompleteCreateChannel)
     this.nextpage();
