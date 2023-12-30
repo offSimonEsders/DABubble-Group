@@ -102,7 +102,10 @@ export class AddUserComponent implements OnInit{
 
   remove(User:Account){
     console.log(User);
-    this.filteredAccounts.push(User);
+    if(!this.filteredAccounts.some(el => JSON.stringify(el) === JSON.stringify(User))){
+      this.filteredAccounts.push(User);
+      this.savedUser = this.savedUser.filter(obj => !this.filteredAccounts.includes(obj));
+    }
     this.savedUser = this.savedUser.filter(obj => !this.filteredAccounts.includes(obj));
     this.checkIfFilterAccounsIsNull();
     this.settingButton();
