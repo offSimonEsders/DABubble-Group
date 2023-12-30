@@ -4,7 +4,7 @@
         <span>Code learning durchsuchen</span>
         <img src="../../assets/img/searchIcon.png" alt="Hier ist ein Lupen-Icon">
     </div>
-    <div class="profil-menu-container">
+    <div class="profil-menu-container" (click)="switchDropDown()">
         @if(account) {
         <span>{{ account.name }}</span>
         <div class="avatar-container">
@@ -23,5 +23,11 @@
                     fill="black" />
             </g>
         </svg>
+    </div>
+    <div class="dropDown" *ngIf="dropDown">
+        <div>
+            <span>Profile</span>
+            <span (click)="logOut()" class="hoverSpan">Log out</span>
+        </div>
     </div>
 </header>

@@ -3,7 +3,7 @@
 header {
   width: 100%;
   @include displayFlex($jc: space-between);
-
+  position: relative;
   .logo {
     width: 242.11px;
     height: 70px;
@@ -51,4 +51,44 @@ header {
   &:hover .arrow-down-icon path {
     fill: $purple2;
   }
+}
+
+.dropDown{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  @include displayFlex($jc: center);
+  transform: translateY(100%);
+  box-shadow: -4px 6px 14px 1px $bgr;
+  z-index: 10;
+  border-radius: 25px;
+  border-top-right-radius: 0;
+  background-color: white;
+  width: 200px;
+  height: 100px;
+  div{
+    display: flex;
+    flex-direction: column;
+  }
+
+  span{
+    padding: 8px;
+    cursor: pointer;
+    font-size: 22px;
+    width: 170px;
+    text-align: center;
+
+    &:hover {
+      color: $purple2;
+    }
+  }
+
+  .hoverSpan{
+    &:hover {
+      background-color: $bgr;
+      color: $purple2;
+      border-radius: 25px;
+    }
+  }
+
 }
