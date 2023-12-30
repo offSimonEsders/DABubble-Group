@@ -17,7 +17,7 @@ import { Account } from '../models/account.class';
 export class AuthService {
   private accountService!: AccountService;
   userId = 'pesOSpHsgAt97WwG705y';
-
+  userInformation!:Account;
   provider: GoogleAuthProvider;
 
   constructor(private auth: Auth, private router: Router) {

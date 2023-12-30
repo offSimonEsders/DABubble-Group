@@ -67,13 +67,14 @@ export class CreateChannelComponent {
 
   findLoginAccount(){
     this.presentAccountname = this.accountsJSON.accounts.filter(obj => obj.accountId == this.presentAccount.userId);
+    this.presentAccount.userInformation = this.presentAccountname[0];
     return this.presentAccountname[0].name;
   }
 
-  async saveNameOfChannel(){
-    let JSON =  new Channel('', [],this.ChannelName,this.ChannelDescription, true, await this.findLoginAccount())
+  saveNameOfChannel(){
+    let JSON =  new Channel('', [],this.ChannelName,this.ChannelDescription, true, this.findLoginAccount())
     this.chatService.incompleteCreateChannel = JSON;
-    console.log(this.chatService.incompleteCreateChannel)
+    console.log(this.chatService.incompleteCreateChannel);
     this.nextpage();
   }
 }
