@@ -36,7 +36,7 @@ export class AddUserComponent implements OnInit{
 
   ngOnInit(): void {
     this.filteredAccounts = this.accountService.accounts;
-    this.savedUser.push(this.presentAccount.userInformation)
+    this.savedUser.push(this.presentAccount.userInformation);
   }
 
   togglePrivate(){

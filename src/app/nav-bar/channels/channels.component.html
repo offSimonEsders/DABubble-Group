@@ -130,7 +130,8 @@
     <div *ngIf="openPe">
         <div *ngFor="let i of accountService.accounts" class="channels" (click)="openChat('chats', i.accountId)">
             <div class="container"><app-avatar [accountId]="i.accountId" [hideStatus]="false"></app-avatar></div>
-            <span class="personName">{{ i.name }}</span>
+            <span *ngIf="whichUserAreYou(i.accountId)" class="personName">{{ i.name + ' (Du)' }} </span>
+            <span *ngIf="!whichUserAreYou(i.accountId)" class="personName">{{ i.name }} </span>
         </div>
     </div>
 </div>

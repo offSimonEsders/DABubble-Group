@@ -35,7 +35,17 @@ export class ChannelsComponent implements OnInit {
     this.messageService = inject(MessageService);
   }
 
-  ngOnInit(): void {}
+  whichUserAreYou(id:string){
+    if(id == this.authService.userId){
+      return true;
+    }else{
+      return false
+    }
+  }
+
+  ngOnInit(): void {
+    
+  }
 
   hideChannels() {
     console.log(this.accountService.accounts);
