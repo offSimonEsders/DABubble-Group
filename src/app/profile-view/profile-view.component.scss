@@ -87,11 +87,17 @@
     width: 100%;
     @include displayFlex($jc: center); 
 
-    img{
-        height: 200px !important;
-        width: 200px !important;
+    div{
+        height: 200px ;
+        width: 200px ;
         border-radius: 100%;
+        img{
+            height: 200px !important;
+            width: 200px !important;
+            border-radius: 100% !important;
+        }
     }
+    
 }
 
 .informations{
