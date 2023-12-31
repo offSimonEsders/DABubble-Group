@@ -22,6 +22,8 @@ export class AuthService {
   userInformation!: Account;
   provider: GoogleAuthProvider;
 
+  profileViewAccount!:Account;
+
   constructor(private auth: Auth, private router: Router) {
     this.accountService = inject(AccountService);
     this.provider = new GoogleAuthProvider();

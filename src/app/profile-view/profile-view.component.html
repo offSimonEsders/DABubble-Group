@@ -1,13 +1,13 @@
-<div class="overdiv">
+
     <div class="crate-overdiv">
         <h1>Profil</h1>
         
         <div class="picture">
-            <img src="../../assets/img/characters/elias_neumann.svg" alt="">
+            <app-avatar [accountId]="account.accountId" [hideStatus]="false"></app-avatar>
         </div>
 
         <div class="informations">
-            <h2>Ben Mustermann</h2>
+            <h2>{{ account.name }}</h2>
             <div class="status">
                 <div></div>
                 <span>Aktiv</span>
@@ -24,7 +24,7 @@
                     
                 <div>
                     <span>E-Mail-Adresse</span>
-                    <a href="#">ExamplelADDweb.de</a>
+                    <a href="#">{{ account.email }}</a>
                 </div>
             </div>
   
@@ -61,4 +61,3 @@
             </svg>
         </div>
     </div>
-</div>
