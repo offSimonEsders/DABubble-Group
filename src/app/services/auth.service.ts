@@ -89,7 +89,7 @@ export class AuthService {
     });
   }
 
-  authServiceSignOut() {
+  authServiceLogOut() {
     signOut(this.auth).then(() => {
       console.log(this.auth.currentUser);
     });
