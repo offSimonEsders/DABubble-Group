@@ -3,12 +3,14 @@ import { AccountService } from './account.service';
 import {
   Auth,
   GoogleAuthProvider,
+  confirmPasswordReset,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signInAnonymously,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  verifyPasswordResetCode,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Account } from '../models/account.class';
@@ -17,7 +19,7 @@ import { Account } from '../models/account.class';
 export class AuthService {
   private accountService!: AccountService;
   userId = 'pesOSpHsgAt97WwG705y';
-  userInformation!:Account;
+  userInformation!: Account;
   provider: GoogleAuthProvider;
 
   constructor(private auth: Auth, private router: Router) {
@@ -51,7 +53,7 @@ export class AuthService {
         this.router.navigate(['/test']);
       })
       .catch(() => {
-        if(error_function) {
+        if (error_function) {
           error_function();
         }
       });
@@ -103,13 +105,28 @@ export class AuthService {
     this.accountService.addAccount(newAcc);
   }
 
-  async resetPassword(email: string) {
+  async resetPasswordMail(email: string) {
     return await sendPasswordResetEmail(this.auth, email)
       .then(() => {
         return true;
       })
       .catch(() => {
         return false;
+      });
+  }
+
+  async changePassword(oobCode: string, newPassword: string) {
+    console.log(oobCode);
+    return await confirmPasswordReset(this.auth, oobCode, newPassword)
+  }
+
+  async verifyooBCode(oobCode: string) {
+    return verifyPasswordResetCode(this.auth, oobCode)
+      .then(() => {
+        return false;
+      })
+      .catch(() => {
+        return true;
       });
   }
 

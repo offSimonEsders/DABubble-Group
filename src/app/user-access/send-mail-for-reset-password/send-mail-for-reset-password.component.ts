@@ -17,7 +17,6 @@ export class SendMailForResetPasswordComponent implements AfterViewInit {
   loginFrame!: HTMLDivElement;
 
   constructor(private authservice: AuthService, private checkinputservice: CheckInputService) {
-
   }
 
   ngAfterViewInit(): void {
@@ -40,7 +39,7 @@ export class SendMailForResetPasswordComponent implements AfterViewInit {
 
   async sendMailToResetPassword(event: Event) {
     event.preventDefault();
-    if( await this.authservice.resetPassword(this.sendmailinput.nativeElement.value)) {
+    if (await this.authservice.resetPasswordMail(this.sendmailinput.nativeElement.value)) {
       this.sendmailuserfeedback.nativeElement.style.display = 'flex';
     }
     this.sendmailsubmitbutton.nativeElement.disabled = true;
