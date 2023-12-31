@@ -9,7 +9,7 @@
     </div>
     <form class="login-form">
         <div class="login-input-frame login-input-frame-email">
-            <input type="email" placeholder="beispielname@email.com" (input)="this.removeLoginFailed()" #login_user_email_input>
+            <input type="email" placeholder="beispielname@email.com" (input)="this.removeLoginFailed()" id="login_user_email_input">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <mask id="mask0_23668_3213" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                     height="24">
@@ -23,7 +23,7 @@
             </svg>
         </div>
         <div class="login-input-frame">
-            <input type="password" placeholder="Passwort" #login_user_password_input>
+            <input type="password" placeholder="Passwort" (input)="this.removeLoginFailed()" id="login_user_password_input">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <mask id="mask0_23668_14370" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                     height="24">
@@ -68,8 +68,8 @@
     </button>
 
     <div class="login-or-guest">
-        <button class="login-button" (click)="this.authservice.authServiceSignInWithEmailAndPassword(login_user_email_input.value, login_user_password_input.value, this.loginFailed)">Anmelden</button>
-        <button class="guest-button" (click)="this.authservice.signInAnonymously()">Gäste-Login</button>
+        <button class="login-button" (click)="this.callLoginWithEmailAndPassword()">Anmelden</button>
+        <button class="guest-button" (click)="this.authService.signInAnonymously()">Gäste-Login</button>
     </div>
 
 </div>
