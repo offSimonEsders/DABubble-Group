@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component} from '@angular/core';
 import { AvatarComponent } from '../shared/avatar/avatar.component';
 import { AuthService } from '../services/auth.service';
 import { Account } from '../models/account.class';
@@ -14,12 +14,9 @@ import { ChannelsComponent } from '../nav-bar/channels/channels.component';
   templateUrl: './profile-view.component.html',
   styleUrl: './profile-view.component.scss'
 })
-export class ProfileViewComponent implements OnInit{
+export class ProfileViewComponent{
   account!:Account;
   openChatBoolean:boolean = false;
-
-  ngOnInit(): void {
-  }
   
   constructor(private authService:AuthService,private channels:ChannelsComponent, private head:HeaderComponent){
     this.account = this.authService.profileViewAccount;

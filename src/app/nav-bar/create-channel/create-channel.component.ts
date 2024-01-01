@@ -27,8 +27,6 @@ export class CreateChannelComponent {
   ChannelName:string = '';
   ChannelDescription:string = '';
 
-  newChannelObject!:Channel;
-
   constructor(private chatService: ChatService, private presentAccount:AuthService, private accountsJSON:AccountService) {}
 
   ngOnInit() {

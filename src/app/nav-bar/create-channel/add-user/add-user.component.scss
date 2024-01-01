@@ -1,4 +1,8 @@
 @import "../../../../styles.scss";
+$input-bg-color: white;
+$input-border-color: grey;
+$checked-bg-color: white;
+
 
 .overdiv-addUser{
     h1{
@@ -47,8 +51,8 @@
 }
 
 .input-div{
-    margin-top: 20px;
     @include displayFlex($jc: flex-start); 
+    margin-top: 20px;
     border: 1px solid #adb0d9;
     padding: 16px;
     border-radius: 30px;
@@ -96,11 +100,10 @@
 }
 
 .close-button{
+    @include displayFlex($jc: center); 
     position: absolute;
     top: 30px;
     right: 30px;
-
-    @include displayFlex($jc: center); 
     border-radius: 100%;
     padding: 8px;
     cursor: pointer;
@@ -119,11 +122,6 @@
         }
     }
 }
-
-
-$input-bg-color: white;
-$input-border-color: grey;
-$checked-bg-color: white;
 
 .checkbox-div{
     padding: 8px;
