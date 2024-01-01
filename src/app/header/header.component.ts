@@ -53,7 +53,6 @@ export class HeaderComponent implements OnInit {
 
   openProfileView(){
     this.authService.profileViewAccount = this.account;
-    console.log(this.authService.profileViewAccount);
     this.profileView = true;
     this.dropDown = false;
     

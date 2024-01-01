@@ -48,7 +48,6 @@ export class ChannelsComponent implements OnInit {
   }
 
   hideChannels() {
-    console.log(this.accountService.accounts);
     this.openCh = !this.openCh;
     this.rotateCh = !this.rotateCh;
   }

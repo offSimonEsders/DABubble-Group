@@ -110,7 +110,6 @@ export class AddUserComponent implements OnInit{
   }
 
   remove(User:Account){
-    console.log(User);
     if(!this.filteredAccounts.some(el => JSON.stringify(el) === JSON.stringify(User))){
       this.filteredAccounts.push(User);
       this.savedUser = this.savedUser.filter(obj => !this.filteredAccounts.includes(obj));
@@ -131,8 +130,7 @@ export class AddUserComponent implements OnInit{
         JSON.memberIds.push(this.accountService.accounts[i].accountId);
       }
     }
-    this.Addpeople(JSON)
-    console.log(JSON);
+    this.Addpeople(JSON);
     this.CreateChannel.close2();
     this.chatService.addChatOrChannel(JSON, 'channels');
   }
