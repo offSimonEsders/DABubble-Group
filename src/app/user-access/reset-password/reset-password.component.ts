@@ -15,6 +15,7 @@ export class ResetPasswordComponent implements OnInit {
   @ViewChild('password1') password1?: ElementRef;
   @ViewChild('password2') password2?: ElementRef;
   @ViewChild('changepasswordbutton') changepasswordbutton?: ElementRef;
+  @ViewChild('userfeedbackresetpassword') userfeedbackresetpassword?: any;
 
   linkused!: boolean;
   loaded: boolean = false;
@@ -50,6 +51,8 @@ export class ResetPasswordComponent implements OnInit {
     if (!this.password1) {
       return;
     }
+    this.showAnimationAndLoadogin();
+    this.disableInputAndButton();
     await this.authservice.changePassword(this.route.snapshot.queryParams['oobCode'], this.password1.nativeElement.value);
   }
 
@@ -62,6 +65,21 @@ export class ResetPasswordComponent implements OnInit {
     this.linkused = await this.authservice.verifyooBCode(oobCode);
     this.loaded = this.linkused ? !this.linkused : true;
     this.linkused = this.linkused ? this.linkused : false;
+  }
+
+  showAnimationAndLoadogin() {
+    this.userfeedbackresetpassword.nativeElement.style.display = 'flex';
+    setTimeout(() => {
+      this.router.navigate(['']);
+    }, 2000);
+  }
+
+  disableInputAndButton() {
+    if(this.changepasswordbutton && this.password1 && this.password2) {
+      this.changepasswordbutton.nativeElement.disabled = true;
+      this.password1.nativeElement.disabled = true;
+      this.password2.nativeElement.disabled = true;
+    }
   }
 
 }
