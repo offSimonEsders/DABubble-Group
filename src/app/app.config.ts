@@ -26,7 +26,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(provideAuth(() => getAuth())),
     importProvidersFrom(provideFirestore(() => getFirestore())),
     importProvidersFrom(provideStorage(() => getStorage())),
-    importProvidersFrom(provideFirebaseApp(() => initializeApp({ "projectId": "da-bubble-group", "appId": "1:85078507240:web:3b75c6c208046e424d935d", "storageBucket": "da-bubble-group.appspot.com", "apiKey": "AIzaSyBJTYaikRBczppYRH2LQT4x-k7nbE5BPGE", "authDomain": "da-bubble-group.firebaseapp.com", "messagingSenderId": "85078507240" }))),
     /**
      * importProvidersFrom(provideAppCheck(() => {
       // TODO get a reCAPTCHA Enterprise here https://console.cloud.google.com/security/recaptcha?project=_
@@ -34,8 +33,5 @@ export const appConfig: ApplicationConfig = {
       return initializeAppCheck(undefined, { provider, isTokenAutoRefreshEnabled: true });
     })),
      */
-    importProvidersFrom(provideAuth(() => getAuth())),
-    importProvidersFrom(provideFirestore(() => getFirestore())),
-    importProvidersFrom(provideStorage(() => getStorage())),
   ],
 };
