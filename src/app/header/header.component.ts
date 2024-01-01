@@ -46,6 +46,11 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  closeDropDown(){
+    this.dropDown = false;
+    this.profileView = false;
+  }
+
   openProfileView(){
     this.authService.profileViewAccount = this.account;
     console.log(this.authService.profileViewAccount);
