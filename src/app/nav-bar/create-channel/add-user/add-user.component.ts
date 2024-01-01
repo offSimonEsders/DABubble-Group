@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { Account } from '../../../models/account.class';
 import { CreateChannelComponent } from '../create-channel.component';
 import { AuthService } from '../../../services/auth.service';
+import { Channel } from '../../../models/channel.class';
 
 @Component({
   selector: 'app-add-user',
@@ -31,7 +32,6 @@ export class AddUserComponent implements OnInit{
     this.accountService = inject(AccountService);
     this.fullObj = this.accountService;
   }
-
 
   ngOnInit(): void {
     this.filteredAccounts = this.accountService.accounts;
@@ -71,13 +71,17 @@ export class AddUserComponent implements OnInit{
     this.filteredAccounts.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  renderInDiv(id:string){
-    let user = this.filteredAccounts.find(obj => obj.accountId.toLowerCase().includes(id.toLowerCase()));
+  ifUserExists(user:any,id:string){
     if (user) {
       this.savedUser.push(user);
       this.filteredAccounts = this.filteredAccounts.filter(obj => obj.accountId !== id); 
       this.filteredAccounts = this.filteredAccounts.filter(obj => !this.savedUser.includes(obj));
     }
+  }
+
+  renderInDiv(id:string){
+    let user = this.filteredAccounts.find(obj => obj.accountId.toLowerCase().includes(id.toLowerCase()));
+    this.ifUserExists(user,id);
     this.checkIfFilterAccounsIsNull();
     this.settingButton();
   }
@@ -90,13 +94,17 @@ export class AddUserComponent implements OnInit{
     }
   }
 
+  filterFunction(){
+    this.search = true;
+    this.filteredAccounts = this.fullObj.accounts.filter(obj => obj.name.toLowerCase().includes(this.input.toLowerCase())); 
+    if(this.savedUser.length != 0){
+      this.filteredAccounts = this.filteredAccounts.filter(obj => !this.savedUser.includes(obj));
+    }
+  }
+
   FilterArrayByName(){
     if(this.input != ''){
-      this.search = true;
-      this.filteredAccounts = this.fullObj.accounts.filter(obj => obj.name.toLowerCase().includes(this.input.toLowerCase())); 
-      if(this.savedUser.length != 0){
-        this.filteredAccounts = this.filteredAccounts.filter(obj => !this.savedUser.includes(obj));
-      }
+      this.filterFunction();
       this.sortArray();
       this.checkIfFilterAccounsIsNull();
     } else {
@@ -110,7 +118,6 @@ export class AddUserComponent implements OnInit{
   }
 
   remove(User:Account){
-    console.log(User);
     if(!this.filteredAccounts.some(el => JSON.stringify(el) === JSON.stringify(User))){
       this.filteredAccounts.push(User);
       this.savedUser = this.savedUser.filter(obj => !this.filteredAccounts.includes(obj));
@@ -131,8 +138,11 @@ export class AddUserComponent implements OnInit{
         JSON.memberIds.push(this.accountService.accounts[i].accountId);
       }
     }
-    this.Addpeople(JSON)
-    console.log(JSON);
+    this.AddAndClose(JSON);
+  }
+
+  AddAndClose(JSON:Channel){
+    this.Addpeople(JSON);
     this.CreateChannel.close2();
     this.chatService.addChatOrChannel(JSON, 'channels');
   }
