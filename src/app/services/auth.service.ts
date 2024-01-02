@@ -100,6 +100,7 @@ export class AuthService {
       { onlineStatus: 'offline' }
     ).then(() => {
       signOut(this.auth);
+      this.router.navigate(['']);
     });
   }
 
