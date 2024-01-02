@@ -1,35 +1,35 @@
 @import "../../../styles.scss";
 
-.head{
-    @include displayFlex($jc: space-between);   
+.head {
+  @include displayFlex($jc: space-between);
 }
 
-.edit-button{
+.edit-button {
+  @include displayFlex($jc: center);
+  width: 45px;
+  height: 45px;
+  padding: 4px;
+  border-radius: 100%;
+  svg {
     @include displayFlex($jc: center);
-    width: 45px;
-    height: 45px;
-    padding: 4px;
+  }
+}
+
+.logo {
+  @include displayFlex($jc: center);
+  border-radius: 100px;
+  height: 64px;
+  img {
     border-radius: 100%;
-    svg{
-        @include displayFlex($jc: center);
-    }
-}
-
-.logo{
-    @include displayFlex($jc: center);
-    border-radius: 100px;
     height: 64px;
-    img{
-        border-radius: 100%;  
-        height: 64px;
-        width: 64px;
-        object-fit: cover;
-    }
-    span{
-        color: black;
-        font-size: 24px;
-        font-weight: 700;
-        padding-right: 20px;
-        padding-left: 15px;
-    }
+    width: 64px;
+    object-fit: cover;
+  }
+  span {
+    color: black;
+    font-size: 24px;
+    font-weight: 700;
+    padding-right: 20px;
+    padding-left: 15px;
+  }
 }

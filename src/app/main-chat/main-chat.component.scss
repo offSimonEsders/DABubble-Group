@@ -20,7 +20,17 @@ header {
   width: 100%;
   height: calc(100% - 317.8px);
   @include displayFlex($fd: column, $jc: flex-end, $ai: flex-start);
+  scrollbar-gutter: stable;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: $purple3;
+  }
 }
 
 .subcontainer {

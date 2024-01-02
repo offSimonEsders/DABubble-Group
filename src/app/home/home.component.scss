@@ -17,9 +17,19 @@
     height: calc(100% - 116px);
     @include displayFlex($g: 20px);
 
-    .menu-chanel {
+    .menu-channel {
       @include componentMaxWidth(366px);
-      overflow-y: scroll;
+      scrollbar-gutter: stable;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        background: $purple2;
+      }
     }
 
     .main-chat {
