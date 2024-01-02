@@ -18,7 +18,7 @@ import { Account } from '../models/account.class';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private accountService!: AccountService;
-  userId!: string;
+  userId = 'pesOSpHsgAt97WwG705y';
   userName = 'Frederik Beck';
   userInformation!: Account;
   provider: GoogleAuthProvider;
