@@ -18,12 +18,10 @@ import { Account } from '../models/account.class';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private accountService!: AccountService;
-  userId = 'pesOSpHsgAt97WwG705y';
-  userName = 'Frederik Beck';
-  userInformation!: Account;
+  user!: Account;
   provider: GoogleAuthProvider;
 
-  profileViewAccount!:Account;
+  profileViewAccount!: Account;
 
   constructor(private auth: Auth, private router: Router) {
     this.accountService = inject(AccountService);
@@ -37,7 +35,6 @@ export class AuthService {
   ): any {
     return createUserWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
-        this.userId = userCredential.user.uid;
         return userCredential.user.uid;
       })
       .catch((error) => {
@@ -53,7 +50,8 @@ export class AuthService {
   ) {
     await signInWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
-        this.router.navigate(['/test']);
+        this.getUser(userCredential.user.uid);
+        this.router.navigate(['/home']);
       })
       .catch((error) => {
         if (error_function) {
@@ -88,7 +86,8 @@ export class AuthService {
 
   signInAnonymously() {
     signInAnonymously(this.auth).then(() => {
-      this.router.navigate(['/test']);
+      this.getUser('pesOSpHsgAt97WwG705y');
+      this.router.navigate(['/home']);
     });
   }
 
@@ -131,6 +130,12 @@ export class AuthService {
       .catch(() => {
         return true;
       });
+  }
+
+  getUser(id: string) {
+    this.accountService.getAccount(id).then((account) => {
+      this.user = account;
+    });
   }
 
   // Sign up, login, auto-login, logout, auto-logout, forgot-password functions

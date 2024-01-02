@@ -1,8 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AvatarComponent } from '../shared/avatar/avatar.component';
 import { AuthService } from '../services/auth.service';
-import { AccountService } from '../services/account.service';
-import { Account } from '../models/account.class';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ProfileViewComponent } from '../profile-view/profile-view.component';
@@ -12,49 +10,37 @@ import { ProfileViewComponent } from '../profile-view/profile-view.component';
   standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  imports: [AvatarComponent,CommonModule,ProfileViewComponent],
+  imports: [AvatarComponent, CommonModule, ProfileViewComponent],
 })
 export class HeaderComponent implements OnInit {
   authService!: AuthService;
-  accountService!: AccountService;
-  account!: Account;
   accountStatus!: string;
   accountName!: string;
-  dropDown:boolean = false;
-  profileView:boolean = false;
+  dropDown: boolean = false;
+  profileView: boolean = false;
 
   constructor(private router: Router) {
     this.authService = inject(AuthService);
-    this.accountService = inject(AccountService);
   }
 
-  ngOnInit(): void {
-    this.getAccount();
-  }
+  ngOnInit(): void {}
 
-  switchDropDown(){
+  switchDropDown() {
     this.dropDown = !this.dropDown;
   }
 
-  logOut(){
+  logOut() {
     this.router.navigate(['']);
   }
 
-  getAccount() {
-    this.accountService.getAccount(this.authService.userId).then((account) => {
-      this.account = account;
-    });
-  }
-
-  closeDropDown(){
+  closeDropDown() {
     this.dropDown = false;
     this.profileView = false;
   }
 
-  openProfileView(){
-    this.authService.profileViewAccount = this.account;
+  openProfileView() {
+    this.authService.profileViewAccount = this.authService.user;
     this.profileView = true;
     this.dropDown = false;
-    
   }
 }

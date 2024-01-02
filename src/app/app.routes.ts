@@ -7,8 +7,7 @@ import { ResetPasswordComponent } from './user-access/reset-password/reset-passw
 
 export const routes: Routes = [
   { path: '', component: UserAccessComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'test', component: HomeComponent, canActivate: [AuthGuardService]},
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   {
     path: 'not-found',

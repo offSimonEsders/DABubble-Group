@@ -64,7 +64,7 @@ export class MessageComponent implements OnInit {
   }
 
   checkIfOwnMessage() {
-    if (this.emitMessage.messageFrom === this.authService.userId) {
+    if (this.emitMessage.messageFrom === this.authService.user.accountId) {
       this.ownMessage = true;
     } else {
       this.ownMessage = false;

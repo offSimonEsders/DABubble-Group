@@ -5,10 +5,10 @@
         <img src="../../assets/img/searchIcon.png" alt="Hier ist ein Lupen-Icon">
     </div>
     <div class="profil-menu-container" (click)="switchDropDown()">
-        @if(account) {
-        <span>{{ account.name }}</span>
+        @if(authService.user) {
+        <span>{{ authService.user.name }}</span>
         <div class="avatar-container">
-            <app-avatar [accountId]="account.accountId" [hideStatus]="false"></app-avatar>
+            <app-avatar [accountId]="authService.user.accountId" [hideStatus]="false"></app-avatar>
         </div>
         }
         <svg class="arrow-down-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
@@ -32,6 +32,6 @@
 
     </div>
     <div *ngIf="profileView" class="dropDownProfile">
-        <app-profile-view ></app-profile-view>
+        <app-profile-view></app-profile-view>
     </div>
 </header>

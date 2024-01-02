@@ -29,7 +29,7 @@ export class ReactionService {
 
   userReacted(index: number, message: Message) {
     return message.reactions[index].reacting.includes(
-      this.authService.userName
+      this.authService.user.name
     );
   }
 
@@ -41,7 +41,7 @@ export class ReactionService {
 
   async updateReaction(index: number, message: Message, collection: string) {
     let newReactions = message.reactions;
-    newReactions[index].reacting.push(this.authService.userName);
+    newReactions[index].reacting.push(this.authService.user.name);
     await updateDoc(
       this.firestoreService.getMessageDocRef(
         collection,
@@ -61,7 +61,7 @@ export class ReactionService {
       ),
       {
         reactions: arrayUnion({
-          reacting: [this.authService.userName],
+          reacting: [this.authService.user.name],
           reaction: reaction,
         }),
       }

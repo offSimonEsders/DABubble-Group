@@ -49,7 +49,7 @@ export class ReactionComponent {
 
   removeReaction(index: number, newReactions: Reaction[]) {
     let indexToDelete = this.message.reactions[index].reacting.indexOf(
-      this.authService.userName
+      this.authService.user.name
     );
     newReactions[index].reacting.splice(indexToDelete, 1);
     if (newReactions[index].reacting.length > 0) {

@@ -57,7 +57,7 @@ export class ChatIntroComponent implements OnInit, OnDestroy {
   }
 
   checkIfOwnChat() {
-    if (this.account?.accountId === this.authService.userId) {
+    if (this.account?.accountId === this.authService.user.accountId) {
       this.ownChat = true;
     } else {
       this.ownChat = false;

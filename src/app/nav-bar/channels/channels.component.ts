@@ -1,4 +1,4 @@
-import { Component,inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
@@ -35,8 +35,8 @@ export class ChannelsComponent {
     this.messageService = inject(MessageService);
   }
 
-  whichUserAreYou(id:string){
-    return id == this.authService.userId;
+  whichUserAreYou(id: string) {
+    return id == this.authService.user.accountId;
   }
 
   hideChannels() {
@@ -61,20 +61,19 @@ export class ChannelsComponent {
     });
   }
 
-  privateChatExistsFunction(chatColl:string,i:number,accId:string){
+  privateChatExistsFunction(chatColl: string, i: number, accId: string) {
     this.messageService.checkForExistingMessages(
       chatColl,
       this.chatService.chats[i].id
     );
     this.chatService.currentChat = this.chatService.chats[i];
     this.emitChatInfo(chatColl, accId);
-
   }
 
   async openChat(chatColl: string, accId: string) {
     for (let i = 0; i < this.chatService.chats.length; i++) {
       if (this.privateChatExists(i, accId)) {
-        this.privateChatExistsFunction(chatColl,i,accId);
+        this.privateChatExistsFunction(chatColl, i, accId);
         break;
       }
       if (this.noPrivateChatExists(i)) {
@@ -86,7 +85,9 @@ export class ChannelsComponent {
   privateChatExists(index: number, accId: string) {
     return (
       this.chatService.chats[index].memberIds.includes(accId) &&
-      this.chatService.chats[index].memberIds.includes(this.authService.userId)
+      this.chatService.chats[index].memberIds.includes(
+        this.authService.user.accountId
+      )
     );
   }
 
@@ -95,7 +96,7 @@ export class ChannelsComponent {
   }
 
   async createNewPrivateChat(chatColl: string, accId: string) {
-    let newChat = new Chat('', [this.authService.userId, accId]);
+    let newChat = new Chat('', [this.authService.user.accountId, accId]);
     this.chatService.addChatOrChannel(newChat, 'chats').then((doc: any) => {
       updateDoc(doc, { id: doc.id });
       this.messageService.checkForExistingMessages(chatColl, doc.id);

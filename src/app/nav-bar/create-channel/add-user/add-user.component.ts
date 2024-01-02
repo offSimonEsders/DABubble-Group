@@ -12,98 +12,114 @@ import { Channel } from '../../../models/channel.class';
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [CommonModule,AvatarComponent,FormsModule],
+  imports: [CommonModule, AvatarComponent, FormsModule],
   templateUrl: './add-user.component.html',
-  styleUrl: './add-user.component.scss'
+  styleUrl: './add-user.component.scss',
 })
-export class AddUserComponent implements OnInit{
-  choose:boolean = false;
-  input:string = '';
+export class AddUserComponent implements OnInit {
+  choose: boolean = false;
+  input: string = '';
   accountService!: AccountService;
   filteredAccounts: Account[] = [];
-  fullObj!:AccountService;
-  NoUserFound:boolean = false
-  search:boolean = false;
-  ableButton:boolean = false;
-  savedUser:any[] = [];
-  private:boolean = false;
+  fullObj!: AccountService;
+  NoUserFound: boolean = false;
+  search: boolean = false;
+  ableButton: boolean = false;
+  savedUser: any[] = [];
+  private: boolean = false;
 
-  constructor(private chatService: ChatService,private CreateChannel:CreateChannelComponent, public presentAccount:AuthService) {
+  constructor(
+    private chatService: ChatService,
+    private CreateChannel: CreateChannelComponent,
+    public presentAccount: AuthService
+  ) {
     this.accountService = inject(AccountService);
     this.fullObj = this.accountService;
   }
 
   ngOnInit(): void {
     this.filteredAccounts = this.accountService.accounts;
-    this.savedUser.push(this.presentAccount.userInformation);
+    this.savedUser.push(this.presentAccount.user);
   }
 
-  togglePrivate(){
+  togglePrivate() {
     this.private = !this.private;
   }
 
-  settingButton(){
-    if(this.choose == false){
+  settingButton() {
+    if (this.choose == false) {
       this.ableButton = false;
-    }else if(this.savedUser.length != 0){
+    } else if (this.savedUser.length != 0) {
       this.ableButton = false;
-    }else{
+    } else {
       this.ableButton = true;
     }
   }
 
-  toggleChoose(){
+  toggleChoose() {
     this.choose = !this.choose;
     this.settingButton();
     this.clearsaveUser();
   }
 
-  clearsaveUser(){
+  clearsaveUser() {
     this.filteredAccounts = this.accountService.accounts;
-    this.filteredAccounts = this.filteredAccounts.filter(obj => !this.savedUser.includes(obj));
+    this.filteredAccounts = this.filteredAccounts.filter(
+      (obj) => !this.savedUser.includes(obj)
+    );
     this.savedUser = [];
-    this.savedUser.push(this.presentAccount.userInformation);
+    this.savedUser.push(this.presentAccount.user);
     this.input = '';
     this.NoUserFound = false;
   }
 
-  sortArray(){
+  sortArray() {
     this.filteredAccounts.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  ifUserExists(user:any,id:string){
+  ifUserExists(user: any, id: string) {
     if (user) {
       this.savedUser.push(user);
-      this.filteredAccounts = this.filteredAccounts.filter(obj => obj.accountId !== id); 
-      this.filteredAccounts = this.filteredAccounts.filter(obj => !this.savedUser.includes(obj));
+      this.filteredAccounts = this.filteredAccounts.filter(
+        (obj) => obj.accountId !== id
+      );
+      this.filteredAccounts = this.filteredAccounts.filter(
+        (obj) => !this.savedUser.includes(obj)
+      );
     }
   }
 
-  renderInDiv(id:string){
-    let user = this.filteredAccounts.find(obj => obj.accountId.toLowerCase().includes(id.toLowerCase()));
-    this.ifUserExists(user,id);
+  renderInDiv(id: string) {
+    let user = this.filteredAccounts.find((obj) =>
+      obj.accountId.toLowerCase().includes(id.toLowerCase())
+    );
+    this.ifUserExists(user, id);
     this.checkIfFilterAccounsIsNull();
     this.settingButton();
   }
 
-  checkIfFilterAccounsIsNull(){
-    if(this.filteredAccounts.length == 0){
+  checkIfFilterAccounsIsNull() {
+    if (this.filteredAccounts.length == 0) {
       this.NoUserFound = true;
-    }else{
+    } else {
       this.NoUserFound = false;
     }
   }
 
-  filterFunction(){
+  filterFunction() {
     this.search = true;
-    this.filteredAccounts = this.fullObj.accounts.filter(obj => obj.name.toLowerCase().includes(this.input.toLowerCase())); 
-    if(this.savedUser.length != 0){
-      this.filteredAccounts = this.filteredAccounts.filter(obj => !this.savedUser.includes(obj));
+    this.filteredAccounts = this.fullObj.accounts.filter((obj) =>
+      obj.name.toLowerCase().includes(this.input.toLowerCase())
+    );
+    if (this.savedUser.length != 0) {
+      this.filteredAccounts = this.filteredAccounts.filter(
+        (obj) => !this.savedUser.includes(obj)
+      );
     }
   }
 
-  FilterArrayByName(){
-    if(this.input != ''){
+  FilterArrayByName() {
+    if (this.input != '') {
       this.filterFunction();
       this.sortArray();
       this.checkIfFilterAccounsIsNull();
@@ -113,35 +129,43 @@ export class AddUserComponent implements OnInit{
     }
   }
 
-  Addpeople(JSON:any){
-    return JSON.publicStatus = !this.private;
+  Addpeople(JSON: any) {
+    return (JSON.publicStatus = !this.private);
   }
 
-  remove(User:Account){
-    if(!this.filteredAccounts.some(el => JSON.stringify(el) === JSON.stringify(User))){
+  remove(User: Account) {
+    if (
+      !this.filteredAccounts.some(
+        (el) => JSON.stringify(el) === JSON.stringify(User)
+      )
+    ) {
       this.filteredAccounts.push(User);
-      this.savedUser = this.savedUser.filter(obj => !this.filteredAccounts.includes(obj));
+      this.savedUser = this.savedUser.filter(
+        (obj) => !this.filteredAccounts.includes(obj)
+      );
     }
-    this.savedUser = this.savedUser.filter(obj => !this.filteredAccounts.includes(obj));
+    this.savedUser = this.savedUser.filter(
+      (obj) => !this.filteredAccounts.includes(obj)
+    );
     this.checkIfFilterAccounsIsNull();
     this.settingButton();
   }
 
-  createChannelByArray(){
+  createChannelByArray() {
     let JSON = this.chatService.incompleteCreateChannel;
-    if(this.choose == true){
-      for(let i = 0; i < this.savedUser.length; i++){
+    if (this.choose == true) {
+      for (let i = 0; i < this.savedUser.length; i++) {
         JSON.memberIds.push(this.savedUser[i].id);
       }
-    }else{
-      for(let i = 0; i < this.accountService.accounts.length; i++){
+    } else {
+      for (let i = 0; i < this.accountService.accounts.length; i++) {
         JSON.memberIds.push(this.accountService.accounts[i].accountId);
       }
     }
     this.AddAndClose(JSON);
   }
 
-  AddAndClose(JSON:Channel){
+  AddAndClose(JSON: Channel) {
     this.Addpeople(JSON);
     this.CreateChannel.close2();
     this.chatService.addChatOrChannel(JSON, 'channels');
