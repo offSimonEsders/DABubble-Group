@@ -14,16 +14,20 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Account } from '../models/account.class';
+import { FirestoreService } from './firestore.service';
+import { updateDoc } from '@angular/fire/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private accountService!: AccountService;
+  private firestoreService!: FirestoreService;
   user!: Account;
   provider: GoogleAuthProvider;
   profileViewAccount!: Account;
 
   constructor(private auth: Auth, private router: Router) {
     this.accountService = inject(AccountService);
+    this.firestoreService = inject(FirestoreService);
     this.provider = new GoogleAuthProvider();
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
   }
@@ -90,9 +94,12 @@ export class AuthService {
     });
   }
 
-  authServiceLogOut() {
-    signOut(this.auth).then(() => {
-      console.log(this.auth.currentUser);
+  async authServiceLogOut() {
+    await updateDoc(
+      this.firestoreService.getDocRef('accounts', this.user.accountId),
+      { onlineStatus: 'offline' }
+    ).then(() => {
+      signOut(this.auth);
     });
   }
 

@@ -29,7 +29,7 @@ export class ChatService implements OnDestroy {
   channels: Channel[] = [];
   currentChannel!: Channel;
 
-  incompleteCreateChannel!:Channel;
+  incompleteCreateChannel!: Channel;
 
   channelCreatedSource = new Subject<boolean>();
   channelCreated$ = this.channelCreatedSource.asObservable();
@@ -55,8 +55,7 @@ export class ChatService implements OnDestroy {
       chat.toJson()
     ).catch((err) => {
       // show an ErrormessagdeF
-    }).then((doc: any) => updateDoc(doc, { id: doc.id })
-    )
+    });
   }
 
   setCurrentChatOrCurrentChannel(collId: string, docId: string) {

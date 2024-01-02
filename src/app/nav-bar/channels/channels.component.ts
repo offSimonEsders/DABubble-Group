@@ -35,10 +35,6 @@ export class ChannelsComponent {
     this.messageService = inject(MessageService);
   }
 
-  whichUserAreYou(id: string) {
-    return id == this.authService.user.accountId;
-  }
-
   hideChannels() {
     this.openCh = !this.openCh;
     this.rotateCh = !this.rotateCh;
@@ -71,6 +67,9 @@ export class ChannelsComponent {
   }
 
   async openChat(chatColl: string, accId: string) {
+    if (this.chatService.chats.length === 0) {
+      this.createNewPrivateChat(chatColl, accId);
+    }
     for (let i = 0; i < this.chatService.chats.length; i++) {
       if (this.privateChatExists(i, accId)) {
         this.privateChatExistsFunction(chatColl, i, accId);
