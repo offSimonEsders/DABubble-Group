@@ -18,7 +18,7 @@ import { Account } from '../models/account.class';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private accountService!: AccountService;
-  userId = 'pesOSpHsgAt97WwG705y';
+  userId!: string;
   userName = 'Frederik Beck';
   userInformation!: Account;
   provider: GoogleAuthProvider;
@@ -37,7 +37,7 @@ export class AuthService {
   ): any {
     return createUserWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
-        console.log(userCredential.user.uid);
+        this.userId = userCredential.user.uid;
         return userCredential.user.uid;
       })
       .catch((error) => {
