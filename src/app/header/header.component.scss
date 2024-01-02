@@ -53,6 +53,14 @@ header {
   }
 }
 
+.dropDownProfile{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(100%);
+  z-index: 10;
+}
+
 .dropDown{
   position: absolute;
   bottom: 0;

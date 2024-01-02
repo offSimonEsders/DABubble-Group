@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component,inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
@@ -17,7 +17,7 @@ import { updateDoc } from '@angular/fire/firestore';
   styleUrl: './channels.component.scss',
   imports: [CommonModule, CreateChannelComponent, AvatarComponent],
 })
-export class ChannelsComponent implements OnInit {
+export class ChannelsComponent {
   openCh: boolean = true;
   rotateCh: boolean = false;
   openPe: boolean = true;
@@ -36,19 +36,10 @@ export class ChannelsComponent implements OnInit {
   }
 
   whichUserAreYou(id:string){
-    if(id == this.authService.userId){
-      return true;
-    }else{
-      return false
-    }
-  }
-
-  ngOnInit(): void {
-    
+    return id == this.authService.userId;
   }
 
   hideChannels() {
-    console.log(this.accountService.accounts);
     this.openCh = !this.openCh;
     this.rotateCh = !this.rotateCh;
   }
@@ -70,15 +61,20 @@ export class ChannelsComponent implements OnInit {
     });
   }
 
+  privateChatExistsFunction(chatColl:string,i:number,accId:string){
+    this.messageService.checkForExistingMessages(
+      chatColl,
+      this.chatService.chats[i].id
+    );
+    this.chatService.currentChat = this.chatService.chats[i];
+    this.emitChatInfo(chatColl, accId);
+
+  }
+
   async openChat(chatColl: string, accId: string) {
     for (let i = 0; i < this.chatService.chats.length; i++) {
       if (this.privateChatExists(i, accId)) {
-        this.messageService.checkForExistingMessages(
-          chatColl,
-          this.chatService.chats[i].id
-        );
-        this.chatService.currentChat = this.chatService.chats[i];
-        this.emitChatInfo(chatColl, accId);
+        this.privateChatExistsFunction(chatColl,i,accId);
         break;
       }
       if (this.noPrivateChatExists(i)) {

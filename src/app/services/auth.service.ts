@@ -23,6 +23,8 @@ export class AuthService {
   userInformation!: Account;
   provider: GoogleAuthProvider;
 
+  profileViewAccount!:Account;
+
   constructor(private auth: Auth, private router: Router) {
     this.accountService = inject(AccountService);
     this.provider = new GoogleAuthProvider();
@@ -44,16 +46,16 @@ export class AuthService {
       });
   }
 
-  authServiceSignInWithEmailAndPassword(
+  async authServiceSignInWithEmailAndPassword(
     user_email: string,
     user_password: string,
     error_function?: Function
   ) {
-    signInWithEmailAndPassword(this.auth, user_email, user_password)
+    await signInWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
         this.router.navigate(['/test']);
       })
-      .catch(() => {
+      .catch((error) => {
         if (error_function) {
           error_function();
         }

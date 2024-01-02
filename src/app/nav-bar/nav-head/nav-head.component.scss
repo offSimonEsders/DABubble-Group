@@ -5,11 +5,11 @@
 }
 
 .edit-button{
+    @include displayFlex($jc: center);
     width: 45px;
     height: 45px;
     padding: 4px;
     border-radius: 100%;
-    @include displayFlex($jc: center);
     svg{
         @include displayFlex($jc: center);
     }

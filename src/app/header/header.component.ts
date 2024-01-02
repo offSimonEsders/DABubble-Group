@@ -5,13 +5,14 @@ import { AccountService } from '../services/account.service';
 import { Account } from '../models/account.class';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ProfileViewComponent } from '../profile-view/profile-view.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  imports: [AvatarComponent,CommonModule],
+  imports: [AvatarComponent,CommonModule,ProfileViewComponent],
 })
 export class HeaderComponent implements OnInit {
   authService!: AuthService;
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit {
   accountStatus!: string;
   accountName!: string;
   dropDown:boolean = false;
+  profileView:boolean = false;
 
   constructor(private router: Router) {
     this.authService = inject(AuthService);
@@ -42,5 +44,17 @@ export class HeaderComponent implements OnInit {
     this.accountService.getAccount(this.authService.userId).then((account) => {
       this.account = account;
     });
+  }
+
+  closeDropDown(){
+    this.dropDown = false;
+    this.profileView = false;
+  }
+
+  openProfileView(){
+    this.authService.profileViewAccount = this.account;
+    this.profileView = true;
+    this.dropDown = false;
+    
   }
 }

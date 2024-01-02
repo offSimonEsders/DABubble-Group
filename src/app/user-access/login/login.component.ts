@@ -41,11 +41,11 @@ export class LoginComponent implements AfterViewInit {
     this.registerFrame.style.display = 'flex';
   }
 
-  callLoginWithEmailAndPassword() {
+  async callLoginWithEmailAndPassword() {
     let emailInput = this.loginuseremailinput.value;
     let passwordInput = this.loginuserpasswordinput.value;
-    if (this.checkInputService.isValidUseremail(emailInput) && passwordInput.length < 0) {
-      this.authService.authServiceSignInWithEmailAndPassword(emailInput, passwordInput, this.loginFailed);
+    if (this.checkInputService.isValidUseremail(emailInput) && passwordInput.length > 0) {
+      await this.authService.authServiceSignInWithEmailAndPassword(emailInput, passwordInput, this.loginFailed);
       return;
     }
     this.loginFailed();

@@ -1,25 +1,16 @@
 @import "./../../styles.scss";
 
-.overdiv{
-    height: 100vh;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.2);
-    z-index: 5;
-    @include displayFlex($jc: center); 
-}
-
 .crate-overdiv{
     position: relative;
-    border-radius: 40px;
-    max-width: 400px;
+    max-width: 200px;
     max-height: 900px;
     min-width: 700px;
     background-color: white;
     padding: 22px;
     margin-left: 10px;
+    border-radius: 40px;
+    border-top-right-radius: 0;
+    box-shadow: -4px 6px 14px 1px $bgr;
 
     h1{
         font-size: 32px;
@@ -57,11 +48,10 @@
 }
 
 .close-button{
+    @include displayFlex($jc: center); 
     position: absolute;
     top: 30px;
     right: 30px;
-
-    @include displayFlex($jc: center); 
     border-radius: 100%;
     padding: 8px;
     cursor: pointer;
@@ -74,7 +64,6 @@
     }
     &:hover{
         background-color: $bgr;
-
         svg path {
             fill: $purple2;
         }
@@ -82,16 +71,22 @@
 }
 
 .picture{
+    @include displayFlex($jc: center); 
     padding-top: 20px;
     height: 200px;
     width: 100%;
-    @include displayFlex($jc: center); 
 
-    img{
-        height: 200px;
-        width: 200px;
+    div{
+        height: 200px ;
+        width: 200px ;
         border-radius: 100%;
+        img{
+            height: 200px !important;
+            width: 200px !important;
+            border-radius: 100% !important;
+        }
     }
+    
 }
 
 .informations{
@@ -157,9 +152,9 @@
 }
 
 .button{
+    @include displayFlex($jc: center); 
     margin-top: 50px;
     width: 100%;
-    @include displayFlex($jc: center); 
     button{
         background-color: $buttonPurple;
         padding: 16px;
@@ -182,9 +177,9 @@
             cursor: pointer;
             background-color: $purple2;
         }
+
         &:active {
             background-color: $buttonPurple !important;
         }
     }
 }
-

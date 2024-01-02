@@ -26,8 +26,12 @@
     </div>
     <div class="dropDown" *ngIf="dropDown">
         <div>
-            <span>Profile</span>
+            <span (click)="openProfileView()">Profile</span>
             <span (click)="logOut()" class="hoverSpan">Log out</span>
         </div>
+
+    </div>
+    <div *ngIf="profileView" class="dropDownProfile">
+        <app-profile-view ></app-profile-view>
     </div>
 </header>
