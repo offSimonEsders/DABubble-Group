@@ -5,13 +5,14 @@
             <img src="../../../assets/img/reactions/{{reaction.reaction}}.png" alt="Hier ist ein Icon">
         </div>
         <div class="reacting" [ngStyle]="{fontSize: reaction.reacting.length > 1 ? '16px' : '18px'}">
-            <span *ngFor="let reacting of reaction.reacting, let i = index"> {{ reacting === authService.userName ? 'Du'
+            <span *ngFor="let reacting of reaction.reacting, let i = index"> {{ reacting === authService.user.name ?
+                'Du'
                 : reacting}} <span
                     *ngIf="reaction.reacting.length > 1 && i === reaction.reacting.length - 2">und</span></span>
         </div>
         @if(reaction.reacting.length === 1) {
         @switch(reaction.reacting[0]) {
-        @case (authService.userName) {
+        @case (authService.user.name) {
         <span>hast reagiert</span>
         }
         @default {

@@ -20,7 +20,6 @@ export class AuthService {
   private accountService!: AccountService;
   user!: Account;
   provider: GoogleAuthProvider;
-
   profileViewAccount!: Account;
 
   constructor(private auth: Auth, private router: Router) {
@@ -107,6 +106,12 @@ export class AuthService {
     this.accountService.addAccount(newAcc);
   }
 
+  getUser(id: string) {
+    this.accountService.getAccount(id).then((account) => {
+      this.user = account;
+    });
+  }
+
   async resetPasswordMail(email: string) {
     return await sendPasswordResetEmail(this.auth, email)
       .then(() => {
@@ -131,12 +136,4 @@ export class AuthService {
         return true;
       });
   }
-
-  getUser(id: string) {
-    this.accountService.getAccount(id).then((account) => {
-      this.user = account;
-    });
-  }
-
-  // Sign up, login, auto-login, logout, auto-logout, forgot-password functions
 }
