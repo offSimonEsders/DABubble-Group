@@ -3,6 +3,7 @@ import { StartAnimationComponent } from "./start-animation/start-animation.compo
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { SendMailForResetPasswordComponent } from "./send-mail-for-reset-password/send-mail-for-reset-password.component";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-access',
@@ -13,8 +14,7 @@ import { SendMailForResetPasswordComponent } from "./send-mail-for-reset-passwor
 })
 export class UserAccessComponent {
 
-  constructor() {
+  constructor(public router: Router) {
 
   }
-
 }
