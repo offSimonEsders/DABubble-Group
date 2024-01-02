@@ -79,45 +79,9 @@
   }
 }
 
-.reactions-container {
+.reaction-bar {
   position: absolute;
   top: -18px;
-  @include displayFlex($g: 5px);
-  padding: 3px 15px 3px 20px;
-  border: 1px solid $lightPurple;
-  border-radius: 25px 25px 0px 25px;
-  background-color: white;
-
-  .more-icon {
-    position: relative;
-
-    .btn-container {
-      position: absolute;
-      top: 20px;
-      left: 40px;
-      width: 269px;
-      height: 67px;
-      @include centerElement();
-      border-radius: 0px 30px 30px 30px;
-      background: white;
-      box-shadow: 0px 6px 14px 0px rgba(0, 0, 0, 0.2);
-
-      .edit-message-btn {
-        padding: 10px 20px;
-        border-radius: 100px;
-        font-size: 20px;
-        font-weight: 500;
-        text-wrap: nowrap;
-        z-index: 2;
-      }
-
-      &:hover .edit-message-btn {
-        background-color: $bgr;
-        color: $purple3;
-        font-weight: 700;
-      }
-    }
-  }
 }
 
 .icon {
@@ -144,9 +108,25 @@
   border: 1px solid $lightPurple;
   background: white;
 
-  p {
+  form {
+    width: 100%;
+  }
+
+  textarea {
+    border: none;
+    outline: none;
+    width: 100%;
     font-size: 18px;
     color: $textGrey;
+    resize: none;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+      background: $purple3;
+    }
   }
 
   .edit-options {
@@ -177,19 +157,6 @@
 
     &:hover {
       background-color: $bgr;
-    }
-  }
-
-  .reaction {
-    @include displayFlex($g: 10px);
-    padding: 5px 10px;
-    border-radius: 20px;
-    border: 1px solid $lightPurple;
-    background-color: white;
-
-    .icon {
-      width: 24px;
-      height: 24px;
     }
   }
 }

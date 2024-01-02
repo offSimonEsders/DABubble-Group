@@ -8,7 +8,7 @@
         <div class="subcontainer" *ngFor="let date of messageService.dispatchedDays, let i = index">
             <app-time-separator class="line" [dispatchedDate]="date "></app-time-separator>
             <div class="message" *ngFor="let message of messageService.filteredMessages[i]"><app-message
-                    [emitMessage]="message"></app-message></div>
+                    [emitMessage]="message" [collection]="currentCollection"></app-message></div>
         </div>
         }
         }

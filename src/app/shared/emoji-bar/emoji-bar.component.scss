@@ -1,0 +1,21 @@
+@import "../../../styles.scss";
+
+.emoji-container {
+  @include displayFlex($g: 5px);
+  padding: 3px 15px 3px 20px;
+  border: 1px solid $lightPurple;
+  border-radius: 25px 25px 0px 25px;
+  background-color: white;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  @include centerElement();
+  cursor: pointer;
+
+  &:hover {
+    background-color: $bgr;
+  }
+}

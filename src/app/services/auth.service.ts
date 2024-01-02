@@ -19,6 +19,7 @@ import { Account } from '../models/account.class';
 export class AuthService {
   private accountService!: AccountService;
   userId = 'pesOSpHsgAt97WwG705y';
+  userName = 'Frederik Beck';
   userInformation!: Account;
   provider: GoogleAuthProvider;
 
@@ -117,7 +118,7 @@ export class AuthService {
 
   async changePassword(oobCode: string, newPassword: string) {
     console.log(oobCode);
-    return await confirmPasswordReset(this.auth, oobCode, newPassword)
+    return await confirmPasswordReset(this.auth, oobCode, newPassword);
   }
 
   async verifyooBCode(oobCode: string) {

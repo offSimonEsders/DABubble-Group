@@ -1,0 +1,56 @@
+@import "../../../../styles.scss";
+
+.reactions-container {
+  @include displayFlex($g: 5px);
+  padding: 3px 15px 3px 20px;
+  border: 1px solid $lightPurple;
+  border-radius: 25px 25px 0px 25px;
+  background-color: white;
+
+  .more-icon {
+    position: relative;
+
+    .btn-container {
+      position: absolute;
+      top: 20px;
+      left: 40px;
+      width: 269px;
+      height: 67px;
+      @include centerElement();
+      border-radius: 0px 30px 30px 30px;
+      background: white;
+      box-shadow: 0px 6px 14px 0px rgba(0, 0, 0, 0.2);
+
+      .edit-message-btn {
+        padding: 10px 20px;
+        border-radius: 100px;
+        font-size: 20px;
+        font-weight: 500;
+        text-wrap: nowrap;
+        z-index: 2;
+      }
+
+      &:hover .edit-message-btn {
+        background-color: $bgr;
+        color: $purple3;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  @include centerElement();
+  cursor: pointer;
+
+  &:hover {
+    background-color: $bgr;
+
+    svg path {
+      fill: $purple3;
+    }
+  }
+}

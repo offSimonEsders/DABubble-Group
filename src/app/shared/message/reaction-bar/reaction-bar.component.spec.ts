@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditReactionComponent } from './edit-reaction.component';
+import { ReactionBarComponent } from './reaction-bar.component';
 
-describe('EditReactionComponent', () => {
-  let component: EditReactionComponent;
-  let fixture: ComponentFixture<EditReactionComponent>;
+describe('ReactionBarComponent', () => {
+  let component: ReactionBarComponent;
+  let fixture: ComponentFixture<ReactionBarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditReactionComponent]
+      imports: [ReactionBarComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(EditReactionComponent);
+    fixture = TestBed.createComponent(ReactionBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
