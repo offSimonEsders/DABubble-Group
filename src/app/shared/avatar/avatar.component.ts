@@ -32,7 +32,7 @@ export class AvatarComponent implements OnInit, OnChanges, OnDestroy {
   account!: Account;
   statusSnap!: Function;
   openChatSub!: Subscription;
-  imageurl!: any;
+  imageurl!: string;
 
   constructor(public storageservcice: StorageService) {
     this.accountService = inject(AccountService);
@@ -110,5 +110,4 @@ export class AvatarComponent implements OnInit, OnChanges, OnDestroy {
   async setImageUrl(account: Account) {
     this.imageurl = await this.storageservcice.getImageUrl(account.photoUrl);
   }
-
 }

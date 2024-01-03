@@ -83,10 +83,12 @@ export class ChannelsComponent {
 
   privateChatExists(index: number, accId: string) {
     return (
-      this.chatService.chats[index].memberIds.includes(accId) &&
-      this.chatService.chats[index].memberIds.includes(
-        this.authService.user.accountId
-      )
+      (this.chatService.chats[index].memberIds.includes(accId) &&
+        this.chatService.chats[index].memberIds.includes(
+          this.authService.user.accountId
+        )) ||
+      this.chatService.chats[index].memberIds[0] ===
+        this.chatService.chats[index].memberIds[1]
     );
   }
 

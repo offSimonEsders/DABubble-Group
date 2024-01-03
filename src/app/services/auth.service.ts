@@ -54,6 +54,7 @@ export class AuthService {
     await signInWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
         this.getUser(userCredential.user.uid);
+        this.setOnlineStatus(userCredential.user.uid);
         this.router.navigate(['/home']);
       })
       .catch((error) => {
@@ -90,6 +91,7 @@ export class AuthService {
   signInAnonymously() {
     signInAnonymously(this.auth).then(() => {
       this.getUser('pesOSpHsgAt97WwG705y');
+      this.setOnlineStatus('pesOSpHsgAt97WwG705y');
       this.router.navigate(['/home']);
     });
   }
@@ -117,6 +119,12 @@ export class AuthService {
   getUser(id: string) {
     this.accountService.getAccount(id).then((account) => {
       this.user = account;
+    });
+  }
+
+  setOnlineStatus(accId: string) {
+    return updateDoc(this.firestoreService.getDocRef('accounts', accId), {
+      onlineStatus: 'online',
     });
   }
 
