@@ -117,6 +117,7 @@ export class MessageComponent implements OnInit {
         message: this.editMessageForm.value.message,
       }
     ).then(() => {
+      this.editMessageForm.reset();
       this.cancelEditMessage();
     });
   }
