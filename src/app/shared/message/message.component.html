@@ -51,7 +51,7 @@
             @if(account) {
             <span class="name">{{ account.name }}</span>
             }
-            <span class="time">{{ dispatchedTime | date:'hh:mm' }} Uhr</span>
+            <span class="time">{{ dispatchedTime | timeFormatter }} Uhr</span>
         </div>
         @switch (ownMessage) {
         @case (true) {
@@ -87,7 +87,7 @@
         @if(emitMessage.answerAmount > 0) {
         <div class="answer-container">
             <span class="answers">{{ emitMessage.answerAmount }} Antworten</span>
-            <span class="last-answer">Letzte Antwort {{ lastAnswer | date:'hh:mm' }} Uhr</span>
+            <span class="last-answer">Letzte Antwort {{ lastAnswer | timeFormatter }} Uhr</span>
         </div>
         }
     </div>

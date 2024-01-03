@@ -19,6 +19,7 @@ import { ReactionBarComponent } from './reaction-bar/reaction-bar.component';
 import { EmojiBarComponent } from '../emoji-bar/emoji-bar.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { updateDoc } from '@angular/fire/firestore';
+import { TimePipe } from './time.pipe';
 
 @Component({
   selector: 'app-message',
@@ -33,6 +34,7 @@ import { updateDoc } from '@angular/fire/firestore';
     ReactionBarComponent,
     EmojiBarComponent,
     FormsModule,
+    TimePipe,
   ],
 })
 export class MessageComponent implements OnInit {
