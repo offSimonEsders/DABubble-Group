@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
@@ -17,7 +17,7 @@ import { updateDoc } from '@angular/fire/firestore';
   styleUrl: './channels.component.scss',
   imports: [CommonModule, CreateChannelComponent, AvatarComponent],
 })
-export class ChannelsComponent {
+export class ChannelsComponent{
   openCh: boolean = true;
   rotateCh: boolean = false;
   openPe: boolean = true;
