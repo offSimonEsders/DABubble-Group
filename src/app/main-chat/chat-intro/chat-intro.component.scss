@@ -2,7 +2,7 @@
 
 .channel-intro-container {
   @include displayFlex($fd: column, $ai: flex-start);
-  margin-bottom: 35px;
+  margin-bottom: 73px;
 }
 
 .chat-intro-container {
@@ -25,11 +25,16 @@
       }
     }
   }
+
+  .intro.text {
+    display: inline;
+  }
 }
 
 .intro {
   font-size: 20px;
   color: $textGrey;
+  @include displayFlex($g: 3px);
 
   .link-hover:hover {
     color: $purple3;

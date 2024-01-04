@@ -5,7 +5,9 @@
     <div class="intro">Du hast diesen Channel heute erstellt. Das ist der Anfang des Channels
         <div [ngStyle]="{color: '#797ef3'}">
             @switch(chatService.currentChannel.publicStatus) {
-            @case (true) {#}
+            @case (true) {
+            <span>#</span>
+            }
             @default {<i class='bx bxs-lock-alt'></i>}
             }
             {{ chatService.currentChannel.name }}
@@ -14,8 +16,7 @@
     </div>
     }
     @if(account && chatSelected === 'chats') {
-    <div class="chat-intro-container"
-        [ngStyle]="{transform: ownChat ? 'translateY(-5px)' : 'translateY(0px)', marginBottom: ownChat ? '0px' : '22px'}">
+    <div class="chat-intro-container" [ngStyle]="{marginBottom: ownChat ? '33px' : '60px'}">
         <div class="chat-member">
             <div class="avatar-container">
                 <app-avatar [accountId]="account.accountId" [hideStatus]="true"></app-avatar>
@@ -24,10 +25,11 @@
         </div>
         @switch (ownChat) {
         @case (true) {
-        <p *ngIf="ownChat" class="intro"><span [ngStyle]="{fontWeight: '700'}">Dieser Raum ist nur für dich da.</span>
+        <div *ngIf="ownChat" class="intro text"><span [ngStyle]="{fontWeight: '700'}">Dieser Raum ist nur für dich
+                da.</span>
             Mache dir Notizen, liste deine
             To-dos auf oder bewahre Links und Dateien griffbereit auf. Du kannst hier auch gerne Dinge mit dir selbst
-            besprechen.</p>
+            besprechen.</div>
         }
         @default {
         <p *ngIf="!ownChat" class="intro">Diese Unterhaltung findet nur zwischen <span class="link-hover"

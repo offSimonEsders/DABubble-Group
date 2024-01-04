@@ -21,6 +21,7 @@ import { updateDoc } from '@angular/fire/firestore';
 import { TimePipe } from './time.pipe';
 import { ToggleContainerService } from '../../services/toggle-container.service';
 import { MessageService } from '../../services/message.service';
+import { ResizeTextareaDirective } from './resize-textarea.directive';
 
 @Component({
   selector: 'app-message',
@@ -31,6 +32,7 @@ import { MessageService } from '../../services/message.service';
     AvatarComponent,
     CommonModule,
     BubbleStyle,
+    ResizeTextareaDirective,
     ReactionComponent,
     ReactionBarComponent,
     EmojiBarComponent,
@@ -151,18 +153,19 @@ export class MessageComponent implements OnInit {
 
   openSecondaryChat() {
     this.messageService.messageId = this.emitMessage.id;
-    this.toggleContainerService.toggle.next({
+    this.toggleContainerService.toggleContainer({
       element: 'secondary-chat',
       width: '100%',
       message: this.emitMessage,
     });
+    this.toggleContainerService.displaySecondaryChat = true;
   }
 
-  @HostListener('mouseenter') mouseover(eventData: Event) {
+  @HostListener('mouseenter') mouseover() {
     this.onhover = true;
   }
 
-  @HostListener('mouseleave') mouseleave(eventData: Event) {
+  @HostListener('mouseleave') mouseleave() {
     this.onhover = false;
   }
 

@@ -21,12 +21,13 @@ export class ThreadChatHeaderComponent {
   }
 
   /**
-   * The closeThread function toggles the width of the 'secondary-chat' element to '0px'.
+   * Sets the width of the 'secondary-chat' container to '0px' and the displaySecondaryChat to false.
    */
   closeThread() {
-    this.toggleContainerService.toggle.next({
+    this.toggleContainerService.toggleContainer({
       element: 'secondary-chat',
       width: '0px',
     });
+    this.toggleContainerService.displaySecondaryChat = false;
   }
 }

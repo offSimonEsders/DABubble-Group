@@ -22,7 +22,9 @@
     @case (true) {
     <div class="edit-message-box">
         <form (ngSubmit)="saveEditedMessage()" #form="ngForm">
-            <textarea rows="3" ngModel name="message" required></textarea>
+            <div class="wrapper">
+                <textarea ngModel name="message" required autoSize></textarea>
+            </div>
             <div class="edit-options">
                 <div class="icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">

@@ -111,6 +111,11 @@
     width: 100%;
   }
 
+  .wrapper {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
   textarea {
     border: none;
     outline: none;
@@ -120,11 +125,7 @@
     resize: none;
 
     &::-webkit-scrollbar {
-      width: 5px;
-    }
-    &::-webkit-scrollbar-thumb {
-      border-radius: 2px;
-      background: $purple3;
+      width: 0px;
     }
   }
 

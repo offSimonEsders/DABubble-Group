@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * The ngOnInit function subscribes to an event and resizes the element of the emitted element reference based on the received width.
    */
   ngOnInit(): void {
-    this.toggleSub = this.toggleContainerService.toggle.subscribe({
+    this.toggleSub = this.toggleContainerService.toggleSubject.subscribe({
       next: (data: ToggleSub) => {
         this.elementRef = data.element;
         this.width = data.width;

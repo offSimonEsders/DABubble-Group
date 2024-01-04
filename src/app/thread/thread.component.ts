@@ -7,7 +7,6 @@ import { ToggleContainerService } from '../services/toggle-container.service';
 import { MessageService } from '../services/message.service';
 import { ChatService } from '../services/chat.service';
 import { Subscription } from 'rxjs';
-import { Answer } from '../models/answer.class';
 
 @Component({
   selector: 'app-thread',
@@ -36,7 +35,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.toggleSub = this.toggleContainerService.toggle.subscribe({
+    this.toggleSub = this.toggleContainerService.toggleSubject.subscribe({
       next: (data) => {
         if (data.message) {
           this.message = data.message;

@@ -18,7 +18,7 @@ import { Auth } from '@angular/fire/auth';
   styleUrl: './channels.component.scss',
   imports: [CommonModule, CreateChannelComponent, AvatarComponent],
 })
-export class ChannelsComponent{
+export class ChannelsComponent {
   openCh: boolean = true;
   rotateCh: boolean = false;
   openPe: boolean = true;
@@ -29,15 +29,15 @@ export class ChannelsComponent{
   chatService!: ChatService;
   messageService!: MessageService;
 
-  constructor(private auth: Auth,) {
+  constructor(private auth: Auth) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);
     this.messageService = inject(MessageService);
-    this.sortAccounts()
+    this.sortAccounts();
   }
 
-  sortAccounts(){
+  sortAccounts() {
     this.accountService.accounts.sort((a, b) => {
       if (a.accountId == this.auth.currentUser?.uid) {
         return -1; // Verschiebe a an die erste Stelle
@@ -95,14 +95,13 @@ export class ChannelsComponent{
     }
   }
 
+  // prettier-ignore
   privateChatExists(index: number, accId: string) {
     return (
       (this.chatService.chats[index].memberIds.includes(accId) &&
-        this.chatService.chats[index].memberIds.includes(
-          this.authService.user.accountId
-        )) ||
-      this.chatService.chats[index].memberIds[0] ===
-        this.chatService.chats[index].memberIds[1]
+      this.chatService.chats[index].memberIds.includes(this.authService.user.accountId) &&
+      accId !== this.authService.user.accountId) ||
+      this.chatService.chats[index].memberIds[0] === this.chatService.chats[index].memberIds[1]
     );
   }
 
@@ -126,4 +125,4 @@ export class ChannelsComponent{
       accountId: accId,
     });
   }
-} 
+}
