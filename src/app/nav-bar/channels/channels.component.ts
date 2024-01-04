@@ -9,6 +9,7 @@ import { Chat } from '../../models/chat.class';
 import { Channel } from '../../models/channel.class';
 import { MessageService } from '../../services/message.service';
 import { updateDoc } from '@angular/fire/firestore';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-channels',
@@ -28,11 +29,24 @@ export class ChannelsComponent{
   chatService!: ChatService;
   messageService!: MessageService;
 
-  constructor() {
+  constructor(private auth: Auth,) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);
     this.messageService = inject(MessageService);
+    this.sortAccounts()
+  }
+
+  sortAccounts(){
+    this.accountService.accounts.sort((a, b) => {
+      if (a.accountId == this.auth.currentUser?.uid) {
+        return -1; // Verschiebe a an die erste Stelle
+      } else if (b.accountId == this.auth.currentUser?.uid) {
+        return 1; // Verschiebe b an die erste Stelle
+      } else {
+        return a.name.localeCompare(b.name);
+      }
+    });
   }
 
   hideChannels() {
@@ -111,18 +125,5 @@ export class ChannelsComponent{
       chatColl: chatColl,
       accountId: accId,
     });
-  }
-
-
-  sortAccounts(){
-    // this.accounts.accounts.sort((a, b) => {
-    //   if (a.accountId === this.authService.user.accountId) {
-    //     return -1; // Verschiebe a an die erste Stelle
-    //   } else if (b.accountId === this.authService.user.accountId) {
-    //     return 1; // Verschiebe b an die erste Stelle
-    //   } else {
-    //     return 0; // Behalte die Reihenfolge bei
-    //   }
-    // });
   }
 } 
