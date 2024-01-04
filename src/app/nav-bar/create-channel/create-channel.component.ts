@@ -31,7 +31,9 @@ export class CreateChannelComponent {
     private chatService: ChatService,
     private presentAccount: AuthService,
     private accountsJSON: AccountService
-  ) {}
+  ) {
+    
+  }
 
   ngOnInit() {
     this.subscription = this.chatService.channelCreated$.subscribe(

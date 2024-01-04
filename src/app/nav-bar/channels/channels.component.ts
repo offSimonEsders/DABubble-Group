@@ -112,4 +112,17 @@ export class ChannelsComponent{
       accountId: accId,
     });
   }
-}
+
+
+  sortAccounts(){
+    // this.accounts.accounts.sort((a, b) => {
+    //   if (a.accountId === this.authService.user.accountId) {
+    //     return -1; // Verschiebe a an die erste Stelle
+    //   } else if (b.accountId === this.authService.user.accountId) {
+    //     return 1; // Verschiebe b an die erste Stelle
+    //   } else {
+    //     return 0; // Behalte die Reihenfolge bei
+    //   }
+    // });
+  }
+} 

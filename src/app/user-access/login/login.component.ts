@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CheckInputService } from '../../services/check-input.service';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements AfterViewInit {
   loginuseremailinput!: HTMLInputElement;
   loginuserpasswordinput! : HTMLInputElement;
 
-  constructor(public authService: AuthService, private checkInputService: CheckInputService) {
+  constructor(public authService: AuthService, private checkInputService: CheckInputService,private accounts:AccountService) {
     
   }
 
