@@ -9,6 +9,7 @@ export class Message {
   reactions: Array<Reaction>;
   answerAmount: number;
   lastAnswer: number;
+  isAnAnswer: boolean;
 
   constructor(
     id: string,
@@ -18,7 +19,8 @@ export class Message {
     message: string,
     reactions: Array<Reaction>,
     answerAmount: number,
-    lastAnswer: number
+    lastAnswer: number,
+    isAnAnswer: boolean
   ) {
     (this.id = id),
       (this.chatId = chatId),
@@ -27,7 +29,8 @@ export class Message {
       (this.message = message),
       (this.reactions = reactions),
       (this.answerAmount = answerAmount),
-      (this.lastAnswer = lastAnswer);
+      (this.lastAnswer = lastAnswer),
+      (this.isAnAnswer = isAnAnswer);
   }
 
   toJson() {
@@ -40,6 +43,7 @@ export class Message {
       reactions: this.reactions,
       answerAmount: this.answerAmount,
       lastAnswer: this.lastAnswer,
+      isAnAnswer: this.isAnAnswer,
     };
   }
 }

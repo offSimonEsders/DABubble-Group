@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { CommonModule } from '@angular/common';
+import { ChatService } from '../../services/chat.service';
+import { ToggleContainerService } from '../../services/toggle-container.service';
 
 @Component({
   selector: 'app-thread-chat-header',
@@ -10,16 +12,21 @@ import { CommonModule } from '@angular/common';
   imports: [AvatarComponent, CommonModule],
 })
 export class ThreadChatHeaderComponent {
-  members = [1, 2, 3];
-  accountStatus = 'online';
+  chatService!: ChatService;
+  toggleContainerService!: ToggleContainerService;
 
-  translateAvatarElements(index: number) {
-    if (index < 2 && this.members.length > 2) {
-      return 'translateX(' + 20 / (index + 1) + 'px)';
-    } else if (index < 1 && this.members.length === 2) {
-      return 'translateX(' + 10 / (index + 1) + 'px)';
-    } else {
-      return 'translateX(0px)';
-    }
+  constructor() {
+    this.chatService = inject(ChatService);
+    this.toggleContainerService = inject(ToggleContainerService);
+  }
+
+  /**
+   * The closeThread function toggles the width of the 'secondary-chat' element to '0px'.
+   */
+  closeThread() {
+    this.toggleContainerService.toggle.next({
+      element: 'secondary-chat',
+      width: '0px',
+    });
   }
 }

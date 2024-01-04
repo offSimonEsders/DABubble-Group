@@ -107,6 +107,7 @@ $buttonPurple: #444df2;
   max-width: $max;
   border-radius: 30px;
   background-color: white;
+  overflow: hidden;
 }
 
 @mixin centerElement() {

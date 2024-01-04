@@ -9,17 +9,18 @@ import {
 import { AvatarComponent } from '../avatar/avatar.component';
 import { CommonModule } from '@angular/common';
 import { BubbleStyle } from './message-bubble-style.directive';
-import { Message } from '../../models/message.class';
 import { AuthService } from '../../services/auth.service';
 import { Account } from '../../models/account.class';
 import { AccountService } from '../../services/account.service';
 import { ReactionComponent } from './reaction/reaction.component';
 import { FirestoreService } from '../../services/firestore.service';
 import { ReactionBarComponent } from './reaction-bar/reaction-bar.component';
-import { EmojiBarComponent } from '../emoji-bar/emoji-bar.component';
+import { EmojiBarComponent } from './emoji-bar/emoji-bar.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { updateDoc } from '@angular/fire/firestore';
 import { TimePipe } from './time.pipe';
+import { ToggleContainerService } from '../../services/toggle-container.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-message',
@@ -41,8 +42,12 @@ export class MessageComponent implements OnInit {
   firestoreService!: FirestoreService;
   authService!: AuthService;
   accountService!: AccountService;
-  @Input() emitMessage!: Message;
+  toggleContainerService!: ToggleContainerService;
+  messageService!: MessageService;
+  @Input() emitMessage!: any; // Message or Answer
   @Input() collection!: string;
+  @Input() hideAnswers!: boolean;
+  @Input() isAnswer!: boolean;
   @ViewChild('form') editMessageForm!: NgForm;
   account!: Account;
   dispatchedTime!: Date;
@@ -56,13 +61,17 @@ export class MessageComponent implements OnInit {
     this.firestoreService = inject(FirestoreService);
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
+    this.toggleContainerService = inject(ToggleContainerService);
+    this.messageService = inject(MessageService);
   }
 
   ngOnInit(): void {
-    this.checkIfOwnMessage();
-    this.getAccount();
-    this.dispatchedTime = new Date(this.emitMessage.dispatchedDate);
-    this.lastAnswer = new Date(this.emitMessage.lastAnswer);
+    if (this.emitMessage) {
+      this.checkIfOwnMessage();
+      this.getAccount();
+      this.dispatchedTime = new Date(this.emitMessage.dispatchedDate);
+      this.lastAnswer = new Date(this.emitMessage.lastAnswer);
+    }
   }
 
   checkIfOwnMessage() {
@@ -79,14 +88,6 @@ export class MessageComponent implements OnInit {
       .then((account) => {
         this.account = account;
       });
-  }
-
-  @HostListener('mouseenter') mouseover(eventData: Event) {
-    this.onhover = true;
-  }
-
-  @HostListener('mouseleave') mouseleave(eventData: Event) {
-    this.onhover = false;
   }
 
   displayElement(element: string) {
@@ -109,7 +110,34 @@ export class MessageComponent implements OnInit {
   }
 
   async saveEditedMessage() {
-    await updateDoc(
+    if (this.emitMessage.isAnAnswer) {
+      this.editAnswer().then(() => {
+        this.editMessageForm.reset();
+        this.cancelEditMessage();
+      });
+    } else {
+      this.editMessage().then(() => {
+        this.editMessageForm.reset();
+        this.cancelEditMessage();
+      });
+    }
+  }
+
+  async editAnswer() {
+    return await updateDoc(
+      this.firestoreService.getAnswerDocRef(
+        this.emitMessage.chatId,
+        this.emitMessage.messageId,
+        this.emitMessage.id
+      ),
+      {
+        message: this.editMessageForm.value.message,
+      }
+    );
+  }
+
+  async editMessage() {
+    return await updateDoc(
       this.firestoreService.getMessageDocRef(
         this.collection,
         this.emitMessage.chatId,
@@ -118,9 +146,33 @@ export class MessageComponent implements OnInit {
       {
         message: this.editMessageForm.value.message,
       }
-    ).then(() => {
-      this.editMessageForm.reset();
-      this.cancelEditMessage();
+    );
+  }
+
+  openSecondaryChat() {
+    this.messageService.messageId = this.emitMessage.id;
+    this.toggleContainerService.toggle.next({
+      element: 'secondary-chat',
+      width: '100%',
+      message: this.emitMessage,
     });
+  }
+
+  @HostListener('mouseenter') mouseover(eventData: Event) {
+    this.onhover = true;
+  }
+
+  @HostListener('mouseleave') mouseleave(eventData: Event) {
+    this.onhover = false;
+  }
+
+  setInlinePaddingToContainer() {
+    if (this.isAnswer) {
+      return '0px';
+    } else if (this.ownMessage) {
+      return '100px 0px';
+    } else {
+      return '0px 1000px';
+    }
   }
 }

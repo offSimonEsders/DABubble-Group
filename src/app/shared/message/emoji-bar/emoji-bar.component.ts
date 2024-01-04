@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { ReactionService } from '../../services/reaction.service';
-import { Message } from '../../models/message.class';
+import { ReactionService } from '../../../services/reaction.service';
 
 @Component({
   selector: 'app-emoji-bar',
@@ -13,7 +12,7 @@ import { Message } from '../../models/message.class';
 export class EmojiBarComponent {
   reactions = ['rocket', 'check', 'nerd', 'handsUp'];
   reactionService!: ReactionService;
-  @Input() message!: Message;
+  @Input() message!: any; // Message or Answer
   @Input() collection!: string;
   @Input() ownMessage!: boolean;
   @Output() emojibarEmitter = new EventEmitter<void>();

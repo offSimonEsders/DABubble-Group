@@ -2,7 +2,19 @@
     <header>
         <app-thread-chat-header></app-thread-chat-header>
     </header>
-    <div class="chat-container"></div>
-    <!-- <app-message-box class="message-box" [currentChanel]="currentChanel"></app-message-box> -->
-    <app-message-box class="message-box"></app-message-box>
+    @if(message) {
+    <app-message [emitMessage]="message" [collection]="currentCollection" [hideAnswers]="true"></app-message>
+    <div class="answer-amount-container">
+        <span>{{ message.answerAmount }} Antworten</span>
+        <div class="horizontal-line"></div>
+    </div>
+    }
+    <div class="chat-container">
+        @if(messageService.answers) {
+        <div class="answer" *ngFor="let answer of messageService.answers">
+            <app-message [emitMessage]="answer" [collection]="currentCollection" [isAnswer]="true"></app-message>
+        </div>
+        }
+    </div>
+    <app-message-box [secondaryChat]="true" class="message-box"></app-message-box>
 </div>

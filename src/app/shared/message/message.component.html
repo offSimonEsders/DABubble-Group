@@ -1,5 +1,6 @@
+@if(emitMessage) {
 <div class="message-container" (click)="closeEmojibar()"
-    [ngStyle]="{flexDirection: ownMessage ? 'row-reverse' : 'row', backgroundColor: openedEditMessage ? '#eceefe' : 'white'}">
+    [ngStyle]="{flexDirection: ownMessage ? 'row-reverse' : 'row', backgroundColor: openedEditMessage ? '#eceefe' : 'white', padding: hideAnswers || isAnswer ? '10px 37px' : '10px 45px', gap: hideAnswers || isAnswer ? '20px' : '30px'}">
     @if (onhover && !openedEditMessage) {
     @switch(openedEmojibar) {
     @case (true) {
@@ -9,7 +10,7 @@
     }
     @default {
     <app-reaction-bar [message]="emitMessage" [collection]="collection" [ownMessage]="ownMessage"
-        (reactionbarEmitter)="displayElement($event)" class="reaction-bar"
+        [hideIcons]="hideAnswers || isAnswer" (reactionbarEmitter)="displayElement($event)" class="reaction-bar"
         [ngStyle]="{right: ownMessage ? 'unset' : '33.4px', left: ownMessage ? '76px' : 'unset'}"></app-reaction-bar>
     }
     }
@@ -46,7 +47,7 @@
     }
     @default {
     <div class="message-subcontainer"
-        [ngStyle]="{alignItems: ownMessage ? 'flex-end' : 'flex-start', paddingInline: ownMessage ? '100px 0px' : '0px 100px'}">
+        [ngStyle]="{alignItems: ownMessage ? 'flex-end' : 'flex-start', paddingInline: setInlinePaddingToContainer(), paddingRight: hideAnswers ? '37px' : 'unset'}">
         <div class="message-header" [ngStyle]="{flexDirection: ownMessage ? 'row-reverse' : 'row'}">
             @if(account) {
             <span class="name">{{ account.name }}</span>
@@ -84,9 +85,9 @@
                 [reaction]="reaction" [message]="emitMessage" [index]="i"></app-reaction>
         </div>
         }
-        @if(emitMessage.answerAmount > 0) {
+        @if(emitMessage.answerAmount > 0 && !hideAnswers) {
         <div class="answer-container">
-            <span class="answers">{{ emitMessage.answerAmount }} Antworten</span>
+            <span class="answers" (click)="openSecondaryChat()">{{ emitMessage.answerAmount }} Antworten</span>
             <span class="last-answer">Letzte Antwort {{ lastAnswer | timeFormatter }} Uhr</span>
         </div>
         }
@@ -94,3 +95,4 @@
     }
     }
 </div>
+}

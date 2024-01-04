@@ -11,15 +11,18 @@ import {
   onSnapshot,
 } from '@angular/fire/firestore';
 import { Subject } from 'rxjs';
+import { Answer } from '../models/answer.class';
 
 @Injectable({ providedIn: 'root' })
 export class MessageService {
   firestore!: FirestoreService;
   messages!: Array<Message>;
+  answers!: Array<Answer>;
   dispatchedDays!: Array<number>;
   filteredMessages!: Array<Message[]>;
   collId!: string;
   channelId!: string;
+  messageId!: string;
   openChatEmitter = new Subject<{ collId: string }>();
 
   constructor() {
@@ -73,7 +76,53 @@ export class MessageService {
       data.get('message'),
       data.get('reactions'),
       data.get('answerAmount'),
-      data.get('lastAnswer')
+      data.get('lastAnswer'),
+      data.get('isAnAnswer')
+    );
+  }
+
+  async addAnswer(answer: Answer, chatId: string, messageId: string) {
+    return await addDoc(
+      collection(
+        this.firestore.db,
+        'channels',
+        chatId,
+        'messages',
+        messageId,
+        'answers'
+      ),
+      answer.toJson()
+    ).catch((err) => {
+      // show an Errormessage
+    });
+  }
+
+  setAnswers() {
+    return onSnapshot(
+      this.firestore.getChannelAnswerCollRef(this.channelId, this.messageId),
+      (list: QuerySnapshot) => {
+        this.answers = [];
+        list.forEach((element: QueryDocumentSnapshot) => {
+          const answer = this.createAnswer(element);
+          this.answers.push(answer);
+        });
+        this.answers.sort((a, b) => a.dispatchedDate - b.dispatchedDate);
+      }
+    );
+  }
+
+  createAnswer(data: QueryDocumentSnapshot | DocumentSnapshot) {
+    return new Answer(
+      data.get('id'),
+      data.get('chatId'),
+      data.get('messageId'),
+      data.get('messageFrom'),
+      data.get('dispatchedDate'),
+      data.get('message'),
+      data.get('reactions'),
+      data.get('answerAmount'),
+      data.get('lastAnswer'),
+      data.get('isAnAnswer')
     );
   }
 

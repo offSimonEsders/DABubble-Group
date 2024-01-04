@@ -2,7 +2,6 @@
 
 .message-container {
   width: 100%;
-  padding: 10px 45px;
   @include displayFlex($ai: flex-start, $g: 30px);
   position: relative;
   cursor: pointer;

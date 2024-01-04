@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { Account } from '../../models/account.class';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { Message } from '../../models/message.class';
 import { AuthService } from '../../services/auth.service';
 import { MessageService } from '../../services/message.service';
 import { updateDoc } from '@angular/fire/firestore';
+import { Answer } from '../../models/answer.class';
 
 @Component({
   selector: 'app-message-box',
@@ -22,10 +23,11 @@ export class MessageBoxComponent implements OnInit {
   messageService!: MessageService;
   accountService!: AccountService;
   @ViewChild('form') sendMessageForm!: NgForm;
+  @Input() secondaryChat!: boolean;
   currentCollection = '';
   chatId!: string;
   chatWithAccount!: Account;
-  private openChatSub!: Subscription;
+  openChatSub!: Subscription;
 
   constructor() {
     this.authService = inject(AuthService);
@@ -47,10 +49,32 @@ export class MessageBoxComponent implements OnInit {
     });
   }
 
+  async onSubmit() {
+    if (this.secondaryChat) {
+      this.sendAnswer();
+    } else {
+      this.sendMessage();
+    }
+  }
+
   async sendMessage() {
     let newMessage = this.createMessage();
     this.messageService
       .addMessage(newMessage, this.currentCollection, this.chatId)
+      .then((doc: any) => {
+        updateDoc(doc, { id: doc.id });
+        this.sendMessageForm.reset();
+      });
+  }
+
+  async sendAnswer() {
+    let newAnswer = this.createAnswer();
+    this.messageService
+      .addAnswer(
+        newAnswer,
+        this.chatService.currentChannel.id,
+        this.messageService.messageId
+      )
       .then((doc: any) => {
         updateDoc(doc, { id: doc.id });
         this.sendMessageForm.reset();
@@ -66,7 +90,23 @@ export class MessageBoxComponent implements OnInit {
       this.sendMessageForm.value.message,
       [],
       0,
-      0
+      0,
+      false
+    );
+  }
+
+  createAnswer() {
+    return new Answer(
+      '',
+      this.chatService.currentChannel.id,
+      this.messageService.messageId,
+      this.authService.user.accountId,
+      +new Date(),
+      this.sendMessageForm.value.message,
+      [],
+      0,
+      0,
+      true
     );
   }
 

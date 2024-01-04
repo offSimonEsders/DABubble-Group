@@ -3,8 +3,10 @@
         <app-header></app-header>
     </header>
     <section>
-        <app-nav-bar class="menu-channel"></app-nav-bar>
+        <app-nav-bar [ngStyle]="{width: elementRef === 'menu-channel' ? width : '100%'}"
+            class="menu-channel"></app-nav-bar>
         <app-main-chat class="main-chat"></app-main-chat>
-        <app-thread class="secondary-chat"></app-thread>
+        <app-thread [ngStyle]="{width: elementRef === 'secondary-chat' ? width : '100%'}"
+            class="secondary-chat"></app-thread>
     </section>
 </div>

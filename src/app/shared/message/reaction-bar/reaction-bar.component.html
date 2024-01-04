@@ -1,10 +1,14 @@
 <div class="reactions-container">
+    @if(!hideIcons) {
     <div class="icon" (click)="addReaction('check')">
         <img src="../../../../assets/img/reactions/check.png" alt="Hier ist ein Check-Icon">
     </div>
+    }
+    @if(!hideIcons) {
     <div class="icon" (click)="addReaction('handsUp')">
         <img src="../../../../assets/img/reactions/handsUp.png" alt="Hier ist ein HandsUp-Icon">
     </div>
+    }
     <div class="icon" (click)="$event.stopPropagation(); openEmojibar()">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <mask id="mask0_1823_21557" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -18,7 +22,8 @@
             </g>
         </svg>
     </div>
-    <div class="icon">
+    @if(!hideIcons) {
+    <div class="icon" (click)="openSecondaryChat()">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <mask id="mask0_1823_21561" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                 height="24">
@@ -31,6 +36,7 @@
             </g>
         </svg>
     </div>
+    }
     @if (ownMessage) {
     <div class="icon more-icon" (click)="showEditMessageBtn()">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

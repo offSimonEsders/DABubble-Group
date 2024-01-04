@@ -2,7 +2,6 @@ import { Component, HostListener, Input, inject } from '@angular/core';
 import { Reaction } from '../../../models/reaction.class';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
-import { Message } from '../../../models/message.class';
 import { FirestoreService } from '../../../services/firestore.service';
 import { updateDoc } from '@angular/fire/firestore';
 import { ReactionService } from '../../../services/reaction.service';
@@ -19,7 +18,7 @@ export class ReactionComponent {
   authService!: AuthService;
   reactionService!: ReactionService;
   @Input() collection!: string;
-  @Input() message!: Message;
+  @Input() message!: any; // Message or Answer
   @Input() index!: number;
   @Input() reaction!: Reaction;
   onhover = false;
@@ -65,6 +64,25 @@ export class ReactionComponent {
   }
 
   async updateReaction(newReactions: Reaction[]) {
+    if (this.message.isAnAnswer) {
+      this.updateAnswer(newReactions);
+    } else {
+      this.updateMessage(newReactions);
+    }
+  }
+
+  async updateAnswer(newReactions: Reaction[]) {
+    await updateDoc(
+      this.firestoreService.getAnswerDocRef(
+        this.message.chatId,
+        this.message.messageId,
+        this.message.id
+      ),
+      { reactions: newReactions }
+    );
+  }
+
+  async updateMessage(newReactions: Reaction[]) {
     await updateDoc(
       this.firestoreService.getMessageDocRef(
         this.collection,

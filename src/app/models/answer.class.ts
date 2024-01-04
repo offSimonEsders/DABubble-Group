@@ -1,7 +1,7 @@
 import { Message } from './message.class';
 import { Reaction } from './reaction.class';
 
-export class answer extends Message {
+export class Answer extends Message {
   messageId: string;
 
   constructor(
@@ -13,7 +13,8 @@ export class answer extends Message {
     message: string,
     reactions: Array<Reaction>,
     answerAmount: number,
-    lastAnswer: number
+    lastAnswer: number,
+    isAnAnswer: boolean
   ) {
     super(
       id,
@@ -23,7 +24,8 @@ export class answer extends Message {
       message,
       reactions,
       answerAmount,
-      lastAnswer
+      lastAnswer,
+      isAnAnswer
     ),
       (this.messageId = messageId);
   }
@@ -39,6 +41,7 @@ export class answer extends Message {
       reactions: this.reactions,
       answerAmount: this.answerAmount,
       lastAnswer: this.lastAnswer,
+      isAnAnswer: this.isAnAnswer,
     };
   }
 }

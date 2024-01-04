@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FirestoreService } from '../../../services/firestore.service';
-import { Message } from '../../../models/message.class';
 import { AuthService } from '../../../services/auth.service';
 import { ReactionService } from '../../../services/reaction.service';
+import { MessageService } from '../../../services/message.service';
+import { ToggleContainerService } from '../../../services/toggle-container.service';
 
 @Component({
   selector: 'app-reaction-bar',
@@ -16,9 +17,12 @@ export class ReactionBarComponent {
   firestoreService: FirestoreService;
   authService!: AuthService;
   reactionService!: ReactionService;
-  @Input() message!: Message;
+  messageService!: MessageService;
+  toggleContainerService!: ToggleContainerService;
+  @Input() message!: any; // Message or Answer
   @Input() collection!: string;
   @Input() ownMessage!: boolean;
+  @Input() hideIcons!: boolean;
   @Output() reactionbarEmitter = new EventEmitter<string>();
   editMessage = false;
 
@@ -26,6 +30,8 @@ export class ReactionBarComponent {
     this.firestoreService = inject(FirestoreService);
     this.authService = inject(AuthService);
     this.reactionService = inject(ReactionService);
+    this.messageService = inject(MessageService);
+    this.toggleContainerService = inject(ToggleContainerService);
   }
 
   showEditMessageBtn() {
@@ -43,5 +49,14 @@ export class ReactionBarComponent {
 
   addReaction(reaction: string) {
     this.reactionService.addReaction(reaction, this.message, this.collection);
+  }
+
+  openSecondaryChat() {
+    this.messageService.messageId = this.message.id;
+    this.toggleContainerService.toggle.next({
+      element: 'secondary-chat',
+      width: '100%',
+      message: this.message,
+    });
   }
 }
