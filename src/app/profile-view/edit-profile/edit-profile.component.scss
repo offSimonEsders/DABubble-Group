@@ -2,9 +2,6 @@
 
 .crate-overdiv{
     position: relative;
-    max-width: 200px;
-    max-height: 900px;
-    min-width: 700px;
     background-color: white;
     padding: 22px;
     margin-left: 10px;
@@ -13,7 +10,7 @@
     box-shadow: -4px 6px 14px 1px $bgr;
 
     h1{
-        font-size: 32px;
+        font-size: 28px;
         margin-top: 10px;
         margin-bottom: 20px;
     }
@@ -156,20 +153,21 @@
     margin-top: 50px;
     width: 100%;
     button{
+        margin-left: 20px;
+        margin-right: 20px;
         background-color: $buttonPurple;
         padding: 16px;
         border: none;
         border-radius: 30px;
         color: white;
-        width: 200px;
+        width: 150px;
         max-width: none !important;
         display: flex;
         justify-content: center;
         align-items: center;
     
         span{
-            font-size: 22px;
-            padding-left: 10px;
+            font-size: 18px;
             margin-right: 0 !important;
         }
     

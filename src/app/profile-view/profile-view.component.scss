@@ -2,9 +2,6 @@
 
 .crate-overdiv{
     position: relative;
-    max-width: 200px;
-    max-height: 900px;
-    min-width: 700px;
     background-color: white;
     padding: 22px;
     margin-left: 10px;
@@ -13,7 +10,7 @@
     box-shadow: -4px 6px 14px 1px $bgr;
 
     h1{
-        font-size: 32px;
+        font-size: 28px;
         margin-top: 10px;
         margin-bottom: 20px;
     }
