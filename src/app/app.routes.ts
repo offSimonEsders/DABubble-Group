@@ -9,6 +9,7 @@ import { ImprintComponent } from './imprint/imprint.component';
 
 export const routes: Routes = [
   { path: '', component: UserAccessComponent },
+  { path: 'test', component: HomeComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: 'DSGVO', component:DsgvoComponent },
