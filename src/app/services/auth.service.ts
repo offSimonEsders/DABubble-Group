@@ -107,6 +107,19 @@ export class AuthService {
     });
   }
 
+  async authUpdateUser(user:Account){
+    await updateDoc(
+      this.firestoreService.getDocRef('accounts', user.accountId),
+      { 
+        name: user.name,
+        email: user.email,
+      }
+    ).then(() => {
+      signOut(this.auth);
+      this.router.navigate(['']);
+    });
+  }
+
   authServiceCreateNewAccount(
     user_name: string,
     user_email: string,

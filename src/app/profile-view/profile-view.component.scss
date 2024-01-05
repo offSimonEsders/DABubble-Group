@@ -4,6 +4,7 @@
     position: relative;
     background-color: white;
     padding: 22px;
+    min-width: 450px;
     margin-left: 10px;
     border-radius: 40px;
     border-top-right-radius: 0;
@@ -178,5 +179,14 @@
         &:active {
             background-color: $buttonPurple !important;
         }
+    }
+}
+
+.editDiv{
+    @include displayFlex($jc: space-between); 
+    span{
+        margin-top: 20px;
+        cursor: pointer;
+        color: $purple2;
     }
 }

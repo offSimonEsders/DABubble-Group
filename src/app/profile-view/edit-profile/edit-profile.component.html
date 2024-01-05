@@ -5,7 +5,7 @@
             <app-avatar [accountId]="account.accountId" [hideStatus]="false"></app-avatar>
         </div>
     </div>
-    <div class="close-button">
+    <div (click)="close()" class="close-button">
         <svg  width="24" height="24" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_813_12181" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
@@ -31,7 +31,7 @@
                     <span>Vollständiger Name</span>
             </div>
             <div class="inputDiv">
-                <input type="text" placeholder="{{ account.name }}">
+                <input (input)="checkName()" [(ngModel)]="saveName" type="text" placeholder="{{ account.name }}">
             </div>
         </div>
         <div class="overdivInput">
@@ -43,15 +43,15 @@
                     <span>E-mail</span>
             </div>
             <div class="inputDiv">
-                <input type="text" placeholder="{{ account.email }}">
+                <input (input)="checkEmail()" [(ngModel)]="saveEmail" type="text" placeholder="{{ account.email }}">
             </div>
         </div>
     </div>
     <div class="button">
-        <button>
+        <button (click)="close()" class="buttonfirst">
             <span>Abbrechen</span>
         </button>
-        <button>
+        <button class="noneBackgroudButton">
             <span>Speichern</span>
         </button>
     </div>

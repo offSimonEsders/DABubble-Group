@@ -4,6 +4,7 @@
     position: relative;
     background-color: white;
     padding: 22px;
+    min-width: 350px;
     margin-left: 10px;
     border-radius: 40px;
     border-top-right-radius: 0;
@@ -148,40 +149,6 @@
     }
 }
 
-.button{
-    @include displayFlex($jc: center); 
-    margin-top: 50px;
-    width: 100%;
-    button{
-        margin-left: 20px;
-        margin-right: 20px;
-        background-color: $buttonPurple;
-        padding: 16px;
-        border: none;
-        border-radius: 30px;
-        color: white;
-        width: 150px;
-        max-width: none !important;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    
-        span{
-            font-size: 18px;
-            margin-right: 0 !important;
-        }
-    
-        &:hover{
-            cursor: pointer;
-            background-color: $purple2;
-        }
-
-        &:active {
-            background-color: $buttonPurple !important;
-        }
-    }
-}
-
 .overdivInput{
     margin-top: 20px;
     width: 100%;
@@ -218,6 +185,65 @@
             font-size: 18px;
             outline: none !important;
             width: 100%;
+        }
+    }
+}
+.button{
+    @include displayFlex($jc: center); 
+    margin-top: 50px;
+    width: 100%;
+    button{
+        margin-left: 20px;
+        margin-right: 20px;
+      
+        padding: 16px;
+        border: none;
+        border-radius: 30px;
+        
+        width: 150px;
+        max-width: none !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .buttonfirst{
+        background-color: $buttonPurple;
+        color: white;
+    
+        &:hover{
+            cursor: pointer;
+            background-color: $purple2;
+        }
+
+        &:active {
+            background-color: $buttonPurple !important;
+        }
+
+        span{
+            font-size: 18px;
+            margin-right: 0 ;
+        }
+    }
+    .noneBackgroudButton{
+        background-color: #FFF ;
+        border: 1px solid var(--Purple-2, #797EF3) !important;
+    
+        &:hover{
+            cursor: pointer;
+            background-color: $buttonPurple;
+
+            span{
+                color: white !important;
+            }
+        }
+
+        &:active {
+            background-color: $purple2 !important;
+        }
+    
+        span{    
+            color: var(--Purple-1, #444DF2);
+            margin-right: 0 ;
         }
     }
 }

@@ -18,9 +18,14 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 export class ProfileViewComponent{
   account!:Account;
   openChatBoolean:boolean = false;
+  edit:boolean = false;
   
   constructor(private authService:AuthService,private channels:ChannelsComponent, private head:HeaderComponent){
     this.account = this.authService.profileViewAccount;
+  }
+
+  switchEdit(){
+    this.edit = !this.edit;
   }
 
   openWithChat(){

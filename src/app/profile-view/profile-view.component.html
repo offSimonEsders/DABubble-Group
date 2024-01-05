@@ -1,4 +1,4 @@
-<div class="crate-overdiv" *ngIf="false">
+<div class="crate-overdiv" *ngIf="!edit">
         <h1>Profil</h1>
         <div class="picture">
             <div>
@@ -6,7 +6,11 @@
             </div>
         </div>
         <div class="informations">
-            <h2>{{ account.name }}</h2>
+            <div class="editDiv">
+                <h2>{{ account.name }}</h2>
+                <span (click)="switchEdit()">Bearbeiten</span>
+            </div>
+            
             <div class="status">
                 <div></div>
                 <span>Aktiv</span>
@@ -52,6 +56,5 @@
             </svg>
         </div>
 </div>
-
-<app-edit-profile></app-edit-profile>
+<app-edit-profile *ngIf="edit"></app-edit-profile>
 
