@@ -31,7 +31,7 @@
                     <span>Vollständiger Name</span>
             </div>
             <div class="inputDiv">
-                <input (input)="checkName()" [(ngModel)]="saveName" type="text" placeholder="{{ account.name }}">
+                <input (input)="checkall()" [(ngModel)]="saveName" type="text" placeholder="{{ account.name }}">
             </div>
         </div>
         <div class="overdivInput">
@@ -43,7 +43,7 @@
                     <span>E-mail</span>
             </div>
             <div class="inputDiv">
-                <input (input)="checkEmail()" [(ngModel)]="saveEmail" type="text" placeholder="{{ account.email }}">
+                <input (input)="checkall()" [(ngModel)]="saveEmail" type="text" placeholder="{{ account.email }}">
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
         <button (click)="close()" class="buttonfirst">
             <span>Abbrechen</span>
         </button>
-        <button class="noneBackgroudButton">
+        <button (click)="save()" class="noneBackgroudButton" [disabled]="disabeld">
             <span>Speichern</span>
         </button>
     </div>

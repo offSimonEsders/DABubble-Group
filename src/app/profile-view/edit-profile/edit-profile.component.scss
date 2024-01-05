@@ -240,6 +240,19 @@
         &:active {
             background-color: $purple2 !important;
         }
+
+        &:disabled{
+            cursor: default;
+            background-color: lightgray !important;
+
+            span{
+                color: var(--Purple-1, #444DF2) !important;
+            }
+
+            &:active {
+                background-color: lightgray !important;
+            }
+        }
     
         span{    
             color: var(--Purple-1, #444DF2);
