@@ -5,11 +5,12 @@ import { Account } from '../models/account.class';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { ChannelsComponent } from '../nav-bar/channels/channels.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-profile-view',
   standalone: true,
-  imports: [AvatarComponent,CommonModule,ChannelsComponent],
+  imports: [AvatarComponent,CommonModule,ChannelsComponent,EditProfileComponent],
   providers: [ChannelsComponent],
   templateUrl: './profile-view.component.html',
   styleUrl: './profile-view.component.scss'
