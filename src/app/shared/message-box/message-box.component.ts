@@ -9,11 +9,12 @@ import { AuthService } from '../../services/auth.service';
 import { MessageService } from '../../services/message.service';
 import { updateDoc } from '@angular/fire/firestore';
 import { Answer } from '../../models/answer.class';
+import { ResizeTextareaDirective } from '../message/resize-textarea.directive';
 
 @Component({
   selector: 'app-message-box',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ResizeTextareaDirective],
   templateUrl: './message-box.component.html',
   styleUrl: './message-box.component.scss',
 })

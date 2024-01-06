@@ -36,8 +36,10 @@ export class MainChatComponent implements OnInit, OnDestroy {
   messageService!: MessageService;
   toggleContainerService!: ToggleContainerService;
   private openChatSub!: Subscription;
+  private loadedChatSub!: Subscription;
   currentCollection: string = '';
   @ViewChild('chat') container!: ElementRef;
+  chatLoaded = false;
 
   constructor() {
     this.chatService = inject(ChatService);
@@ -50,13 +52,18 @@ export class MainChatComponent implements OnInit, OnDestroy {
     this.openChatSub = this.chatService.openChatEmitter.subscribe({
       next: (data) => {
         this.currentCollection = data.chatColl;
-          this.setContainerStyle(data.chatColl);
       },
+    });
+    this.loadedChatSub = this.messageService.loadedMessagesEmitter.subscribe({
+      next: () => {
+        this.setAlignment();
+      }
     });
   }
 
   ngOnDestroy(): void {
     this.openChatSub.unsubscribe();
+    this.loadedChatSub.unsubscribe();
   }
 
   // prettier-ignore
@@ -64,24 +71,9 @@ export class MainChatComponent implements OnInit, OnDestroy {
     return this.toggleContainerService.displayChannelMenu && this.toggleContainerService.displaySecondaryChat ? true : false;
   }
 
-  setContainerStyle(collection: string) {
-    this.setHeight(collection);
-    this.setAlignment();
-  }
-
-  setHeight(collection: string) {
-    if (collection === 'channels') {
-      this.container.nativeElement.style.height = 'calc(100% - 279px)';
-    } else if (collection === 'chats') {
-      this.container.nativeElement.style.height = 'calc(100% - 273.8px)';
-    } else {
-      this.container.nativeElement.style.height = 'calc(100% - 212.6px)';
-    }
-  }
-
   // prettier-ignore
   setAlignment() {
-    if(this.messageService) {
+    if(this.messageService.messages) {
       if (this.messageService.messages.length > 3) {
         this.container.nativeElement.style.justifyContent = 'flex-start';
         setTimeout(() => {

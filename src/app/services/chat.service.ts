@@ -122,4 +122,8 @@ export class ChatService implements OnDestroy {
       data.get('creater')
     );
   }
+
+  AllUserInChannel(){
+    console.log(this.channels)
+  }
 }

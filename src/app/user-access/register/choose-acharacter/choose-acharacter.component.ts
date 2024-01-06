@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { StorageService } from '../../../services/storage.service';
 import { CheckInputService } from '../../../services/check-input.service';
+import { ChatService } from '../../../services/chat.service';
 
 @Component({
   selector: 'app-choose-acharacter',
@@ -10,7 +11,7 @@ import { CheckInputService } from '../../../services/check-input.service';
   templateUrl: './choose-acharacter.component.html',
   styleUrl: './choose-acharacter.component.scss'
 })
-export class ChooseACharacterComponent implements AfterViewInit {
+export class ChooseACharacterComponent implements AfterViewInit{
   @Input() userData!: any;
   @Input() resetRegistrationForm!: Function;
   @ViewChild('characterpreviewimg') characterpreviewimg!: any;
@@ -26,7 +27,7 @@ export class ChooseACharacterComponent implements AfterViewInit {
   loadownimage: boolean = false;
   fileWithNewName!: any;
 
-  constructor(private authservice: AuthService, private storageservice: StorageService, private checkinputservice: CheckInputService) {
+  constructor(private authservice: AuthService, private storageservice: StorageService, private checkinputservice: CheckInputService,private channel:ChatService) {
   }
 
   ngAfterViewInit() {
@@ -77,6 +78,11 @@ export class ChooseACharacterComponent implements AfterViewInit {
     }
     this.authservice.authServiceCreateNewAccount(this.userData.username, this.userData.useremail, this.storageUrL, Uid);
     this.showAnimationAndLoadogin();
+    this.setAllUserToChannel();
+  }
+
+  setAllUserToChannel(){
+    this.channel.AllUserInChannel();
   }
 
   showAnimationAndLoadogin() {

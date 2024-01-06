@@ -23,6 +23,8 @@ export class MessageService {
   collId!: string;
   channelId!: string;
   messageId!: string;
+  loadedMessagesEmitter = new Subject<boolean>();
+  loadedAnswersEmitter = new Subject<boolean>();
   openChatEmitter = new Subject<{ collId: string }>();
 
   constructor() {
@@ -107,6 +109,7 @@ export class MessageService {
           this.answers.push(answer);
         });
         this.answers.sort((a, b) => a.dispatchedDate - b.dispatchedDate);
+        this.loadedAnswersEmitter.next(true);
       }
     );
   }
@@ -136,14 +139,17 @@ export class MessageService {
     this.dispatchedDays = Array.from(new Set(timestamps)).sort();
   }
 
+  // prettier-ignore
   getFilteredMessages() {
     this.filteredMessages = [];
     for (let i = 0; i < this.dispatchedDays.length; i++) {
       let arrayOfFilteredMessages = this.messages.filter((message: Message) =>
         this.onDispatchedDay(message, i)
       );
+      arrayOfFilteredMessages.sort((a, b) => a.dispatchedDate - b.dispatchedDate);
       this.filteredMessages.push(arrayOfFilteredMessages);
     }
+    this.loadedMessagesEmitter.next(true);
   }
 
   onDispatchedDay(message: Message, index: number) {
