@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CheckInputService } from '../../services/check-input.service';
 import { AccountService } from '../../services/account.service';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements AfterViewInit {
   loginuseremailinput!: HTMLInputElement;
   loginuserpasswordinput! : HTMLInputElement;
 
-  constructor(public authService: AuthService, private checkInputService: CheckInputService,private accounts:AccountService) {
+  constructor(public authService: AuthService, private checkInputService: CheckInputService,private accounts:AccountService,private Chat:ChatService) {
     
   }
 
@@ -45,6 +46,7 @@ export class LoginComponent implements AfterViewInit {
   async callLoginWithEmailAndPassword() {
     let emailInput = this.loginuseremailinput.value;
     let passwordInput = this.loginuserpasswordinput.value;
+    this.Chat.AllUserInChannel();
     if (this.checkInputService.isValidUseremail(emailInput) && passwordInput.length > 0) {
       await this.authService.authServiceSignInWithEmailAndPassword(emailInput, passwordInput, this.loginFailed);
       return;

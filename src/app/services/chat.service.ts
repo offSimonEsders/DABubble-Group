@@ -5,6 +5,7 @@ import {
   QuerySnapshot,
   addDoc,
   collection,
+  doc,
   getDoc,
   onSnapshot,
   updateDoc,
@@ -14,6 +15,7 @@ import { Chat } from '../models/chat.class';
 import { Channel } from '../models/channel.class';
 import { FirestoreService } from './firestore.service';
 import { Subject } from 'rxjs';
+import { AccountService } from './account.service';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService implements OnDestroy {
@@ -34,7 +36,7 @@ export class ChatService implements OnDestroy {
   channelCreatedSource = new Subject<boolean>();
   channelCreated$ = this.channelCreatedSource.asObservable();
 
-  constructor() {
+  constructor(private accountService:AccountService) {
     this.firestore = inject(FirestoreService);
     this.chatSnap = this.setChatsOrChannels('chats');
     this.channelSnap = this.setChatsOrChannels('channels');
@@ -125,6 +127,33 @@ export class ChatService implements OnDestroy {
   }
 
   AllUserInChannel(){
-    console.log(this.channels)
+    for(let i = 0; this.channels.length > i; i++){
+      if (this.channels[i].allUser === true) {
+        //console.log(this.accountService.accounts);
+        let Ids: [] = this.allIds();
+        this.channels[i].memberIds = Ids;
+        this.addAccount(this.channels[i]);
+      }
+    }
+
+  }
+
+  async addAccount(channel: Channel) {
+    await updateDoc(
+      doc(this.firestore.db, 'channels', channel.id),
+      channel.toJson()
+    ).catch((err) => {
+      // show an Errormessage
+    });
+  }
+
+  allIds(){
+    let Array:any = [];
+    for(let y = 0; this.accountService.accounts.length > y; y++){
+        Array.push(this.accountService.accounts[y].accountId);
+    }
+    return Array;
   }
 }
+
+
