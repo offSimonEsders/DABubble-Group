@@ -101,7 +101,7 @@ export class ChannelsComponent {
       (this.chatService.chats[index].memberIds.includes(accId) &&
       this.chatService.chats[index].memberIds.includes(this.authService.user.accountId) &&
       accId !== this.authService.user.accountId) ||
-      this.chatService.chats[index].memberIds[0] === this.chatService.chats[index].memberIds[1]
+      (this.chatService.chats[index].memberIds[0] === accId && this.chatService.chats[index].memberIds[1] === accId)
     );
   }
 
