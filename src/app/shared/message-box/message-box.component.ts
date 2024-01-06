@@ -10,13 +10,14 @@ import { MessageService } from '../../services/message.service';
 import { updateDoc } from '@angular/fire/firestore';
 import { Answer } from '../../models/answer.class';
 import { ResizeTextareaDirective } from '../message/resize-textarea.directive';
+import { EmojiPickerComponent } from './emoji-picker/emoji-picker.component';
 
 @Component({
   selector: 'app-message-box',
   standalone: true,
-  imports: [FormsModule, ResizeTextareaDirective],
   templateUrl: './message-box.component.html',
   styleUrl: './message-box.component.scss',
+  imports: [FormsModule, ResizeTextareaDirective, EmojiPickerComponent],
 })
 export class MessageBoxComponent implements OnInit {
   authService!: AuthService;

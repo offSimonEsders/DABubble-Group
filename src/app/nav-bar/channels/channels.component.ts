@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
@@ -71,11 +71,9 @@ export class ChannelsComponent {
     });
   }
 
+  // prettier-ignore
   privateChatExistsFunction(chatColl: string, i: number, accId: string) {
-    this.messageService.checkForExistingMessages(
-      chatColl,
-      this.chatService.chats[i].id
-    );
+    this.messageService.checkForExistingMessages(chatColl, this.chatService.chats[i].id);
     this.chatService.currentChat = this.chatService.chats[i];
     this.emitChatInfo(chatColl, accId);
   }
