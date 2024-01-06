@@ -46,7 +46,6 @@ export class AddUserComponent implements OnInit {
 
   togglePrivate() {
     this.private = !this.private;
-    this.allUser = !this.allUser;
   }
 
   settingButton() {
@@ -60,6 +59,7 @@ export class AddUserComponent implements OnInit {
   }
 
   toggleChoose() {
+    this.allUser = !this.allUser;
     this.choose = !this.choose;
     this.settingButton();
     this.clearsaveUser();
