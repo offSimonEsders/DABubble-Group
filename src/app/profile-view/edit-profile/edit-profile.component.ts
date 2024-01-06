@@ -44,7 +44,6 @@ export class EditProfileComponent {
 
   async save(){
     if(this.saveEmail || this.saveName != ''){
-      debugger;
       if(this.saveEmail != ''){
         this.account.email = this.saveEmail;
       }
@@ -52,7 +51,8 @@ export class EditProfileComponent {
         this.account.name = this.saveName;
       }
       await this.authService.authUpdateUser(this.account);
-      console.log(this.account)
+      this.channels.sortAccounts();
+      this.close();
     }
   }
 }

@@ -115,8 +115,6 @@ export class AuthService {
         email: user.email,
       }
     ).then(() => {
-      signOut(this.auth);
-      this.router.navigate(['']);
     });
   }
 
