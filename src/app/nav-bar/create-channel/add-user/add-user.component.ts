@@ -28,6 +28,7 @@ export class AddUserComponent implements OnInit {
   ableButton: boolean = false;
   savedUser: any[] = [];
   private: boolean = false;
+  allUser:boolean = true;
 
   constructor(
     private chatService: ChatService,
@@ -45,6 +46,7 @@ export class AddUserComponent implements OnInit {
 
   togglePrivate() {
     this.private = !this.private;
+    this.allUser = !this.allUser;
   }
 
   settingButton() {
@@ -166,8 +168,13 @@ export class AddUserComponent implements OnInit {
     this.AddAndClose(JSON);
   }
 
+  addUser(JSON:any){
+    return (JSON.allUser = this.allUser);
+  }
+
   AddAndClose(JSON: Channel) {
     this.Addpeople(JSON);
+    this.addUser(JSON);
     this.CreateChannel.close2();
     this.chatService.addChatOrChannel(JSON, 'channels').then((doc: any) => {
       updateDoc(doc, { id: doc.id });

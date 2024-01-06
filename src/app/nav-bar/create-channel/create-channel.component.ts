@@ -87,7 +87,8 @@ export class CreateChannelComponent {
       this.ChannelName,
       this.ChannelDescription,
       true,
-      this.findLoginAccount()
+      this.findLoginAccount(),
+      true,
     );
     this.chatService.incompleteCreateChannel = JSON;
     this.nextpage();

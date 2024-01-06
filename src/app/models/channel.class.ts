@@ -5,19 +5,21 @@ export class Channel extends Chat {
   description: string;
   publicStatus: boolean;
   creater: string; // User name
-
+  allUser:boolean;
   constructor(
     id: string,
     memberIds: Array<string>,
     name: string,
     description: string,
     publicStatus: boolean,
-    creater: string
+    creater: string,
+    allUser:boolean
   ) {
     super(id, memberIds),
       (this.name = name),
       (this.description = description),
       (this.publicStatus = publicStatus),
+      (this.allUser = allUser),
       (this.creater = creater);
   }
 
@@ -29,6 +31,7 @@ export class Channel extends Chat {
       publicStatus: this.publicStatus,
       creater: this.creater,
       memberIds: this.memberIds,
+      allUser: this.allUser
     };
   }
 }

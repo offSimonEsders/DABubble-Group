@@ -7,6 +7,7 @@ import { CreateChannelComponent } from '../nav-bar/create-channel/create-channel
 import { ToggleContainerService } from '../services/toggle-container.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ChatService } from '../services/chat.service';
 
 interface ToggleSub {
   element: string;
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   elementRef = 'secondary-chat';
   width = '0px';
 
-  constructor() {
+  constructor(private channel: ChatService) {
     this.toggleContainerService = inject(ToggleContainerService);
   }
 
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.width = data.width;
       },
     });
+    this.channel.AllUserInChannel();
   }
 
   ngOnDestroy(): void {

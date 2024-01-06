@@ -119,7 +119,8 @@ export class ChatService implements OnDestroy {
       data.get('name'),
       data.get('description'),
       data.get('publicStatus'),
-      data.get('creater')
+      data.get('creater'),
+      data.get('allUser'),
     );
   }
 
