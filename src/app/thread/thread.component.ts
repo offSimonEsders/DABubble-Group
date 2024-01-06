@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MessageBoxComponent } from '../shared/message-box/message-box.component';
 import { ThreadChatHeaderComponent } from './thread-chat-header/thread-chat-header.component';
 import { CommonModule } from '@angular/common';
@@ -27,6 +34,8 @@ export class ThreadComponent implements OnInit, OnDestroy {
   currentCollection = 'channels';
   message!: any;
   toggleSub!: Subscription;
+  @ViewChild('chat') container!: ElementRef;
+  private loadedChatSub!: Subscription;
 
   constructor() {
     this.toggleContainerService = inject(ToggleContainerService);
@@ -34,6 +43,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
     this.messageService = inject(MessageService);
   }
 
+  // prettier-ignore
   ngOnInit(): void {
     this.toggleSub = this.toggleContainerService.toggleSubject.subscribe({
       next: (data) => {
@@ -43,9 +53,17 @@ export class ThreadComponent implements OnInit, OnDestroy {
         }
       },
     });
+    this.loadedChatSub = this.messageService.loadedAnswersEmitter.subscribe({
+      next: () => {
+        setTimeout(() => {
+          this.container.nativeElement.scrollTo(0, this.container.nativeElement.scrollHeight);
+        }, 100)
+      },
+    });
   }
 
   ngOnDestroy(): void {
     this.toggleSub.unsubscribe();
+    this.loadedChatSub.unsubscribe();
   }
 }

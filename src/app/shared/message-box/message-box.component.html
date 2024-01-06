@@ -1,6 +1,6 @@
 <div class="message-box">
     <form (ngSubmit)="onSubmit()" #form="ngForm">
-        <textarea rows="2" placeholder="{{ secondaryChat ? 'Antworten...' : setPlaceholder() }}" ngModel name="message"
+        <textarea autoSize placeholder="{{ secondaryChat ? 'Antworten...' : setPlaceholder() }}" ngModel name="message"
             required></textarea>
         <div class="icons-text-box-container">
             <div class="left-icons">

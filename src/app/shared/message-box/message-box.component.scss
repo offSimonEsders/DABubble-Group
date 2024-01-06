@@ -2,14 +2,17 @@
 
 .message-box {
   width: 100%;
-  height: 145px;
   padding: 20px;
   border: 1px solid $lightPurple;
   border-radius: 20px;
 
+  form {
+    @include displayFlex($fd: column, $g: 40px);
+  }
+
   textarea {
     width: 100%;
-    height: 65px;
+    height: 25px;
     font-size: 18px;
     resize: none;
     border: none;

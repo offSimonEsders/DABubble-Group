@@ -2,14 +2,14 @@
     <header>
         <app-thread-chat-header></app-thread-chat-header>
     </header>
-    @if(message) {
-    <app-message [emitMessage]="message" [collection]="currentCollection" [hideAnswers]="true"></app-message>
-    <div class="answer-amount-container">
-        <span>{{ message.answerAmount }} Antworten</span>
-        <div class="horizontal-line"></div>
-    </div>
-    }
-    <div class="chat-container">
+    <div class="chat-container" #chat>
+        @if(message) {
+        <app-message [emitMessage]="message" [collection]="currentCollection" [hideAnswers]="true"></app-message>
+        <div class="answer-amount-container">
+            <span>{{ message.answerAmount }} Antworten</span>
+            <div class="horizontal-line"></div>
+        </div>
+        }
         @if(messageService.answers) {
         <div class="answer" *ngFor="let answer of messageService.answers">
             <app-message [emitMessage]="answer" [collection]="currentCollection" [isAnswer]="true"></app-message>
