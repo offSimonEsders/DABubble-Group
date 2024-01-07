@@ -1,4 +1,12 @@
-import { Component, Input, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { Account } from '../../models/account.class';
 import { Subscription } from 'rxjs';
@@ -10,14 +18,14 @@ import { MessageService } from '../../services/message.service';
 import { updateDoc } from '@angular/fire/firestore';
 import { Answer } from '../../models/answer.class';
 import { ResizeTextareaDirective } from '../message/resize-textarea.directive';
-import { EmojiPickerComponent } from './emoji-picker/emoji-picker.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @Component({
   selector: 'app-message-box',
   standalone: true,
   templateUrl: './message-box.component.html',
   styleUrl: './message-box.component.scss',
-  imports: [FormsModule, ResizeTextareaDirective, EmojiPickerComponent],
+  imports: [FormsModule, ResizeTextareaDirective, PickerModule],
 })
 export class MessageBoxComponent implements OnInit {
   authService!: AuthService;
@@ -30,6 +38,8 @@ export class MessageBoxComponent implements OnInit {
   chatId!: string;
   chatWithAccount!: Account;
   openChatSub!: Subscription;
+  emojiPickeropened = false;
+  emojiEmitter = new EventEmitter<any>();
 
   constructor() {
     this.authService = inject(AuthService);
@@ -48,6 +58,9 @@ export class MessageBoxComponent implements OnInit {
           });
         }
       },
+    });
+    this.emojiEmitter.subscribe((data) => {
+      this.addEmoji(data);
     });
   }
 
@@ -124,6 +137,25 @@ export class MessageBoxComponent implements OnInit {
       return `Nachricht an ${this.chatWithAccount.name}`;
     } else {
       return 'Starte eine neue Nachricht';
+    }
+  }
+
+  togglePicker() {
+    this.emojiPickeropened = !this.emojiPickeropened;
+  }
+
+  addEmoji(data: any) {
+    const message = this.sendMessageForm.value.message;
+    const sym = data.emoji.unified.split('_');
+    const emoji = String.fromCodePoint(+('0x' + sym));
+    this.sendMessageForm.value.message = message + emoji;
+    this.togglePicker();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick() {
+    if (this.emojiPickeropened) {
+      this.togglePicker();
     }
   }
 }

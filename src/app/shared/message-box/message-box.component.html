@@ -1,7 +1,11 @@
 <div class="message-box">
     <form (ngSubmit)="onSubmit()" #form="ngForm">
-        <!-- <app-emoji-picker></app-emoji-picker> -->
-        <textarea autoSize placeholder="{{ secondaryChat ? 'Antworten...' : setPlaceholder() }}" ngModel name="message"
+        @if(emojiPickeropened) {
+        <emoji-mart (emojiClick)="emojiEmitter.next($event)" set="apple" [darkMode]="false" [perLine]="8"
+            [totalFrequentLines]="1"></emoji-mart>
+        }
+        <textarea [value]="form.value.message" autoSize
+            placeholder="{{ secondaryChat ? 'Antworten...' : setPlaceholder() }}" ngModel name="message"
             required></textarea>
         <div class="icons-text-box-container">
             <div class="left-icons">
@@ -26,7 +30,7 @@
                     </svg>
                 </div>
                 <div class="vektor"></div>
-                <div class="icon-container">
+                <div class="icon-container" (click)="$event.stopPropagation(); togglePicker()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <mask id="mask0_23247_12451" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                             width="24" height="24">

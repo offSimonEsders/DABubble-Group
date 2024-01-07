@@ -5,6 +5,7 @@
   padding: 20px;
   border: 1px solid $lightPurple;
   border-radius: 20px;
+  position: relative;
 
   form {
     @include displayFlex($fd: column, $g: 40px);
@@ -51,7 +52,21 @@
 }
 
 emoji-mart {
-  .emoji-mart-bar {
-    display: none;
+  position: absolute;
+  top: -406.2px;
+  left: 20px;
+}
+
+:host(emoji-mart) {
+  section {
+    background-color: $purple2;
+  }
+
+  .emoji-mart-anchor.emoji-mart-anchor-selected {
+    color: white;
+  }
+
+  .emoji-mart-anchor-bar {
+    background-color: white;
   }
 }

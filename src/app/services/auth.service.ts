@@ -13,6 +13,7 @@ import {
   signOut,
   verifyPasswordResetCode,
   getAuth,
+  verifyBeforeUpdateEmail,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Account } from '../models/account.class';
@@ -166,22 +167,17 @@ export class AuthService {
       });
   }
 
-  changeEmail(email:string){
-    const auth = getAuth();
-    const currentUser = auth.currentUser;
-  
+  async changeEmail(email:string){
+    let auth = getAuth();
+    let currentUser = auth.currentUser;
     if (currentUser !== null) {
-      debugger;
-      updateEmail(currentUser, email).then(() => {
-        debugger;
-        console.log('email')
-        // ...
-      }).catch((error) => {
-        // An error occurred
-        // ...
-      });
+      try {
+        await verifyBeforeUpdateEmail(currentUser, email);
+        console.log(email)
+      } catch (error) {
+        console.error(error);
+      }
     } else {
-      // Handle the case when the user is not authenticated
       console.error("User not authenticated");
     }
   }
