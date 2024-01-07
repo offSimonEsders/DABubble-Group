@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { AccountService } from './account.service';
 import {
   Auth,
+  updateEmail,
   GoogleAuthProvider,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
@@ -11,6 +12,7 @@ import {
   signInWithPopup,
   signOut,
   verifyPasswordResetCode,
+  getAuth,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Account } from '../models/account.class';
@@ -45,7 +47,6 @@ export class AuthService {
         return;
       });
   }
-  
 
   async authServiceSignInWithEmailAndPassword(
     user_email: string,
@@ -163,5 +164,25 @@ export class AuthService {
       .catch(() => {
         return true;
       });
+  }
+
+  changeEmail(email:string){
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+  
+    if (currentUser !== null) {
+      debugger;
+      updateEmail(currentUser, email).then(() => {
+        debugger;
+        console.log('email')
+        // ...
+      }).catch((error) => {
+        // An error occurred
+        // ...
+      });
+    } else {
+      // Handle the case when the user is not authenticated
+      console.error("User not authenticated");
+    }
   }
 }
