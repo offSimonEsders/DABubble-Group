@@ -53,20 +53,10 @@
 
 emoji-mart {
   position: absolute;
-  top: -406.2px;
+  top: -340.2px;
   left: 20px;
-}
 
-:host(emoji-mart) {
-  section {
-    background-color: $purple2;
-  }
-
-  .emoji-mart-anchor.emoji-mart-anchor-selected {
-    color: white;
-  }
-
-  .emoji-mart-anchor-bar {
-    background-color: white;
-  }
+  // .emoji-mart {
+  //   background-color: $purple2 !important;
+  // }
 }

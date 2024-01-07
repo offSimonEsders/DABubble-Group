@@ -1,5 +1,6 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   HostListener,
   Input,
@@ -19,13 +20,14 @@ import { updateDoc } from '@angular/fire/firestore';
 import { Answer } from '../../models/answer.class';
 import { ResizeTextareaDirective } from '../message/resize-textarea.directive';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-message-box',
   standalone: true,
   templateUrl: './message-box.component.html',
   styleUrl: './message-box.component.scss',
-  imports: [FormsModule, ResizeTextareaDirective, PickerModule],
+  imports: [FormsModule, ResizeTextareaDirective, PickerModule, CommonModule],
 })
 export class MessageBoxComponent implements OnInit {
   authService!: AuthService;
@@ -41,7 +43,7 @@ export class MessageBoxComponent implements OnInit {
   emojiPickeropened = false;
   emojiEmitter = new EventEmitter<any>();
 
-  constructor() {
+  constructor(private eRef: ElementRef) {
     this.authService = inject(AuthService);
     this.chatService = inject(ChatService);
     this.messageService = inject(MessageService);
