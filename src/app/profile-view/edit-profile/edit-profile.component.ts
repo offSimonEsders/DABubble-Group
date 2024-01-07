@@ -46,7 +46,7 @@ export class EditProfileComponent {
     if(this.saveEmail || this.saveName != ''){
       if(this.saveEmail != ''){
         this.account.email = this.saveEmail;
-        this.authService.changeEmail(this.account.email)
+        this.authService.changeEmail(this.account.email);
       }
       if(this.saveName != ''){
         this.account.name = this.saveName;
