@@ -2,7 +2,7 @@
     <form (ngSubmit)="onSubmit()" #form="ngForm">
         @if(emojiPickeropened) {
         <emoji-mart (click)="$event.stopPropagation()" (emojiClick)="emojiEmitter.next($event)" set="apple"
-            [darkMode]="false" [perLine]="8" [totalFrequentLines]="1" [showPreview]="false"></emoji-mart>
+            [darkMode]="false" emojiButtonColors="#797ef3" [perLine]="8" [totalFrequentLines]="1" [showPreview]="false"></emoji-mart>
         }
         <textarea [value]="form.value.message" autoSize
             placeholder="{{ secondaryChat ? 'Antworten...' : setPlaceholder() }}" ngModel name="message"

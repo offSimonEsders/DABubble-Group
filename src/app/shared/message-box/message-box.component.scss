@@ -55,8 +55,19 @@ emoji-mart {
   position: absolute;
   top: -340.2px;
   left: 20px;
-
-  // .emoji-mart {
-  //   background-color: $purple2 !important;
-  // }
 }
+
+.emoji-mart {
+  background-color: none;
+}
+
+/* Hintergrundfarbe für Kategorien */
+emoji-mart ::ng-deep emoji-mart-category {
+  background-color: $purple2 !important;
+}
+
+/* Hintergrundfarbe für Emojis */
+emoji-mart ::ng-deep emoji-mart-emoji {
+  background-color: $purple2 !important;
+}
+
