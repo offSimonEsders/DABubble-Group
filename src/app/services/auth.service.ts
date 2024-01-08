@@ -174,6 +174,7 @@ export class AuthService {
       try {
         await verifyBeforeUpdateEmail(currentUser, email);
         console.log(email)
+        debugger;
       } catch (error) {
         console.error(error);
       }
