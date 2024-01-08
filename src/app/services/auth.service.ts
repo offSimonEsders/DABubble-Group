@@ -173,7 +173,6 @@ export class AuthService {
     if (currentUser !== null) {
       try {
         await verifyBeforeUpdateEmail(currentUser, email);
-        console.log(email)
       } catch (error) {
         console.error(error);
       }
