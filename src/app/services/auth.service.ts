@@ -185,6 +185,7 @@ export class AuthService {
     let currentUser = auth.currentUser;
     if (currentUser !== null) {
       try {
+        debugger;
         await verifyBeforeUpdateEmail(currentUser, email);
       } catch (error) {
         console.error(error);
