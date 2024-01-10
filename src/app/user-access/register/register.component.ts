@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { ChooseACharacterComponent } from "./choose-acharacter/choose-acharacter.component";
 import { CheckInputService } from '../../services/check-input.service';
+import { ChooseACharacterComponent } from './choose-acharacter/choose-acharacter.component';
+
 
 @Component({
   selector: 'app-register',

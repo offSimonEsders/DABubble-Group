@@ -7,10 +7,11 @@ import { HeaderComponent } from '../../header/header.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { ProfileViewComponent } from '../profile-view.component';
 import { FormsModule } from '@angular/forms';
+import { ChooseACharacterComponent } from '../../user-access/register/choose-acharacter/choose-acharacter.component';
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
-  imports: [AvatarComponent,FormsModule,CommonModule],
+  imports: [AvatarComponent,FormsModule,CommonModule,ChooseACharacterComponent],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss'
 })
@@ -19,9 +20,14 @@ export class EditProfileComponent {
   disabeld:boolean = true;
   saveName:string = '';
   saveEmail:string = '';
+  openNewImage:boolean = false;
   
   constructor(private authService:AuthService,private channels:ChannelsComponent, private head:HeaderComponent,private parent:ProfileViewComponent){
     this.account = this.authService.profileViewAccount;
+  }
+
+  openAvatar(){
+    this.openNewImage = !this.openNewImage
   }
 
   close(){

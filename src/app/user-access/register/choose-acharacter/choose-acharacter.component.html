@@ -1,6 +1,7 @@
-<section class="choose-a-character-frame">
+<section [style.display]="showDiv ? 'flex' : 'none'"  class="choose-a-character-frame">
     
-    <button class="choose-go-back" (click)="showRegister()"></button>
+    <button *ngIf="register" class="choose-go-back" (click)="showRegister()"></button>
+    <button *ngIf="!register" class="choose-go-back" (click)="goBackToEdit()"></button>
 
     <h1 class="choose-a-character-header">Wähle deinen Avatar</h1>
     <div class="choosed-container">
@@ -25,6 +26,9 @@
         <input type="file" name="" id="select-file" accept=".svg,.png,.jpg,.jpeg" (input)="loadimg()" #selectfile>
         <label for="select-file">Datei hochladen</label>
     </div>
-    <button class="create-acc" (click)="registerNewUser()">Weiter</button>
-    <div class="registration-choose-userfeedback" #userfeedback>Konto erfolgreich erstellt!</div>
+
+    <button *ngIf="register" class="create-acc" (click)="registerNewUser()">Weiter</button>
+    <div *ngIf="register" class="registration-choose-userfeedback" #userfeedback>Konto erfolgreich erstellt!</div>
+    <button *ngIf="!register" class="create-acc" (click)="updatePresentUser()">Speichern</button>
+    <div *ngIf="!register" class="registration-choose-userfeedback" #userfeedback>Bild wurde erfolgreich geändert!</div>
 </section>

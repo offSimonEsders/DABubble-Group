@@ -1,33 +1,52 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { StorageService } from '../../../services/storage.service';
 import { CheckInputService } from '../../../services/check-input.service';
 import { ChatService } from '../../../services/chat.service';
+import { CommonModule } from '@angular/common';
+import { EditProfileComponent } from '../../../profile-view/edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-choose-acharacter',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './choose-acharacter.component.html',
   styleUrl: './choose-acharacter.component.scss'
 })
-export class ChooseACharacterComponent implements AfterViewInit{
+export class ChooseACharacterComponent implements AfterViewInit, OnInit{
   @Input() userData!: any;
   @Input() resetRegistrationForm!: Function;
   @ViewChild('characterpreviewimg') characterpreviewimg!: any;
   @ViewChild('selectfile') selectfile!: any;
   @ViewChild('userfeedback') userfeedback!: any;
+  @ViewChild('forEdit') forEditElement!: ElementRef;
 
   registerframe!: HTMLDivElement;
   chosecharacterframe!: HTMLDivElement;
 
   reader = new FileReader();
-
+  register = true;
   storageUrL: string = 'userAvatars/person.svg';
   loadownimage: boolean = false;
   fileWithNewName!: any;
+  showDiv:boolean = false;
+  editProfile!:EditProfileComponent;
+
+  ngOnInit(): void {
+    if(this.authservice.profileViewAccount){
+
+
+      this.register = false;
+      this.showDiv = true;
+    }
+  }
 
   constructor(private authservice: AuthService, private storageservice: StorageService, private checkinputservice: CheckInputService,private channel:ChatService) {
+
+  }
+
+  goBackToEdit(){
+    this.editProfile.openAvatar();
   }
 
   ngAfterViewInit() {
