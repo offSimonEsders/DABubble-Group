@@ -19,12 +19,25 @@ export class ResetPasswordComponent implements OnInit {
 
   linkused!: boolean;
   loaded: boolean = false;
+  email: boolean = false;
 
   constructor(private router: Router, private authservice: AuthService, private route: ActivatedRoute, private checkinputservice: CheckInputService, private ngzone: NgZone) {
 
   }
   async ngOnInit() {
     await this.isLinkUsed();
+    this.findURL();
+  }
+
+  findURL(){
+    const mode = this.route.snapshot.queryParamMap.get('mode');
+
+    if (mode === 'verifyAndChangeEmail') {
+      console.log(mode);
+      this.email = true;
+    }else{
+      this.email = false;
+    }
   }
 
   goToLogin() {
