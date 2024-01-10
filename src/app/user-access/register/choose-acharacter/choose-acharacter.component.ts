@@ -34,15 +34,15 @@ export class ChooseACharacterComponent implements AfterViewInit, OnInit{
 
   ngOnInit(): void {
     if(this.authservice.profileViewAccount){
-
-
       this.register = false;
       this.showDiv = true;
     }
   }
 
   constructor(private authservice: AuthService, private storageservice: StorageService, private checkinputservice: CheckInputService,private channel:ChatService) {
-
+    if(this.authservice.profileViewAccount){
+      this.editProfile = inject(EditProfileComponent);
+    }
   }
 
   goBackToEdit(){
@@ -101,18 +101,13 @@ export class ChooseACharacterComponent implements AfterViewInit, OnInit{
   }
 
   updatePresentUser(){
-    if(this.validateUserData()) {
-      this.resetRegistrationForm();
-      return;
-    }
-    if (this.loadownimage) {
-      const halfUid = this.authservice.profileViewAccount.accountId.substring(0, this.authservice.profileViewAccount.accountId.length / 2);
-      this.authservice.authServiceCreateNewAccount(this.userData.username, this.userData.useremail, `userAvatars/individual/${halfUid}personalAvatar`, this.authservice.profileViewAccount.accountId);
+    debugger
+    if (true) {
+      debugger;
       this.storageservice.uploadFileToFirestorage(this.fileWithNewName, this.authservice.profileViewAccount.accountId);
       this.showAnimationAndLoadogin();
       return;
     }
-    this.authservice.authServiceCreateNewAccount(this.userData.username, this.userData.useremail, this.storageUrL, this.authservice.profileViewAccount.accountId);
   }
 
   setAllUserToChannel(){
