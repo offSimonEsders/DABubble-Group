@@ -30,13 +30,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.authService.user) {
-      this.account = this.accountService.accounts.find(
-        (account) => account.id === this.authService.user.id
-      );
-      if (this.account) {
-        console.log(this.account);
-      }
+    this.account = this.accountService.accounts.find(
+      (account) => account.id === this.authService.userId
+    );
+    if (this.account) {
+      console.log(this.account);
     }
   }
 

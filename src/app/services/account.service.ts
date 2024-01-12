@@ -52,7 +52,6 @@ export class AccountService implements OnDestroy {
     const docSnap = await getDoc(this.firestore.getDocRef('accounts', docId));
     let account = this.createAccount(docSnap);
     return account;
-    
   }
 
   /**
@@ -65,7 +64,6 @@ export class AccountService implements OnDestroy {
       list.forEach((element: QueryDocumentSnapshot) => {
         let account = this.createAccount(element);
         this.accounts.push(account);
-
       });
     });
   }

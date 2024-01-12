@@ -27,6 +27,7 @@ export class AuthService {
   private accountService!: AccountService;
   private firestoreService!: FirestoreService;
   user!: Account;
+  userId!: string;
   provider: GoogleAuthProvider;
   profileViewAccount!: Account;
 
@@ -72,14 +73,13 @@ export class AuthService {
   ) {
     await signInWithEmailAndPassword(this.auth, user_email, user_password)
       .then((userCredential) => {
+        this.userId = userCredential.user.uid;
         this.getUser(userCredential.user.uid);
         this.setOnlineStatus(userCredential.user.uid);
         //
       })
       .then(() => {
-        setTimeout(() => {
-          this.router.navigate(['/home']);
-        }, 100);
+        this.router.navigate(['/home']);
       })
       .catch((error) => {
         if (error_function) {

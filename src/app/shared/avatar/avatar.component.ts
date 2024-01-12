@@ -15,6 +15,7 @@ import { Account } from '../../models/account.class';
 import { Subscription } from 'rxjs';
 import { ChatService } from '../../services/chat.service';
 import { StorageService } from '../../services/storage.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-avatar',
@@ -25,6 +26,7 @@ import { StorageService } from '../../services/storage.service';
 })
 export class AvatarComponent implements OnInit, OnChanges, OnDestroy {
   private accountService!: AccountService;
+  private authService!: AuthService;
   private firestore!: FirestoreService;
   private chatService!: ChatService;
   @Input() accountId!: string;
@@ -33,11 +35,13 @@ export class AvatarComponent implements OnInit, OnChanges, OnDestroy {
   statusSnap!: Function;
   openChatSub!: Subscription;
   imageurl!: string;
+  accSnap!: any;
 
   constructor(public storageservcice: StorageService) {
     this.accountService = inject(AccountService);
     this.firestore = inject(FirestoreService);
     this.chatService = inject(ChatService);
+    this.authService = inject(AuthService);
   }
 
   /**
@@ -48,6 +52,12 @@ export class AvatarComponent implements OnInit, OnChanges, OnDestroy {
     this.setAccount();
     this.updateOnlineStatus();
     this.updateAccountId();
+    this.accSnap = onSnapshot(
+      this.firestore.getCollectionRef('accounts'),
+      () => {
+        this.setAccount();
+      }
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
