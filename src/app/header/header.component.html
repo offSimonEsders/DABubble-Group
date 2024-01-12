@@ -8,7 +8,9 @@
         @if(authService.user) {
         <span>{{ authService.user.name }}</span>
         <div class="avatar-container">
-            <app-avatar [accountId]="authService.user.accountId" [hideStatus]="false"></app-avatar>
+            @if(account) {
+            <app-avatar [accountId]="account.id" [hideStatus]="false"></app-avatar>
+            }
         </div>
         }
         <svg class="arrow-down-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"

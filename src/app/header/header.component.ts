@@ -4,6 +4,8 @@ import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ProfileViewComponent } from '../profile-view/profile-view.component';
+import { AccountService } from '../services/account.service';
+import { Account } from '../models/account.class';
 
 @Component({
   selector: 'app-header',
@@ -14,16 +16,28 @@ import { ProfileViewComponent } from '../profile-view/profile-view.component';
 })
 export class HeaderComponent implements OnInit {
   authService!: AuthService;
+  accountService!: AccountService;
   accountStatus!: string;
   accountName!: string;
   dropDown: boolean = false;
   profileView: boolean = false;
+  account!: Account | undefined;
 
   constructor(private router: Router) {
     this.authService = inject(AuthService);
+    this.accountService = inject(AccountService);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.authService.user) {
+      this.account = this.accountService.accounts.find(
+        (account) => account.id === this.authService.user.id
+      );
+      if (this.account) {
+        console.log(this.account);
+      }
+    }
+  }
 
   switchDropDown() {
     this.dropDown = !this.dropDown;

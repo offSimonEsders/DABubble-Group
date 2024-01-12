@@ -5,11 +5,15 @@ import {
   GoogleAuthProvider,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
+  getAuth,
   sendPasswordResetEmail,
   signInAnonymously,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateEmail,
+  updateProfile,
+  verifyBeforeUpdateEmail,
   verifyPasswordResetCode,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
@@ -45,7 +49,6 @@ export class AuthService {
         return;
       });
   }
-  
 
   async authServiceSignInWithEmailAndPassword(
     user_email: string,
@@ -56,7 +59,12 @@ export class AuthService {
       .then((userCredential) => {
         this.getUser(userCredential.user.uid);
         this.setOnlineStatus(userCredential.user.uid);
-        this.router.navigate(['/home']);
+        //
+      })
+      .then(() => {
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 100);
       })
       .catch((error) => {
         if (error_function) {
@@ -107,15 +115,25 @@ export class AuthService {
     });
   }
 
-  async authUpdateUser(user:Account){
-    await updateDoc(
-      this.firestoreService.getDocRef('accounts', user.accountId),
-      { 
-        name: user.name,
-        email: user.email,
-      }
-    ).then(() => {
-    });
+  async authUpdateUser(email: string) {
+    // await updateDoc(
+    //   this.firestoreService.getDocRef('accounts', user.accountId),
+    //   {
+    //     name: user.name,
+    //     email: user.email,
+    //   }
+    // ).then(() => {
+    // });
+    if (this.auth.currentUser) {
+      verifyBeforeUpdateEmail(this.auth.currentUser, email)
+        .then(() => {
+          // ...
+        })
+        .catch((error) => {
+          // An error occurred
+          // ...
+        });
+    }
   }
 
   authServiceCreateNewAccount(

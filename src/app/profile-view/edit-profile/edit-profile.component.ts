@@ -10,47 +10,58 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
-  imports: [AvatarComponent,FormsModule,CommonModule],
+  imports: [AvatarComponent, FormsModule, CommonModule],
   templateUrl: './edit-profile.component.html',
-  styleUrl: './edit-profile.component.scss'
+  styleUrl: './edit-profile.component.scss',
 })
 export class EditProfileComponent {
-  account!:Account;
-  disabeld:boolean = true;
-  saveName:string = '';
-  saveEmail:string = '';
-  
-  constructor(private authService:AuthService,private channels:ChannelsComponent, private head:HeaderComponent,private parent:ProfileViewComponent){
+  account!: Account;
+  disabeld: boolean = true;
+  saveName: string = '';
+  saveEmail: string = '';
+
+  constructor(
+    private authService: AuthService,
+    private channels: ChannelsComponent,
+    private head: HeaderComponent,
+    private parent: ProfileViewComponent
+  ) {
     this.account = this.authService.profileViewAccount;
   }
 
-  close(){
+  close() {
     this.saveEmail = '';
     this.saveName = '';
     this.parent.switchEdit();
   }
 
-  checkall(){
-    if(this.saveName.length > 2 || this.saveName.length == 0 && this.checkEmail()){
+  checkall() {
+    if (
+      this.saveName.length > 2 ||
+      (this.saveName.length == 0 && this.checkEmail())
+    ) {
       this.disabeld = false;
-    }else{
+    } else {
       this.disabeld = true;
     }
   }
 
-  checkEmail(){
-    return this.saveEmail.length > 2 && this.saveEmail.includes('@') || this.saveEmail.length == 0 && this.saveEmail.includes('@');
+  checkEmail() {
+    return (
+      (this.saveEmail.length > 2 && this.saveEmail.includes('@')) ||
+      (this.saveEmail.length == 0 && this.saveEmail.includes('@'))
+    );
   }
 
-  async save(){
-    if(this.saveEmail || this.saveName != ''){
-      if(this.saveEmail != ''){
+  async save() {
+    if (this.saveEmail || this.saveName != '') {
+      if (this.saveEmail != '') {
         this.account.email = this.saveEmail;
       }
-      if(this.saveName != ''){
+      if (this.saveName != '') {
         this.account.name = this.saveName;
       }
-      await this.authService.authUpdateUser(this.account);
+      await this.authService.authUpdateUser(this.saveEmail);
       this.channels.sortAccounts();
       this.close();
     }

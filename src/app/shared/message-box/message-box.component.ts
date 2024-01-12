@@ -160,4 +160,8 @@ export class MessageBoxComponent implements OnInit {
       this.togglePicker();
     }
   }
+
+  showChange() {
+    console.log(this.sendMessageForm.value.message);
+  }
 }

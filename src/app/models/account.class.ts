@@ -3,7 +3,7 @@ export class Account {
   email: string;
   photoUrl: string;
   onlineStatus: 'online' | 'away' | 'offline';
-  private id: string; // Primary key, References UID
+  id: string; // Primary key, References UID
 
   constructor(
     name: string,
