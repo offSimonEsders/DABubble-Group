@@ -24,9 +24,6 @@ export class HeaderComponent implements OnInit {
     this.authService = inject(AuthService);
   }
 
-  swichImage(){
-    this.swich = !this.swich;
-  }
 
   ngOnInit(): void {}
 

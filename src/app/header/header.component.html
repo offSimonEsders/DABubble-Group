@@ -7,7 +7,7 @@
     <div class="profil-menu-container" (click)="switchDropDown()">
         @if(authService.user) {
         <span>{{ authService.user.name }}</span>
-        <div class="avatar-container" *ngIf="swich">
+        <div class="avatar-container">
             <app-avatar [accountId]="authService.user.accountId" [hideStatus]="false"></app-avatar>
         </div>
         }
