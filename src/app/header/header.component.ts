@@ -18,9 +18,14 @@ export class HeaderComponent implements OnInit {
   accountName!: string;
   dropDown: boolean = false;
   profileView: boolean = false;
+  swich:boolean = true;
 
   constructor(private router: Router) {
     this.authService = inject(AuthService);
+  }
+
+  swichImage(){
+    this.swich = !this.swich;
   }
 
   ngOnInit(): void {}

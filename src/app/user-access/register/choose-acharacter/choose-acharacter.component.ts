@@ -5,6 +5,7 @@ import { CheckInputService } from '../../../services/check-input.service';
 import { ChatService } from '../../../services/chat.service';
 import { CommonModule } from '@angular/common';
 import { EditProfileComponent } from '../../../profile-view/edit-profile/edit-profile.component';
+import { HeaderComponent } from '../../../header/header.component';
 
 @Component({
   selector: 'app-choose-acharacter',
@@ -31,6 +32,7 @@ export class ChooseACharacterComponent implements AfterViewInit, OnInit{
   fileWithNewName!: any;
   showDiv:boolean = false;
   editProfile!:EditProfileComponent;
+  header!: HeaderComponent;
 
   ngOnInit(): void {
     if(this.authservice.profileViewAccount){
@@ -39,10 +41,12 @@ export class ChooseACharacterComponent implements AfterViewInit, OnInit{
     }
   }
 
-  constructor(private authservice: AuthService, private storageservice: StorageService, private checkinputservice: CheckInputService,private channel:ChatService) {
+  constructor(public authservice: AuthService, private storageservice: StorageService, private checkinputservice: CheckInputService,private channel:ChatService) {
     if(this.authservice.profileViewAccount){
       this.editProfile = inject(EditProfileComponent);
+      this.header = inject(HeaderComponent);
     }
+
   }
 
   goBackToEdit(){
@@ -109,6 +113,10 @@ export class ChooseACharacterComponent implements AfterViewInit, OnInit{
       return;
     }
     this.authservice.authUpdateImgURL(this.authservice.profileViewAccount.accountId,this.storageUrL);
+    this.authservice.user = this.authservice.profileViewAccount;
+    this.header.swichImage();
+    this.header.swichImage();
+
   }
 
   setAllUserToChannel(){

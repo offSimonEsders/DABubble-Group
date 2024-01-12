@@ -10,7 +10,8 @@
         </div>
     </div>
     <div class="choose-container">
-        <h2 class="name-container" id="choose-name-container">Name</h2>
+        <h2 *ngIf="register" class="name-container" id="choose-name-container">Name</h2>
+        <h2 *ngIf="!register" class="name-container" id="choose-name-container">{{ authservice.profileViewAccount.name }}</h2>
         <h3>Aus der Liste wählen</h3>
         <div class="choosable-container">
             <img src="../../../../assets/img/characters/elise_roth.svg" alt="" (click)="this.changeCharacterPreview('../../../../assets/img/characters/elise_roth.svg', 'userAvatars/elise_roth.svg')">
@@ -22,7 +23,7 @@
         </div>
     </div>
     <div class="load-own-img">
-        <h3>eigenes Bild verwenden</h3>
+        <h3>Eigenes Bild verwenden</h3>
         <input type="file" name="" id="select-file" accept=".svg,.png,.jpg,.jpeg" (input)="loadimg()" #selectfile>
         <label for="select-file">Datei hochladen</label>
     </div>
