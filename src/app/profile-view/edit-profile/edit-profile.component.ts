@@ -40,10 +40,6 @@ export class EditProfileComponent {
     this.openNewImage = !this.openNewImage;
   }
 
-  openAvatar() {
-    this.openNewImage = !this.openNewImage;
-  }
-
   close() {
     this.saveEmail = '';
     this.saveName = '';

@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { AccountService } from './account.service';
 import {
   Auth,
-  updateEmail,
   GoogleAuthProvider,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
@@ -14,9 +13,7 @@ import {
   signOut,
   updateEmail,
   updateProfile,
-  verifyBeforeUpdateEmail,
   verifyPasswordResetCode,
-  getAuth,
   verifyBeforeUpdateEmail,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
@@ -40,15 +37,17 @@ export class AuthService {
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
   }
 
-  updateEmail(newEmail:string){
-    if(this.auth.currentUser){
-      updateEmail(this.auth.currentUser, newEmail).then(() => {
-        // Email updated!
-        // ...
-      }).catch((error) => {
-        // An error occurred
-        // ...
-      });
+  updateEmail(newEmail: string) {
+    if (this.auth.currentUser) {
+      updateEmail(this.auth.currentUser, newEmail)
+        .then(() => {
+          // Email updated!
+          // ...
+        })
+        .catch((error) => {
+          // An error occurred
+          // ...
+        });
     }
   }
 
@@ -121,13 +120,10 @@ export class AuthService {
     });
   }
 
-  async authUpdateImgURL(id:string,url:string){
-    await updateDoc(
-      this.firestoreService.getDocRef('accounts', id),
-      { 
-        photoUrl: url
-      }
-    ).then(() => {
+  async authUpdateImgURL(id: string, url: string) {
+    await updateDoc(this.firestoreService.getDocRef('accounts', id), {
+      photoUrl: url,
+    }).then(() => {
       this.user.photoUrl = url;
       this.profileViewAccount.photoUrl = url;
     });
@@ -211,7 +207,7 @@ export class AuthService {
       });
   }
 
-  async changeEmail(email:string){
+  async changeEmail(email: string) {
     let auth = getAuth();
     let currentUser = auth.currentUser;
     if (currentUser !== null) {
@@ -222,7 +218,7 @@ export class AuthService {
         console.error(error);
       }
     } else {
-      console.error("User not authenticated");
+      console.error('User not authenticated');
     }
   }
 }
