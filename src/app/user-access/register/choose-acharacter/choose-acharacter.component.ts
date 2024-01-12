@@ -101,13 +101,14 @@ export class ChooseACharacterComponent implements AfterViewInit, OnInit{
   }
 
   updatePresentUser(){
-    debugger
-    if (true) {
+    debugger;
+    if (this.loadownimage) {
       debugger;
       this.storageservice.uploadFileToFirestorage(this.fileWithNewName, this.authservice.profileViewAccount.accountId);
       this.showAnimationAndLoadogin();
       return;
     }
+    this.authservice.authUpdateImgURL(this.authservice.profileViewAccount.accountId,this.storageUrL);
   }
 
   setAllUserToChannel(){

@@ -112,6 +112,18 @@ export class AuthService {
     });
   }
 
+  async authUpdateImgURL(id:string,url:string){
+    await updateDoc(
+      this.firestoreService.getDocRef('accounts', id),
+      { 
+        photoUrl: url
+      }
+    ).then(() => {
+      this.user.photoUrl = url;
+      this.profileViewAccount.photoUrl = url;
+    });
+  }
+
   async authServiceLogOut() {
     await updateDoc(
       this.firestoreService.getDocRef('accounts', this.user.accountId),
