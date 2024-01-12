@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { AccountService } from './account.service';
 import {
   Auth,
+  updateEmail,
   GoogleAuthProvider,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
@@ -15,11 +16,14 @@ import {
   updateProfile,
   verifyBeforeUpdateEmail,
   verifyPasswordResetCode,
+  getAuth,
+  verifyBeforeUpdateEmail,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Account } from '../models/account.class';
 import { FirestoreService } from './firestore.service';
 import { updateDoc } from '@angular/fire/firestore';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -34,6 +38,18 @@ export class AuthService {
     this.firestoreService = inject(FirestoreService);
     this.provider = new GoogleAuthProvider();
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  }
+
+  updateEmail(newEmail:string){
+    if(this.auth.currentUser){
+      updateEmail(this.auth.currentUser, newEmail).then(() => {
+        // Email updated!
+        // ...
+      }).catch((error) => {
+        // An error occurred
+        // ...
+      });
+    }
   }
 
   authServiceSignUpWithEmailAndPassword(
@@ -102,6 +118,18 @@ export class AuthService {
       this.getUser('pesOSpHsgAt97WwG705y');
       this.setOnlineStatus('pesOSpHsgAt97WwG705y');
       this.router.navigate(['/home']);
+    });
+  }
+
+  async authUpdateImgURL(id:string,url:string){
+    await updateDoc(
+      this.firestoreService.getDocRef('accounts', id),
+      { 
+        photoUrl: url
+      }
+    ).then(() => {
+      this.user.photoUrl = url;
+      this.profileViewAccount.photoUrl = url;
     });
   }
 
@@ -181,5 +209,20 @@ export class AuthService {
       .catch(() => {
         return true;
       });
+  }
+
+  async changeEmail(email:string){
+    let auth = getAuth();
+    let currentUser = auth.currentUser;
+    if (currentUser !== null) {
+      try {
+        debugger;
+        await verifyBeforeUpdateEmail(currentUser, email);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.error("User not authenticated");
+    }
   }
 }

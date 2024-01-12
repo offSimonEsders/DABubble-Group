@@ -14,21 +14,54 @@ import { NgIf } from '@angular/common';
 export class ResetPasswordComponent implements OnInit {
   @ViewChild('password1') password1?: ElementRef;
   @ViewChild('password2') password2?: ElementRef;
+  @ViewChild('email1') email1?: ElementRef;
+  @ViewChild('email2') email2?: ElementRef;
   @ViewChild('changepasswordbutton') changepasswordbutton?: ElementRef;
+  @ViewChild('changeemailbutton') changeemailbutton?: ElementRef;
   @ViewChild('userfeedbackresetpassword') userfeedbackresetpassword?: any;
 
   linkused!: boolean;
   loaded: boolean = false;
+  email: boolean = false;
 
   constructor(private router: Router, private authservice: AuthService, private route: ActivatedRoute, private checkinputservice: CheckInputService, private ngzone: NgZone) {
 
   }
   async ngOnInit() {
     await this.isLinkUsed();
+    this.findURL();
+  }
+
+  findURL(){
+    const mode = this.route.snapshot.queryParamMap.get('mode');
+    if (mode === 'verifyAndChangeEmail') {
+      console.log(mode);
+      this.email = true;
+    }else{
+      this.email = false;
+    }
   }
 
   goToLogin() {
     this.router.navigate(['']);
+  }
+
+  checkIfEmailEntered(){
+    if (this.email1 && this.email2 && this.changepasswordbutton) {
+      this.changepasswordbutton.nativeElement.disabled = true;
+      let value1 = this.email1.nativeElement.value;
+      let value2 = this.email2.nativeElement.value;
+      if (value1 == '' || value2 == '' || value1 != value2) {
+        return;
+      }
+      if (!this.checkinputservice.isValidUseremail(value1)) {
+        return;
+      }
+      if(this.changeemailbutton){
+        this.changeemailbutton.nativeElement.disabled = false;
+      }
+      
+    }
   }
 
   checkIfPasswordEntered() {
@@ -46,6 +79,16 @@ export class ResetPasswordComponent implements OnInit {
     }
   }
 
+  callchangeEmail(event:Event){
+    event.preventDefault();
+    if (!this.email1) {
+      return;
+    }
+    this.showAnimationAndLoadogin();
+    this.disableEmailInputAndButton();
+    this.authservice.updateEmail(this.email1.nativeElement.value);
+  }
+
   async callchangePassword(event: Event) {
     event.preventDefault();
     if (!this.password1) {
@@ -54,6 +97,14 @@ export class ResetPasswordComponent implements OnInit {
     this.showAnimationAndLoadogin();
     this.disableInputAndButton();
     await this.authservice.changePassword(this.route.snapshot.queryParams['oobCode'], this.password1.nativeElement.value);
+  }
+
+  disableEmailInputAndButton(){
+    if(this.changeemailbutton && this.email1 && this.email2) {
+      this.changeemailbutton.nativeElement.disabled = true;
+      this.email1.nativeElement.disabled = true;
+      this.email2.nativeElement.disabled = true;
+    }
   }
 
   async isLinkUsed() {

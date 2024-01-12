@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   dropDown: boolean = false;
   profileView: boolean = false;
   account!: Account | undefined;
+  swich: boolean = true;
 
   constructor(private router: Router) {
     this.authService = inject(AuthService);

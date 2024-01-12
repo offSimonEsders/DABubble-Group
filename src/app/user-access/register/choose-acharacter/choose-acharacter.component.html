@@ -1,6 +1,7 @@
-<section class="choose-a-character-frame">
+<section [style.display]="showDiv ? 'flex' : 'none'"  class="choose-a-character-frame">
     
-    <button class="choose-go-back" (click)="showRegister()"></button>
+    <button *ngIf="register" class="choose-go-back" (click)="showRegister()"></button>
+    <button *ngIf="!register" class="choose-go-back" (click)="goBackToEdit()"></button>
 
     <h1 class="choose-a-character-header">Wähle deinen Avatar</h1>
     <div class="choosed-container">
@@ -9,7 +10,8 @@
         </div>
     </div>
     <div class="choose-container">
-        <h2 class="name-container" id="choose-name-container">Name</h2>
+        <h2 *ngIf="register" class="name-container" id="choose-name-container">Name</h2>
+        <h2 *ngIf="!register" class="name-container" id="choose-name-container">{{ authservice.profileViewAccount.name }}</h2>
         <h3>Aus der Liste wählen</h3>
         <div class="choosable-container">
             <img src="../../../../assets/img/characters/elise_roth.svg" alt="" (click)="this.changeCharacterPreview('../../../../assets/img/characters/elise_roth.svg', 'userAvatars/elise_roth.svg')">
@@ -21,10 +23,13 @@
         </div>
     </div>
     <div class="load-own-img">
-        <h3>eigenes Bild verwenden</h3>
+        <h3>Eigenes Bild verwenden</h3>
         <input type="file" name="" id="select-file" accept=".svg,.png,.jpg,.jpeg" (input)="loadimg()" #selectfile>
         <label for="select-file">Datei hochladen</label>
     </div>
-    <button class="create-acc" (click)="registerNewUser()">Weiter</button>
-    <div class="registration-choose-userfeedback" #userfeedback>Konto erfolgreich erstellt!</div>
+
+    <button *ngIf="register" class="create-acc" (click)="registerNewUser()">Weiter</button>
+    <div *ngIf="register" class="registration-choose-userfeedback" #userfeedback>Konto erfolgreich erstellt!</div>
+    <button *ngIf="!register" class="create-acc" (click)="updatePresentUser()">Speichern</button>
+    <div *ngIf="!register" class="registration-choose-userfeedback" #userfeedback>Bild wurde erfolgreich geändert!</div>
 </section>
