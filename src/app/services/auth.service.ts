@@ -76,7 +76,6 @@ export class AuthService {
         this.userId = userCredential.user.uid;
         this.getUser(userCredential.user.uid);
         this.setOnlineStatus(userCredential.user.uid);
-        //
       })
       .then(() => {
         this.router.navigate(['/home']);

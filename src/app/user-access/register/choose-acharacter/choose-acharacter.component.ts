@@ -104,14 +104,16 @@ export class ChooseACharacterComponent implements AfterViewInit, OnInit{
     this.setAllUserToChannel();
   }
 
-  updatePresentUser(){
+  async updatePresentUser(){
     if (this.loadownimage) {
-      this.storageservice.uploadFileToFirestorage(this.fileWithNewName, this.authservice.profileViewAccount.accountId);
+      let Uid = this.authservice.profileViewAccount.accountId;
+      this.storageservice.uploadFileToFirestorage(this.fileWithNewName, Uid);
       this.showAnimationAndLoadogin();
-      return;
+    }else{
+      this.authservice.authUpdateImgURL(this.authservice.profileViewAccount.accountId,this.storageUrL);
+      this.authservice.user = this.authservice.profileViewAccount;
+      this.showAnimationAndLoadogin();
     }
-    this.authservice.authUpdateImgURL(this.authservice.profileViewAccount.accountId,this.storageUrL);
-    this.authservice.user = this.authservice.profileViewAccount;
   }
 
   setAllUserToChannel(){
