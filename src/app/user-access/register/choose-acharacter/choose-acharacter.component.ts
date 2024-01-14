@@ -107,7 +107,9 @@ export class ChooseACharacterComponent implements AfterViewInit, OnInit{
   async updatePresentUser(){
     if (this.loadownimage) {
       let Uid = this.authservice.profileViewAccount.accountId;
+      const halfUid = Uid.substring(0, Uid.length / 2);
       this.storageservice.uploadFileToFirestorage(this.fileWithNewName, Uid);
+      this.authservice.authUpdateImgURL(this.authservice.user.accountId, `userAvatars/individual/${halfUid}personalAvatar`);
       this.showAnimationAndLoadogin();
     }else{
       this.authservice.authUpdateImgURL(this.authservice.profileViewAccount.accountId,this.storageUrL);
