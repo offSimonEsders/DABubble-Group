@@ -8,7 +8,6 @@ import { ToggleContainerService } from '../services/toggle-container.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../services/chat.service';
-import { AuthService } from '../services/auth.service';
 
 interface ToggleSub {
   element: string;
@@ -35,11 +34,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   elementRef = 'secondary-chat';
   width = '0px';
 
-  constructor(private channel: ChatService, private auth:AuthService) {
+  constructor(private channel: ChatService) {
     this.toggleContainerService = inject(ToggleContainerService);
-    if(this.auth.profileViewAccount){
-      this.auth.profileViewAccount = this.auth.getFromLocalStorage();
-    }
   }
 
   /**

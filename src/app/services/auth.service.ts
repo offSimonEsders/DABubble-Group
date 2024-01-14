@@ -76,6 +76,7 @@ export class AuthService {
         this.userId = userCredential.user.uid;
         this.getUser(userCredential.user.uid);
         this.setOnlineStatus(userCredential.user.uid);
+        //
       })
       .then(() => {
         this.router.navigate(['/home']);
@@ -85,16 +86,6 @@ export class AuthService {
           error_function();
         }
       });
-  }
-
-  setInLocalStorage(){
-    debugger;
-    localStorage.setItem('user', JSON.stringify(this.user));
-  }
-
-  getFromLocalStorage(){
-    const item = localStorage.getItem('user');
-    return item ? JSON.parse(item) : this.signInAnonymously();
   }
 
   authServiceSignInWithGoogle() {
@@ -182,8 +173,6 @@ export class AuthService {
   getUser(id: string) {
     this.accountService.getAccount(id).then((account) => {
       this.user = account;
-      this.profileViewAccount = this.user;
-      this.setInLocalStorage();
     });
   }
 
