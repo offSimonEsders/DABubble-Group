@@ -87,6 +87,16 @@ export class AuthService {
       });
   }
 
+  setInLocalStorage(){
+    debugger;
+    localStorage.setItem('user', JSON.stringify(this.user));
+  }
+
+  getFromLocalStorage(){
+    const item = localStorage.getItem('user');
+    return item ? JSON.parse(item) : this.signInAnonymously();
+  }
+
   authServiceSignInWithGoogle() {
     signInWithPopup(this.auth, this.provider)
       .then((result) => {
@@ -172,6 +182,8 @@ export class AuthService {
   getUser(id: string) {
     this.accountService.getAccount(id).then((account) => {
       this.user = account;
+      this.profileViewAccount = this.user;
+      this.setInLocalStorage();
     });
   }
 
