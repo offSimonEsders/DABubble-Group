@@ -2,4 +2,8 @@
 
 .overdiv {
   padding: 16px;
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: none;
+  }
 }
