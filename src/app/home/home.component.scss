@@ -16,11 +16,22 @@
     width: 100%;
     height: calc(100vh - 141px);
     @include displayFlex($g: 20px);
+    @media (max-width: 1000px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      max-height: calc(100vh - 141px);
+    }
 
     .menu-channel {
       @include componentMaxWidth(366px);
       scrollbar-gutter: stable;
       overflow-y: auto;
+
+      @media (max-width: 1000px) {
+        @include componentMaxWidth(100%);
+      }
 
       &::-webkit-scrollbar {
         width: 5px;
@@ -41,3 +52,10 @@
     }
   }
 }
+
+.destop{
+  @media (max-width: 1000px) {
+    display: none !important;
+  }
+}
+
