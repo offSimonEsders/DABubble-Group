@@ -2,6 +2,10 @@
 
 .head {
   @include displayFlex($jc: space-between);
+
+  @media (max-width:1000px) {
+    display: none;
+  }
 }
 
 .edit-button {
