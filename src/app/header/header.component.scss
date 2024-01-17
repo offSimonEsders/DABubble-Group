@@ -7,6 +7,21 @@ header {
   .logo {
     width: 242.11px;
     height: 70px;
+
+    @media (max-width:730px) {
+      object-fit: contain;
+      width: 200px;
+    }
+
+    @media (max-width:630px) {
+      object-fit: contain;
+      width: 150px;
+    }
+
+    @media (max-width:500px) {
+      object-fit: contain;
+      width: 100px;
+    }
   }
 }
 
@@ -25,7 +40,9 @@ header {
   }
 }
 .searchContainer {
-
+  @media (max-width:1000px) {
+    display: none;
+  }
 }
 
 .searchbar {
@@ -109,6 +126,16 @@ app-avatar {
   @include displayFlex($g: 20px);
   cursor: pointer;
 
+  @media (max-width:630px) {
+    justify-content: flex-end;
+    max-width: 350px;
+    gap: 5px;
+  }
+
+  @media (max-width:630px) {
+    max-width: 200px;
+  }
+
   span {
     font-size: 32px;
     font-weight: 700;
@@ -116,6 +143,26 @@ app-avatar {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+
+    @media (max-width:730px) {
+      font-size: 26px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    @media (max-width:630px) {
+      font-size: 22px;
+      max-width: calc(100% - 100px);
+    }
+
+
+    @media (max-width:500px) {
+      font-size: 18px;
+    }
+
+    @media (max-width:400px) {
+      font-size: 16px;
+    }
   }
 
   .avatar-container {
@@ -129,6 +176,13 @@ app-avatar {
 
   &:hover .arrow-down-icon path {
     fill: $purple2;
+  }
+}
+
+.arrow-down-icon{
+  @media (max-width:730px) {
+    width: 25px;
+    height: 25px;
   }
 }
 
