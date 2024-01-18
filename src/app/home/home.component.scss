@@ -4,6 +4,8 @@
   @media (min-width:1001px) {
     display: none !important;
   }
+
+  height: calc(100vh - 120px)!important;
 }
 
 .home {
@@ -11,6 +13,12 @@
   height: 100vh;
   padding: 25px 20px;
   background-color: $bgr;
+
+  @media (max-width: 1000px) {
+    padding: 0;
+    padding-top: 20px;
+    border-radius: 0;
+  }
 
   header {
     width: 100%;
@@ -23,10 +31,8 @@
     height: calc(100vh - 141px);
     @include displayFlex($g: 20px);
     @media (max-width: 1000px) {
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
-      max-height: calc(100vh - 141px);
+      max-height: calc(100vh - 120px) !important;
+      gap: 0;
 
     }
 
@@ -39,6 +45,7 @@
         @include componentMaxWidth(100%);
         overflow-y: scroll;
         min-width: 100% !important;
+        border-radius: 0px;
       }
 
       &::-webkit-scrollbar {
@@ -53,10 +60,18 @@
 
     .main-chat {
       @include componentMaxWidth(100%);
+
+      @media (max-width:1000px) {
+        border-radius: 0px;
+      }
     }
 
     .secondary-chat {
       @include componentMaxWidth(485px);
+
+      @media (max-width:1000px) {
+        border-radius: 0px;
+      }
     }
   }
 }

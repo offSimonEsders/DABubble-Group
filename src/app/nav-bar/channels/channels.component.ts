@@ -31,6 +31,7 @@ export class ChannelsComponent {
   chatService!: ChatService;
   messageService!: MessageService;
   home!:HomeComponent;
+  head!:HeaderComponent;
   //@ViewChild('headerElement', { static: false }) head!: HeaderComponent;
 
   constructor(private auth: Auth) {
@@ -38,7 +39,9 @@ export class ChannelsComponent {
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);
     this.messageService = inject(MessageService);
+    //this.head = inject(HeaderComponent);
     this.home = inject(HomeComponent);
+
     this.sortAccounts();
   }
 

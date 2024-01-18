@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit {
 
     this.messageService.getFilteredMessages();
     this.messages = this.messageService.filteredMessages;
-    console.log(this.messages);
+    //console.log(this.messages);
 
 
   }
