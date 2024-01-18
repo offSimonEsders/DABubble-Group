@@ -60,9 +60,6 @@ export class HeaderComponent implements OnInit {
     this.account = this.accountService.accounts.find(
       (account) => account.id === this.authService.userId
     );
-    if (this.account) {
-      console.log(this.account);
-    }
 
     this.accountService.getAllAccounts();
     this.userArr =  this.accountService.accounts.filter(

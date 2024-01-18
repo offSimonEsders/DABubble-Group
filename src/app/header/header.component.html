@@ -54,7 +54,7 @@
             
     </div>
     
-    <div class="profil-menu-container" (click)="switchDropDown()">
+    <div class="profil-menu-container" (click)="switchDropDown();">
         @if(authService.user) {
         <span>{{ authService.user.name }}</span>
         <div class="avatar-container">
