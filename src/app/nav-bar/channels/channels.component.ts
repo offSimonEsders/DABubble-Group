@@ -10,6 +10,7 @@ import { Channel } from '../../models/channel.class';
 import { MessageService } from '../../services/message.service';
 import { updateDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
+import { HomeComponent } from '../../home/home.component';
 
 @Component({
   selector: 'app-channels',
@@ -28,12 +29,14 @@ export class ChannelsComponent {
   accountService!: AccountService;
   chatService!: ChatService;
   messageService!: MessageService;
+  home!:HomeComponent;
 
   constructor(private auth: Auth) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);
     this.messageService = inject(MessageService);
+    this.home = inject(HomeComponent);
     this.sortAccounts();
   }
 
@@ -69,6 +72,11 @@ export class ChannelsComponent {
       this.chatService.currentChannel = channel;
       this.chatService.openChatEmitter.next({ chatColl: collId });
     });
+    let screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+    debugger;
+    if (screenWidth <= 1000) {
+      this.home.swichMobileChat();
+    }
   }
 
   // prettier-ignore

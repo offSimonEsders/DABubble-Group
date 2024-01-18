@@ -133,7 +133,11 @@ app-avatar {
   }
 
   @media (max-width:630px) {
-    max-width: 200px;
+    max-width: 250px;
+  }
+
+  @media (max-width:435px) {
+    max-width: 150px;
   }
 
   span {
@@ -163,11 +167,19 @@ app-avatar {
     @media (max-width:400px) {
       font-size: 16px;
     }
+    @media (max-width:370px) {
+      display: none;
+    }
   }
 
   .avatar-container {
     width: 70px;
     height: 70px;
+
+    @media (max-width:435px) {
+      height: 45px;
+      width: 45px;
+    }
   }
 
   &:hover span {
@@ -183,6 +195,10 @@ app-avatar {
   @media (max-width:730px) {
     width: 25px;
     height: 25px;
+  }
+    @media (max-width:730px) {
+    width: 20px;
+    height: 20px;
   }
 }
 

@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   toggleSub!: Subscription;
   elementRef = 'secondary-chat';
   width = '0px';
+  hideBar:boolean = false;
 
   constructor(private channel: ChatService) {
     this.toggleContainerService = inject(ToggleContainerService);
@@ -49,6 +50,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       },
     });
     this.channel.AllUserInChannel();
+  }
+
+  swichMobileChat(){
+    this.hideBar = !this.hideBar;
   }
 
   ngOnDestroy(): void {
