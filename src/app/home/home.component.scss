@@ -1,5 +1,11 @@
 @import "../../styles.scss";
 
+.mobile{
+  @media (min-width:1001px) {
+    display: none !important;
+  }
+}
+
 .home {
   width: 100vw;
   height: 100vh;

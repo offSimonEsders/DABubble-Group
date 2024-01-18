@@ -1,5 +1,9 @@
-<header>
-    <img class="logo" src="../../assets/img/daBubbleLogo.png" alt="Hier ist das Logo von DaBubble">
+<header #headerElement>
+    <div>
+        <img *ngIf="!hideBar" class="logo" src="../../assets/img/daBubbleLogo.png" alt="Hier ist das Logo von DaBubble">
+        <app-nav-head *ngIf="hideBar" class="logo"></app-nav-head>
+    </div>
+    
     <div class="searchContainer">
         <div class="searchbar">
             <input id="searchInputField"

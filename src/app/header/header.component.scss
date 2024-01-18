@@ -17,11 +17,6 @@ header {
       object-fit: contain;
       width: 150px;
     }
-
-    @media (max-width:500px) {
-      object-fit: contain;
-      width: 100px;
-    }
   }
 }
 
@@ -160,14 +155,7 @@ app-avatar {
     }
 
 
-    @media (max-width:500px) {
-      font-size: 18px;
-    }
-
-    @media (max-width:400px) {
-      font-size: 16px;
-    }
-    @media (max-width:370px) {
+    @media (max-width:570px) {
       display: none;
     }
   }

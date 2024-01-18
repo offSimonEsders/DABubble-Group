@@ -4,3 +4,9 @@
   padding: 16px;
 
 }
+
+.head{
+  @media (max-width:1000px) {
+    display: none;
+  }
+}

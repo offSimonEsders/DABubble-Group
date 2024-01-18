@@ -13,13 +13,14 @@ import { Channel } from '../models/channel.class';
 import { FirestoreService } from '../services/firestore.service';
 import { StorageService } from '../services/storage.service';
 import { Chat } from '../models/chat.class';
+import { NavHeadComponent } from '../nav-bar/nav-head/nav-head.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  imports: [AvatarComponent, CommonModule, ProfileViewComponent],
+  imports: [AvatarComponent, CommonModule, ProfileViewComponent,NavHeadComponent],
 })
 export class HeaderComponent implements OnInit {
   authService!: AuthService;
@@ -40,6 +41,7 @@ export class HeaderComponent implements OnInit {
   messageService!: MessageService;
   chatService!: any;
   firestoreService: FirestoreService;
+  hideBar:boolean = false;
 
   constructor(private router: Router, public storageservice: StorageService) {
     this.authService = inject(AuthService);
@@ -47,7 +49,10 @@ export class HeaderComponent implements OnInit {
     this.messageService = inject(MessageService);
     this.chatService = inject(ChatService);
     this.firestoreService = inject(FirestoreService);
-    
+  }
+
+  swichMobileChat(){
+    this.hideBar = !this.hideBar;
   }
 
   ngOnInit(): void {
