@@ -27,6 +27,7 @@ interface ToggleSub {
     CreateChannelComponent,
     CommonModule,
   ],
+  providers:[HeaderComponent]
 })
 export class HomeComponent implements OnInit, OnDestroy {
   toggleContainerService!: ToggleContainerService;

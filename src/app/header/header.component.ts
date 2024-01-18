@@ -52,6 +52,7 @@ export class HeaderComponent implements OnInit {
   }
 
   swichMobileChat(){
+    debugger;
     this.hideBar = !this.hideBar;
   }
 
@@ -72,8 +73,6 @@ export class HeaderComponent implements OnInit {
     this.messageService.getFilteredMessages();
     this.messages = this.messageService.filteredMessages;
     //console.log(this.messages);
-
-
   }
 
   switchDropDown() {

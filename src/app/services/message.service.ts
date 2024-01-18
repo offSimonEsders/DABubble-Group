@@ -141,15 +141,20 @@ export class MessageService {
 
   // prettier-ignore
   getFilteredMessages() {
-    this.filteredMessages = [];
-    for (let i = 0; i < this.dispatchedDays.length; i++) {
-      let arrayOfFilteredMessages = this.messages.filter((message: Message) =>
-        this.onDispatchedDay(message, i)
-      );
-      arrayOfFilteredMessages.sort((a, b) => a.dispatchedDate - b.dispatchedDate);
-      this.filteredMessages.push(arrayOfFilteredMessages);
+    if(this.dispatchedDays){
+      this.filteredMessages = [];
+      if(this.dispatchedDays.length > 0){
+        for (let i = 0; i < this.dispatchedDays.length; i++) {
+          let arrayOfFilteredMessages = this.messages.filter((message: Message) =>
+            this.onDispatchedDay(message, i)
+          );
+          arrayOfFilteredMessages.sort((a, b) => a.dispatchedDate - b.dispatchedDate);
+          this.filteredMessages.push(arrayOfFilteredMessages);
+        }
+        this.loadedMessagesEmitter.next(true);
     }
-    this.loadedMessagesEmitter.next(true);
+    }
+    
   }
 
   onDispatchedDay(message: Message, index: number) {

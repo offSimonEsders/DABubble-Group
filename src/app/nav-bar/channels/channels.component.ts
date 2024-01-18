@@ -39,7 +39,7 @@ export class ChannelsComponent {
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);
     this.messageService = inject(MessageService);
-    //this.head = inject(HeaderComponent);
+    this.head = inject(HeaderComponent);
     this.home = inject(HomeComponent);
 
     this.sortAccounts();
@@ -79,8 +79,8 @@ export class ChannelsComponent {
     });
     let screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
     if (screenWidth <= 1000) {
+      this.head.swichMobileChat();
       this.home.swichMobileChat();
-      //this.head.swichMobileChat();
     }
   }
 
