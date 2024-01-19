@@ -77,11 +77,7 @@ export class ChannelsComponent {
       this.chatService.currentChannel = channel;
       this.chatService.openChatEmitter.next({ chatColl: collId });
     });
-    let screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
-    if (screenWidth <= 1000) {
-      this.head.swichMobileChat();
-      this.home.swichMobileChat();
-    }
+    this.openMobileView();
   }
 
   // prettier-ignore
@@ -103,6 +99,15 @@ export class ChannelsComponent {
       if (this.noPrivateChatExists(i)) {
         this.createNewPrivateChat(chatColl, accId);
       }
+    }
+    this.openMobileView();
+  }
+
+  openMobileView(){
+    let screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+    if (screenWidth <= 1000) {
+      this.chatService.swichPictureFunction();
+      this.home.swichMobileChat();
     }
   }
 

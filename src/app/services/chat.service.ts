@@ -30,7 +30,7 @@ export class ChatService implements OnDestroy {
   currentChat!: Chat;
   channels: Channel[] = [];
   currentChannel!: Channel;
-
+  swichPicture:boolean = false;
   incompleteCreateChannel!: Channel;
 
   channelCreatedSource = new Subject<boolean>();
@@ -45,6 +45,10 @@ export class ChatService implements OnDestroy {
   ngOnDestroy(): void {
     this.chatSnap();
     this.channelSnap();
+  }
+
+  swichPictureFunction(){
+    this.swichPicture = !this.swichPicture;
   }
 
   channelCreated(state: boolean) {
