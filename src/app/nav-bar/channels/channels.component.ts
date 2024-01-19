@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateChannelComponent } from '../create-channel/create-channel.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
@@ -10,6 +10,8 @@ import { Channel } from '../../models/channel.class';
 import { MessageService } from '../../services/message.service';
 import { updateDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
+import { HomeComponent } from '../../home/home.component';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-channels',
@@ -28,12 +30,18 @@ export class ChannelsComponent {
   accountService!: AccountService;
   chatService!: ChatService;
   messageService!: MessageService;
+  home!:HomeComponent;
+  head!:HeaderComponent;
+  //@ViewChild('headerElement', { static: false }) head!: HeaderComponent;
 
   constructor(private auth: Auth) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);
     this.messageService = inject(MessageService);
+    this.head = inject(HeaderComponent);
+    this.home = inject(HomeComponent);
+
     this.sortAccounts();
   }
 
@@ -69,6 +77,11 @@ export class ChannelsComponent {
       this.chatService.currentChannel = channel;
       this.chatService.openChatEmitter.next({ chatColl: collId });
     });
+    let screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+    if (screenWidth <= 1000) {
+      this.head.swichMobileChat();
+      this.home.swichMobileChat();
+    }
   }
 
   // prettier-ignore

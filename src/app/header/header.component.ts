@@ -8,13 +8,14 @@ import { AccountService } from '../services/account.service';
 import { Account } from '../models/account.class';
 import { StorageService } from '../services/storage.service';
 import { SearchBarComponent } from "../search-bar/search-bar.component";
+import { NavHeadComponent } from '../nav-bar/nav-head/nav-head.component';
 
 @Component({
-    selector: 'app-header',
-    standalone: true,
-    templateUrl: './header.component.html',
-    styleUrl: './header.component.scss',
-    imports: [AvatarComponent, CommonModule, ProfileViewComponent, SearchBarComponent]
+  selector: 'app-header',
+  standalone: true,
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss',
+  imports: [AvatarComponent, CommonModule, ProfileViewComponent, NavHeadComponent, SearchBarComponent],
 })
 export class HeaderComponent implements OnInit {
   authService!: AuthService;
@@ -25,11 +26,18 @@ export class HeaderComponent implements OnInit {
   profileView: boolean = false;
   account!: Account | undefined;
   swich: boolean = true;
+  hideBar:boolean = false;
 
 
   constructor(private router: Router, public storageservice: StorageService) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);    
+  }
+
+
+  swichMobileChat(){
+    debugger;
+    this.hideBar = !this.hideBar;
   }
 
   ngOnInit(): void {

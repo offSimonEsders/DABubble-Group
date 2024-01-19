@@ -1,8 +1,11 @@
 <header>
-    <img class="logo" src="../../assets/img/daBubbleLogo.png" alt="Hier ist das Logo von DaBubble">
-    <app-search-bar></app-search-bar>
+    <div>
+        <img *ngIf="!hideBar" class="logo" src="../../assets/img/daBubbleLogo.png" alt="Hier ist das Logo von DaBubble">
+        <app-nav-head *ngIf="hideBar" class="logo"></app-nav-head>
+    </div>
     
-    <div class="profil-menu-container" (click)="switchDropDown()">
+    <app-search-bar></app-search-bar>    
+    <div class="profil-menu-container" (click)="switchDropDown();">
         @if(authService.user) {
         <span>{{ authService.user.name }}</span>
         <div class="avatar-container">
