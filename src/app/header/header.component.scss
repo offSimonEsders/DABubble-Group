@@ -99,12 +99,11 @@ header {
 }
 
 .closeline{
-  display: none !important;
   width: 100vw;
   height: 50px;
   @include displayFlex($jc: center);
-  @media (max-width:1000px) {
-    display: block;
+  @media (min-width:1000px) {
+    display: none !important;
   }
 
   div{
@@ -184,7 +183,7 @@ header {
         fill: $purple2;
       }
 
-      @media (max-width:1000px) {
+      @media (min-width:1000px) {
         display: none;
       }
     }
