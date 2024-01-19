@@ -5,6 +5,12 @@
 
   @media (max-width:1000px) {
     cursor: pointer;
+
+    &:hover{
+      .arrow-down-icon path{
+        fill: $purple2;
+      }
+    }
   }
 }
 
@@ -18,6 +24,13 @@
     @include displayFlex($jc: center);
   }
 
+  &:hover{
+    cursor: pointer;
+
+    svg path{
+      fill: $purple2;
+    }
+  }
 
   @media (max-width:1000px) {
     display: none ;
@@ -68,5 +81,9 @@
 
   &:hover path {
     fill: $purple2;
+  }
+
+  @media (min-width:1001px) {
+    display: none;
   }
 }

@@ -1,7 +1,10 @@
 <header>
-    <div>
-        <img *ngIf="!hideBar" class="logo" src="../../assets/img/daBubbleLogo.png" alt="Hier ist das Logo von DaBubble">
-        <app-nav-head *ngIf="hideBar" class="logo"></app-nav-head>
+    <div class="Mobilelogos">
+        <img *ngIf="!this.chatService.swichPicture" class="logo" src="../../assets/img/daBubbleLogo.png" alt="Hier ist das Logo von DaBubble">
+        <app-nav-head *ngIf="this.chatService.swichPicture" class="logo"></app-nav-head>
+    </div>
+    <div class="Destoplogos">
+        <img class="logo" src="../../assets/img/daBubbleLogo.png" alt="Hier ist das Logo von DaBubble">
     </div>
     
     <div class="searchContainer">

@@ -68,6 +68,18 @@ header {
   border: 1px solid #adb0d9;
 }
 
+.Mobilelogos{
+  @media (min-width:1001px) {
+    display: none;
+  }
+}
+
+.Destoplogos{
+  @media (max-width:1000px) {
+    display: none;
+  }
+}
+
 .searchResults::-webkit-scrollbar {
   position: absolute;
   left: 0;
