@@ -207,7 +207,7 @@ app-avatar {
 }
 
 .closeline{
-  display: none;
+  display: none !important;
   width: 100vw;
   height: 50px;
   @include displayFlex($jc: center);
@@ -279,6 +279,10 @@ app-avatar {
       path &:hover {
         fill: $purple2;
       }
+
+      @media (max-width:1000px) {
+        display: none;
+      }
     }
   }
 
@@ -291,9 +295,8 @@ app-avatar {
       }
       margin-top: 0;
     }
-    
-      background-color: none !important;
-      margin-top: 20px;
+    background-color: none !important;
+    margin-top: 20px;
 
   }
 
