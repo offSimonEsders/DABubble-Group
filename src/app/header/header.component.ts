@@ -9,6 +9,7 @@ import { Account } from '../models/account.class';
 import { StorageService } from '../services/storage.service';
 import { SearchBarComponent } from "../search-bar/search-bar.component";
 import { NavHeadComponent } from '../nav-bar/nav-head/nav-head.component';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-header',
@@ -27,11 +28,13 @@ export class HeaderComponent implements OnInit {
   account!: Account | undefined;
   swich: boolean = true;
   hideBar:boolean = false;
+  chatService!:ChatService;
 
 
   constructor(private router: Router, public storageservice: StorageService) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);    
+    this.chatService = inject(ChatService);
   }
 
 
