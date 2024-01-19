@@ -124,6 +124,18 @@ header {
   z-index: 10;
 }
 
+.Destoplogos{
+  @media (max-width:1000px) {
+    display: none;
+  }
+}
+
+.Mobilelogos{
+  @media (min-width:1001px) {
+    display: none;
+  }
+}
+
 .dropDown{
   position: absolute;
   bottom: 0;
