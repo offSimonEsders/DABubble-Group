@@ -62,7 +62,7 @@ export class ChannelsComponent {
     if(name.endsWith("(Du)")){
       return '';
     }else{
-      return '(Du)';
+      return ' (Du)';
     }
   }
 
