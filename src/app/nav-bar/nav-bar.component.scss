@@ -10,3 +10,9 @@
     display: none;
   }
 }
+
+.head-mobile{
+  @media (min-width:1001px) {
+    display: none;
+  }
+}
