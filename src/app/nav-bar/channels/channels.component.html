@@ -126,7 +126,7 @@
         <div *ngFor="let i of accountService.accounts" class="channels" (click)="openChat('chats', i.accountId)">
             <div class="container"><app-avatar [accountId]="i.accountId" [hideStatus]="false"></app-avatar></div>
             @if(authService.user) {
-                <span *ngIf="authService.user.name === i.name" class="personName">{{ i.name + ' (Du)' }} </span>
+                <span *ngIf="authService.user.name === i.name" class="personName">{{ i.name + setEndSpan(i.name) }} </span>
                 <span *ngIf="authService.user.name !== i.name" class="personName">{{ i.name }} </span>
             }
         </div>

@@ -54,12 +54,14 @@ export class CreateChannelComponent {
     this.ChannelName = '';
     this.ChannelDescription = '';
     this.checkDisabled = true;
+    this.chatService.channelCreated(false);
   }
 
   close2() {
     this.openCreate2 = false;
     this.whichCreate = 1;
     this.checkDisabled = true;
+    this.chatService.channelCreated(false);
   }
 
   nextpage() {

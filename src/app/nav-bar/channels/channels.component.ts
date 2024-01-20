@@ -12,6 +12,7 @@ import { updateDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { HomeComponent } from '../../home/home.component';
 import { HeaderComponent } from '../../header/header.component';
+import { SafePropertyRead } from '@angular/compiler';
 
 @Component({
   selector: 'app-channels',
@@ -55,6 +56,14 @@ export class ChannelsComponent {
         return a.name.localeCompare(b.name);
       }
     });
+  }
+
+  setEndSpan(name:string){
+    if(name.endsWith("(Du)")){
+      return '';
+    }else{
+      return '(Du)';
+    }
   }
 
   hideChannels() {
