@@ -174,14 +174,14 @@ export class MessageComponent implements OnInit {
     if (this.isAnswer) {
       return '0px';
     } else if (this.ownMessage) {
-      if(screenWidth !> 550){
-        return '30px 0px'
+      if(screenWidth < 551){
+        return '0px 0px'
       }else{
         return '100px 0px';
       }
     } else {
-      if(screenWidth !> 550){
-        return '0px 30px'
+      if(screenWidth < 550){
+        return '0px 0px'
       }else{
         return '0px 1000px';
       }
