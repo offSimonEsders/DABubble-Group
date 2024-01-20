@@ -7,7 +7,7 @@ import { HeaderComponent } from '../../header/header.component';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { ProfileViewComponent } from '../profile-view.component';
 import { FormsModule } from '@angular/forms';
-import { ChooseACharacterComponent } from '../../user-access/register/choose-acharacter/choose-acharacter.component';
+import { ChooseImageComponent } from '../choose-image/choose-image.component';
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
@@ -15,7 +15,7 @@ import { ChooseACharacterComponent } from '../../user-access/register/choose-ach
     AvatarComponent,
     FormsModule,
     CommonModule,
-    ChooseACharacterComponent,
+    ChooseImageComponent
   ],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss',
