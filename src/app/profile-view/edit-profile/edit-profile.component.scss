@@ -10,6 +10,14 @@
     border-top-right-radius: 0;
     box-shadow: -4px 6px 14px 1px $bgr;
 
+    @media (max-width:1000px) {
+        min-width: 100%;
+        max-width: 100%;
+        margin-left: 0px;
+        border-radius: 0px;
+        height: 100vh;
+    }
+
     h1{
         font-size: 28px;
         margin-top: 10px;
@@ -53,6 +61,11 @@
     border-radius: 100%;
     padding: 8px;
     cursor: pointer;
+
+    @media (max-width:500px) {
+        top: 32px;
+        right: 10px;
+    }
     svg{
         &:active {
             path{

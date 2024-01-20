@@ -23,13 +23,14 @@
         </div>
     </div>
     <div class="load-own-img">
-        <h3>Eigenes Bild verwenden</h3>
+        <h3 class="resp-h3">Eigenes Bild verwenden</h3>
         <input type="file" name="" id="select-file" accept=".svg,.png,.jpg,.jpeg" (input)="loadimg()" #selectfile>
         <label for="select-file">Datei hochladen</label>
     </div>
 
+    <div class="center-element" *ngIf="!register"><button  class="create-acc" (click)="updatePresentUser()">Speichern</button></div>
     <button *ngIf="register" class="create-acc" (click)="registerNewUser()">Weiter</button>
     <div *ngIf="register" class="registration-choose-userfeedback" #userfeedback>Konto erfolgreich erstellt!</div>
-    <button *ngIf="!register" class="create-acc" (click)="updatePresentUser()">Speichern</button>
+   
     <div *ngIf="!register" class="registration-choose-userfeedback" #userfeedback>Bild wurde erfolgreich geändert!</div>
 </section>

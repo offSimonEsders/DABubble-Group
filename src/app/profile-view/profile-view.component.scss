@@ -10,6 +10,14 @@
     border-top-right-radius: 0;
     box-shadow: -4px 6px 14px 1px $bgr;
 
+    @media (max-width:1000px) {
+        min-width: 100%;
+        max-width: 100%;
+        margin-left: 0px;
+        border-radius: 0px;
+        height: 100vh;
+    }
+
     h1{
         font-size: 28px;
         margin-top: 10px;
@@ -20,6 +28,10 @@
         margin-top: 20px;
         font-size: 20px;
         font-weight: 700;
+
+        @media (max-width:1000px) {
+            margin-top: 0px;
+        }
     }
 
     span{
@@ -188,5 +200,28 @@
         margin-top: 20px;
         cursor: pointer;
         color: $purple2;
+    }
+
+    @media (max-width:1000px) {
+        margin-top: 50px;
+    }
+}
+
+.destop{
+    @media (max-width:1000px) {
+        display: none;
+    }
+}
+
+.mobile{
+    @media (min-width:1001px) {
+        display: none;
+    }
+    cursor: pointer;
+
+    &:hover{
+        path{
+            fill:$purple2;
+        }
     }
 }
