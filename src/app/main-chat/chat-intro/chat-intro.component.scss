@@ -36,6 +36,18 @@
   color: $textGrey;
   @include displayFlex($g: 3px);
 
+  @media (max-width:1350px) {
+    font-size: 16px;
+  }
+
+  @media (max-width:1350px) {
+    font-size: 14px;
+  }
+  @media (max-width:1350px) {
+    font-size: 11px;
+    gap: 0;
+  }
+
   .link-hover:hover {
     color: $purple3;
     font-weight: 700;
