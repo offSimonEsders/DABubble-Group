@@ -170,12 +170,22 @@ export class MessageComponent implements OnInit {
   }
 
   setInlinePaddingToContainer() {
+    let screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
     if (this.isAnswer) {
       return '0px';
     } else if (this.ownMessage) {
-      return '100px 0px';
+      if(screenWidth !> 550){
+        return '30px 0px'
+      }else{
+        return '100px 0px';
+      }
     } else {
-      return '0px 1000px';
+      if(screenWidth !> 550){
+        return '0px 30px'
+      }else{
+        return '0px 1000px';
+      }
+      
     }
   }
 }
