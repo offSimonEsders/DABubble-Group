@@ -18,19 +18,19 @@ import { CommonModule } from '@angular/common';
     imports: [AvatarComponent, CommonModule]
 })
 export class SearchBarComponent {
-  userArr: any[] = [];
+  users: any[] = [];
+  messages: DocumentData[] = [];
+
   foundUsers: DocumentData[] = [];
   foundChannels: DocumentData[] = [];
-  messages: DocumentData[] = [];
   foundMessages: DocumentData[] = [];
   showResults: boolean = false;
-  searchText: string = '';
+  searchText!: Event;
   messageService!: MessageService;
   chatService!: any;
   firestoreService: FirestoreService;
   accountService!: AccountService;
   authService!: AuthService;
-  
 
   constructor() {
     this.messageService = inject(MessageService);
@@ -40,60 +40,40 @@ export class SearchBarComponent {
   }
   
   ngOnInit(): void {
-
     this.accountService.getAllAccounts();
-    this.userArr =  this.accountService.accounts.filter(
+    this.users =  this.accountService.accounts.filter(
       (account) => account.name.length > 0
     );
-
-
-    this.messageService.getFilteredMessages();
-    this.messages = this.messageService.filteredMessages;
-    console.log(this.messages);
-
-
   }
 
   clearSearch() {
-    const searchInputField = <HTMLInputElement>document.getElementById('searchInputField');
+    let searchInputField = <HTMLInputElement>document.getElementById('searchInputField');
     searchInputField.value = '';
     this.showResults = false;
   }
 
-  onSearch(_event: Event) {
-    const input = <HTMLInputElement>document.getElementById('searchInputField');
+  onSearch(event: any) {
     this.foundUsers = [];
-    this.foundMessages = [];  
     this.foundChannels = [];  
 
-    if (!input || input.value == ''){
+    if (event.target.value == ''){
       this.showResults = false;
       return;
     }
 
-     this.userArr.forEach((user) => {
-       if (user['name'].toLowerCase().includes(input.value.toLowerCase())) {
-          this.foundUsers.push(user);
+    this.users.forEach((user) => {
+      if (user['name'].toLowerCase().includes(event.target.value.toLowerCase())) {
+        this.foundUsers.push(user);
        }
      });
 
-    this.messages.forEach((message) => {
-      if (message['text'].toLowerCase().includes(input.value.toLowerCase())) {
-        this.foundMessages.push(message);
-      }
-    });
-    console.log('Found Messages:' + this.messages);
-
     this.chatService.channels.forEach((channel: DocumentData) => {
-      if (channel['name'].toLowerCase().includes(input.value.toLowerCase())) {
+      if (channel['name'].toLowerCase().includes(event.target.value.toLowerCase())) {
         this.foundChannels.push(channel);
       }
     });
 
-    if (this.foundUsers.length + this.foundChannels.length + this.foundMessages.length <= 0)
-      this.showResults = false;
-    else
-      this.showResults = true;
+    this.showResults = (!(this.foundUsers.length + this.foundChannels.length <= 0))
   } 
 
   openNewChannelDiv() {

@@ -1,8 +1,6 @@
 @import "../../styles.scss";
 
 .searchbar {
-    // width: calc(100% - 891px);
-    // max-width: 989px;
     padding: 17.5px 45px;
     @include displayFlex($jc: space-between);
     border-radius: 42px;
@@ -14,10 +12,6 @@
       color: $textGrey;
     }
   }
-  .searchContainer {
-  
-  }
-  
   .searchbar {
       width: 100%;
       padding: 15px 20px;
@@ -34,6 +28,7 @@
   
   .searchResults{
     margin-top: 6px;
+    margin-right: 20px;
     position: absolute;
     background-color: white;
     border-radius: 42px;

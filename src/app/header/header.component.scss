@@ -24,6 +24,10 @@ header {
   }
 }
 
+app-search-bar {
+  min-width: 400px;
+}
+
 .profil-menu-container {
   max-width: 468px;
   @include displayFlex($g: 20px);
