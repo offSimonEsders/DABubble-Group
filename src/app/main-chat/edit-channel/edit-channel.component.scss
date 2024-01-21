@@ -54,6 +54,11 @@
 .EditNameChannelInnerDiv{
     display: flex;  
     justify-content: space-between;
+
+    width: 100%;
+    div{
+        width: 100%;
+    }
 }
 
 .EditNameChannelName{
@@ -73,6 +78,26 @@
 }
 
 .editbutton-div{
+    max-width: 80px;
+    max-height: 20px;
+    span{
+        color: $purple2;
+        cursor: pointer;
+
+        &:hover{
+            color: $purple3;
+        }
+    }
+}
+
+.editbutton-div-Save{
+    max-width: 80px;
+    width: 80px;
+    max-height: 20px;
+    position: absolute;
+    z-index: 100;
+    top: 10px;
+    right: 0px;
     span{
         color: $purple2;
         cursor: pointer;
@@ -151,3 +176,30 @@
       }
     }
   }
+
+  .inputDiv{
+    margin-top: 20px ;
+    border: 1px solid $purple2;
+    border-radius: 100px;
+    padding: 8px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    div{
+        max-width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input{
+        padding-left: 10px;
+        padding-right: 10px;
+        border: none;
+        font-size: 18px;
+        outline: none !important;
+        width: 100%;
+    }
+}
