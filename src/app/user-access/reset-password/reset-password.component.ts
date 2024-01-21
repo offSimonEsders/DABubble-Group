@@ -28,8 +28,8 @@ export class ResetPasswordComponent implements OnInit {
 
   }
   async ngOnInit() {
-    await this.isLinkUsed();
-    this.findURL();
+    //await this.isLinkUsed();
+    //this.findURL();
   }
 
   findURL(){
