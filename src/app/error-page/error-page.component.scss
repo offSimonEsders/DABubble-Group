@@ -5,14 +5,33 @@
   height: 100vh;
   @include centerElement();
   background: linear-gradient(1deg, #313ae5 1.22%, #797ef3 98.76%);
+  overflow: hidden;
 
   header {
     @include displayFlex($g: 20px);
     margin-bottom: 50px;
 
+    max-width: 100%;
+    max-height: 100%;
+
     span {
       font-size: 64px;
       color: white;
+
+      @media (max-width:700px) {
+        font-size: 48px;
+      }
+    }
+  }
+
+  @media (max-width:700px) {
+    .logo-container{
+      max-width: 100vw;
+  
+      svg{
+        max-width: 80%;
+      }
+  
     }
   }
 
