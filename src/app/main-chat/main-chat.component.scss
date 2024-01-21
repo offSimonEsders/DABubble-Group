@@ -24,7 +24,7 @@ header {
   width: 100%;
   height: 100%;
   @include displayFlex($fd: column, $ai: flex-start);
-  overflow-y: auto;
+  overflow-y: scroll ;
 
   .subcontainer:first-of-type {
     margin-top: 63px;
