@@ -12,6 +12,7 @@ import {
 } from '@angular/fire/firestore';
 import { Subject } from 'rxjs';
 import { Answer } from '../models/answer.class';
+import { Channel } from '../models/channel.class';
 
 @Injectable({ providedIn: 'root' })
 export class MessageService {
@@ -26,6 +27,8 @@ export class MessageService {
   loadedMessagesEmitter = new Subject<boolean>();
   loadedAnswersEmitter = new Subject<boolean>();
   openChatEmitter = new Subject<{ collId: string }>();
+
+  editChannel!:Channel;
 
   constructor() {
     this.firestore = inject(FirestoreService);
