@@ -12,8 +12,8 @@
         @if(authService.user) {
         <span>{{ authService.user.name }}</span>
         <div class="avatar-container">
-            @if(account) {
-            <app-avatar [accountId]="account.id" [hideStatus]="false"></app-avatar>
+            @if(authService.user) {
+            <app-avatar [accountId]="authService.user.accountId" [hideStatus]="false"></app-avatar>
             }
         </div>
         }
