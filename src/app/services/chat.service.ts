@@ -64,6 +64,13 @@ export class ChatService implements OnDestroy {
     });
   }
 
+  async updateChannel(chat: Chat | Channel, collId: string){
+    await updateDoc(
+      doc(this.firestore.db,collId),
+      chat.toJson()
+    )
+  }
+
   setCurrentChatOrCurrentChannel(collId: string, docId: string) {
     if (collId === 'chats') {
       this.getChat(docId).then((chat) => {

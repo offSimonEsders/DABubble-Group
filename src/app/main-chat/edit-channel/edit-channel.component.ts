@@ -14,6 +14,7 @@ export class EditChannelComponent {
 
   constructor(private chat:MessageService){
     this.informationOfChannel = this.chat.editChannel;
+    console.log(this.informationOfChannel)
   }
 
   returnCreater(){

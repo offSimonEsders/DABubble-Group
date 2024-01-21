@@ -4,7 +4,6 @@
     background-color: white;
     z-index: 88;
     border-radius: 25px;
-    min-height: 700px;
     min-width: 700px;
     padding: 25px 45px;
     font-family: "Nunito", sans-serif;
@@ -129,3 +128,26 @@
         }
     }
 }
+
+.plus {
+    @include displayFlex($jc: center);
+    border-radius: 100%;
+    padding: 8px;
+    cursor: pointer;
+  
+    svg {
+      &:active {
+        path {
+          fill: black !important;
+        }
+      } 
+    }
+  
+    &:hover {
+      background-color: $bgr;
+  
+      svg path {
+        fill: $purple2;
+      }
+    }
+  }
