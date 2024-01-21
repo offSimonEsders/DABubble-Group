@@ -15,4 +15,17 @@ export class EditChannelComponent {
   constructor(private chat:MessageService){
     this.informationOfChannel = this.chat.editChannel;
   }
+
+  returnCreater(){
+    if(this.informationOfChannel){
+      if (this.informationOfChannel.creater.endsWith("(Du)")) {
+        this.informationOfChannel.creater = this.informationOfChannel.creater.slice(0, -4);
+        return this.informationOfChannel.creater;
+      } else {
+        return this.informationOfChannel.creater;
+      }
+    }else{
+      return '';
+    }
+  }
 }

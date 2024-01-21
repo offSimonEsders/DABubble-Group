@@ -52,13 +52,80 @@
     }
 }
 
+.EditNameChannelInnerDiv{
+    display: flex;  
+    justify-content: space-between;
+}
+
 .EditNameChannelName{
     display: flex;
     align-items: center;
+    margin-top: 20px;
+
+    span{
+        margin-left: 10px;
+    }
 }
 
 .headEditName{
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+}
+
+.editbutton-div{
     span{
-        font-weight: 700;
+        color: $purple2;
+        cursor: pointer;
+
+        &:hover{
+            color: $purple3;
+        }
+    }
+}
+
+.lineOverdiv{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+
+    div{
+        width: 95%;
+        height: 2px;
+        border-radius: 20px;
+        background-color: rgb(165, 165, 165);
+    }
+}
+
+.creater{
+    color: $purple2;
+    margin-top: 20px;
+    font-size: 28px;
+}
+
+.leaveButton{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    button{
+        background-color: $buttonPurple;
+        padding: 16px;
+        border: none;
+        border-radius: 30px;
+        color: white;
+        font-size: 18px;
+        //width: 150px;
+        &:hover{
+            cursor: pointer;
+            background-color: $purple2;
+        }
+        &:active {
+            background-color: $buttonPurple !important;
+        }
     }
 }
