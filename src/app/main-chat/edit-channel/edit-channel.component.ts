@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { Channel } from '../../models/channel.class';
 import { MessageService } from '../../services/message.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-edit-channel',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './edit-channel.component.html',
   styleUrl: './edit-channel.component.scss'
 })
@@ -16,8 +18,9 @@ export class EditChannelComponent {
   editChannelDiscription:boolean = true;
   nameChannel!:string;
   discriptionChannel!:string;
+  disabeldButton:boolean = false;
 
-  constructor(private chat:MessageService){
+  constructor(private chat:MessageService, private update:ChatService){
     this.informationOfChannel = this.chat.editChannel;
     console.log(this.informationOfChannel)
     this.nameChannel = this.informationOfChannel.name;
@@ -35,5 +38,23 @@ export class EditChannelComponent {
     }else{
       return '';
     }
+  }
+
+  editChannelNameFuction(){
+    if(this.nameChannel != ''){
+      console.log('enable edit')
+      this.disabeldButton = false;
+    }else{
+      console.log('disabe edit')
+      this.disabeldButton = true;
+    }
+  }
+
+  changeName(){
+    if(this.nameChannel != this.informationOfChannel.name){
+      this.informationOfChannel.name = this.nameChannel
+      this.update.updateChannel(this.informationOfChannel,this.informationOfChannel.id);
+    }
+    
   }
 }

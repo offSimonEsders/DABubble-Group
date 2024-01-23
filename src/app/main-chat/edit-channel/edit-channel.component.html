@@ -74,7 +74,12 @@
 
         <div class="EditNameChannelInnerDiv" *ngIf="editChannelName" style="position: relative; width: 100%;" >
             <div>
-                <span class="headEditName">Channel-Name</span>
+                <div style="display: flex; justify-content: space-between;">
+                    <span class="headEditName">Channel-Name</span>     
+                    <div class="editbutton-div-Save">
+                        <span [class.disabledSpan]="disabeldButton">Speichern</span>
+                    </div> 
+                </div>
                 <div class="EditNameChannelName">
 
                 </div>
@@ -104,11 +109,8 @@
 
                         
                         }
-                    <input [value]="nameChannel" type="text">
+                    <input (input)="editChannelNameFuction()" [(ngModel)]="nameChannel" type="text">
                 </div>
-            </div>
-            <div class="editbutton-div-Save">
-                <span>Speichern</span>
             </div>
         </div>
     </div>
@@ -136,20 +138,24 @@
         </div>
     </div>
 
-    <div class="EditNameChannel"  *ngIf="editChannelDiscription" style="position: relative; width: 100%;" >
+    <div class="EditNameChannel"  *ngIf="editChannelDiscription" style="width: 100%;" >
         <div class="EditNameChannelInnerDiv">
             <div>
-                <span class="headEditName">Beschreibung</span>
+                <div style="display: flex; justify-content: space-between;">
+                    <span class="headEditName">Beschreibung</span>     
+                    <div class="editbutton-div-Save">
+                        <span>Speichern</span>
+                    </div> 
+                </div>
+                
                 <div class="EditNameChannelName">
 
                 </div>
                 <div class="inputDiv">
-                    <input [value]="discriptionChannel" type="text">
+                    <input [(ngModel)]="discriptionChannel" type="text">
                 </div>
             </div>
-            <div class="editbutton-div-Save">
-                <span>Speichern</span>
-            </div>
+
         </div>
         <div class="lineOverdiv"><div></div></div>
         <div>
