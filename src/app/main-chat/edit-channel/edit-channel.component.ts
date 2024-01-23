@@ -4,6 +4,7 @@ import { MessageService } from '../../services/message.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChatService } from '../../services/chat.service';
+import { ChannelBoxComponent } from '../channel-box/channel-box.component';
 
 @Component({
   selector: 'app-edit-channel',
@@ -14,13 +15,13 @@ import { ChatService } from '../../services/chat.service';
 })
 export class EditChannelComponent {
   informationOfChannel!: Channel;
-  editChannelName:boolean = true;
-  editChannelDiscription:boolean = true;
+  editChannelName:boolean = false;
+  editChannelDiscription:boolean = false;
   nameChannel!:string;
   discriptionChannel!:string;
   disabeldButton:boolean = false;
 
-  constructor(private chat:MessageService, private update:ChatService){
+  constructor(private chat:MessageService, private update:ChatService,private close:ChannelBoxComponent){
     this.informationOfChannel = this.chat.editChannel;
     console.log(this.informationOfChannel)
     this.nameChannel = this.informationOfChannel.name;
@@ -50,11 +51,39 @@ export class EditChannelComponent {
     }
   }
 
+  closeWindow(){
+    this.editChannelName = false
+    this.editChannelDiscription = false;
+    this.close.openEditView();
+  }
+
   changeName(){
-    if(this.nameChannel != this.informationOfChannel.name){
-      this.informationOfChannel.name = this.nameChannel
-      this.update.updateChannel(this.informationOfChannel,this.informationOfChannel.id);
+    if(!this.disabeldButton){
+      if(this.nameChannel != this.informationOfChannel.name){
+        this.informationOfChannel.name = this.nameChannel
+        this.update.updateChannel(this.informationOfChannel,this.informationOfChannel.id);
+        this.editChannelName = false;
+      }else{
+        this.editChannelName = false;
+      }
     }
-    
+  }
+
+  changeDiscription(){
+      if(this.discriptionChannel != this.informationOfChannel.description){
+        this.informationOfChannel.description = this.discriptionChannel;
+        this.update.updateChannel(this.informationOfChannel,this.informationOfChannel.id);
+        this.editChannelDiscription = false;
+      }else{
+        this.editChannelDiscription = false;
+      }
+  }
+
+  openNameEdit(){
+    this.editChannelName = true;
+  }
+
+  openDiscription(){
+    this.editChannelDiscription = true;
   }
 }
