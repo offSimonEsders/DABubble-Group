@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChatService } from '../../services/chat.service';
 import { ChannelBoxComponent } from '../channel-box/channel-box.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-edit-channel',
@@ -21,7 +22,7 @@ export class EditChannelComponent {
   discriptionChannel!:string;
   disabeldButton:boolean = false;
 
-  constructor(private chat:MessageService, private update:ChatService,private close:ChannelBoxComponent){
+  constructor(private chat:MessageService, private update:ChatService,private close:ChannelBoxComponent, private auth:AuthService){
     this.informationOfChannel = this.chat.editChannel;
     console.log(this.informationOfChannel)
     this.nameChannel = this.informationOfChannel.name;
@@ -85,5 +86,17 @@ export class EditChannelComponent {
 
   openDiscription(){
     this.editChannelDiscription = true;
+  }
+
+  removeFromChannel(){
+    const index = this.informationOfChannel.memberIds.indexOf(this.auth.userId);
+
+    if (index !== -1) {
+      this.informationOfChannel.memberIds.splice(index, 1);
+      this.update.updateChannel(this.informationOfChannel,this.informationOfChannel.id);
+      this.closeWindow()
+    } else {
+      this.closeWindow()
+    }
   }
 }
