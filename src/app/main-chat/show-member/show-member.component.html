@@ -7,4 +7,12 @@
             </svg>
         </div>
     </div>
+    <div class="user">
+       <div *ngFor="let user of InfoCh['memberIds'],let i = index">
+        <div class="avatar-container">
+            <app-avatar [accountId]="user" [hideStatus]="true"></app-avatar>
+        </div>
+        <span></span>
+       </div>
+    </div>
 </div>
