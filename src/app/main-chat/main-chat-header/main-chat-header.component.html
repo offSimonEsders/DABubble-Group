@@ -4,7 +4,7 @@
 <div class="channel-header">
     <app-channel-box [currentChannel]="currentChannel"></app-channel-box>
     <div class="chat-members-info-container">
-        <div class="chat-members-info">
+        <div class="chat-members-info" (click)="openEditViewMember()">
             <div class="container">
                 <div class="avatar-container"
                     *ngFor="let member of currentChannel['memberIds'] | slice:0:3, let i = index"
@@ -52,3 +52,8 @@
 </div>
 }
 }
+
+
+<div class="fullscreen" *ngIf="openEditMember" (click)="openEditViewMember()">
+    <app-show-member (click)="$event.stopPropagation()"></app-show-member>
+</div>

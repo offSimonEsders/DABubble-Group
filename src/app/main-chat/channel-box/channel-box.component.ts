@@ -5,6 +5,7 @@ import { Channel } from '../../models/channel.class';
 import { EditChannelComponent } from '../edit-channel/edit-channel.component';
 import { MessageService } from '../../services/message.service';
 
+
 @Component({
   selector: 'app-channel-box',
   standalone: true,
@@ -17,6 +18,7 @@ export class ChannelBoxComponent implements OnInit {
   @Input() currentChannel!: Channel;
   onHover = false;
   openEdit = false;
+
 
   constructor(private chat:MessageService){}
 

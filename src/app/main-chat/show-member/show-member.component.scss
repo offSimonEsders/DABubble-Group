@@ -1,0 +1,46 @@
+@import "../../../styles.scss";
+
+.overdivEditChannel{
+    background-color: white;
+    z-index: 88;
+    border-radius: 25px;
+    min-width: 700px;
+    padding: 25px 45px;
+    font-family: "Nunito", sans-serif;
+    gap: 10px;
+
+    @media (max-width:1000px) {
+        min-width: 100%;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0px;
+    }
+}
+
+.plus {
+    @include displayFlex($jc: center);
+    border-radius: 100%;
+    padding: 8px;
+    cursor: pointer;
+  
+    svg {
+      &:active {
+        path {
+          fill: black !important;
+        }
+      } 
+    }
+  
+    &:hover {
+      background-color: $bgr;
+  
+      svg path {
+        fill: $purple2;
+      }
+    }
+  }
+
+.head{
+    display: flex;
+    justify-content: space-between;
+}

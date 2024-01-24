@@ -8,13 +8,14 @@ import { Channel } from '../../models/channel.class';
 import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
 import { Account } from '../../models/account.class';
+import { ShowMemberComponent } from '../show-member/show-member.component';
 
 @Component({
   selector: 'app-main-chat-header',
   standalone: true,
   templateUrl: './main-chat-header.component.html',
   styleUrl: './main-chat-header.component.scss',
-  imports: [AvatarComponent, CommonModule, ChannelBoxComponent],
+  imports: [AvatarComponent, CommonModule, ChannelBoxComponent,ShowMemberComponent],
 })
 export class MainChatHeaderComponent implements OnInit, OnDestroy {
   authService!: AuthService;
@@ -24,6 +25,7 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
   currentCollection = '';
   currentChannel!: Channel;
   chatWithAccount!: Account;
+  openEditMember = false;
 
   constructor() {
     this.authService = inject(AuthService);
@@ -66,5 +68,9 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
     } else {
       return 'translateX(0px)';
     }
+  }
+
+  openEditViewMember(){
+    this.openEditMember = !this.openEditMember;
   }
 }
