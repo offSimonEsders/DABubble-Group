@@ -8,6 +8,13 @@
     padding: 25px 45px;
     font-family: "Nunito", sans-serif;
     gap: 10px;
+
+    @media (max-width:1000px) {
+        min-width: 100%;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0px;
+    }
 }
 
 .headEditChannel{
@@ -34,6 +41,10 @@
     span{
         font-size: 36px;
         margin-left: 10px;
+
+        @media (max-width:550px) {
+            font-size: 28px;
+        }
     }
 }
 
