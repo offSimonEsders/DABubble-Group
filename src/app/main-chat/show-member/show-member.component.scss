@@ -55,13 +55,19 @@
 .user{
   margin-top: 20px;
 
-  .overUserSiv{
-    padding-top: 16px;
+  .overUserDiv{
+    margin-top: 16px;
     display: flex;
     align-items: center;
+    border-radius: 25px;
+    cursor: pointer;
+
+    &:hover{
+      background-color: #eceefe;
+    }
 
     span{
-      margin-left: 10px;
+      margin-left: 15px;
       font-size: 18px;
       max-width: 100%;
       text-overflow: ellipsis;
