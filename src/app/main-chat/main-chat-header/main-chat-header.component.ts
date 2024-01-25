@@ -42,6 +42,7 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
       next: (data) => {
         this.currentCollection = data.chatColl;
         this.currentChannel = this.chatService.currentChannel;
+        this.getAllNamesOfChannelMembers();
         if (data.accountId) {
           this.accountService.getAccount(data.accountId).then((account) => {
             this.chatWithAccount = account;
@@ -49,6 +50,14 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
         }
       },
     });
+  }
+
+  async getAllNamesOfChannelMembers(){
+    this.chatService.currentChannelNames = [];
+    for (let i = 0; i < this.chatService.currentChannel.memberIds.length; i++) {
+      let currenAccount = await this.accountService.getAccount(this.chatService.currentChannel.memberIds[i]);
+      this.chatService.currentChannelNames.push(currenAccount.name);
+    }
   }
 
   ngOnDestroy(): void {

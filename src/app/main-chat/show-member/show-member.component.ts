@@ -3,6 +3,8 @@ import { Channel } from '../../models/channel.class';
 import { CommonModule } from '@angular/common';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { ChatService } from '../../services/chat.service';
+import { AccountService } from '../../services/account.service';
+import { Account } from '../../models/account.class';
 
 @Component({
   selector: 'app-show-member',
@@ -13,12 +15,12 @@ import { ChatService } from '../../services/chat.service';
 })
 export class ShowMemberComponent {
   InfoCh!:Channel;
-  chatService!:ChatService
+  chatService!:ChatService;
+  UserName!:string[];
 
-  constructor(){
+  constructor(private accountService:AccountService){
     this.chatService = inject(ChatService);
     this.InfoCh = this.chatService.currentChannel;
   }
-   
 
 }

@@ -16,6 +16,7 @@ import { Channel } from '../models/channel.class';
 import { FirestoreService } from './firestore.service';
 import { Subject } from 'rxjs';
 import { AccountService } from './account.service';
+import { Account } from '../models/account.class';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService implements OnDestroy {
@@ -30,6 +31,7 @@ export class ChatService implements OnDestroy {
   currentChat!: Chat;
   channels: Channel[] = [];
   currentChannel!: Channel;
+  currentChannelNames!:any[];
   swichPicture:boolean = false;
   incompleteCreateChannel!: Channel;
 
