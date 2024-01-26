@@ -41,9 +41,19 @@ export class AddPeopleChannelComponent {
   ngOnInit(): void {
     this.filteredAccounts = this.accountService.accounts;
     this.pushAllUserToArray();
+    this.removeAllAccountsFromList();
+  }
+
+  removeAllAccountsFromList(){
+    for (let i = 0; i < this.filteredAccounts.length; i++) {
+      if(this.savedUser.includes(this.filteredAccounts[i])){
+        this.savedUser.splice(i, 1);
+      }
+    }
   }
 
   pushAllUserToArray(){
+    this.filteredAccounts = this.chatService.currentChannelAccounts;
     this.savedUser = this.chatService.currentChannelAccounts;
     this.filterFunction()
   }
