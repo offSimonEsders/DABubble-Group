@@ -9,7 +9,7 @@
                         <span class="personName">{{ i.name }}</span>
                 </div>
             </div>
-            <div class="popup" *ngIf="search">
+            <div class="popup">
                 <div>
                     <div *ngFor="let i of filteredAccounts" class="channels" (click)="renderInDiv(i.accountId)">
                         <div class="container"><app-avatar [accountId]="i.accountId" [hideStatus]="false"></app-avatar></div>
