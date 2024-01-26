@@ -9,6 +9,7 @@ import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from '../../services/message.service';
 import { MainChatHeaderComponent } from '../main-chat-header/main-chat-header.component';
+import { Channel } from '../../models/channel.class';
 
 @Component({
   selector: 'app-add-people-channel',
@@ -29,14 +30,19 @@ export class AddPeopleChannelComponent {
   savedUser: any[] = [];
   allUser:boolean = true;
   setButtonTrue:boolean = true;
+  informationOfChannel!: Channel;
+  EditInformationOfChannel!:Channel;
 
   constructor(
     private chatService: ChatService,
     public presentAccount: AuthService,
-    private close:MainChatHeaderComponent
+    private close:MainChatHeaderComponent,
+    private chat:MessageService
   ) {
     this.accountService = inject(AccountService);
     this.fullObj = this.accountService;
+    this.informationOfChannel = this.chat.editChannel;
+    this.EditInformationOfChannel = this.informationOfChannel;
   }
 
   ngOnInit(): void {
@@ -47,7 +53,12 @@ export class AddPeopleChannelComponent {
   removeAllAccountsFromList(){
     this.filteredAccounts = this.filteredAccounts.filter(account => 
       !this.savedUser.some(saved => saved.id === account.id)
-  );
+    );
+    if(this.filteredAccounts.length == 0){
+      this.NoUserFound = true;
+    }else{
+      this.NoUserFound = false;
+    }
   }
 
   pushAllUserToArray(){
@@ -106,8 +117,10 @@ export class AddPeopleChannelComponent {
       obj.accountId.toLowerCase().includes(id.toLowerCase())
     );
     this.ifUserExists(user, id);
+    this.EditInformationOfChannel.memberIds.push(id);
     this.checkIfFilterAccounsIsNull();
     this.settingButton();
+
   }
 
   checkIfFilterAccounsIsNull() {
@@ -144,6 +157,14 @@ export class AddPeopleChannelComponent {
 
   closeWindow(){
     this.close.openEditViewMemberEdit();
+  }
+
+  updateChannelMembers(){
+    if(!this.NoUserFound){
+      this.informationOfChannel = this.EditInformationOfChannel;
+      this.chatService.updateChannel(this.informationOfChannel,this.informationOfChannel.id);
+    }
+    
   }
 
 }
