@@ -27,4 +27,9 @@ export class ShowMemberComponent {
   close(){
     this.closeDiv.openEditViewMember();
   }
+
+  openAddUser(){
+    this.closeDiv.openEditViewMember();
+    this.closeDiv.openEditViewMemberEdit();
+  }
 }
