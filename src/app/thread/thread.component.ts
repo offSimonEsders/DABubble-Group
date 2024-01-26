@@ -55,6 +55,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
     });
     this.loadedChatSub = this.messageService.loadedAnswersEmitter.subscribe({
       next: () => {
+        this.message.answerAmount = this.messageService.answers.length;
         setTimeout(() => {
           this.container.nativeElement.scrollTo(0, this.container.nativeElement.scrollHeight);
         }, 100)
