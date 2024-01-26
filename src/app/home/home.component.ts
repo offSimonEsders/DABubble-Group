@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, inject } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { MainChatComponent } from '../main-chat/main-chat.component';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
@@ -35,7 +35,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   elementRef = 'secondary-chat';
   width = '0px';
   hideBar:boolean = false;
-
+  showMainChat = true;
+  window: Window = window;
+  
   constructor(private channel: ChatService) {
     this.toggleContainerService = inject(ToggleContainerService);
   }
@@ -53,7 +55,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.channel.AllUserInChannel();
   }
 
-  swichMobileChat(){
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    if (window.innerWidth < 1300 && this.toggleContainerService.displaySecondaryChat == true){
+      this.closeSecondaryChat();
+    }
+  }
+
+  closeSecondaryChat() {
+    this.toggleContainerService.toggleContainer({
+      element: 'secondary-chat',
+      width: '0px',
+    });
+    this.toggleContainerService.displaySecondaryChat = false;
+  }
+
+  swichMobileChat() {
     this.hideBar = !this.hideBar;
   }
 
