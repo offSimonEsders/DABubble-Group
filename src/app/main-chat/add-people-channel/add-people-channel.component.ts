@@ -8,6 +8,7 @@ import { AccountService } from '../../services/account.service';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from '../../services/message.service';
+import { MainChatHeaderComponent } from '../main-chat-header/main-chat-header.component';
 
 @Component({
   selector: 'app-add-people-channel',
@@ -27,12 +28,12 @@ export class AddPeopleChannelComponent {
   ableButton: boolean = false;
   savedUser: any[] = [];
   allUser:boolean = true;
+  setButtonTrue:boolean = true;
 
   constructor(
     private chatService: ChatService,
-    private CreateChannel: CreateChannelComponent,
     public presentAccount: AuthService,
-    private chat:MessageService,
+    private close:MainChatHeaderComponent
   ) {
     this.accountService = inject(AccountService);
     this.fullObj = this.accountService;
@@ -100,6 +101,7 @@ export class AddPeopleChannelComponent {
   }
 
   renderInDiv(id: string) {
+    this.setButtonTrue = false;
     let user = this.filteredAccounts.find((obj) =>
       obj.accountId.toLowerCase().includes(id.toLowerCase())
     );
@@ -138,6 +140,10 @@ export class AddPeopleChannelComponent {
       this.removeAllAccountsFromList();
       this.search = false;
     }
+  }
+
+  closeWindow(){
+    this.close.openEditViewMemberEdit();
   }
 
 }

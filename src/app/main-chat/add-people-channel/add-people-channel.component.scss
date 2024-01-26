@@ -6,7 +6,7 @@
     border-radius: 25px;
     min-width: 700px;
     max-width: 900px;
-    min-height: 450px;
+    min-height: 480px;
     padding: 25px 45px;
     font-family: "Nunito", sans-serif;
     gap: 10px;
@@ -24,12 +24,41 @@ $input-bg-color: white;
 $input-border-color: grey;
 $checked-bg-color: rgb(80, 80, 80);
 
+.head{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plus {
+    @include displayFlex($jc: center);
+    border-radius: 100%;
+    padding: 8px;
+    cursor: pointer;
+  
+    svg {
+      &:active {
+        path {
+          fill: black !important;
+        }
+      } 
+    }
+  
+    &:hover {
+      background-color: $bgr;
+  
+      svg path {
+        fill: $purple2;
+      }
+    }
+  }
 
 .overdiv-addUser{
     h1{
         font-size: 26px;
-        margin-top: 10px;
-        margin-bottom: 20px;
+        margin-top: 15px;
+        margin-bottom: 15px;
     }
 
     h2{
