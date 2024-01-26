@@ -31,7 +31,7 @@ export class AddPeopleChannelComponent {
   allUser:boolean = true;
   setButtonTrue:boolean = true;
   informationOfChannel!: Channel;
-  EditInformationOfChannel!:Channel;
+  EditInformationOfChannel:string[] = [];
 
   constructor(
     private chatService: ChatService,
@@ -42,7 +42,7 @@ export class AddPeopleChannelComponent {
     this.accountService = inject(AccountService);
     this.fullObj = this.accountService;
     this.informationOfChannel = this.chat.editChannel;
-    this.EditInformationOfChannel = this.informationOfChannel;
+    this.EditInformationOfChannel = [];
   }
 
   ngOnInit(): void {
@@ -117,7 +117,7 @@ export class AddPeopleChannelComponent {
       obj.accountId.toLowerCase().includes(id.toLowerCase())
     );
     this.ifUserExists(user, id);
-    this.EditInformationOfChannel.memberIds.push(id);
+    this.EditInformationOfChannel.push(id);
     this.checkIfFilterAccounsIsNull();
     this.settingButton();
 
@@ -159,10 +159,13 @@ export class AddPeopleChannelComponent {
     this.close.openEditViewMemberEdit();
   }
 
-  updateChannelMembers(){
+  async updateChannelMembers(){
     if(!this.NoUserFound){
-      this.informationOfChannel = this.EditInformationOfChannel;
-      this.chatService.updateChannel(this.informationOfChannel,this.informationOfChannel.id);
+      for (let i = 0; i < this.EditInformationOfChannel.length; i++) {
+        this.informationOfChannel.memberIds.push(this.EditInformationOfChannel[i]);
+      }
+      await this.chatService.updateChannel(this.informationOfChannel,this.informationOfChannel.id);
+      this.closeWindow();
     }
     
   }

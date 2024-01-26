@@ -84,6 +84,7 @@ export class ChannelsComponent {
     this.messageService.checkForExistingMessages(collId, channelId);
     this.chatService.getChannel(channelId).then((channel: Channel) => {
       this.chatService.currentChannel = channel;
+      this.messageService.editChannel = this.chatService.currentChannel;
       this.chatService.openChatEmitter.next({ chatColl: collId });
     });
     this.openMobileView();
