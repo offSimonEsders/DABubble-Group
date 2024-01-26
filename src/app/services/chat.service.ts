@@ -32,6 +32,7 @@ export class ChatService implements OnDestroy {
   channels: Channel[] = [];
   currentChannel!: Channel;
   currentChannelNames!:any[];
+  currentChannelAccounts!:any[];
   swichPicture:boolean = false;
   incompleteCreateChannel!: Channel;
 

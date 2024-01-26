@@ -14,7 +14,7 @@
             </div>
             <span>{{ currentChannel['memberIds'].length }}</span>
         </div>
-        <div class="icon-container">
+        <div class="icon-container" (click)="openEditViewMemberEdit()">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <mask id="mask0_23247_13415" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                     height="24">
@@ -56,4 +56,8 @@
 
 <div class="fullscreen" *ngIf="openEditMember" (click)="openEditViewMember()">
     <app-show-member (click)="$event.stopPropagation()"></app-show-member>
+</div>
+
+<div class="fullscreen" *ngIf="openEditMemberEdit" (click)="openEditViewMemberEdit()">
+    <app-add-people-channel (click)="$event.stopPropagation()"></app-add-people-channel>
 </div>

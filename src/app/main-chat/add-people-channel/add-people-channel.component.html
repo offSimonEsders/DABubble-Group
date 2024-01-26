@@ -1,0 +1,26 @@
+<div class="overdivEditChannel">
+    <div class="overdiv-addUser">
+        <h1>Leute hinzufügen</h1>
+        <div class="input-div">
+            <input (input)="FilterArrayByName()" [(ngModel)]="input" style="width: 100%;" type="text" placeholder="Personen hinzufügen">
+            <div class="overdiv-ScrollUser" >
+                <div *ngFor="let i of savedUser" class="channelsForAccounts">
+                        <div class="container"><app-avatar [accountId]="i.accountId" [hideStatus]="false"></app-avatar></div>
+                        <span class="personName">{{ i.name }}</span>
+                </div>
+            </div>
+            <div class="popup" *ngIf="search">
+                <div>
+                    <div *ngFor="let i of filteredAccounts" class="channels" (click)="renderInDiv(i.accountId)">
+                        <div class="container"><app-avatar [accountId]="i.accountId" [hideStatus]="false"></app-avatar></div>
+                        <span class="personName">{{ i.name }}</span>
+                    </div>
+                </div>
+                <h3 *ngIf="NoUserFound">Keine Personen gefunden</h3>
+            </div>
+        </div>
+        <div class="button">
+            <button [disabled]="ableButton" >Hinzufügen</button>
+        </div>
+    </div>
+</div>

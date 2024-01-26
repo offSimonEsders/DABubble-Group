@@ -9,13 +9,14 @@ import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
 import { Account } from '../../models/account.class';
 import { ShowMemberComponent } from '../show-member/show-member.component';
+import { AddPeopleChannelComponent } from '../add-people-channel/add-people-channel.component';
 
 @Component({
   selector: 'app-main-chat-header',
   standalone: true,
   templateUrl: './main-chat-header.component.html',
   styleUrl: './main-chat-header.component.scss',
-  imports: [AvatarComponent, CommonModule, ChannelBoxComponent,ShowMemberComponent],
+  imports: [AvatarComponent, CommonModule, ChannelBoxComponent,ShowMemberComponent,AddPeopleChannelComponent],
 })
 export class MainChatHeaderComponent implements OnInit, OnDestroy {
   authService!: AuthService;
@@ -26,6 +27,7 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
   currentChannel!: Channel;
   chatWithAccount!: Account;
   openEditMember = false;
+  openEditMemberEdit = false;
 
   constructor() {
     this.authService = inject(AuthService);
@@ -55,10 +57,12 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
 
   async getAllNamesOfChannelMembers(){
     this.chatService.currentChannelNames = [];
+    this.chatService.currentChannelAccounts = [];
     for (let i = 0; i < this.chatService.currentChannel.memberIds.length; i++) {
       let currenAccount = await this.accountService.getAccount(this.chatService.currentChannel.memberIds[i]);
       if(!this.chatService.currentChannelNames.includes(currenAccount.name)){
         this.chatService.currentChannelNames.push(currenAccount.name);
+        this.chatService.currentChannelAccounts.push(currenAccount);
       }
     }
   }
@@ -84,5 +88,9 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
 
   openEditViewMember(){
     this.openEditMember = !this.openEditMember;
+  }
+  
+  openEditViewMemberEdit(){
+    this.openEditMemberEdit = !this.openEditMemberEdit;
   }
 }

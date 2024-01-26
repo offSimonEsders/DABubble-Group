@@ -8,6 +8,8 @@
     padding: 25px 45px;
     font-family: "Nunito", sans-serif;
     gap: 10px;
+    max-height: 100vh;
+    overflow-y: scroll;
 
     @media (max-width:1000px) {
         min-width: 100%;
