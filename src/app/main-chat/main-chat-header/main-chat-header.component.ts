@@ -10,14 +10,14 @@ import { AuthService } from '../../services/auth.service';
 import { Account } from '../../models/account.class';
 import { ShowMemberComponent } from '../show-member/show-member.component';
 import { AddPeopleChannelComponent } from '../add-people-channel/add-people-channel.component';
-import { ProfileViewComponent } from '../../profile-view/profile-view.component';
+import { ProfileViewMemberComponent } from '../../profile-view-member/profile-view-member.component';
 
 @Component({
   selector: 'app-main-chat-header',
   standalone: true,
   templateUrl: './main-chat-header.component.html',
   styleUrl: './main-chat-header.component.scss',
-  imports: [AvatarComponent, CommonModule, ChannelBoxComponent,ShowMemberComponent,AddPeopleChannelComponent,ProfileViewComponent],
+  imports: [AvatarComponent, CommonModule, ChannelBoxComponent,ShowMemberComponent,AddPeopleChannelComponent,ProfileViewMemberComponent],
 })
 export class MainChatHeaderComponent implements OnInit, OnDestroy {
   authService!: AuthService;

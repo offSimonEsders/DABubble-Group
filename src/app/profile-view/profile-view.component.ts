@@ -22,7 +22,6 @@ export class ProfileViewComponent{
   
   constructor(private authService:AuthService,private channels:ChannelsComponent, private head:HeaderComponent){
     this.account = this.authService.profileViewAccount;
-    debugger;
   }
 
   switchEdit(){

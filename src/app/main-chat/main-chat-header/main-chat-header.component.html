@@ -62,6 +62,6 @@
     <app-add-people-channel (click)="$event.stopPropagation()"></app-add-people-channel>
 </div>
 
-<div *ngIf="profileView" class="fullscreen">
-    <app-profile-view></app-profile-view>
+<div *ngIf="profileView" class="fullscreen" (click)="openProfileView()">
+   <app-profile-view-member (click)="$event.stopPropagation()"></app-profile-view-member>
 </div>

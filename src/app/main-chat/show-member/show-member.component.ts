@@ -35,8 +35,8 @@ export class ShowMemberComponent {
     this.closeDiv.openEditViewMemberEdit();
   }
 
-  GoToSetProfileViewAccount(id:string){
-    this.authService.setprofileViewAccount(id);
+  async GoToSetProfileViewAccount(id:string){
+    await this.authService.setprofileViewAccount(id);
     this.div.openEditViewMember();
     this.div.openProfileView();
   }

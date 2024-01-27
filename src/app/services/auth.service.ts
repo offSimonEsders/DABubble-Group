@@ -176,8 +176,8 @@ export class AuthService {
     });
   }
 
-  setprofileViewAccount(id:string){
-    this.accountService.getAccount(id).then((account) => {
+  async setprofileViewAccount(id:string){
+    await this.accountService.getAccount(id).then((account) => {
       this.profileViewAccount = account;
       
     });
