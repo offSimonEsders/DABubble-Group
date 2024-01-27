@@ -37,6 +37,8 @@ export class ProfileViewMemberComponent {
       this.channels.openChat('chats', this.account.accountId);
       this.openChatBoolean = false;
     }
-    this.close.openProfileView();
+    this.close.profileView = false;
+    this.close.openEditMember = false;
+    this.channels.openMobileView();
   }
 }

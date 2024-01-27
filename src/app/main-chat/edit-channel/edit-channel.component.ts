@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { ChatService } from '../../services/chat.service';
 import { ChannelBoxComponent } from '../channel-box/channel-box.component';
 import { AuthService } from '../../services/auth.service';
+import { ShowMemberComponent } from '../show-member/show-member.component';
 
 @Component({
   selector: 'app-edit-channel',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,ShowMemberComponent],
   templateUrl: './edit-channel.component.html',
   styleUrl: './edit-channel.component.scss'
 })

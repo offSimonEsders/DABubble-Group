@@ -195,6 +195,13 @@
     }
   }
 
+  .member{
+    display: none;
+    @media (max-width:1000px) {
+        display: block;
+    }
+  }
+
   .inputDiv{
     margin-top: 20px ;
     border: 1px solid $purple2;

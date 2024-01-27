@@ -12,7 +12,6 @@ import { updateDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { HomeComponent } from '../../home/home.component';
 import { HeaderComponent } from '../../header/header.component';
-import { SafePropertyRead } from '@angular/compiler';
 
 @Component({
   selector: 'app-channels',

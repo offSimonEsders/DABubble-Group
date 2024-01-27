@@ -9,8 +9,9 @@
     border-radius: 40px;
 
     @media (max-width:1000px) {
-        min-width: 100%;
-        max-width: 100%;
+        min-width: 100vw;
+        max-width: 100vh;
+        overflow: hidden;
         margin-left: 0px;
         border-radius: 0px;
         height: 100vh;

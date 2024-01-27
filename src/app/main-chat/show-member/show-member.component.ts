@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { ChatService } from '../../services/chat.service';
 import { AccountService } from '../../services/account.service';
-import { Account } from '../../models/account.class';
 import { MainChatHeaderComponent } from '../main-chat-header/main-chat-header.component';
 import { AuthService } from '../../services/auth.service';
 import { HeaderComponent } from '../../header/header.component';

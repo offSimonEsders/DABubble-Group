@@ -157,6 +157,7 @@ export class AddPeopleChannelComponent {
 
   closeWindow(){
     this.close.openEditViewMemberEdit();
+    this.close.openEditMember = false;
   }
 
   async updateChannelMembers(){
