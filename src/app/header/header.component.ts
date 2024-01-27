@@ -55,8 +55,9 @@ export class HeaderComponent implements OnInit {
     this.dropDown = !this.dropDown;
   }
 
-  logOut() {
-    this.authService.authServiceLogOut();
+  async logOut() {
+    this.authService.userId = '';
+    await this.authService.authServiceLogOut();
     this.router.navigate(['']);
   }
 
