@@ -73,7 +73,13 @@
     }
 
     .secondary-chat {
+
       @include componentMaxWidth(485px);
+
+      @media (max-width:1300px) {
+        @include componentMaxWidth(100%);
+      }
+
 
       @media (max-width:1000px) {
         border-radius: 0px;
