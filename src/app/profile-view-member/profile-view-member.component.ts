@@ -5,6 +5,7 @@ import { ChannelsComponent } from '../nav-bar/channels/channels.component';
 import { HeaderComponent } from '../header/header.component';
 import { AvatarComponent } from '../shared/avatar/avatar.component';
 import { CommonModule } from '@angular/common';
+import { MainChatHeaderComponent } from '../main-chat/main-chat-header/main-chat-header.component';
 @Component({
   selector: 'app-profile-view-member',
   standalone: true,
@@ -18,9 +19,8 @@ export class ProfileViewMemberComponent {
   openChatBoolean:boolean = false;
   edit:boolean = false;
   
-  constructor(private authService:AuthService,private channels:ChannelsComponent, private head:HeaderComponent){
+  constructor(private authService:AuthService,private channels:ChannelsComponent, private head:HeaderComponent,private close:MainChatHeaderComponent){
     this.account = this.authService.profileViewAccount;
-    debugger;
   }
 
   switchEdit(){
@@ -37,6 +37,6 @@ export class ProfileViewMemberComponent {
       this.channels.openChat('chats', this.account.accountId);
       this.openChatBoolean = false;
     }
-    this.head.closeDropDown();
+    this.close.openProfileView();
   }
 }
