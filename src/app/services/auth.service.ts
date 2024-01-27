@@ -176,6 +176,13 @@ export class AuthService {
     });
   }
 
+  setprofileViewAccount(id:string){
+    this.accountService.getAccount(id).then((account) => {
+      this.profileViewAccount = account;
+      
+    });
+  }
+
   setOnlineStatus(accId: string) {
     return updateDoc(this.firestoreService.getDocRef('accounts', accId), {
       onlineStatus: 'online',

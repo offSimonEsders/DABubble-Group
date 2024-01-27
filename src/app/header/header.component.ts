@@ -39,7 +39,6 @@ export class HeaderComponent implements OnInit {
 
 
   swichMobileChat(){
-    debugger;
     this.hideBar = !this.hideBar;
   }
 

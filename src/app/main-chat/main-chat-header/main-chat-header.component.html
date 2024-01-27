@@ -61,3 +61,7 @@
 <div class="fullscreen" *ngIf="openEditMemberEdit" (click)="openEditViewMemberEdit()">
     <app-add-people-channel (click)="$event.stopPropagation()"></app-add-people-channel>
 </div>
+
+<div *ngIf="profileView" class="fullscreen">
+    <app-profile-view></app-profile-view>
+</div>

@@ -6,6 +6,8 @@ import { ChatService } from '../../services/chat.service';
 import { AccountService } from '../../services/account.service';
 import { Account } from '../../models/account.class';
 import { MainChatHeaderComponent } from '../main-chat-header/main-chat-header.component';
+import { AuthService } from '../../services/auth.service';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-show-member',
@@ -19,7 +21,7 @@ export class ShowMemberComponent {
   chatService!:ChatService;
   UserName!:string[];
 
-  constructor(private accountService:AccountService,private closeDiv:MainChatHeaderComponent){
+  constructor(private accountService:AccountService,private closeDiv:MainChatHeaderComponent,private authService:AuthService, private head:HeaderComponent, public div:MainChatHeaderComponent){
     this.chatService = inject(ChatService);
     this.InfoCh = this.chatService.currentChannel;
   }
@@ -31,5 +33,11 @@ export class ShowMemberComponent {
   openAddUser(){
     this.closeDiv.openEditViewMember();
     this.closeDiv.openEditViewMemberEdit();
+  }
+
+  GoToSetProfileViewAccount(id:string){
+    this.authService.setprofileViewAccount(id);
+    this.div.openEditViewMember();
+    this.div.openProfileView();
   }
 }
