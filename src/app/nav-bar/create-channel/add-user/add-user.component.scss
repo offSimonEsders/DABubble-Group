@@ -30,6 +30,13 @@ $checked-bg-color: white;
         color: white;
         font-size: 18px;
         width: 150px;
+
+        @media (max-width:1000px) {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+        }
+        
         &:disabled{
             background-color: $purple2 !important;
             cursor: default !important;
