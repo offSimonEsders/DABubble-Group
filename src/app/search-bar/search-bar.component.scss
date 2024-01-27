@@ -1,5 +1,10 @@
 @import "../../styles.scss";
 
+.searchContainer {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
 .searchbar {
     padding: 17.5px 45px;
     @include displayFlex($jc: space-between);
@@ -17,13 +22,18 @@
       padding: 15px 20px;
       border: 1px solid $lightPurple;
       border-radius: 30px;
-  
+
+      @media (max-width:1200px) {
+       padding: 8px 12px;
+      }
+
       input {
         border: none;
         outline: none;
         width: 100%;
         font-size: 18px;
       }
+
   }
   
   .searchResults{
