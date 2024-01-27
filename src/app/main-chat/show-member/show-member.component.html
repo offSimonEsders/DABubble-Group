@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="user">
-       <div class="overUserDiv" *ngFor="let user of InfoCh['memberIds'],let i = index">
+       <div class="overUserDiv" *ngFor="let user of InfoCh['memberIds'],let i = index" (click)="GoToSetProfileViewAccount(user)">
         <div class="avatar-container">
             <app-avatar [accountId]="user" [hideStatus]="true"></app-avatar>
         </div>

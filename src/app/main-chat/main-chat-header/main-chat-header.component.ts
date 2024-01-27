@@ -10,13 +10,14 @@ import { AuthService } from '../../services/auth.service';
 import { Account } from '../../models/account.class';
 import { ShowMemberComponent } from '../show-member/show-member.component';
 import { AddPeopleChannelComponent } from '../add-people-channel/add-people-channel.component';
+import { ProfileViewMemberComponent } from '../../profile-view-member/profile-view-member.component';
 
 @Component({
   selector: 'app-main-chat-header',
   standalone: true,
   templateUrl: './main-chat-header.component.html',
   styleUrl: './main-chat-header.component.scss',
-  imports: [AvatarComponent, CommonModule, ChannelBoxComponent,ShowMemberComponent,AddPeopleChannelComponent],
+  imports: [AvatarComponent, CommonModule, ChannelBoxComponent,ShowMemberComponent,AddPeopleChannelComponent,ProfileViewMemberComponent],
 })
 export class MainChatHeaderComponent implements OnInit, OnDestroy {
   authService!: AuthService;
@@ -28,6 +29,7 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
   chatWithAccount!: Account;
   openEditMember = false;
   openEditMemberEdit = false;
+  profileView = false;
 
   constructor() {
     this.authService = inject(AuthService);
@@ -92,5 +94,9 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
   
   openEditViewMemberEdit(){
     this.openEditMemberEdit = !this.openEditMemberEdit;
+  }
+
+  openProfileView(){
+    this.profileView = !this.profileView;
   }
 }
