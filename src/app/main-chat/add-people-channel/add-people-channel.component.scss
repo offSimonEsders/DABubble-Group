@@ -1,4 +1,5 @@
 @import "../../../styles.scss";
+@include scrollBar();
 
 .overdivEditChannel{
     background-color: white;
@@ -141,24 +142,9 @@ $checked-bg-color: rgb(80, 80, 80);
     }
 }
 
-.overdiv-ScrollUser{
-    display: flex;
-    overflow-x: scroll;
-    ::-webkit-scrollbar {
-        width: 12px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
-    }
-     
-    ::-webkit-scrollbar-thumb {
-        background: #888; 
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555; 
-    }
+.overdiv-ScrollUser {
+  display: flex;
+  overflow-x: auto;
 }
 
 .close-button{
@@ -235,7 +221,7 @@ $checked-bg-color: rgb(80, 80, 80);
     border-top-left-radius: 0;
     border: 1px solid gray;
     transform: translateY(100%);
-    overflow-y: scroll;
+    overflow-y: auto;
 
     h3{
         color: red;
