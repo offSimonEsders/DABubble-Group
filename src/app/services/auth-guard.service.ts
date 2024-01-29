@@ -10,10 +10,11 @@ export class AuthGuardService {
   constructor(private auth: Auth, private router: Router) {
 
   }
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if (this.auth.currentUser) {
+  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    if (await this.auth.currentUser) {
       return true;
     } else {
+      this.router.navigate([''])
       return false;
     }
   }
