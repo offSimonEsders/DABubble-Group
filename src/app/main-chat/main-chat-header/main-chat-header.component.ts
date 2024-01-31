@@ -51,6 +51,7 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
             this.chatWithAccount = account;
           });
         }
+        if (this.currentChannel)
         this.getAllNamesOfChannelMembers();
       },
     });
