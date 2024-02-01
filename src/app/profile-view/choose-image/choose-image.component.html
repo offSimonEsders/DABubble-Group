@@ -6,7 +6,7 @@
     <h1 class="choose-a-character-header">Wähle deinen Avatar</h1>
     <div class="choosed-container">
         <div class="character-preview">
-            <img src="./assets/img/characters/person.svg" alt="" #characterpreviewimg>
+            <img src="/assets/img/characters/person.svg" alt="" #characterpreviewimg>
         </div>
     </div>
     <div class="choose-container">
@@ -14,12 +14,12 @@
         <h2 *ngIf="!register" class="name-container" id="choose-name-container">{{ authservice.profileViewAccount.name }}</h2>
         <h3>Aus der Liste wählen</h3>
         <div class="choosable-container">
-            <img src="./assets/img/characters/elise_roth.svg" alt="" (click)="this.changeCharacterPreview('./assets/img/characters/elise_roth.svg', 'userAvatars/elise_roth.svg')">
-            <img src="./assets/img/characters/elias_neumann.svg" alt="" (click)="this.changeCharacterPreview('./assets/img/characters/elias_neumann.svg', 'userAvatars/elias_neumann.svg')">
-            <img src="./assets/img/characters/steffen_hoffmann.svg" alt="" (click)="this.changeCharacterPreview('./assets/img/characters/steffen_hoffmann.svg', 'userAvatars/steffen_hoffmann.svg')">
-            <img src="./assets/img/characters/noah_braun.svg" alt="" (click)="this.changeCharacterPreview('./assets/img/characters/noah_braun.svg', 'userAvatars/noah_braun.svg')">
-            <img src="./assets/img/characters/sofia_müller.svg" alt="" (click)="this.changeCharacterPreview('./assets/img/characters/sofia_müller.svg', 'userAvatars/sofia_müller.svg')">
-            <img src="./assets/img/characters/frederik_beck.svg" alt="" (click)="this.changeCharacterPreview('./assets/img/characters/frederik_beck.svg', 'userAvatars/frederik_beck.svg')">
+            <img src="/assets/img/characters/elise_roth.svg" alt="" (click)="this.changeCharacterPreview('/assets/img/characters/elise_roth.svg', 'userAvatars/elise_roth.svg')">
+            <img src="/assets/img/characters/elias_neumann.svg" alt="" (click)="this.changeCharacterPreview('/assets/img/characters/elias_neumann.svg', 'userAvatars/elias_neumann.svg')">
+            <img src="/assets/img/characters/steffen_hoffmann.svg" alt="" (click)="this.changeCharacterPreview('/assets/img/characters/steffen_hoffmann.svg', 'userAvatars/steffen_hoffmann.svg')">
+            <img src="/assets/img/characters/noah_braun.svg" alt="" (click)="this.changeCharacterPreview('/assets/img/characters/noah_braun.svg', 'userAvatars/noah_braun.svg')">
+            <img src="/assets/img/characters/sofia_müller.svg" alt="" (click)="this.changeCharacterPreview('/assets/img/characters/sofia_müller.svg', 'userAvatars/sofia_müller.svg')">
+            <img src="/assets/img/characters/frederik_beck.svg" alt="" (click)="this.changeCharacterPreview('/assets/img/characters/frederik_beck.svg', 'userAvatars/frederik_beck.svg')">
         </div>
     </div>
     <div class="load-own-img">

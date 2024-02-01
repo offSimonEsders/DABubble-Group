@@ -2,7 +2,7 @@
     @if(onhover) {
     <div class="reaction-info">
         <div class="icon">
-            <img src="../../../assets/img/reactions/{{reaction.reaction}}.png" alt="Hier ist ein Icon">
+            <img src="assets/img/reactions/{{reaction.reaction}}.png" alt="Hier ist ein Icon">
         </div>
         <div class="reacting" [ngStyle]="{fontSize: reaction.reacting.length > 1 ? '16px' : '18px'}">
             <span *ngFor="let reacting of reaction.reacting, let i = index"> {{ reacting === authService.user.name ?
@@ -26,7 +26,7 @@
     </div>
     }
     <div class="icon">
-        <img src="../../../assets/img/reactions/{{reaction.reaction}}.png" alt="Hier ist ein Icon">
+        <img src="assets/img/reactions/{{reaction.reaction}}.png" alt="Hier ist ein Icon">
     </div>
     <span>{{ reaction.reacting.length }}</span>
 </div>
