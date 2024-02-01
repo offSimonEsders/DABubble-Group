@@ -3,17 +3,17 @@
         <app-header></app-header>
     </header>
     <section class="destop">
-        <app-nav-bar [ngStyle]="{width: elementRef === 'menu-channel' ? width : '100%'}"
+        <app-nav-bar ngClass="boxShadow" [ngStyle]="{width: elementRef === 'menu-channel' ? width : '100%'}"
             class="menu-channel"></app-nav-bar>
-        <app-main-chat [ngStyle]="{display: !(window.innerWidth < 1300 && toggleContainerService.displaySecondaryChat == true) ? 'flex' : 'none'}" class="main-chat"></app-main-chat>
-        <app-thread [ngStyle]="{width: elementRef === 'secondary-chat' ? width : '100%'}"
+        <app-main-chat ngClass="boxShadow" [ngStyle]="{display: !(window.innerWidth < 1300 && toggleContainerService.displaySecondaryChat == true) ? 'flex' : 'none'}" class="main-chat"></app-main-chat>
+        <app-thread ngClass="boxShadow" [ngStyle]="{width: elementRef === 'secondary-chat' ? width : '100%'}"
             class="secondary-chat"></app-thread>
     </section>
     <section class="mobile">
-        <app-nav-bar *ngIf="!hideBar" [ngStyle]="{width: elementRef === 'menu-channel' ? width : '100%'}"
+        <app-nav-bar ngClass="boxShadow" *ngIf="!hideBar" [ngStyle]="{width: elementRef === 'menu-channel' ? width : '100%'}"
             class="menu-channel"></app-nav-bar>
-        <app-main-chat [ngStyle]="{display: !(toggleContainerService.displaySecondaryChat == true) ? 'flex' : 'none'}" class="main-chat" ></app-main-chat>
-        <app-thread [ngStyle]="{width: elementRef === 'secondary-chat' ? width : '100%'}"
+        <app-main-chat ngClass="boxShadow" [ngStyle]="{display: !(toggleContainerService.displaySecondaryChat == true) ? 'flex' : 'none'}" class="main-chat" ></app-main-chat>
+        <app-thread ngClass="boxShadow" [ngStyle]="{width: elementRef === 'secondary-chat' ? width : '100%'}"
             class="secondary-chat"></app-thread>
     </section>
 </div>
