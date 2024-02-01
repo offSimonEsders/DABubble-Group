@@ -1,6 +1,6 @@
 <div class="searchContainer">
     <div class="searchbar">
-        <input id="searchInputField"
+        <input [(ngModel)]="input"
         class="input-field"
         type="text"
         placeholder="Code learning durchsuchen"
@@ -10,14 +10,14 @@
     <div class="searchResults" *ngIf="showResults">
         <div *ngIf="foundUsers.length > 0" >
             <h4>Users:</h4>
-            <div *ngFor="let user of foundUsers" class="foundContent" (click)="openChat('chats', user ['accountId'])" >
+            <div *ngFor="let user of foundUsers" class="foundContent" (click)="channels.openChat('chats', user ['accountId']); clearSearch()" >
                 <app-avatar [accountId]="user['id']" [hideStatus]="false"></app-avatar>
                 <span>{{user['name']}}</span>
             </div> 
         </div>
         <div *ngIf="foundChannels.length > 0" >
             <h4>Channels:</h4>
-            <div *ngFor="let channel of foundChannels" class="foundContent" (click)="openChannel('channels', channel['id'])">
+            <div *ngFor="let channel of foundChannels" class="foundContent" (click)="channels.openChannel('channels', channel['id']); clearSearch()">
                 @if(channel) {
                     @switch (channel['publicStatus']) {
                     @case (true) {
