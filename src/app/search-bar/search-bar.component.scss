@@ -38,13 +38,12 @@
   
   .searchResults{
     margin-top: 6px;
-    margin-right: 20px;
     position: absolute;
     background-color: white;
     border-radius: 42px;
     padding: 28px;
     width: -webkit-fill-available;
-    max-width: 550px;
+    max-width: 740px;
     max-height: calc(100vh - 140px);
     overflow: auto;
     z-index: 100;

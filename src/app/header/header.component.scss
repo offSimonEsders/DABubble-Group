@@ -26,6 +26,9 @@ header {
 
 app-search-bar {
   min-width: 400px;
+  max-width: 750px;
+  width: -webkit-fill-available;
+  margin: 0px 16px;
 }
 
 .profil-menu-container {
@@ -159,7 +162,6 @@ app-search-bar {
   right: 0;
   @include displayFlex($jc: center);
   transform: translateY(100%);
-  box-shadow: -4px 6px 14px 1px $bgr;
   z-index: 10;
   border-radius: 25px;
   border-top-right-radius: 0;

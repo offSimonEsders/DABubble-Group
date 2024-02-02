@@ -1,7 +1,7 @@
-<section [style.display]="showDiv ? 'flex' : 'none'"  class="choose-a-character-frame">
+<section [style.display]="showDiv ? 'flex' : 'none'"  class="choose-a-character-frame boxShadow">
     
-    <button *ngIf="register" class="choose-go-back" (click)="showRegister()"></button>
-    <button *ngIf="!register" class="choose-go-back" (click)="goBackToEdit()"></button>
+    <button *ngIf="register" class="choose-go-back backButton" (click)="showRegister()"></button>
+    <button *ngIf="!register" class="choose-go-back backButton" (click)="goBackToEdit()"></button>
 
     <h1 class="choose-a-character-header">Wähle deinen Avatar</h1>
     <div class="choosed-container">

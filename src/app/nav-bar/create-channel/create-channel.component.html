@@ -1,17 +1,17 @@
 <div (click)="close()" *ngIf="openCreate" class="overdiv">
-    <div (click)="$event.stopPropagation()" *ngIf="whichCreate == 1" class="crate-overdiv">
+    <div (click)="$event.stopPropagation()" *ngIf="whichCreate == 1" class="crate-overdiv boxShadow">
         <h1>Channel erstellen</h1>
         <span>Channels dienen deinem Team zur Kommunikation. Am besten sollen sie themenbezogen sein #marketing zum
             Beispiel.</span>
         <h2>Channel-Name</h2>
-        <div class="input-div">
+        <div class="input-div smallInputField">
             <span>#</span>
-            <input (input)="checkDisabledButton()" [(ngModel)]="ChannelName" type="text" placeholder="z.B. Kooperationsprojekte">
+            <input (input)="checkDisabledButton()" [(ngModel)]="ChannelName" type="text" placeholder="z.B. Kooperationsprojekte" >
         </div>
         <h2>
             Beschreibung <span>(optional)</span>
         </h2>
-        <div class="input-div">
+        <div class="input-div smallInputField">
             <input [(ngModel)]="ChannelDescription" style="width: 100%;" type="text" placeholder="Dein Text hier">
         </div>
         <div class="button">
