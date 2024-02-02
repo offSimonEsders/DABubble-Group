@@ -17,6 +17,7 @@
       color: $textGrey;
     }
   }
+
   .searchbar {
       width: 100%;
       padding: 15px 20px;
@@ -98,4 +99,10 @@
         cursor: pointer;
     }
   }
-  
+  .searchIcon {
+    &:hover { 
+      svg path {
+        fill: $purple2;
+      }
+    }
+  }
