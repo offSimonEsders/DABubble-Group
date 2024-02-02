@@ -38,7 +38,14 @@
       .icon-container {
         width: 40px;
         height: 40px;
+        cursor: pointer;
         @include centerElement();
+
+        &:hover { 
+          svg path {
+            fill: $purple2;
+          }
+        }
       }
     }
 
