@@ -1,3 +1,7 @@
+@import "../../styles.scss";
+
+@include smallerScrollBar();
+
 .imprint-frame {
     display: flex;
     align-items: center;

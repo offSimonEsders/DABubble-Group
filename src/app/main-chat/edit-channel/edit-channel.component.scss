@@ -9,7 +9,7 @@
     font-family: "Nunito", sans-serif;
     gap: 10px;
     max-height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     @media (max-width:1000px) {
         min-width: 100%;

@@ -1,3 +1,7 @@
+@import "../../styles.scss";
+
+@include smallerScrollBar();
+
 .dsgvo-frame {
     display: flex;
     align-items: center;
@@ -59,7 +63,6 @@
 
         .dsgvo-go-back {
             cursor: pointer;
-            display: flex;
             display: flex;
             justify-content: center;
             align-items: center;

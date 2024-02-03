@@ -34,15 +34,6 @@ header {
   .subcontainer:last-of-type {
     margin-bottom: 63px;
   }
-
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    background: $lightPurple;
-  }
 }
 
 .message,
