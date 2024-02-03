@@ -30,6 +30,7 @@ import { ToggleContainerService } from '../services/toggle-container.service';
     TimeSeparatorComponent,
     MessageComponent,
   ],
+  providers: [ MainChatHeaderComponent]
 })
 export class MainChatComponent implements OnInit, OnDestroy {
   chatService!: ChatService;

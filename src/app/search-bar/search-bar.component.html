@@ -17,15 +17,15 @@
         </div>
     </div>
     <div class="searchResults boxShadow" *ngIf="showResults">
-        <div *ngIf="foundUsers.length > 0" >
-            <h4>Users:</h4>
+        <div *ngIf="foundUsers.length > 0" class="searchResultsSection">
+            <h3>Users:</h3>
             <div *ngFor="let user of foundUsers" class="foundContent" (click)="channels.openChat('chats', user ['accountId']); clearSearch()" >
                 <app-avatar [accountId]="user['id']" [hideStatus]="false"></app-avatar>
                 <span>{{user['name']}}</span>
             </div> 
         </div>
-        <div *ngIf="foundChannels.length > 0" >
-            <h4>Channels:</h4>
+        <div *ngIf="foundChannels.length > 0" class="searchResultsSection">
+            <h3>Channels:</h3>
             <div *ngFor="let channel of foundChannels" class="foundContent" (click)="channels.openChannel('channels', channel['id']); clearSearch()">
                 @if(channel) {
                     @switch (channel['publicStatus']) {
