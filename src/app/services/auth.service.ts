@@ -1,5 +1,6 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, OnInit, inject } from '@angular/core';
 import { AccountService } from './account.service';
+import { browserLocalPersistence, setPersistence} from "firebase/auth";
 import {
   Auth,
   GoogleAuthProvider,
@@ -36,6 +37,8 @@ export class AuthService {
     this.firestoreService = inject(FirestoreService);
     this.provider = new GoogleAuthProvider();
     this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+
   }
 
   updateEmail(newEmail: string) {
@@ -56,14 +59,20 @@ export class AuthService {
     user_email: string,
     user_password: string
   ): any {
-    return createUserWithEmailAndPassword(this.auth, user_email, user_password)
-      .then((userCredential) => {
-        return userCredential.user.uid;
-      })
-      .catch((error) => {
-        console.log('die registrierung ist fehlgeschlagen');
-        return;
-      });
+    setPersistence(this.auth, browserLocalPersistence)
+    .then(() => {
+      // Existing and future Auth states are now persisted in the current
+      // session only. Closing the window would clear any existing state even
+      // if a user forgets to sign out.
+      // ...
+      // New sign-in will be persisted with session persistence.
+      return this.authServiceSignInWithEmailAndPassword(user_email, user_password);
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
   }
 
   async authServiceSignInWithEmailAndPassword(
