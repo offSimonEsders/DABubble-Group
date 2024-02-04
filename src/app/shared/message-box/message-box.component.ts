@@ -21,13 +21,14 @@ import { Answer } from '../../models/answer.class';
 import { ResizeTextareaDirective } from '../message/resize-textarea.directive';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { CommonModule } from '@angular/common';
+import { AvatarComponent } from "../avatar/avatar.component";
 
 @Component({
-  selector: 'app-message-box',
-  standalone: true,
-  templateUrl: './message-box.component.html',
-  styleUrl: './message-box.component.scss',
-  imports: [FormsModule, ResizeTextareaDirective, PickerModule, CommonModule],
+    selector: 'app-message-box',
+    standalone: true,
+    templateUrl: './message-box.component.html',
+    styleUrl: './message-box.component.scss',
+    imports: [FormsModule, ResizeTextareaDirective, PickerModule, CommonModule, AvatarComponent]
 })
 export class MessageBoxComponent implements OnInit {
   authService!: AuthService;
@@ -42,6 +43,7 @@ export class MessageBoxComponent implements OnInit {
   openChatSub!: Subscription;
   emojiPickeropened = false;
   emojiEmitter = new EventEmitter<any>();
+  userPickerOpened: Boolean = false;
 
   constructor(private eRef: ElementRef) {
     this.authService = inject(AuthService);
@@ -51,6 +53,7 @@ export class MessageBoxComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAllNamesOfChannelMembers();
     this.openChatSub = this.chatService.openChatEmitter.subscribe({
       next: (data) => {
         this.currentCollection = data.chatColl;
@@ -63,7 +66,7 @@ export class MessageBoxComponent implements OnInit {
     });
     this.emojiEmitter.subscribe((data) => {
       this.addEmoji(data);
-    });
+    });    
   }
 
   async onSubmit() {
@@ -144,6 +147,26 @@ export class MessageBoxComponent implements OnInit {
 
   togglePicker() {
     this.emojiPickeropened = !this.emojiPickeropened;
+  }
+
+  toggleUserPicker() {
+    this.userPickerOpened = !this.userPickerOpened;
+  }
+
+  async getAllNamesOfChannelMembers(){
+    this.chatService.currentChannelNames = [];
+    this.chatService.currentChannelAccounts = [];
+    for (let i = 0; i < this.chatService.currentChannel.memberIds.length; i++) {
+      let currenAccount = await this.accountService.getAccount(this.chatService.currentChannel.memberIds[i]);
+      if(!this.chatService.currentChannelNames.includes(currenAccount.name)){
+        this.chatService.currentChannelNames.push(currenAccount.name);
+        this.chatService.currentChannelAccounts.push(currenAccount);
+      }
+    }
+  }
+  
+  addUserName(user: any) {
+    this.sendMessageForm.value.message = this.sendMessageForm.value.message + '@' + user.name + ' ';
   }
 
   addEmoji(data: any) {

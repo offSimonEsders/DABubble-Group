@@ -43,7 +43,7 @@
                         </g>
                     </svg>
                 </div>
-                <div class="icon-container">
+                <div *ngIf="this.chatService.currentChannel != null && this.chatService.currentChannel.memberIds.length > 1" class="icon-container" (click)="$event.stopPropagation(); toggleUserPicker()" [ngClass]="{'activateButton': this.userPickerOpened == true}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <mask id="mask0_23247_12455" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                             width="24" height="24">
@@ -56,6 +56,12 @@
                         </g>
                     </svg>
                 </div>
+            </div>
+            <div *ngIf="userPickerOpened" class="userListContainer boxShadow">
+                <div *ngFor="let user of this.chatService.currentChannelAccounts" class="userAvatarContainer" (click)="this.addUserName(user); userPickerOpened = false ">
+                    <app-avatar [accountId]="user['id']" [hideStatus]="false"></app-avatar>
+                    <span>{{user['name']}}</span>
+                </div> 
             </div>
             <button type="submit" [disabled]="!form.value.message || currentCollection === ''" class="send-message-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">

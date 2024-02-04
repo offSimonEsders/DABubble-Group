@@ -1,4 +1,5 @@
 @import "../../../styles.scss";
+@include smallerScrollBar();
 
 .message-box {
   width: 100%;
@@ -48,6 +49,48 @@
         }
       }
     }
+
+    app-avatar {
+      width: 40px;
+      display: flex;
+      height: 40px;
+      flex-direction: row;
+    }
+
+    .userListContainer {
+      position: absolute;
+      max-height: 300px;
+      overflow-y: auto;
+      left: 135px;
+      bottom: 53px;
+      border-radius: 32px 32px 32px 0;
+      background-color: white;
+    }
+
+    .userAvatarContainer {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      margin: 12px;
+      border-radius: 42px;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $bgr;
+        svg path {
+          fill: $purple2;
+        }
+        span {
+          color: $purple2;
+        }
+    }
+    }
+    .activateButton {
+      svg path {
+        fill: $purple2;
+      }
+  }
 
     .send-message-icon {
       border: none;
