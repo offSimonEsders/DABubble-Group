@@ -156,13 +156,16 @@ export class MessageBoxComponent implements OnInit {
   async getAllNamesOfChannelMembers(){
     this.chatService.currentChannelNames = [];
     this.chatService.currentChannelAccounts = [];
-    for (let i = 0; i < this.chatService.currentChannel.memberIds.length; i++) {
-      let currenAccount = await this.accountService.getAccount(this.chatService.currentChannel.memberIds[i]);
-      if(!this.chatService.currentChannelNames.includes(currenAccount.name)){
-        this.chatService.currentChannelNames.push(currenAccount.name);
-        this.chatService.currentChannelAccounts.push(currenAccount);
+    if(this.chatService.currentChannel){
+      for (let i = 0; i < this.chatService.currentChannel.memberIds.length; i++) {
+        let currenAccount = await this.accountService.getAccount(this.chatService.currentChannel.memberIds[i]);
+        if(!this.chatService.currentChannelNames.includes(currenAccount.name)){
+          this.chatService.currentChannelNames.push(currenAccount.name);
+          this.chatService.currentChannelAccounts.push(currenAccount);
+        }
       }
     }
+    
   }
   
   addUserName(user: any) {
