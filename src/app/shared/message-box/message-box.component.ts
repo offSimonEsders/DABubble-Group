@@ -162,6 +162,7 @@ export class MessageBoxComponent implements OnInit {
         if(!this.chatService.currentChannelNames.includes(currenAccount.name)){
           this.chatService.currentChannelNames.push(currenAccount.name);
           this.chatService.currentChannelAccounts.push(currenAccount);
+          
         }
       }
     }
