@@ -145,7 +145,6 @@ export class ChatService implements OnDestroy {
   AllUserInChannel(){
     for(let i = 0; this.channels.length > i; i++){
       if (this.channels[i].allUser === true) {
-        //console.log(this.accountService.accounts);
         let Ids: [] = this.allIds();
         this.channels[i].memberIds = Ids;
         this.addAccount(this.channels[i]);

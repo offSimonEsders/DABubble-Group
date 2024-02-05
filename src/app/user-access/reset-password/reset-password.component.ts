@@ -35,7 +35,6 @@ export class ResetPasswordComponent implements OnInit {
   findURL(){
     const mode = this.route.snapshot.queryParamMap.get('mode');
     if (mode === 'verifyAndChangeEmail') {
-      console.log(mode);
       this.email = true;
     }else{
       this.email = false;

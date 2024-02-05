@@ -109,7 +109,6 @@ export class AuthService {
         // ...
       })
       .catch((error) => {
-        console.log(error);
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -209,7 +208,6 @@ export class AuthService {
   }
 
   async changePassword(oobCode: string, newPassword: string) {
-    console.log(oobCode);
     return await confirmPasswordReset(this.auth, oobCode, newPassword);
   }
 

@@ -162,7 +162,7 @@ export class MessageBoxComponent implements OnInit {
         if(!this.chatService.currentChannelNames.includes(currenAccount.name)){
           this.chatService.currentChannelNames.push(currenAccount.name);
           this.chatService.currentChannelAccounts.push(currenAccount);
-          
+
         }
       }
     }
@@ -189,6 +189,5 @@ export class MessageBoxComponent implements OnInit {
   }
 
   showChange() {
-    console.log(this.sendMessageForm.value.message);
   }
 }

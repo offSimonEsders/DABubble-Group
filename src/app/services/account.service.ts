@@ -23,7 +23,6 @@ export class AccountService implements OnDestroy {
   }
 
   sortAccounts() {
-    console.log(this.accounts);
   }
 
   ngOnDestroy() {

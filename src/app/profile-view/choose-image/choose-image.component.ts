@@ -75,7 +75,6 @@ export class ChooseImageComponent {
   changeCharacterPreview(path: string, UrL: string) {
     this.characterpreviewimg.nativeElement.src = path;
     this.storageUrL = UrL;
-    console.log(this.storageUrL);
   }
 
   loadimg() {

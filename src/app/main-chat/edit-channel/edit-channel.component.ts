@@ -25,7 +25,6 @@ export class EditChannelComponent {
 
   constructor(private chat:MessageService, private update:ChatService,private close:ChannelBoxComponent, private auth:AuthService){
     this.informationOfChannel = this.chat.editChannel;
-    console.log(this.informationOfChannel)
     this.nameChannel = this.informationOfChannel.name;
     this.discriptionChannel = this.informationOfChannel.description;
   }
@@ -45,10 +44,8 @@ export class EditChannelComponent {
 
   editChannelNameFuction(){
     if(this.nameChannel != ''){
-      console.log('enable edit')
       this.disabeldButton = false;
     }else{
-      console.log('disabe edit')
       this.disabeldButton = true;
     }
   }

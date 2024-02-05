@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
       (account) => account.id === this.authService.userId
     );
     if (this.account) {
-      console.log(this.account);
+      //console.log(this.account);
     }
   }
 
