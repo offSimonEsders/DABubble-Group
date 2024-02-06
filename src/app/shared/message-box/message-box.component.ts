@@ -153,7 +153,7 @@ export class MessageBoxComponent implements OnInit {
     this.userPickerOpened = !this.userPickerOpened;
   }
 
-  async getAllNamesOfChannelMembers(){
+  async getAllNamesOfChannelMembers() {
     this.chatService.currentChannelNames = [];
     this.chatService.currentChannelAccounts = [];
     if(this.chatService.currentChannel){
@@ -162,11 +162,9 @@ export class MessageBoxComponent implements OnInit {
         if(!this.chatService.currentChannelNames.includes(currenAccount.name)){
           this.chatService.currentChannelNames.push(currenAccount.name);
           this.chatService.currentChannelAccounts.push(currenAccount);
-
         }
       }
     }
-    
   }
   
   addUserName(user: any) {
@@ -185,6 +183,9 @@ export class MessageBoxComponent implements OnInit {
   onClick() {
     if (this.emojiPickeropened) {
       this.togglePicker();
+    }
+    if (this.userPickerOpened) {
+      this.toggleUserPicker();
     }
   }
 

@@ -6,6 +6,7 @@ export class Channel extends Chat {
   publicStatus: boolean;
   creater: string; // User name
   allUser:boolean;
+  
   constructor(
     id: string,
     memberIds: Array<string>,

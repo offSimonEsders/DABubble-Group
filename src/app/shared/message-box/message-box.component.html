@@ -43,7 +43,7 @@
                         </g>
                     </svg>
                 </div>
-                <div *ngIf="this.chatService.currentChannel != null && this.chatService.currentChannel.memberIds.length > 1" class="icon-container" (click)="$event.stopPropagation(); toggleUserPicker()" [ngClass]="{'activateButton': this.userPickerOpened == true}">
+                <div *ngIf="!(this.currentCollection === 'chats' && this.chatWithAccount)" class="icon-container" (click)="$event.stopPropagation(); toggleUserPicker()" [ngClass]="{'activateButton': this.userPickerOpened == true}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <mask id="mask0_23247_12455" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                             width="24" height="24">
