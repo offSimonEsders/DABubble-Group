@@ -222,7 +222,7 @@
 
         .invalid-userpassword {
             &::after {
-                content: "*Ihr Passwort sollte mindestens 8 Zeichen umfassen und eine Kombination aus Zahlen und Sonderzeichen beinhalten.";
+                content: "*Ihr Passwort muss mindestens 8 Zeichen umfassen und eine Kombination aus Klein- und Großbuchstaben, Zahlen und Sonderzeichen beinhalten.";
                 position: absolute;
                 color: var(--Rosa-error, #ED1E79);
                 font-size: 14px;
