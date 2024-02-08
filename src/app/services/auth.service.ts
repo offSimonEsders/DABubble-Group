@@ -156,16 +156,6 @@ export class AuthService {
       }
     ).then(() => {
     });
-    // if (this.auth.currentUser) {
-    //   verifyBeforeUpdateEmail(this.auth.currentUser, email)
-    //     .then(() => {
-    //       // ...
-    //     })
-    //     .catch((error) => {
-    //       // An error occurred
-    //       // ...
-    //     });
-    // }
   }
 
   authServiceCreateNewAccount(
