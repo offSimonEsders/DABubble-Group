@@ -148,24 +148,24 @@ export class AuthService {
   }
 
   async authUpdateUser(email: string) {
-    // await updateDoc(
-    //   this.firestoreService.getDocRef('accounts', user.accountId),
-    //   {
-    //     name: user.name,
-    //     email: user.email,
-    //   }
-    // ).then(() => {
-    // });
-    if (this.auth.currentUser) {
-      verifyBeforeUpdateEmail(this.auth.currentUser, email)
-        .then(() => {
-          // ...
-        })
-        .catch((error) => {
-          // An error occurred
-          // ...
-        });
-    }
+    await updateDoc(
+      this.firestoreService.getDocRef('accounts', this.user.accountId),
+      {
+        name: this.user.name,
+        email: this.user.email,
+      }
+    ).then(() => {
+    });
+    // if (this.auth.currentUser) {
+    //   verifyBeforeUpdateEmail(this.auth.currentUser, email)
+    //     .then(() => {
+    //       // ...
+    //     })
+    //     .catch((error) => {
+    //       // An error occurred
+    //       // ...
+    //     });
+    // }
   }
 
   authServiceCreateNewAccount(

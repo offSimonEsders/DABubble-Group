@@ -8,6 +8,7 @@ import { ChooseACharacterComponent } from './register/choose-acharacter/choose-a
 import { EditProfileComponent } from '../profile-view/edit-profile/edit-profile.component';
 import { ChannelsComponent } from '../nav-bar/channels/channels.component';
 import { HeaderComponent } from '../header/header.component';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -16,13 +17,12 @@ import { HeaderComponent } from '../header/header.component';
     templateUrl: './user-access.component.html',
     styleUrl: './user-access.component.scss',
     imports: [StartAnimationComponent, LoginComponent, RegisterComponent, SendMailForResetPasswordComponent, HeaderComponent],
-    providers: [ChooseACharacterComponent, EditProfileComponent, ChannelsComponent, HeaderComponent]
+    providers: [ChooseACharacterComponent, EditProfileComponent, ChannelsComponent]
 })
 export class UserAccessComponent {
 
   constructor(public router: Router) {
 
   }
-
   
 }
