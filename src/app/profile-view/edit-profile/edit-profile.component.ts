@@ -8,6 +8,8 @@ import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { ProfileViewComponent } from '../profile-view.component';
 import { FormsModule } from '@angular/forms';
 import { ChooseImageComponent } from '../choose-image/choose-image.component';
+import { UserAccessComponent } from '../../user-access/user-access.component';
+import { LoginComponent } from '../../user-access/login/login.component';
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
@@ -16,6 +18,10 @@ import { ChooseImageComponent } from '../choose-image/choose-image.component';
     FormsModule,
     CommonModule,
     ChooseImageComponent
+  ],
+  providers:[
+    UserAccessComponent,
+    LoginComponent
   ],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss',
