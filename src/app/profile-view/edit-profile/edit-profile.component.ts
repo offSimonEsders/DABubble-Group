@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ChooseImageComponent } from '../choose-image/choose-image.component';
 import { UserAccessComponent } from '../../user-access/user-access.component';
 import { LoginComponent } from '../../user-access/login/login.component';
+import { ChooseACharacterComponent } from '../../user-access/register/choose-acharacter/choose-acharacter.component';
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
@@ -20,8 +21,6 @@ import { LoginComponent } from '../../user-access/login/login.component';
     ChooseImageComponent
   ],
   providers:[
-    UserAccessComponent,
-    LoginComponent
   ],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss',

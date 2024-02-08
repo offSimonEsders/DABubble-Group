@@ -16,6 +16,7 @@ import { LoginComponent } from '../user-access/login/login.component';
   providers: [ChannelsComponent,EditProfileComponent,UserAccessComponent,LoginComponent],
   templateUrl: './profile-view.component.html',
   styleUrl: './profile-view.component.scss',
+  
 })
 export class ProfileViewComponent{
   account!:Account;

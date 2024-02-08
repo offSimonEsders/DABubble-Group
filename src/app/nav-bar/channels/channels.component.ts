@@ -12,6 +12,7 @@ import { updateDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { HomeComponent } from '../../home/home.component';
 import { HeaderComponent } from '../../header/header.component';
+import { EditProfileComponent } from '../../profile-view/edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-channels',

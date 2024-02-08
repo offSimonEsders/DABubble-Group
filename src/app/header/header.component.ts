@@ -10,6 +10,9 @@ import { StorageService } from '../services/storage.service';
 import { SearchBarComponent } from "../search-bar/search-bar.component";
 import { NavHeadComponent } from '../nav-bar/nav-head/nav-head.component';
 import { ChatService } from '../services/chat.service';
+import { EditChannelComponent } from '../main-chat/edit-channel/edit-channel.component';
+import { EditProfileComponent } from '../profile-view/edit-profile/edit-profile.component';
+import { UserAccessComponent } from '../user-access/user-access.component';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +20,7 @@ import { ChatService } from '../services/chat.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   imports: [AvatarComponent, CommonModule, ProfileViewComponent, NavHeadComponent, SearchBarComponent],
+  providers:[UserAccessComponent]
 })
 export class HeaderComponent implements OnInit {
   authService!: AuthService;
@@ -58,7 +62,7 @@ export class HeaderComponent implements OnInit {
   async logOut() {
     this.authService.userId = '';
     await this.authService.authServiceLogOut();
-    this.router.navigate(['']);
+    //this.router.navigate(['']);
   }
 
   closeDropDown() {
