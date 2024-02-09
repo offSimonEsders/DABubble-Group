@@ -22,7 +22,7 @@ import { ChannelsComponent } from '../nav-bar/channels/channels.component';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   imports: [AvatarComponent, CommonModule, ProfileViewComponent, NavHeadComponent, SearchBarComponent],
-  providers:[UserAccessComponent,ChannelsComponent,ProfileViewComponent,LoginComponent]
+  providers:[UserAccessComponent,ChannelsComponent,ProfileViewComponent,LoginComponent,EditProfileComponent]
 })
 export class HeaderComponent implements OnInit {
   authService!: AuthService;
