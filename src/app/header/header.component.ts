@@ -13,14 +13,16 @@ import { ChatService } from '../services/chat.service';
 import { EditChannelComponent } from '../main-chat/edit-channel/edit-channel.component';
 import { EditProfileComponent } from '../profile-view/edit-profile/edit-profile.component';
 import { UserAccessComponent } from '../user-access/user-access.component';
+import { LoginComponent } from '../user-access/login/login.component';
+import { ChannelsComponent } from '../nav-bar/channels/channels.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  imports: [AvatarComponent, CommonModule, ProfileViewComponent, NavHeadComponent, SearchBarComponent],
-  providers:[UserAccessComponent]
+  imports: [AvatarComponent, CommonModule, ProfileViewComponent, NavHeadComponent, SearchBarComponent,UserAccessComponent],
+  providers:[UserAccessComponent,ChannelsComponent]
 })
 export class HeaderComponent implements OnInit {
   authService!: AuthService;
@@ -62,7 +64,6 @@ export class HeaderComponent implements OnInit {
   async logOut() {
     this.authService.userId = '';
     await this.authService.authServiceLogOut();
-    //this.router.navigate(['']);
   }
 
   closeDropDown() {

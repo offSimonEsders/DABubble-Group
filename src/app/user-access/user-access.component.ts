@@ -9,6 +9,7 @@ import { EditProfileComponent } from '../profile-view/edit-profile/edit-profile.
 import { ChannelsComponent } from '../nav-bar/channels/channels.component';
 import { HeaderComponent } from '../header/header.component';
 import { AuthService } from '../services/auth.service';
+import { ProfileViewComponent } from '../profile-view/profile-view.component';
 
 
 @Component({
