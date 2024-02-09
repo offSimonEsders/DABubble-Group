@@ -21,8 +21,8 @@ import { ChannelsComponent } from '../nav-bar/channels/channels.component';
   standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  imports: [AvatarComponent, CommonModule, ProfileViewComponent, NavHeadComponent, SearchBarComponent,UserAccessComponent],
-  providers:[UserAccessComponent,ChannelsComponent]
+  imports: [AvatarComponent, CommonModule, ProfileViewComponent, NavHeadComponent, SearchBarComponent],
+  providers:[UserAccessComponent,ChannelsComponent,ProfileViewComponent,LoginComponent]
 })
 export class HeaderComponent implements OnInit {
   authService!: AuthService;
