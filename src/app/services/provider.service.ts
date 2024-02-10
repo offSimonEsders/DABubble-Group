@@ -14,8 +14,10 @@ export class ProviderService {
   private openEditHeadChat: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private MemberEditChatHead: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private MemberEditChatHeadMember: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private MemberEditChatprofileView: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 
+  EditChatHeadObservableprofileView$: Observable<boolean> = this.MemberEditChatprofileView.asObservable();
   EditChatHeadObservableMember$: Observable<boolean> = this.MemberEditChatHeadMember.asObservable();
   EditChatHeadObservable$: Observable<boolean> = this.MemberEditChatHead.asObservable();
   openEditObservable$: Observable<boolean> = this.openEditHeadChat.asObservable();
@@ -65,8 +67,15 @@ export class ProviderService {
   openEditViewMemberEdit(){
     this.MemberEditChatHead.next(!this.MemberEditChatHead);
   }
+  openEditViewMember(){
+    this.MemberEditChatHeadMember.next(!this.MemberEditChatHeadMember);
+  }
+
   setEditMeber(value: boolean) {
-    this.dropDownSubject.next(value);
+    this.MemberEditChatHeadMember.next(value);
   }
   
+  openProfileView(){
+    this.MemberEditChatprofileView.next(!this.MemberEditChatprofileView);
+  }
 }

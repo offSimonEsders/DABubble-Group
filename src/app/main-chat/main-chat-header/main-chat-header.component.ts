@@ -32,7 +32,7 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
   openEditMemberEdit = false;
   profileView = false;
 
-  constructor(private provider:ProviderService) {
+  constructor(public provider:ProviderService) {
     this.authService = inject(AuthService);
     this.chatService = inject(ChatService);
     this.accountService = inject(AccountService);
@@ -45,6 +45,9 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.provider.EditChatHeadObservable$.subscribe((value: boolean) => {
       this.openEditMemberEdit = value;
+    });
+    this.provider.EditChatHeadObservableprofileView$.subscribe((value: boolean) => {
+      this.profileView = value;
     });
     this.provider.EditChatHeadObservableMember$.subscribe((value: boolean) => {
       this.openEditMember = value;
@@ -96,13 +99,5 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  openEditViewMember(){
-    this.openEditMember = !this.openEditMember;
-  }
-  
 
-
-  openProfileView(){
-    this.profileView = !this.profileView;
-  }
 }

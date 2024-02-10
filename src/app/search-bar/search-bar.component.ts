@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { ChannelsComponent } from '../nav-bar/channels/channels.component';
 import { FormsModule } from '@angular/forms';
+import { OpenChatFromProfileViewService } from '../services/open-chat-from-profile-view.service';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class SearchBarComponent {
   authService!: AuthService;
   input: any;
 
-  constructor(public channels: ChannelsComponent) {
+  constructor(public open:OpenChatFromProfileViewService) {
     this.messageService = inject(MessageService);
     this.chatService = inject(ChatService);
     this.firestoreService = inject(FirestoreService);

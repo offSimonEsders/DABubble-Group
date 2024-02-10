@@ -21,7 +21,7 @@ export class ChannelBoxComponent implements OnInit {
   openEdit = false;
 
 
-  constructor(private chat:MessageService,private provider:ProviderService){}
+  constructor(private chat:MessageService,public provider:ProviderService){}
 
   ngOnInit(): void {
     this.chat.editChannel = this.currentChannel;

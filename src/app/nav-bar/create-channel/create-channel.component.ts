@@ -64,6 +64,7 @@ export class CreateChannelComponent {
     this.chatService.channelCreated(false);
   }
 
+
   nextpage() {
     this.whichCreate = 2;
     this.openCreate2 = true;

@@ -9,6 +9,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { UserAccessComponent } from '../user-access/user-access.component';
 import { LoginComponent } from '../user-access/login/login.component';
 import { ProviderService } from '../services/provider.service';
+import { OpenChatFromProfileViewService } from '../services/open-chat-from-profile-view.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -24,7 +25,7 @@ export class ProfileViewComponent{
   openChatBoolean:boolean = false;
   edit:boolean = false;
   
-  constructor(private authService:AuthService,private channels:ChannelsComponent, private Provider:ProviderService){
+  constructor(private authService:AuthService,private channels:ChannelsComponent, private Provider:ProviderService,public open:OpenChatFromProfileViewService){
     this.account = this.authService.profileViewAccount;
   }
 
@@ -39,7 +40,7 @@ export class ProfileViewComponent{
 
   openChat(){
     if(this.openChatBoolean){
-      this.channels.openChat('chats', this.account.accountId);
+      this.open.openChat('chats', this.account.accountId);
       this.openChatBoolean = false;
     }
     this.Provider.closeDropDownProvider();

@@ -30,6 +30,6 @@
     </svg>
 </div>
 
-<div class="fullscreen" *ngIf="openEdit" (click)="openEditView()">
+<div class="fullscreen" *ngIf="openEdit" (click)="provider.openEditView()">
     <app-edit-channel (click)="$event.stopPropagation()"></app-edit-channel>
 </div>

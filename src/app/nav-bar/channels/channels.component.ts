@@ -11,6 +11,7 @@ import { MessageService } from '../../services/message.service';
 import { updateDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { ProviderService } from '../../services/provider.service';
+import { OpenChatFromProfileViewService } from '../../services/open-chat-from-profile-view.service';
 
 @Component({
   selector: 'app-channels',
@@ -30,7 +31,7 @@ export class ChannelsComponent {
   chatService!: ChatService;
   messageService!: MessageService;
 
-  constructor(private auth: Auth, private provider:ProviderService) {
+  constructor(public open: OpenChatFromProfileViewService,private provider:ProviderService) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);
@@ -62,76 +63,5 @@ export class ChannelsComponent {
   openNewChannelDiv() {
     this.chatService.channelCreated(true);
   }
-
-  async openChannel(collId: string, channelId: string) {
-    this.messageService.checkForExistingMessages(collId, channelId);
-    this.chatService.getChannel(channelId).then((channel: Channel) => {
-      this.chatService.currentChannel = channel;
-      this.messageService.editChannel = this.chatService.currentChannel;
-      this.chatService.openChatEmitter.next({ chatColl: collId });
-    });
-    this.openMobileView();
-  }
-
-  // prettier-ignore
-  privateChatExistsFunction(chatColl: string, i: number, accId: string) {
-    this.messageService.checkForExistingMessages(chatColl, this.chatService.chats[i].id);
-    this.chatService.currentChat = this.chatService.chats[i];
-    this.emitChatInfo(chatColl, accId);
-  }
-
-  async openChat(chatColl: string, accId: string) {
-    if (this.chatService.chats.length === 0) {
-      this.createNewPrivateChat(chatColl, accId);
-    }
-    for (let i = 0; i < this.chatService.chats.length; i++) {
-      if (this.privateChatExists(i, accId)) {
-        this.privateChatExistsFunction(chatColl, i, accId);
-        break;
-      }
-      if (this.noPrivateChatExists(i)) {
-        this.createNewPrivateChat(chatColl, accId);
-      }
-    }
-    this.openMobileView();
-  }
-
-  openMobileView(){
-    let screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
-    if (screenWidth <= 1000) {
-      this.chatService.swichPictureFunction();
-      this.provider.swichMobileChat();
-    }
-  }
-
-  // prettier-ignore
-  privateChatExists(index: number, accId: string) {
-    return (
-      (this.chatService.chats[index].memberIds.includes(accId) &&
-      this.chatService.chats[index].memberIds.includes(this.authService.user.accountId) &&
-      accId !== this.authService.user.accountId) ||
-      (this.chatService.chats[index].memberIds[0] === accId && this.chatService.chats[index].memberIds[1] === accId)
-    );
-  }
-
-  noPrivateChatExists(i: number) {
-    return i === this.chatService.chats.length - 1;
-  }
-
-  async createNewPrivateChat(chatColl: string, accId: string) {
-    let newChat = new Chat('', [this.authService.user.accountId, accId]);
-    this.chatService.addChatOrChannel(newChat, 'chats').then((doc: any) => {
-      updateDoc(doc, { id: doc.id });
-      this.messageService.checkForExistingMessages(chatColl, doc.id);
-      this.chatService.setCurrentChatOrCurrentChannel(chatColl, doc.id);
-    });
-    this.emitChatInfo(chatColl, accId);
-  }
-
-  emitChatInfo(chatColl: string, accId: string) {
-    this.chatService.openChatEmitter.next({
-      chatColl: chatColl,
-      accountId: accId,
-    });
-  }
+  
 }

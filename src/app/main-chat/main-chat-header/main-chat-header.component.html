@@ -4,7 +4,7 @@
 <div class="channel-header">
     <app-channel-box [currentChannel]="currentChannel"></app-channel-box>
     <div class="chat-members-info-container">
-        <div class="chat-members-info" (click)="openEditViewMember()">
+        <div class="chat-members-info" (click)="provider.openEditViewMember()">
             <div class="container">
                 <div class="avatar-container"
                     *ngFor="let member of currentChannel['memberIds'] | slice:0:3, let i = index"
@@ -14,7 +14,7 @@
             </div>
             <span>{{ currentChannel['memberIds'].length }}</span>
         </div>
-        <div class="icon-container" (click)="openEditViewMemberEdit()">
+        <div class="icon-container" (click)="provider.openEditViewMemberEdit()">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <mask id="mask0_23247_13415" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                     height="24">
@@ -54,14 +54,14 @@
 }
 
 
-<div class="fullscreen" *ngIf="openEditMember" (click)="openEditViewMember()">
+<div class="fullscreen" *ngIf="openEditMember" (click)="provider.openEditViewMember()">
     <app-show-member (click)="$event.stopPropagation()"></app-show-member>
 </div>
 
-<div class="fullscreen" *ngIf="openEditMemberEdit" (click)="openEditViewMemberEdit()">
+<div class="fullscreen" *ngIf="openEditMemberEdit" (click)="provider.openEditViewMemberEdit()">
     <app-add-people-channel (click)="$event.stopPropagation()"></app-add-people-channel>
 </div>
 
-<div *ngIf="profileView" class="fullscreen" (click)="openProfileView()">
+<div *ngIf="profileView" class="fullscreen" (click)="provider.openProfileView()">
    <app-profile-view-member (click)="$event.stopPropagation()"></app-profile-view-member>
 </div>
