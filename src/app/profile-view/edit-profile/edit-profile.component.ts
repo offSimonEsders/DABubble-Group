@@ -36,7 +36,7 @@ export class EditProfileComponent implements OnInit{
   constructor(
     private authService: AuthService,
     private parent: ProfileViewComponent,
-    private provider:ProviderService
+    public provider:ProviderService
   ) {
     this.account = this.authService.profileViewAccount;
   }
