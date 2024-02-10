@@ -11,7 +11,14 @@ export class ProviderService {
   private dropDownSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private profileViewSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private homehideBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private openEditHeadChat: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private MemberEditChatHead: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private MemberEditChatHeadMember: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+
+  EditChatHeadObservableMember$: Observable<boolean> = this.MemberEditChatHeadMember.asObservable();
+  EditChatHeadObservable$: Observable<boolean> = this.MemberEditChatHead.asObservable();
+  openEditObservable$: Observable<boolean> = this.openEditHeadChat.asObservable();
   homeBarObservable$: Observable<boolean> = this.homehideBar.asObservable();
 
   dropDownObservable$: Observable<boolean> = this.dropDownSubject.asObservable();
@@ -48,4 +55,18 @@ export class ProviderService {
   swichMobileChat() {
     this.homehideBar.next(!this.homehideBar);
   }
+
+
+  openEditView(){
+    this.openEditHeadChat.next(!this.openEditHeadChat);
+  }
+
+
+  openEditViewMemberEdit(){
+    this.MemberEditChatHead.next(!this.MemberEditChatHead);
+  }
+  setEditMeber(value: boolean) {
+    this.dropDownSubject.next(value);
+  }
+  
 }
