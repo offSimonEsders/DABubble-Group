@@ -101,4 +101,20 @@ export class OpenChatFromProfileViewService {
     this.checkDisabled.next(true);
     this.chatService.channelCreated(false);
   }
+
+
+
+
+//--------------------HeaderComponet---------------------//
+
+  private profileViewHeader: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  profileViewHeaderObservabl$: Observable<boolean> = this.profileViewHeader.asObservable();
+
+  private openEditMemberHeader: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  openEditMemberHeaderObservabl$: Observable<boolean> = this.openEditMemberHeader.asObservable();
+
+  setFalseForChatHeader(){
+    this.profileViewHeader.next(false);
+    this.openEditMemberHeader.next(false);
+  }
 }

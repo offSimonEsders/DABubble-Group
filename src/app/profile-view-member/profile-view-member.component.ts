@@ -20,7 +20,7 @@ export class ProfileViewMemberComponent {
   openChatBoolean:boolean = false;
   edit:boolean = false;
   
-  constructor(private authService:AuthService,private channels:ChannelsComponent, private head:HeaderComponent,private close:MainChatHeaderComponent,public open:OpenChatFromProfileViewService){
+  constructor(private authService:AuthService,private close:MainChatHeaderComponent,public open:OpenChatFromProfileViewService){
     this.account = this.authService.profileViewAccount;
   }
 
@@ -38,8 +38,7 @@ export class ProfileViewMemberComponent {
       this.open.openChat('chats', this.account.accountId);
       this.openChatBoolean = false;
     }
-    this.close.profileView = false;
-    this.close.openEditMember = false;
+    this.open.setFalseForChatHeader();
     this.open.openMobileView();
   }
 }

@@ -12,6 +12,7 @@ import { ShowMemberComponent } from '../show-member/show-member.component';
 import { AddPeopleChannelComponent } from '../add-people-channel/add-people-channel.component';
 import { ProfileViewMemberComponent } from '../../profile-view-member/profile-view-member.component';
 import { ProviderService } from '../../services/provider.service';
+import { OpenChatFromProfileViewService } from '../../services/open-chat-from-profile-view.service';
 
 @Component({
   selector: 'app-main-chat-header',
@@ -32,7 +33,7 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
   openEditMemberEdit = false;
   profileView = false;
 
-  constructor(public provider:ProviderService) {
+  constructor(public provider:ProviderService,private chatHeader:OpenChatFromProfileViewService) {
     this.authService = inject(AuthService);
     this.chatService = inject(ChatService);
     this.accountService = inject(AccountService);
@@ -43,6 +44,12 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
    * chat collection and chat ID.
    */
   ngOnInit(): void {
+    this.chatHeader.profileViewHeaderObservabl$.subscribe((value: boolean) => {
+      this.profileView = value;
+    });
+    this.chatHeader.openEditMemberHeaderObservabl$.subscribe((value: boolean) => {
+      this.openEditMember = value;
+    });
     this.provider.EditChatHeadObservable$.subscribe((value: boolean) => {
       this.openEditMemberEdit = value;
     });
