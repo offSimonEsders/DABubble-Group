@@ -9,6 +9,7 @@ import {
   collection,
   getDoc,
   onSnapshot,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { Subject } from 'rxjs';
 import { Answer } from '../models/answer.class';
@@ -56,7 +57,7 @@ export class MessageService {
     const message = this.createMessage(docSnap);
     return message;
   }
-
+  
   setMessages() {
     return onSnapshot(
       this.firestore.getMessageCollRef(this.collId, this.channelId),
@@ -86,7 +87,21 @@ export class MessageService {
     );
   }
 
+  async setLastAnswer(chatId: string,messageId: string ) {
+    return await updateDoc(
+      this.firestore.getMessageDocRef(
+        this.collId,
+        chatId,
+        messageId
+      ),
+      {
+        lastAnswer: Date.now(),
+      }
+    );
+  }
+  
   async addAnswer(answer: Answer, chatId: string, messageId: string) {
+    this.setLastAnswer(chatId,messageId);
     return await addDoc(
       collection(
         this.firestore.db,
@@ -155,9 +170,9 @@ export class MessageService {
           this.filteredMessages.push(arrayOfFilteredMessages);
         }
         this.loadedMessagesEmitter.next(true);
+      }
     }
-    }
-    
+
   }
 
   onDispatchedDay(message: Message, index: number) {
