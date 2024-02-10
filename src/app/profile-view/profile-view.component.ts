@@ -25,7 +25,7 @@ export class ProfileViewComponent{
   openChatBoolean:boolean = false;
   edit:boolean = false;
   
-  constructor(private authService:AuthService,private channels:ChannelsComponent, private Provider:ProviderService,public open:OpenChatFromProfileViewService){
+  constructor(private authService:AuthService, private Provider:ProviderService,public open:OpenChatFromProfileViewService){
     this.account = this.authService.profileViewAccount;
   }
 

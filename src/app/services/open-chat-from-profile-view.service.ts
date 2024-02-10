@@ -7,12 +7,20 @@ import { ProviderService } from './provider.service';
 import { Chat } from '../models/chat.class';
 import { updateDoc } from '@angular/fire/firestore';
 import { Channel } from '../models/channel.class';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OpenChatFromProfileViewService {
+  private WhichEdit: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+  private WhichEdit2: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private checkDisabled: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
+
+  checkDisabledObservabl$: Observable<boolean> = this.checkDisabled.asObservable();
+  WhichEditObservabl2$: Observable<boolean> = this.WhichEdit2.asObservable();
+  WhichEditObservabl$: Observable<number> = this.WhichEdit.asObservable();
   constructor(private authService: AuthService, private accountService: AccountService, private chatService: ChatService, private messageService: MessageService, private provider: ProviderService) { }
   
 
@@ -85,5 +93,12 @@ export class OpenChatFromProfileViewService {
       this.chatService.openChatEmitter.next({ chatColl: collId });
     });
     this.openMobileView();
+  }
+
+  close2() {
+    this.WhichEdit2.next(false);
+    this.WhichEdit.next(1);
+    this.checkDisabled.next(true);
+    this.chatService.channelCreated(false);
   }
 }

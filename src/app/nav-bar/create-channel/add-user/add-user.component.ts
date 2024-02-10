@@ -9,6 +9,7 @@ import { CreateChannelComponent } from '../create-channel.component';
 import { AuthService } from '../../../services/auth.service';
 import { Channel } from '../../../models/channel.class';
 import { updateDoc } from '@angular/fire/firestore';
+import { OpenChatFromProfileViewService } from '../../../services/open-chat-from-profile-view.service';
 
 @Component({
   selector: 'app-add-user',
@@ -32,7 +33,7 @@ export class AddUserComponent implements OnInit {
 
   constructor(
     private chatService: ChatService,
-    private CreateChannel: CreateChannelComponent,
+    private close:OpenChatFromProfileViewService,
     public presentAccount: AuthService
   ) {
     this.accountService = inject(AccountService);
@@ -175,7 +176,7 @@ export class AddUserComponent implements OnInit {
   AddAndClose(JSON: Channel) {
     this.Addpeople(JSON);
     this.addUser(JSON);
-    this.CreateChannel.close2();
+    this.close.close2();
     this.chatService.addChatOrChannel(JSON, 'channels').then((doc: any) => {
       updateDoc(doc, { id: doc.id });
     });
