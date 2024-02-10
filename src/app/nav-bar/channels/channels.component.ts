@@ -10,9 +10,7 @@ import { Channel } from '../../models/channel.class';
 import { MessageService } from '../../services/message.service';
 import { updateDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
-import { HomeComponent } from '../../home/home.component';
-import { HeaderComponent } from '../../header/header.component';
-import { EditProfileComponent } from '../../profile-view/edit-profile/edit-profile.component';
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'app-channels',
@@ -31,32 +29,17 @@ export class ChannelsComponent {
   accountService!: AccountService;
   chatService!: ChatService;
   messageService!: MessageService;
-  home!:HomeComponent;
-  head!:HeaderComponent;
-  //@ViewChild('headerElement', { static: false }) head!: HeaderComponent;
 
-  constructor(private auth: Auth) {
+  constructor(private auth: Auth, private provider:ProviderService) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);
     this.messageService = inject(MessageService);
-    this.head = inject(HeaderComponent);
-    this.home = inject(HomeComponent);
 
-    this.sortAccounts();
+    this.provider.sortAccounts();
   }
 
-  sortAccounts() {
-    this.accountService.accounts.sort((a, b) => {
-      if (a.accountId == this.auth.currentUser?.uid) {
-        return -1; // Verschiebe a an die erste Stelle
-      } else if (b.accountId == this.auth.currentUser?.uid) {
-        return 1; // Verschiebe b an die erste Stelle
-      } else {
-        return a.name.localeCompare(b.name);
-      }
-    });
-  }
+  
 
   setEndSpan(name:string){
     if(name.endsWith("(Du)")){
@@ -117,7 +100,7 @@ export class ChannelsComponent {
     let screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
     if (screenWidth <= 1000) {
       this.chatService.swichPictureFunction();
-      this.home.swichMobileChat();
+      this.provider.swichMobileChat();
     }
   }
 

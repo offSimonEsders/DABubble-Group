@@ -15,6 +15,10 @@ import { EditProfileComponent } from '../profile-view/edit-profile/edit-profile.
 import { UserAccessComponent } from '../user-access/user-access.component';
 import { LoginComponent } from '../user-access/login/login.component';
 import { ChannelsComponent } from '../nav-bar/channels/channels.component';
+import { ProviderService } from '../services/provider.service';
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
@@ -22,7 +26,7 @@ import { ChannelsComponent } from '../nav-bar/channels/channels.component';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   imports: [AvatarComponent, CommonModule, ProfileViewComponent, NavHeadComponent, SearchBarComponent],
-  providers:[UserAccessComponent,ChannelsComponent,ProfileViewComponent,LoginComponent,EditProfileComponent]
+  providers:[]
 })
 export class HeaderComponent implements OnInit {
   authService!: AuthService;
@@ -37,7 +41,7 @@ export class HeaderComponent implements OnInit {
   chatService!:ChatService;
 
 
-  constructor(private router: Router, public storageservice: StorageService) {
+  constructor(private router: Router, public storageservice: StorageService,private provider:ProviderService) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);    
     this.chatService = inject(ChatService);
@@ -49,16 +53,16 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.provider.dropDownObservable$.subscribe((value: boolean) => {
+      this.dropDown = value;
+    });
+
+    this.provider.profileViewObservable$.subscribe((value: boolean) => {
+      this.profileView = value;
+    });
     this.account = this.accountService.accounts.find(
       (account) => account.id === this.authService.userId
     );
-    if (this.account) {
-      //console.log(this.account);
-    }
-  }
-
-  switchDropDown() {
-    this.dropDown = !this.dropDown;
   }
 
   async logOut() {
@@ -66,14 +70,16 @@ export class HeaderComponent implements OnInit {
     await this.authService.authServiceLogOut();
   }
 
+  switchDropDown() {
+    this.provider.setDropDown(!this.dropDown);
+  }
+
   closeDropDown() {
-    this.dropDown = false;
-    this.profileView = false;
+    this.provider.closeDropDownProvider();
   }
 
   openProfileView() {
     this.authService.profileViewAccount = this.authService.user;
-    this.profileView = true;
-    this.dropDown = false;
+    this.provider.setProfileView(true);
   }
 }

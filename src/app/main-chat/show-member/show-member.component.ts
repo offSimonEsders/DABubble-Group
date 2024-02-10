@@ -20,7 +20,7 @@ export class ShowMemberComponent {
   chatService!:ChatService;
   UserName!:string[];
 
-  constructor(private accountService:AccountService,private closeDiv:MainChatHeaderComponent,private authService:AuthService, private head:HeaderComponent, public div:MainChatHeaderComponent){
+  constructor(private accountService:AccountService,private closeDiv:MainChatHeaderComponent,private authService:AuthService, public div:MainChatHeaderComponent){
     this.chatService = inject(ChatService);
     this.InfoCh = this.chatService.currentChannel;
   }

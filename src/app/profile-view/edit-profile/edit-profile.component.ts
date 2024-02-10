@@ -11,6 +11,7 @@ import { ChooseImageComponent } from '../choose-image/choose-image.component';
 import { UserAccessComponent } from '../../user-access/user-access.component';
 import { LoginComponent } from '../../user-access/login/login.component';
 import { ChooseACharacterComponent } from '../../user-access/register/choose-acharacter/choose-acharacter.component';
+import { ProviderService } from '../../services/provider.service';
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
@@ -34,9 +35,8 @@ export class EditProfileComponent {
 
   constructor(
     private authService: AuthService,
-    private channels: ChannelsComponent,
-    private head: HeaderComponent,
-    private parent: ProfileViewComponent
+    private parent: ProfileViewComponent,
+    private provider:ProviderService
   ) {
     this.account = this.authService.profileViewAccount;
   }
@@ -79,7 +79,7 @@ export class EditProfileComponent {
         this.account.name = this.saveName;
       }
       await this.authService.authUpdateUser(this.saveEmail);
-      this.channels.sortAccounts();
+      this.provider.sortAccounts();
       this.close();
     }
   }
