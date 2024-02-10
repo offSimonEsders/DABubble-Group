@@ -78,4 +78,13 @@ export class ProviderService {
   openProfileView(){
     this.MemberEditChatprofileView.next(!this.MemberEditChatprofileView);
   }
+
+  //-----------------EditComponet-----------------//
+  private openNewImageComponet: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+
+  openNewImageComponetObservable$: Observable<boolean> = this.openNewImageComponet.asObservable();
+  openAvatar() {
+    this.openNewImageComponet.next(!this.openNewImageComponet);
+  }
 }

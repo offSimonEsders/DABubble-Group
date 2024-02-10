@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Account } from '../../models/account.class';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -26,7 +26,7 @@ import { ProviderService } from '../../services/provider.service';
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss',
 })
-export class EditProfileComponent {
+export class EditProfileComponent implements OnInit{
   account!: Account;
   disabeld: boolean = true;
   saveName: string = '';
@@ -41,8 +41,10 @@ export class EditProfileComponent {
     this.account = this.authService.profileViewAccount;
   }
 
-  openAvatar() {
-    this.openNewImage = !this.openNewImage;
+  ngOnInit(): void {
+    this.provider.openNewImageComponetObservable$.subscribe((value: boolean) => {
+      this.openNewImage = value;
+    });
   }
 
   close() {

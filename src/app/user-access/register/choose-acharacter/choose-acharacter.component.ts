@@ -6,6 +6,7 @@ import { ChatService } from '../../../services/chat.service';
 import { CommonModule } from '@angular/common';
 import { EditProfileComponent } from '../../../profile-view/edit-profile/edit-profile.component';
 import { HomeComponent } from '../../../home/home.component';
+import { ProviderService } from '../../../services/provider.service';
 
 @Component({
   selector: 'app-choose-acharacter',
@@ -41,7 +42,7 @@ export class ChooseACharacterComponent implements AfterViewInit, OnInit{
     }
   }
 
-  constructor(public authservice: AuthService, private storageservice: StorageService, private checkinputservice: CheckInputService,private channel:ChatService) {
+  constructor(private provider:ProviderService,public authservice: AuthService, private storageservice: StorageService, private checkinputservice: CheckInputService,private channel:ChatService) {
     if(this.authservice.profileViewAccount){
       this.editProfile = inject(EditProfileComponent);
       this.home = inject(HomeComponent);
@@ -50,7 +51,7 @@ export class ChooseACharacterComponent implements AfterViewInit, OnInit{
   }
 
   goBackToEdit(){
-    this.editProfile.openAvatar();
+    this.provider.openAvatar();
   }
 
   ngAfterViewInit() {
