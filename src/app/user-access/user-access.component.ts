@@ -10,6 +10,7 @@ import { ChannelsComponent } from '../nav-bar/channels/channels.component';
 import { HeaderComponent } from '../header/header.component';
 import { AuthService } from '../services/auth.service';
 import { ProfileViewComponent } from '../profile-view/profile-view.component';
+import { HomeComponent } from '../home/home.component';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { ProfileViewComponent } from '../profile-view/profile-view.component';
     templateUrl: './user-access.component.html',
     styleUrl: './user-access.component.scss',
     imports: [StartAnimationComponent, LoginComponent, RegisterComponent, SendMailForResetPasswordComponent, HeaderComponent],
-    providers: []
+    providers: [EditProfileComponent, ProfileViewComponent, HomeComponent]
 })
 export class UserAccessComponent {
 
