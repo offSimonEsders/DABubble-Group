@@ -64,6 +64,7 @@
       padding: 6px;
       border-radius: 42px;
       align-items: center;
+      width: fit-content;
   
       &:hover {
         background-color: $bgr;
@@ -87,4 +88,5 @@
 
   .searchResultsSection {
     margin-top: 20px;
+    overflow-x: auto;
   }
