@@ -25,6 +25,9 @@ export class ChannelBoxComponent implements OnInit {
 
   ngOnInit(): void {
     this.chat.editChannel = this.currentChannel;
+     this.UiService.openEditObservable$.subscribe((value: boolean) => {
+      this.openEdit = value;
+    });
   }
 
   openEditViewFromChannel(){

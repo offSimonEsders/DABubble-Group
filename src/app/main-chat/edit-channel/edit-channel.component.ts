@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Channel } from '../../models/channel.class';
 import { MessageService } from '../../services/message.service';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,7 @@ import { UiService } from '../../services/UiService.service';
   templateUrl: './edit-channel.component.html',
   styleUrl: './edit-channel.component.scss',
 })
-export class EditChannelComponent {
+export class EditChannelComponent implements OnInit{
   informationOfChannel!: Channel;
   editChannelName:boolean = false;
   editChannelDiscription:boolean = false;
@@ -28,6 +28,11 @@ export class EditChannelComponent {
     this.informationOfChannel = this.chat.editChannel;
     this.nameChannel = this.informationOfChannel.name;
     this.discriptionChannel = this.informationOfChannel.description;
+  }
+
+  ngOnInit(): void {
+
+   
   }
 
   returnCreater(){
