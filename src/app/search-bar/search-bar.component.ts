@@ -3,7 +3,6 @@ import { AvatarComponent } from "../shared/avatar/avatar.component";
 import { DocumentData } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { ChannelsComponent } from '../nav-bar/channels/channels.component';
 import { FormsModule } from '@angular/forms';
 import { SearchService } from '../services/search.service';
 import { OpenChatFromProfileViewService } from '../services/open-chat-from-profile-view.service';
@@ -31,7 +30,7 @@ export class SearchBarComponent {
   input: any;
   authService: AuthService;
 
-  constructor(public open: OpenChatFromProfileViewService, public channels: ChannelsComponent) {
+  constructor(public open: OpenChatFromProfileViewService) {
     this.searchService = inject(SearchService); 
     this.authService = inject(AuthService);
   }
