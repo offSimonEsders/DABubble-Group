@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
-import { HomeComponent } from '../../home/home.component';
+import { UiService } from '../../services/UiService.service';
 
 @Component({
   selector: 'app-nav-head',
@@ -11,11 +11,9 @@ import { HomeComponent } from '../../home/home.component';
 })
 export class NavHeadComponent {
   chatService!: ChatService;
-  home!:HomeComponent;
 
-  constructor() {
+  constructor(private UiService:UiService) {
     this.chatService = inject(ChatService);
-    this.home = inject(HomeComponent);
   }
 
   openNewChat() {
@@ -28,7 +26,7 @@ export class NavHeadComponent {
     let screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     if (screenWidth <= 1000) {
       this.chatService.swichPictureFunction();
-      this.home.swichMobileChat();
+      this.UiService.swichMobileChat();
     }
   }
 }

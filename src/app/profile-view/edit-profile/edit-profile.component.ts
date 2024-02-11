@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Account } from '../../models/account.class';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { ChooseImageComponent } from '../choose-image/choose-image.component';
 import { UserAccessComponent } from '../../user-access/user-access.component';
 import { LoginComponent } from '../../user-access/login/login.component';
 import { ChooseACharacterComponent } from '../../user-access/register/choose-acharacter/choose-acharacter.component';
+import { UiService } from '../../services/UiService.service';
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
@@ -25,7 +26,7 @@ import { ChooseACharacterComponent } from '../../user-access/register/choose-ach
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss',
 })
-export class EditProfileComponent {
+export class EditProfileComponent implements OnInit{
   account!: Account;
   disabeld: boolean = true;
   saveName: string = '';
@@ -34,15 +35,16 @@ export class EditProfileComponent {
 
   constructor(
     private authService: AuthService,
-    private channels: ChannelsComponent,
-    private head: HeaderComponent,
-    private parent: ProfileViewComponent
+    private parent: ProfileViewComponent,
+    public UiService:UiService
   ) {
     this.account = this.authService.profileViewAccount;
   }
 
-  openAvatar() {
-    this.openNewImage = !this.openNewImage;
+  ngOnInit(): void {
+    this.UiService.openNewImageComponetObservable$.subscribe((value: boolean) => {
+      this.openNewImage = value;
+    });
   }
 
   close() {
@@ -79,7 +81,7 @@ export class EditProfileComponent {
         this.account.name = this.saveName;
       }
       await this.authService.authUpdateUser(this.saveEmail);
-      this.channels.sortAccounts();
+      this.UiService.sortAccounts();
       this.close();
     }
   }

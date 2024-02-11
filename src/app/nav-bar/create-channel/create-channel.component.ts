@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Channel } from '../../models/channel.class';
 import { AuthService } from '../../services/auth.service';
 import { AccountService } from '../../services/account.service';
+import { OpenChatFromProfileViewService } from '../../services/open-chat-from-profile-view.service';
 
 @Component({
   selector: 'app-create-channel',
@@ -30,12 +31,22 @@ export class CreateChannelComponent {
   constructor(
     private chatService: ChatService,
     private presentAccount: AuthService,
-    private accountsJSON: AccountService
+    private accountsJSON: AccountService,
+    public closeService:OpenChatFromProfileViewService,
   ) {
     
   }
 
   ngOnInit() {
+    this.closeService.checkDisabledObservabl$.subscribe((value: boolean) => {
+      this.checkDisabled = value;
+    });
+    this.closeService.WhichEditObservabl2$.subscribe((value: boolean) => {
+      this.openCreate2 = value;
+    });
+    this.closeService.WhichEditObservabl$.subscribe((value: number) => {
+      this.whichCreate = value;
+    });
     this.subscription = this.chatService.channelCreated$.subscribe(
       (state) => (this.openCreate = state)
     );
@@ -57,12 +68,8 @@ export class CreateChannelComponent {
     this.chatService.channelCreated(false);
   }
 
-  close2() {
-    this.openCreate2 = false;
-    this.whichCreate = 1;
-    this.checkDisabled = true;
-    this.chatService.channelCreated(false);
-  }
+
+
 
   nextpage() {
     this.whichCreate = 2;

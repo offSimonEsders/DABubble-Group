@@ -18,7 +18,7 @@ import { ProfileViewComponent } from '../profile-view/profile-view.component';
     templateUrl: './user-access.component.html',
     styleUrl: './user-access.component.scss',
     imports: [StartAnimationComponent, LoginComponent, RegisterComponent, SendMailForResetPasswordComponent, HeaderComponent],
-    providers: [ChooseACharacterComponent, EditProfileComponent, ChannelsComponent]
+    providers: []
 })
 export class UserAccessComponent {
 

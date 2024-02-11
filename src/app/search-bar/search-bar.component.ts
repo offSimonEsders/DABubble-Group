@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ChannelsComponent } from '../nav-bar/channels/channels.component';
 import { FormsModule } from '@angular/forms';
 import { SearchService } from '../services/search.service';
+import { OpenChatFromProfileViewService } from '../services/open-chat-from-profile-view.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { SearchService } from '../services/search.service';
     standalone: true,
     templateUrl: './search-bar.component.html',
     styleUrl: './search-bar.component.scss',
-    providers: [ChannelsComponent],
+    providers: [],
     imports: [AvatarComponent, CommonModule,FormsModule]
 })
 export class SearchBarComponent {
@@ -30,7 +31,7 @@ export class SearchBarComponent {
   input: any;
   authService: AuthService;
 
-  constructor(public channels: ChannelsComponent) {
+  constructor(public open: OpenChatFromProfileViewService, public channels: ChannelsComponent) {
     this.searchService = inject(SearchService); 
     this.authService = inject(AuthService);
   }

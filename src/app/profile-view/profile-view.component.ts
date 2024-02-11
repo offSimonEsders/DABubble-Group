@@ -3,17 +3,19 @@ import { AvatarComponent } from '../shared/avatar/avatar.component';
 import { AuthService } from '../services/auth.service';
 import { Account } from '../models/account.class';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../header/header.component';
+
 import { ChannelsComponent } from '../nav-bar/channels/channels.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { UserAccessComponent } from '../user-access/user-access.component';
 import { LoginComponent } from '../user-access/login/login.component';
+import { UiService } from '../services/UiService.service';
+import { OpenChatFromProfileViewService } from '../services/open-chat-from-profile-view.service';
 
 @Component({
   selector: 'app-profile-view',
   standalone: true,
   imports: [AvatarComponent,CommonModule,ChannelsComponent,EditProfileComponent],
-  providers: [ChannelsComponent,EditProfileComponent,UserAccessComponent,LoginComponent],
+  providers: [],
   templateUrl: './profile-view.component.html',
   styleUrl: './profile-view.component.scss',
   
@@ -23,7 +25,7 @@ export class ProfileViewComponent{
   openChatBoolean:boolean = false;
   edit:boolean = false;
   
-  constructor(private authService:AuthService,private channels:ChannelsComponent, private head:HeaderComponent){
+  constructor(private authService:AuthService, private UiService:UiService,public open:OpenChatFromProfileViewService){
     this.account = this.authService.profileViewAccount;
   }
 
@@ -38,9 +40,9 @@ export class ProfileViewComponent{
 
   openChat(){
     if(this.openChatBoolean){
-      this.channels.openChat('chats', this.account.accountId);
+      this.open.openChat('chats', this.account.accountId);
       this.openChatBoolean = false;
     }
-    this.head.closeDropDown();
+    this.UiService.closeDropDownProvider();
   }
 }

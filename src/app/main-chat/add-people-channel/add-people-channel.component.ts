@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { MessageService } from '../../services/message.service';
 import { MainChatHeaderComponent } from '../main-chat-header/main-chat-header.component';
 import { Channel } from '../../models/channel.class';
+import { UiService } from '../../services/UiService.service';
 
 @Component({
   selector: 'app-add-people-channel',
@@ -36,8 +37,9 @@ export class AddPeopleChannelComponent {
   constructor(
     private chatService: ChatService,
     public presentAccount: AuthService,
-    private close:MainChatHeaderComponent,
-    private chat:MessageService
+    private chat:MessageService,
+    private UiService:UiService
+    
   ) {
     this.accountService = inject(AccountService);
     this.fullObj = this.accountService;
@@ -156,8 +158,8 @@ export class AddPeopleChannelComponent {
   }
 
   closeWindow(){
-    this.close.openEditViewMemberEdit();
-    this.close.openEditMember = false;
+    this.UiService.openEditViewMemberEdit();
+    this.UiService.setEditMeber(false);
   }
 
   async updateChannelMembers(){

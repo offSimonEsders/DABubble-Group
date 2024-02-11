@@ -7,13 +7,14 @@ import { ChatService } from '../../services/chat.service';
 import { ChannelBoxComponent } from '../channel-box/channel-box.component';
 import { AuthService } from '../../services/auth.service';
 import { ShowMemberComponent } from '../show-member/show-member.component';
+import { UiService } from '../../services/UiService.service';
 
 @Component({
   selector: 'app-edit-channel',
   standalone: true,
   imports: [CommonModule,FormsModule,ShowMemberComponent],
   templateUrl: './edit-channel.component.html',
-  styleUrl: './edit-channel.component.scss'
+  styleUrl: './edit-channel.component.scss',
 })
 export class EditChannelComponent {
   informationOfChannel!: Channel;
@@ -23,7 +24,7 @@ export class EditChannelComponent {
   discriptionChannel!:string;
   disabeldButton:boolean = false;
 
-  constructor(private chat:MessageService, private update:ChatService,private close:ChannelBoxComponent, private auth:AuthService){
+  constructor(private chat:MessageService, private update:ChatService, private auth:AuthService,private UiService:UiService){
     this.informationOfChannel = this.chat.editChannel;
     this.nameChannel = this.informationOfChannel.name;
     this.discriptionChannel = this.informationOfChannel.description;
@@ -53,7 +54,7 @@ export class EditChannelComponent {
   closeWindow(){
     this.editChannelName = false
     this.editChannelDiscription = false;
-    this.close.openEditView();
+    this.UiService.openEditView();
   }
 
   changeName(){

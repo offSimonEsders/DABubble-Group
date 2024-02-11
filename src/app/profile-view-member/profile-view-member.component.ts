@@ -6,11 +6,12 @@ import { HeaderComponent } from '../header/header.component';
 import { AvatarComponent } from '../shared/avatar/avatar.component';
 import { CommonModule } from '@angular/common';
 import { MainChatHeaderComponent } from '../main-chat/main-chat-header/main-chat-header.component';
+import { OpenChatFromProfileViewService } from '../services/open-chat-from-profile-view.service';
 @Component({
   selector: 'app-profile-view-member',
   standalone: true,
   imports: [AvatarComponent,CommonModule],
-  providers: [ChannelsComponent],
+  providers: [],
   templateUrl: './profile-view-member.component.html',
   styleUrl: './profile-view-member.component.scss'
 })
@@ -19,7 +20,7 @@ export class ProfileViewMemberComponent {
   openChatBoolean:boolean = false;
   edit:boolean = false;
   
-  constructor(private authService:AuthService,private channels:ChannelsComponent, private head:HeaderComponent,private close:MainChatHeaderComponent){
+  constructor(private authService:AuthService,private close:MainChatHeaderComponent,public open:OpenChatFromProfileViewService){
     this.account = this.authService.profileViewAccount;
   }
 
@@ -34,11 +35,10 @@ export class ProfileViewMemberComponent {
 
   openChat(){
     if(this.openChatBoolean){
-      this.channels.openChat('chats', this.account.accountId);
+      this.open.openChat('chats', this.account.accountId);
       this.openChatBoolean = false;
     }
-    this.close.profileView = false;
-    this.close.openEditMember = false;
-    this.channels.openMobileView();
+    this.open.setFalseForChatHeader();
+    this.open.openMobileView();
   }
 }

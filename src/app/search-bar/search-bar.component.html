@@ -19,14 +19,14 @@
     <div class="searchResults boxShadow" *ngIf="showResults">
         <div *ngIf="foundUsers.length > 0" class="searchResultsSection">
             <h3>Users:</h3>
-            <div *ngFor="let user of foundUsers" class="foundContent" (click)="channels.openChat('chats', user['id']); clearSearch()" >
+            <div *ngFor="let user of foundUsers" class="foundContent" (click)="open.openChat('chats', user ['accountId']); clearSearch()" >
                 <app-avatar [accountId]="user['id']" [hideStatus]="false"></app-avatar>
                 <span>{{user['name']}}</span>
             </div> 
         </div>
         <div *ngIf="foundChannels.length > 0" class="searchResultsSection">
             <h3>Channels:</h3>
-            <div *ngFor="let channel of foundChannels" class="foundContent" (click)="channels.openChannel('channels', channel['id']); clearSearch()">
+            <div *ngFor="let channel of foundChannels" class="foundContent" (click)="open.openChannel('channels', channel['id']); clearSearch()">
                 @if(channel) {
                     @switch (channel['publicStatus']) {
                     @case (true) {
@@ -55,10 +55,10 @@
         </div>
         <div *ngIf="foundChatMessages.length > 0" class="searchResultsSection">
             <h3>Messages:</h3>
-            <div *ngFor="let message of foundChatMessages" class="foundContent" (click)="channels.openChannel('chats', message[1]); clearSearch()" >
+            <div *ngFor="let message of foundChatMessages" class="foundContent" (click)="open.openChannel('chats', message[1]); clearSearch()" >
                 <app-avatar [accountId]="message[0]['messageFrom']" [hideStatus]="true"></app-avatar><span>{{message[0]['message']}}</span>
             </div> 
-            <div *ngFor="let message of foundChannelMessages" class="foundContent" (click)="channels.openChannel('channel', message['chatId']); clearSearch()" >
+            <div *ngFor="let message of foundChannelMessages" class="foundContent" (click)="open.openChannel('channel', message['chatId']); clearSearch()" >
                 <app-avatar [accountId]="message['messageFrom']" [hideStatus]="true"></app-avatar><span>{{message['message']}}</span>
             </div> 
 
