@@ -3,7 +3,6 @@ import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../../services/chat.service';
 import { Subscription } from 'rxjs';
-import { ChannelBoxComponent } from '../channel-box/channel-box.component';
 import { Channel } from '../../models/channel.class';
 import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
@@ -11,8 +10,9 @@ import { Account } from '../../models/account.class';
 import { ShowMemberComponent } from '../show-member/show-member.component';
 import { AddPeopleChannelComponent } from '../add-people-channel/add-people-channel.component';
 import { ProfileViewMemberComponent } from '../../profile-view-member/profile-view-member.component';
-import { ProviderService } from '../../services/provider.service';
+import { UiService } from '../../services/UiService.service';
 import { OpenChatFromProfileViewService } from '../../services/open-chat-from-profile-view.service';
+import { ChannelBoxComponent } from '../channel-box/channel-box.component';
 
 @Component({
   selector: 'app-main-chat-header',
@@ -33,7 +33,7 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
   openEditMemberEdit = false;
   profileView = false;
 
-  constructor(public provider:ProviderService,private chatHeader:OpenChatFromProfileViewService) {
+  constructor(public UiService:UiService,private chatHeader:OpenChatFromProfileViewService) {
     this.authService = inject(AuthService);
     this.chatService = inject(ChatService);
     this.accountService = inject(AccountService);
@@ -50,13 +50,13 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
     this.chatHeader.openEditMemberHeaderObservabl$.subscribe((value: boolean) => {
       this.openEditMember = value;
     });
-    this.provider.EditChatHeadObservable$.subscribe((value: boolean) => {
+    this.UiService.EditChatHeadObservable$.subscribe((value: boolean) => {
       this.openEditMemberEdit = value;
     });
-    this.provider.EditChatHeadObservableprofileView$.subscribe((value: boolean) => {
+    this.UiService.EditChatHeadObservableprofileView$.subscribe((value: boolean) => {
       this.profileView = value;
     });
-    this.provider.EditChatHeadObservableMember$.subscribe((value: boolean) => {
+    this.UiService.EditChatHeadObservableMember$.subscribe((value: boolean) => {
       this.openEditMember = value;
     });
     this.openChatSub = this.chatService.openChatEmitter.subscribe({

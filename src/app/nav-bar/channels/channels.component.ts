@@ -10,7 +10,7 @@ import { Channel } from '../../models/channel.class';
 import { MessageService } from '../../services/message.service';
 import { updateDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
-import { ProviderService } from '../../services/provider.service';
+import { UiService } from '../../services/UiService.service';
 import { OpenChatFromProfileViewService } from '../../services/open-chat-from-profile-view.service';
 
 @Component({
@@ -31,13 +31,13 @@ export class ChannelsComponent {
   chatService!: ChatService;
   messageService!: MessageService;
 
-  constructor(public open: OpenChatFromProfileViewService,private provider:ProviderService) {
+  constructor(public open: OpenChatFromProfileViewService,private UiService:UiService) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);
     this.messageService = inject(MessageService);
 
-    this.provider.sortAccounts();
+    this.UiService.sortAccounts();
   }
 
   

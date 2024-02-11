@@ -11,7 +11,7 @@ import { ChooseImageComponent } from '../choose-image/choose-image.component';
 import { UserAccessComponent } from '../../user-access/user-access.component';
 import { LoginComponent } from '../../user-access/login/login.component';
 import { ChooseACharacterComponent } from '../../user-access/register/choose-acharacter/choose-acharacter.component';
-import { ProviderService } from '../../services/provider.service';
+import { UiService } from '../../services/UiService.service';
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
@@ -36,13 +36,13 @@ export class EditProfileComponent implements OnInit{
   constructor(
     private authService: AuthService,
     private parent: ProfileViewComponent,
-    public provider:ProviderService
+    public UiService:UiService
   ) {
     this.account = this.authService.profileViewAccount;
   }
 
   ngOnInit(): void {
-    this.provider.openNewImageComponetObservable$.subscribe((value: boolean) => {
+    this.UiService.openNewImageComponetObservable$.subscribe((value: boolean) => {
       this.openNewImage = value;
     });
   }
@@ -81,7 +81,7 @@ export class EditProfileComponent implements OnInit{
         this.account.name = this.saveName;
       }
       await this.authService.authUpdateUser(this.saveEmail);
-      this.provider.sortAccounts();
+      this.UiService.sortAccounts();
       this.close();
     }
   }

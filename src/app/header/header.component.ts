@@ -15,7 +15,7 @@ import { EditProfileComponent } from '../profile-view/edit-profile/edit-profile.
 import { UserAccessComponent } from '../user-access/user-access.component';
 import { LoginComponent } from '../user-access/login/login.component';
 import { ChannelsComponent } from '../nav-bar/channels/channels.component';
-import { ProviderService } from '../services/provider.service';
+import { UiService } from '../services/UiService.service';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 
@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
   chatService!:ChatService;
 
 
-  constructor(private router: Router, public storageservice: StorageService,private provider:ProviderService) {
+  constructor(private router: Router, public storageservice: StorageService,private UiService:UiService) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);    
     this.chatService = inject(ChatService);
@@ -53,11 +53,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.provider.dropDownObservable$.subscribe((value: boolean) => {
+    this.UiService.dropDownObservable$.subscribe((value: boolean) => {
       this.dropDown = value;
     });
 
-    this.provider.profileViewObservable$.subscribe((value: boolean) => {
+    this.UiService.profileViewObservable$.subscribe((value: boolean) => {
       this.profileView = value;
     });
     this.account = this.accountService.accounts.find(
@@ -71,15 +71,15 @@ export class HeaderComponent implements OnInit {
   }
 
   switchDropDown() {
-    this.provider.setDropDown(!this.dropDown);
+    this.UiService.setDropDown(!this.dropDown);
   }
 
   closeDropDown() {
-    this.provider.closeDropDownProvider();
+    this.UiService.closeDropDownProvider();
   }
 
   openProfileView() {
     this.authService.profileViewAccount = this.authService.user;
-    this.provider.setProfileView(true);
+    this.UiService.setProfileView(true);
   }
 }

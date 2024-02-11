@@ -4,7 +4,7 @@ import { HoverStyleDirective } from './hover-style.directive';
 import { Channel } from '../../models/channel.class';
 import { EditChannelComponent } from '../edit-channel/edit-channel.component';
 import { MessageService } from '../../services/message.service';
-import { ProviderService } from '../../services/provider.service';
+import { UiService } from '../../services/UiService.service';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class ChannelBoxComponent implements OnInit {
   openEdit = false;
 
 
-  constructor(private chat:MessageService,public provider:ProviderService){}
+  constructor(private chat:MessageService,public UiService:UiService){}
 
   ngOnInit(): void {
     this.chat.editChannel = this.currentChannel;
@@ -30,7 +30,7 @@ export class ChannelBoxComponent implements OnInit {
   openEditViewFromChannel(){
     if(this.currentChannel){
       this.chat.editChannel = this.currentChannel;
-      this.provider.openEditView();
+      this.UiService.openEditView();
     }
 
   }

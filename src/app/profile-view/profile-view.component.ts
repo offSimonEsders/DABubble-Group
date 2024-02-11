@@ -8,14 +8,14 @@ import { ChannelsComponent } from '../nav-bar/channels/channels.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { UserAccessComponent } from '../user-access/user-access.component';
 import { LoginComponent } from '../user-access/login/login.component';
-import { ProviderService } from '../services/provider.service';
+import { UiService } from '../services/UiService.service';
 import { OpenChatFromProfileViewService } from '../services/open-chat-from-profile-view.service';
 
 @Component({
   selector: 'app-profile-view',
   standalone: true,
   imports: [AvatarComponent,CommonModule,ChannelsComponent,EditProfileComponent],
-  providers: [ChannelsComponent,EditProfileComponent,UserAccessComponent,LoginComponent],
+  providers: [],
   templateUrl: './profile-view.component.html',
   styleUrl: './profile-view.component.scss',
   
@@ -25,7 +25,7 @@ export class ProfileViewComponent{
   openChatBoolean:boolean = false;
   edit:boolean = false;
   
-  constructor(private authService:AuthService, private Provider:ProviderService,public open:OpenChatFromProfileViewService){
+  constructor(private authService:AuthService, private UiService:UiService,public open:OpenChatFromProfileViewService){
     this.account = this.authService.profileViewAccount;
   }
 
@@ -43,6 +43,6 @@ export class ProfileViewComponent{
       this.open.openChat('chats', this.account.accountId);
       this.openChatBoolean = false;
     }
-    this.Provider.closeDropDownProvider();
+    this.UiService.closeDropDownProvider();
   }
 }

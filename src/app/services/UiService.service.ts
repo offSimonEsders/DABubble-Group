@@ -7,7 +7,7 @@ import { AccountService } from './account.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProviderService {
+export class UiService {
   private dropDownSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private profileViewSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private homehideBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

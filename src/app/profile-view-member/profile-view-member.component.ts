@@ -11,7 +11,7 @@ import { OpenChatFromProfileViewService } from '../services/open-chat-from-profi
   selector: 'app-profile-view-member',
   standalone: true,
   imports: [AvatarComponent,CommonModule],
-  providers: [ChannelsComponent],
+  providers: [],
   templateUrl: './profile-view-member.component.html',
   styleUrl: './profile-view-member.component.scss'
 })

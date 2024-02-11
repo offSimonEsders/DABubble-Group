@@ -8,7 +8,7 @@ import { ToggleContainerService } from '../services/toggle-container.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../services/chat.service';
-import { ProviderService } from '../services/provider.service';
+import { UiService } from '../services/UiService.service';
 
 interface ToggleSub {
   element: string;
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   showMainChat = true;
   window: Window = window;
   
-  constructor(private channel: ChatService,private provider:ProviderService) {
+  constructor(private channel: ChatService,private UiService:UiService) {
     this.toggleContainerService = inject(ToggleContainerService);
   }
 
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * The ngOnInit function subscribes to an event and resizes the element of the emitted element reference based on the received width.
    */
   ngOnInit(): void {
-    this.provider.homeBarObservable$.subscribe((value: boolean) => {
+    this.UiService.homeBarObservable$.subscribe((value: boolean) => {
       this.hideBar = value;
     });
     this.toggleSub = this.toggleContainerService.toggleSubject.subscribe({

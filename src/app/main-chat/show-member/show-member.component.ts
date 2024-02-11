@@ -7,7 +7,7 @@ import { AccountService } from '../../services/account.service';
 import { MainChatHeaderComponent } from '../main-chat-header/main-chat-header.component';
 import { AuthService } from '../../services/auth.service';
 import { HeaderComponent } from '../../header/header.component';
-import { ProviderService } from '../../services/provider.service';
+import { UiService } from '../../services/UiService.service';
 
 @Component({
   selector: 'app-show-member',
@@ -22,23 +22,23 @@ export class ShowMemberComponent {
   chatService!:ChatService;
   UserName!:string[];
 
-  constructor(private authService:AuthService,private providers:ProviderService,){
+  constructor(private authService:AuthService,private UiService:UiService,){
     this.chatService = inject(ChatService);
     this.InfoCh = this.chatService.currentChannel;
   }
 
   close(){
-    this.providers.openEditViewMember();
+    this.UiService.openEditViewMember();
   }
 
   openAddUser(){
-    this.providers.openEditViewMember();
-    this.providers.openEditViewMemberEdit();
+    this.UiService.openEditViewMember();
+    this.UiService.openEditViewMemberEdit();
   }
 
   async GoToSetProfileViewAccount(id:string){
     await this.authService.setprofileViewAccount(id);
-    this.providers.openEditViewMember();
-    this.providers.openProfileView();
+    this.UiService.openEditViewMember();
+    this.UiService.openProfileView();
   }
 }

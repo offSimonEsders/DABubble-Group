@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { AccountService } from './account.service';
 import { ChatService } from './chat.service';
 import { MessageService } from './message.service';
-import { ProviderService } from './provider.service';
+import { UiService } from './UiService.service';
 import { Chat } from '../models/chat.class';
 import { updateDoc } from '@angular/fire/firestore';
 import { Channel } from '../models/channel.class';
@@ -21,7 +21,7 @@ export class OpenChatFromProfileViewService {
   checkDisabledObservabl$: Observable<boolean> = this.checkDisabled.asObservable();
   WhichEditObservabl2$: Observable<boolean> = this.WhichEdit2.asObservable();
   WhichEditObservabl$: Observable<number> = this.WhichEdit.asObservable();
-  constructor(private authService: AuthService, private accountService: AccountService, private chatService: ChatService, private messageService: MessageService, private provider: ProviderService) { }
+  constructor(private authService: AuthService, private accountService: AccountService, private chatService: ChatService, private messageService: MessageService, private UiService: UiService) { }
   
 
   async openChat(chatColl: string, accId: string) {
@@ -44,7 +44,7 @@ export class OpenChatFromProfileViewService {
     let screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
     if (screenWidth <= 1000) {
       this.chatService.swichPictureFunction();
-      this.provider.swichMobileChat();
+      this.UiService.swichMobileChat();
     }
   }
 

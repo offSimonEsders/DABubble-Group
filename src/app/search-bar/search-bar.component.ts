@@ -17,7 +17,7 @@ import { OpenChatFromProfileViewService } from '../services/open-chat-from-profi
     standalone: true,
     templateUrl: './search-bar.component.html',
     styleUrl: './search-bar.component.scss',
-    providers: [ChannelsComponent],
+    providers: [],
     imports: [AvatarComponent, CommonModule,FormsModule]
 })
 export class SearchBarComponent {

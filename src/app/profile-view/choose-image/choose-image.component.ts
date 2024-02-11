@@ -7,7 +7,7 @@ import { ChatService } from './../../services/chat.service';
 import { CommonModule } from '@angular/common';
 import { EditProfileComponent } from './../../profile-view/edit-profile/edit-profile.component';
 import { HomeComponent } from './../../home/home.component';
-import { ProviderService } from '../../services/provider.service';
+import { UiService } from '../../services/UiService.service';
 @Component({
   selector: 'app-choose-image',
   standalone: true,
@@ -42,12 +42,12 @@ export class ChooseImageComponent {
     }
   }
 
-  constructor(private Provider:ProviderService,public authservice: AuthService, private storageservice: StorageService, private checkinputservice: CheckInputService,private channel:ChatService) {
+  constructor(private UiService:UiService,public authservice: AuthService, private storageservice: StorageService, private checkinputservice: CheckInputService,private channel:ChatService) {
 
   }
 
   goBackToEdit(){
-    this.Provider.openAvatar();
+    this.UiService.openAvatar();
   }
 
   ngAfterViewInit() {
