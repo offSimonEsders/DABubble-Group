@@ -53,6 +53,15 @@
                 <span>{{channel['name']}}</span>   
             </div> 
         </div>
+        <div *ngIf="foundChatMessages.length > 0" class="searchResultsSection">
+            <h3>Messages:</h3>
+            <div *ngFor="let message of foundChatMessages" class="foundContent" (click)="open.openChannel('chats', message[1]); clearSearch()" >
+                <app-avatar [accountId]="message[0]['messageFrom']" [hideStatus]="true"></app-avatar><span>{{message[0]['message']}}</span>
+            </div> 
+            <div *ngFor="let message of foundChannelMessages" class="foundContent" (click)="open.openChannel('channel', message['chatId']); clearSearch()" >
+                <app-avatar [accountId]="message['messageFrom']" [hideStatus]="true"></app-avatar><span>{{message['message']}}</span>
+            </div> 
+
+        </div>
     </div>    
-    
 </div>
