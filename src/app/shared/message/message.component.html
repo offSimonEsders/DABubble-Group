@@ -50,7 +50,7 @@
     @default {
     <div class="message-subcontainer"
         [ngStyle]="{alignItems: ownMessage ? 'flex-end' : 'flex-start', paddingInline: setInlinePaddingToContainer(), paddingRight: hideAnswers ? '37px' : 'unset'}">
-        <div class="message-header" [ngStyle]="{flexDirection: ownMessage ? 'row-reverse' : 'row'}">
+        <div (click)="GoToSetProfileViewAccount(account.accountId)" class="message-header" [ngStyle]="{flexDirection: ownMessage ? 'row-reverse' : 'row'}">
             @if(account) {
             <span class="name">{{ account.name }}</span>
             }

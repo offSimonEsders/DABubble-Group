@@ -22,6 +22,7 @@ import { TimePipe } from './time.pipe';
 import { ToggleContainerService } from '../../services/toggle-container.service';
 import { MessageService } from '../../services/message.service';
 import { ResizeTextareaDirective } from './resize-textarea.directive';
+import { UiService } from '../../services/UiService.service';
 
 @Component({
   selector: 'app-message',
@@ -59,7 +60,7 @@ export class MessageComponent implements OnInit {
   openedEditMessage = false;
   openedEmojibar = false;
 
-  constructor() {
+  constructor(private UiService:UiService) {
     this.firestoreService = inject(FirestoreService);
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
@@ -187,5 +188,10 @@ export class MessageComponent implements OnInit {
       }
       
     }
+  }
+
+  async GoToSetProfileViewAccount(id:string){
+    await this.authService.setprofileViewAccount(id);
+    this.UiService.openProfileView();
   }
 }

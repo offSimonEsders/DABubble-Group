@@ -34,7 +34,7 @@
 @case ('chats') {
 @if(chatWithAccount) {
 <div class="private-chat-header">
-    <div class="subcontainer">
+    <div class="subcontainer" (click)="GoToSetProfileViewAccount(chatWithAccount.accountId)">
         <div class="avatar-container">
             <app-avatar [accountId]="chatWithAccount.accountId"></app-avatar>
         </div>

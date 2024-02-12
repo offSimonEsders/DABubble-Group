@@ -115,5 +115,8 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-
+  async GoToSetProfileViewAccount(id:string){
+    await this.authService.setprofileViewAccount(id);
+    this.UiService.openProfileView();
+  }
 }
