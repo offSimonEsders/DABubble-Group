@@ -166,8 +166,11 @@
         </div>
     </div>
 
-    <div class="leaveButton">
+    <div class="leaveButton" >
         <button (click)="removeFromChannel()">Channel verlassen</button>
+        @if(leaveGuest){
+            <span style="color: red;">Der Gast kann nicht aus dem Channel entfent werden</span>
+        }
     </div>
    <div class="member">
     <app-show-member></app-show-member>

@@ -24,6 +24,8 @@ export class EditChannelComponent implements OnInit{
   discriptionChannel!:string;
   disabeldButton:boolean = false;
 
+  leaveGuest:boolean = false;
+
   constructor(private chat:MessageService, private update:ChatService, private auth:AuthService,private UiService:UiService){
     this.informationOfChannel = this.chat.editChannel;
     this.nameChannel = this.informationOfChannel.name;
@@ -94,13 +96,21 @@ export class EditChannelComponent implements OnInit{
 
   removeFromChannel(){
     const index = this.informationOfChannel.memberIds.indexOf(this.auth.userId);
+    if(this.auth.user.id == 'pesOSpHsgAt97WwG705y'){
+      this.leaveGuest = true;
 
-    if (index !== -1) {
-      this.informationOfChannel.memberIds.splice(index, 1);
-      this.update.updateChannel(this.informationOfChannel,this.informationOfChannel.id);
-      this.closeWindow()
-    } else {
-      this.closeWindow()
+      setTimeout(() => {
+        this.leaveGuest = false;
+      }, 3000);
+    }else{
+      if (index !== -1) {
+        this.informationOfChannel.memberIds.splice(index, 1);
+        this.update.updateChannel(this.informationOfChannel,this.informationOfChannel.id);
+        this.closeWindow()
+      } else {
+        this.closeWindow()
+      }
     }
-  }
+    }
+    
 }

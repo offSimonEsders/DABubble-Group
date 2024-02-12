@@ -152,7 +152,8 @@
     margin-top: 20px;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
+    flex-direction: column;
 
     button{
         background-color: $buttonPurple;
@@ -169,6 +170,10 @@
         &:active {
             background-color: $buttonPurple !important;
         }
+    }
+
+    span{
+        margin-top: 10px;
     }
 }
 
