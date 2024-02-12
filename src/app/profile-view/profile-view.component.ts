@@ -6,8 +6,6 @@ import { CommonModule } from '@angular/common';
 
 import { ChannelsComponent } from '../nav-bar/channels/channels.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { UserAccessComponent } from '../user-access/user-access.component';
-import { LoginComponent } from '../user-access/login/login.component';
 import { UiService } from '../services/UiService.service';
 
 @Component({

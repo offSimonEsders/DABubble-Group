@@ -38,7 +38,7 @@ export class ChooseACharacterComponent implements AfterViewInit, OnInit{
   ngOnInit(): void {
     if(this.authservice.profileViewAccount){
       this.register = false;
-      this.showDiv = true;
+      this.showDiv = false;
     }
   }
 
