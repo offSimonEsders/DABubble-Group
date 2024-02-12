@@ -34,6 +34,7 @@ export class ChannelBoxComponent implements OnInit {
     if(this.currentChannel){
       this.chat.editChannel = this.currentChannel;
       this.UiService.openEditView();
+      this.openEdit = true;
     }
 
   }

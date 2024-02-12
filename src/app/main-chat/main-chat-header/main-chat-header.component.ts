@@ -75,6 +75,16 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
 
   }
 
+  openEditViewMember(){
+    this.UiService.openEditViewMember();
+    this.openEditMember = true;
+  }
+
+  openEditViewMemberEdit(){
+    this.UiService.openEditViewMemberEdit();
+    this.openEditMemberEdit = true;
+  }
+
   async getAllNamesOfChannelMembers(){
     this.chatService.currentChannelNames = [];
     this.chatService.currentChannelAccounts = [];

@@ -55,20 +55,20 @@ export class UiService {
   }
 
   swichMobileChat() {
-    this.homehideBar.next(!this.homehideBar);
+    this.homehideBar.next(!this.homehideBar.value);
   }
 
 
   openEditView(){
-    this.openEditHeadChat.next(!this.openEditHeadChat);
+    this.openEditHeadChat.next(!this.openEditHeadChat.value);
   }
 
 
   openEditViewMemberEdit(){
-    this.MemberEditChatHead.next(!this.MemberEditChatHead);
+    this.MemberEditChatHead.next(!this.MemberEditChatHead.value);
   }
   openEditViewMember(){
-    this.MemberEditChatHeadMember.next(!this.MemberEditChatHeadMember);
+    this.MemberEditChatHeadMember.next(!this.MemberEditChatHeadMember.value);
   }
 
   setEditMeber(value: boolean) {
@@ -76,7 +76,7 @@ export class UiService {
   }
   
   openProfileView(){
-    this.MemberEditChatprofileView.next(!this.MemberEditChatprofileView);
+    this.MemberEditChatprofileView.next(!this.MemberEditChatprofileView.value);
   }
 
   //-----------------EditComponet-----------------//
@@ -85,6 +85,6 @@ export class UiService {
 
   openNewImageComponetObservable$: Observable<boolean> = this.openNewImageComponet.asObservable();
   openAvatar() {
-    this.openNewImageComponet.next(!this.openNewImageComponet);
+    this.openNewImageComponet.next(!this.openNewImageComponet.value);
   }
 }
