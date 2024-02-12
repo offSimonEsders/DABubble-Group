@@ -31,11 +31,11 @@
         </div>
     </div>
 </div>
-<div (click)="closeService.close2()" *ngIf="openCreate2" class="overdiv">
+<div (click)="UiService.close2()" *ngIf="openCreate2" class="overdiv">
     <div (click)="$event.stopPropagation()" class="crate-overdiv" *ngIf="whichCreate != 1">
         <app-add-user></app-add-user>
         <div class="close-button">
-            <svg (click)="closeService.close2()" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            <svg (click)="UiService.close2()" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_813_12181" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                     height="24">

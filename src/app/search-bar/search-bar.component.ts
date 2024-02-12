@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SearchService } from '../services/search.service';
-import { OpenChatFromProfileViewService } from '../services/open-chat-from-profile-view.service';
+import { UiService } from '../services/UiService.service';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class SearchBarComponent {
   input: any;
   authService: AuthService;
 
-  constructor(public open: OpenChatFromProfileViewService) {
+  constructor(public UiService:UiService) {
     this.searchService = inject(SearchService); 
     this.authService = inject(AuthService);
   }

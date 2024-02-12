@@ -11,7 +11,6 @@ import { ShowMemberComponent } from '../show-member/show-member.component';
 import { AddPeopleChannelComponent } from '../add-people-channel/add-people-channel.component';
 import { ProfileViewMemberComponent } from '../../profile-view-member/profile-view-member.component';
 import { UiService } from '../../services/UiService.service';
-import { OpenChatFromProfileViewService } from '../../services/open-chat-from-profile-view.service';
 import { ChannelBoxComponent } from '../channel-box/channel-box.component';
 
 @Component({
@@ -33,7 +32,7 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
   openEditMemberEdit = false;
   profileView = false;
 
-  constructor(public UiService:UiService,private chatHeader:OpenChatFromProfileViewService) {
+  constructor(public UiService:UiService) {
     this.authService = inject(AuthService);
     this.chatService = inject(ChatService);
     this.accountService = inject(AccountService);
@@ -44,10 +43,10 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
    * chat collection and chat ID.
    */
   ngOnInit(): void {
-    this.chatHeader.profileViewHeaderObservabl$.subscribe((value: boolean) => {
+    this.UiService.profileViewHeaderObservabl$.subscribe((value: boolean) => {
       this.profileView = value;
     });
-    this.chatHeader.openEditMemberHeaderObservabl$.subscribe((value: boolean) => {
+    this.UiService.openEditMemberHeaderObservabl$.subscribe((value: boolean) => {
       this.openEditMember = value;
     });
     this.UiService.EditChatHeadObservable$.subscribe((value: boolean) => {

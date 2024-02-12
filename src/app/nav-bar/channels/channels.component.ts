@@ -11,8 +11,6 @@ import { MessageService } from '../../services/message.service';
 import { updateDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { UiService } from '../../services/UiService.service';
-import { OpenChatFromProfileViewService } from '../../services/open-chat-from-profile-view.service';
-
 @Component({
   selector: 'app-channels',
   standalone: true,
@@ -31,7 +29,7 @@ export class ChannelsComponent {
   chatService!: ChatService;
   messageService!: MessageService;
 
-  constructor(public open: OpenChatFromProfileViewService,private UiService:UiService) {
+  constructor(public UiService:UiService) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);
