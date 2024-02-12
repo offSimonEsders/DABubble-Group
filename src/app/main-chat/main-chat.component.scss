@@ -6,6 +6,7 @@
   border-radius: 30px;
   @include displayFlex($fd: column);
   overflow: hidden;
+
 }
 
 header {
@@ -23,8 +24,8 @@ header {
 .chat-container {
   width: 100%;
   height: 100%;
-  @include displayFlex($fd: column, $ai: flex-start);
-  overflow-y: scroll ;
+  //@include displayFlex($fd: column, $ai: flex-start);
+
   overflow-x: hidden;
 
   .subcontainer:first-of-type {
@@ -34,6 +35,7 @@ header {
   .subcontainer:last-of-type {
     margin-bottom: 63px;
   }
+  overflow-y: scroll ;
 }
 
 .message,
