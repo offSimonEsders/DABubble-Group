@@ -12,13 +12,14 @@ import { AddPeopleChannelComponent } from '../add-people-channel/add-people-chan
 import { ProfileViewMemberComponent } from '../../profile-view-member/profile-view-member.component';
 import { UiService } from '../../services/UiService.service';
 import { ChannelBoxComponent } from '../channel-box/channel-box.component';
+import { SearchBarComponent } from '../../search-bar/search-bar.component';
 
 @Component({
   selector: 'app-main-chat-header',
   standalone: true,
   templateUrl: './main-chat-header.component.html',
   styleUrl: './main-chat-header.component.scss',
-  imports: [AvatarComponent, CommonModule, ChannelBoxComponent,ShowMemberComponent,AddPeopleChannelComponent,ProfileViewMemberComponent],
+  imports: [AvatarComponent, CommonModule, ChannelBoxComponent,ShowMemberComponent,AddPeopleChannelComponent,ProfileViewMemberComponent,SearchBarComponent],
 })
 export class MainChatHeaderComponent implements OnInit, OnDestroy {
   authService!: AuthService;
