@@ -65,6 +65,13 @@
       border-radius: 42px;
       align-items: center;
       width: fit-content;
+
+
+
+      app-avatar{
+        min-width: 40px !important;
+      }
+      
   
       &:hover {
         background-color: $bgr;
