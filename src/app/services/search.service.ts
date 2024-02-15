@@ -33,29 +33,37 @@ export class SearchService {
 
   async searchChatMessages(userId: string, searchText: string) {
     let foundChatMessages: [Message,string][] = [];
+    let ChannelID : string[] = []
     this.chatService.chats.forEach(async (chat: Chat) => { 
       const querySnapshot = await getDocs(this.firestoreService.getMessageCollRef('chats', chat.id));
       querySnapshot.forEach(async (doc) => {
         let message: [Message,string] = [this.createMessage(doc),chat.id]
         if(message[0].message.toLowerCase().indexOf(searchText.toLowerCase()) != -1)
           foundChatMessages.push(message);
+          debugger
+          ChannelID.push(chat.id)
       });  
     });
-    return foundChatMessages;
+    console.log(ChannelID)
+    return [foundChatMessages,ChannelID];
   }
   
   async searchChannelMessages(userId: string, searchText: string) {
     let foundChannelMessages: Message[] = [];
+    let ChannelID : string[] = []
     this.chatService.channels.forEach(async (channel: Channel) => { 
       if(channel.allUser || channel.memberIds.includes(userId)) {
+        ChannelID.push(channel.id)  
         const querySnapshot = await getDocs(this.firestoreService.getMessageCollRef('channels', channel.id));
         querySnapshot.forEach(async (doc) => {
           let message = this.createMessage(doc)
           if(message.message.toLowerCase().indexOf(searchText.toLowerCase()) != -1)
             foundChannelMessages.push(message);
-        });            
+        });   
+               
       }
     });
+    console.log(ChannelID)
     return foundChannelMessages;
   }
 
@@ -66,6 +74,7 @@ export class SearchService {
         foundChannels.push(channel);
       }
     });
+
     return foundChannels; 
   }
   

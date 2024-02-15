@@ -49,6 +49,13 @@ export class SearchBarComponent {
     this.showResults = (!(this.foundUsers.length + this.foundChannels.length + this.foundChatMessages.length + this.foundChatMessages.length <= 0))
   } 
 
+  console(){
+    console.log(this.foundChatMessages)
+    console.log(this.foundUsers)
+    console.log(this.foundChannelMessages)
+    console.log(this.foundChatMessages)
+  }
+
   clearSearch() {
     this.input ='';
     this.showResults = false;   
