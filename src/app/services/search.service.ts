@@ -1,7 +1,7 @@
 import { Injectable, inject , OnInit } from '@angular/core';
 import { Message } from '../models/message.class';
 import { FirestoreService } from './firestore.service';
-import { DocumentSnapshot, QueryDocumentSnapshot, getDocs } from '@angular/fire/firestore';
+import { DocumentData, DocumentSnapshot, QueryDocumentSnapshot, getDocs } from '@angular/fire/firestore';
 import { Channel } from '../models/channel.class';
 import { ChatService } from './chat.service';
 import { Chat } from '../models/chat.class';
@@ -45,6 +45,19 @@ export class SearchService {
     });
     return foundChatMessages
   }
+
+  async searchChatMessagesIDS(userId: string, searchText: string) {
+    let ChannelID : string[] = []
+    this.chatService.chats.forEach(async (chat: Chat) => { 
+      const querySnapshot = await getDocs(this.firestoreService.getMessageCollRef('chats', chat.id));
+      querySnapshot.forEach(async (doc) => {
+        let message: [Message,string] = [this.createMessage(doc),chat.id]
+        if(message[0].message.toLowerCase().indexOf(searchText.toLowerCase()) != -1)
+          ChannelID.push(chat.id)
+      });  
+    });
+    return ChannelID
+  }
   
   async searchChannelMessages(userId: string, searchText: string) {
     let foundChannelMessages: Message[] = [];
@@ -61,8 +74,25 @@ export class SearchService {
                
       }
     });
-    console.log(ChannelID)
     return foundChannelMessages;
+  }
+
+  async searchChannelMessagesIDS(userId: string, searchText: string) {
+    let ChannelID : string[] = []
+    this.chatService.channels.forEach(async (channel: Channel) => { 
+      if(channel.allUser || channel.memberIds.includes(userId)) {
+         
+        const querySnapshot = await getDocs(this.firestoreService.getMessageCollRef('channels', channel.id));
+        querySnapshot.forEach(async (doc) => {
+          let message = this.createMessage(doc)
+          if(message.message.toLowerCase().indexOf(searchText.toLowerCase()) != -1)
+          ChannelID.push(channel.id) 
+        }); 
+             
+          
+      }
+    });
+    return ChannelID;
   }
 
   searchChannels(searchText: string) {

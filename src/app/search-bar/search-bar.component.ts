@@ -22,6 +22,8 @@ export class SearchBarComponent {
 
   foundUsers: DocumentData[] = [];
   foundChannels: DocumentData[] = [];
+  getIdsChannels: string[] = [];
+  getIdsChats: string[] = [];
   foundChatMessages:  DocumentData[] = [];
   foundChannelMessages: DocumentData[] = [];
   showResults: boolean = false;
@@ -45,7 +47,9 @@ export class SearchBarComponent {
     this.foundUsers = await this.searchService.searchUsers(this.input);
     this.foundChannels = await this.searchService.searchChannels(this.input);
     this.foundChannelMessages = await this.searchService.searchChannelMessages(this.authService.userId, this.input);
+    this.getIdsChannels = await this.searchService.searchChannelMessagesIDS(this.authService.userId, this.input);
     this.foundChatMessages = await this.searchService.searchChatMessages(this.authService.userId, this.input);
+    this.getIdsChats = await this.searchService.searchChatMessagesIDS(this.authService.userId, this.input);
     this.showResults = (!(this.foundUsers.length + this.foundChannels.length + this.foundChatMessages.length + this.foundChatMessages.length <= 0))
 
     console.log(this.foundChatMessages)
