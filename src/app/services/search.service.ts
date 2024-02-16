@@ -40,12 +40,10 @@ export class SearchService {
         let message: [Message,string] = [this.createMessage(doc),chat.id]
         if(message[0].message.toLowerCase().indexOf(searchText.toLowerCase()) != -1)
           foundChatMessages.push(message);
-          debugger
           ChannelID.push(chat.id)
       });  
     });
-    console.log(ChannelID)
-    return [foundChatMessages,ChannelID];
+    return foundChatMessages
   }
   
   async searchChannelMessages(userId: string, searchText: string) {

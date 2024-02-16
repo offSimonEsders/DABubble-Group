@@ -116,6 +116,7 @@ export class UiService {
   
 
   async openChat(chatColl: string, accId: string) {
+    debugger
     if (this.chatService.chats.length === 0) {
       this.createNewPrivateChat(chatColl, accId);
     }
@@ -177,6 +178,7 @@ export class UiService {
   }
 
   async openChannel(collId: string, channelId: string) {
+    debugger
     this.messageService.checkForExistingMessages(collId, channelId);
     this.chatService.getChannel(channelId).then((channel: Channel) => {
       this.chatService.currentChannel = channel;

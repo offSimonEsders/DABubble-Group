@@ -47,6 +47,8 @@ export class SearchBarComponent {
     this.foundChannelMessages = await this.searchService.searchChannelMessages(this.authService.userId, this.input);
     this.foundChatMessages = await this.searchService.searchChatMessages(this.authService.userId, this.input);
     this.showResults = (!(this.foundUsers.length + this.foundChannels.length + this.foundChatMessages.length + this.foundChatMessages.length <= 0))
+
+    console.log(this.foundChatMessages)
   } 
 
   console(){
