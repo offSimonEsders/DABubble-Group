@@ -8,6 +8,8 @@ import { MessageService } from '../../services/message.service';
 import { AccountService } from '../../services/account.service';
 import { Account } from '../../models/account.class';
 import { AuthService } from '../../services/auth.service';
+import { MainChatHeaderComponent } from '../main-chat-header/main-chat-header.component';
+import { UiService } from '../../services/UiService.service';
 
 @Component({
   selector: 'app-chat-intro',
@@ -15,6 +17,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './chat-intro.component.html',
   styleUrl: './chat-intro.component.scss',
   imports: [ChannelBoxComponent, AvatarComponent, CommonModule],
+  providers:[]
 })
 export class ChatIntroComponent implements OnInit, OnDestroy {
   chatSelected!: string;
@@ -26,7 +29,7 @@ export class ChatIntroComponent implements OnInit, OnDestroy {
   messageService!: MessageService;
   private openChatSub!: Subscription;
 
-  constructor() {
+  constructor(private ui:UiService) {
     this.authService = inject(AuthService);
     this.accountService = inject(AccountService);
     this.chatService = inject(ChatService);

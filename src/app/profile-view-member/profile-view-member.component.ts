@@ -36,8 +36,8 @@ export class ProfileViewMemberComponent {
 
   openChat(){
     if(this.openChatBoolean){
-      this.UiService.openChat('chats', this.account.accountId);
       this.openChatBoolean = false;
+      this.UiService.openChat('chats', this.account.accountId);
     }
     this.UiService.setFalseForChatHeader();
     this.UiService.openMobileView();

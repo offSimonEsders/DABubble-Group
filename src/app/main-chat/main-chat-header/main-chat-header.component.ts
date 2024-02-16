@@ -37,6 +37,21 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
     this.authService = inject(AuthService);
     this.chatService = inject(ChatService);
     this.accountService = inject(AccountService);
+    this.openChatSub = this.chatService.openChatEmitter.subscribe({
+      next: (data) => {
+        this.currentCollection = data.chatColl;
+        this.currentChannel = this.chatService.currentChannel;
+        if (data.accountId) {
+
+          this.accountService.getAccount(data.accountId).then((account) => {
+            this.chatWithAccount = account;
+          });
+        }
+        if (this.currentChannel)
+        this.getAllNamesOfChannelMembers();
+      },
+    });
+
   }
 
   /**
@@ -59,20 +74,7 @@ export class MainChatHeaderComponent implements OnInit, OnDestroy {
     this.UiService.EditChatHeadObservableMember$.subscribe((value: boolean) => {
       this.openEditMember = value;
     });
-    this.openChatSub = this.chatService.openChatEmitter.subscribe({
-      next: (data) => {
-        this.currentCollection = data.chatColl;
-        this.currentChannel = this.chatService.currentChannel;
-        if (data.accountId) {
-          this.accountService.getAccount(data.accountId).then((account) => {
-            this.chatWithAccount = account;
-          });
-        }
-        if (this.currentChannel)
-        this.getAllNamesOfChannelMembers();
-      },
-    });
-
+    
   }
 
   openEditViewMember(){

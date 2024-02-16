@@ -58,6 +58,11 @@ export class AvatarComponent implements OnInit, OnChanges, OnDestroy {
         this.setAccount();
       }
     );
+    this.updateAccountId();
+  }
+
+  ngAfterViewInit() {
+    this.updateAccountId();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
