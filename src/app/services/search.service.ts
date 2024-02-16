@@ -53,7 +53,7 @@ export class SearchService {
       querySnapshot.forEach(async (doc) => {
         let message: [Message,string] = [this.createMessage(doc),chat.id]
         if(message[0].message.toLowerCase().indexOf(searchText.toLowerCase()) != -1)
-          ChannelID.push(chat.id)
+          ChannelID.push(chat.memberIds[1])
       });  
     });
     return ChannelID

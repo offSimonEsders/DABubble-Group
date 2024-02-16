@@ -56,7 +56,7 @@
         <div *ngIf="foundChannelMessages.length > 0" class="searchResultsSection">
             <h3 >Messages:</h3>
             <div *ngFor="let message of foundChatMessages; let i = index" class="foundContent" (click)="UiService.openChat('chats', getIdsChats[i]); clearSearch()" >
-                <app-avatar [accountId]="message[0]['messageFrom']" [hideStatus]="true"></app-avatar><span>{{message[1]['message']}}</span>
+                <app-avatar [accountId]="message[0]['messageFrom']" [hideStatus]="true"></app-avatar><span>{{message[0]['message']}}</span>
             </div> 
             <div *ngFor="let message of foundChannelMessages;let i = index" class="foundContent" (click)="UiService.openChannel('channels', getIdsChannels[i]); clearSearch()" >
                 <app-avatar [accountId]="message['messageFrom']" [hideStatus]="true"></app-avatar><span>{{message['message']}}</span>

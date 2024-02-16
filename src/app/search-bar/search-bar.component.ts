@@ -48,8 +48,8 @@ export class SearchBarComponent {
     this.foundChannels = await this.searchService.searchChannels(this.input);
     this.foundChannelMessages = await this.searchService.searchChannelMessages(this.authService.userId, this.input);
     this.getIdsChannels = await this.searchService.searchChannelMessagesIDS(this.authService.userId, this.input);
-    //this.foundChatMessages = await this.searchService.searchChatMessages(this.authService.userId, this.input);
-    //this.getIdsChats = await this.searchService.searchChatMessagesIDS(this.authService.userId, this.input);
+    this.foundChatMessages = await this.searchService.searchChatMessages(this.authService.userId, this.input);
+    this.getIdsChats = await this.searchService.searchChatMessagesIDS(this.authService.userId, this.input);
     this.showResults = (!(this.foundUsers.length + this.foundChannels.length + this.foundChatMessages.length + this.foundChatMessages.length <= 0))
   }
 
