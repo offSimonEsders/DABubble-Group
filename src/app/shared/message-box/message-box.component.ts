@@ -22,6 +22,7 @@ import { ResizeTextareaDirective } from '../message/resize-textarea.directive';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { CommonModule } from '@angular/common';
 import { AvatarComponent } from "../avatar/avatar.component";
+import { ThreadComponent } from '../../thread/thread.component';
 
 @Component({
     selector: 'app-message-box',
@@ -45,11 +46,12 @@ export class MessageBoxComponent implements OnInit {
   emojiEmitter = new EventEmitter<any>();
   userPickerOpened: Boolean = false;
 
-  constructor(private eRef: ElementRef) {
+  constructor() {
     this.authService = inject(AuthService);
     this.chatService = inject(ChatService);
     this.messageService = inject(MessageService);
     this.accountService = inject(AccountService);
+    
   }
 
   ngOnInit(): void {
@@ -87,8 +89,19 @@ export class MessageBoxComponent implements OnInit {
       });
   }
 
+  updatemessage(message: any) {
+    let getMessage = this.messageService.getMessage(message.id)
+
+
+    //.then((doc: any) => { 
+    //   updateDoc(doc, { answerAmount: message.answerAmount + 1});
+    // });
+  }
+
   async sendAnswer() {
     let newAnswer = this.createAnswer();
+    //let message =  this.thred.message;
+    //this.updatemessage(message);
     this.messageService
       .addAnswer(
         newAnswer,
@@ -96,7 +109,8 @@ export class MessageBoxComponent implements OnInit {
         this.messageService.messageId
       )
       .then((doc: any) => {
-        updateDoc(doc, { id: doc.id });
+
+        updateDoc(doc, { id: doc.id});
         this.sendMessageForm.reset();
       });
   }

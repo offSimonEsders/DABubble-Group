@@ -7,6 +7,7 @@ import {
   QuerySnapshot,
   addDoc,
   collection,
+  doc,
   getDoc,
   onSnapshot,
   updateDoc,
@@ -56,6 +57,13 @@ export class MessageService {
     );
     const message = this.createMessage(docSnap);
     return message;
+  }
+
+  async updateAnswerAmount(channelId: string, messageId: string) {
+    const nachrichtRef = doc(this.firestore.db, 'channels', channelId, 'messages', messageId);
+    await updateDoc(nachrichtRef, {
+      answerAmount: + 1
+    });
   }
   
   setMessages() {

@@ -53,6 +53,7 @@ export class ReactionBarComponent {
 
   openSecondaryChat() {
     this.messageService.messageId = this.message.id;
+    debugger
     this.toggleContainerService.toggleContainer({
       element: 'secondary-chat',
       width: '100%',
