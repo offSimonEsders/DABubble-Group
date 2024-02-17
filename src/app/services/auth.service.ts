@@ -32,7 +32,7 @@ export class AuthService {
   provider: GoogleAuthProvider;
   profileViewAccount!: Account;
 
-  constructor(private auth: Auth, private router: Router) {
+  constructor(public auth: Auth, private router: Router) {
     this.accountService = inject(AccountService);
     this.firestoreService = inject(FirestoreService);
     this.provider = new GoogleAuthProvider();

@@ -15,5 +15,5 @@ export const routes: Routes = [
   { path: 'DSGVO', component:DsgvoComponent },
   { path: 'IMPRINT', component: ImprintComponent },
   { path: 'not-found', component: ErrorPageComponent, data: { message: 'Page not Found!' }, },
-  { path: '**', redirectTo: '/not-found' }, // ** Wildcard-Route: Abfangen aller nicht bekannten Pfade *muss als letzes im Array erscheinen
+  { path: '**', redirectTo: '' }, // ** Wildcard-Route: Abfangen aller nicht bekannten Pfade *muss als letzes im Array erscheinen
 ];
