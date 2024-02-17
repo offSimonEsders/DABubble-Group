@@ -9,11 +9,9 @@ import { ImprintComponent } from './imprint/imprint.component';
 
 export const routes: Routes = [
   { path: '', component: UserAccessComponent },
-  { path: 'test', component: HomeComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'DSGVO', component:DsgvoComponent },
   { path: 'IMPRINT', component: ImprintComponent },
-  { path: 'not-found', component: ErrorPageComponent, data: { message: 'Page not Found!' }, },
-  { path: '**', redirectTo: '' }, // ** Wildcard-Route: Abfangen aller nicht bekannten Pfade *muss als letzes im Array erscheinen
+  { path: '**', redirectTo: '' }, 
 ];

@@ -63,4 +63,8 @@ export class LoginComponent implements AfterViewInit {
     this.loginInputFrameEmail.classList.remove('login-failed');
   }
 
+  showPasswort(){
+    this.loginuserpasswordinput.type = (this.loginuserpasswordinput.type === "text") ? "password" : "text";
+  }
+
 }

@@ -13,7 +13,7 @@ export class CheckInputService {
   }
 
   isValidUserpassword(password: string): boolean {
-    let regex = /^(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[a-z\d!@#$%^&*]{8,}$/i;;
+    let regex = /^(?=.*[a-z])[a-z]{4,}$/i;
     return regex.test(password);
   }
 

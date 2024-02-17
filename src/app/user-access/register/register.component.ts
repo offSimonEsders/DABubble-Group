@@ -96,6 +96,10 @@ export class RegisterComponent implements AfterViewInit {
     this.userData.userpassword = this.registrationuserpassword.value;
   }
 
+  showPasswort(){
+    this.registrationuserpassword.type = (this.registrationuserpassword.type === "text") ? "password" : "text";
+  }
+
   resetRegistrationForm() {
     this.registrationusername.value = '';
     this.registrationuseremail.value = '';
