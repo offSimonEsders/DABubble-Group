@@ -69,6 +69,7 @@ export class MessageBoxComponent implements OnInit {
     this.emojiEmitter.subscribe((data) => {
       this.addEmoji(data);
     });    
+    
   }
 
   async onSubmit() {
@@ -89,19 +90,13 @@ export class MessageBoxComponent implements OnInit {
       });
   }
 
-  updatemessage(message: any) {
-    let getMessage = this.messageService.getMessage(message.id)
-
-
-    //.then((doc: any) => { 
-    //   updateDoc(doc, { answerAmount: message.answerAmount + 1});
-    // });
+  async updatemessage(messageID: any,) {
+    let message: Message =  await this.messageService.getMessage(messageID);
+    this.messageService.updateAnswerAmount(this.chatService.currentChannel.id, message.id, message.answerAmount + 1);
   }
 
   async sendAnswer() {
     let newAnswer = this.createAnswer();
-    //let message =  this.thred.message;
-    //this.updatemessage(message);
     this.messageService
       .addAnswer(
         newAnswer,
@@ -109,11 +104,15 @@ export class MessageBoxComponent implements OnInit {
         this.messageService.messageId
       )
       .then((doc: any) => {
-
         updateDoc(doc, { id: doc.id});
         this.sendMessageForm.reset();
       });
-  }
+      this.updatemessage(this.messageService.messageId);
+    
+     
+    }
+    
+  
 
   createMessage() {
     return new Message(

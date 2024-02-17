@@ -61,6 +61,10 @@ export class ThreadComponent implements OnInit, OnDestroy {
         }, 100)
       },
     });
+
+    if(this.message){
+      this.messageService.messageForAnswers = this.message;
+    }
   }
 
   ngOnDestroy(): void {

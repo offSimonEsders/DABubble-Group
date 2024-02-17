@@ -30,6 +30,8 @@ export class MessageService {
   loadedAnswersEmitter = new Subject<boolean>();
   openChatEmitter = new Subject<{ collId: string }>();
 
+  messageForAnswers!: Message;
+
   editChannel!:Channel;
 
   constructor() {
@@ -59,10 +61,10 @@ export class MessageService {
     return message;
   }
 
-  async updateAnswerAmount(channelId: string, messageId: string) {
+  async updateAnswerAmount(channelId: string, messageId: string, answerAmount: number) {
     const nachrichtRef = doc(this.firestore.db, 'channels', channelId, 'messages', messageId);
     await updateDoc(nachrichtRef, {
-      answerAmount: + 1
+      answerAmount: answerAmount
     });
   }
   
