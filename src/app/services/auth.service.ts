@@ -55,18 +55,19 @@ export class AuthService {
     }
   }
 
-  authServiceSignUpWithEmailAndPassword(
+  async authServiceSignUpWithEmailAndPassword(
     user_email: string,
     user_password: string
-  ): any {
-    setPersistence(this.auth, browserLocalPersistence)
+  ): Promise<any> {
+    await setPersistence(this.auth, browserLocalPersistence)
     .then(() => {
       // Existing and future Auth states are now persisted in the current
       // session only. Closing the window would clear any existing state even
       // if a user forgets to sign out.
       // ...
-      // New sign-in will be persisted with session persistence.
+      
       return this.authServiceSignInWithEmailAndPassword(user_email, user_password);
+      
     })
     .catch((error) => {
       // Handle Errors here.

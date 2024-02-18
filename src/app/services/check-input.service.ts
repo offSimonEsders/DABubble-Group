@@ -13,8 +13,10 @@ export class CheckInputService {
   }
 
   isValidUserpassword(password: string): boolean {
-    let regex = /^(?=.*[a-z])[a-z]{4,}$/i;
-    return regex.test(password);
+    if (password.length < 4) {
+      return false;
+    }
+    return true;
   }
 
 }
