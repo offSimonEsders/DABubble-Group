@@ -59,21 +59,14 @@ export class AuthService {
     user_email: string,
     user_password: string
   ): Promise<any> {
-    await setPersistence(this.auth, browserLocalPersistence)
-    .then(() => {
-      // Existing and future Auth states are now persisted in the current
-      // session only. Closing the window would clear any existing state even
-      // if a user forgets to sign out.
-      // ...
-      
-      this.authServiceSignInWithEmailAndPassword(user_email, user_password);
-      
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-    });
+    return createUserWithEmailAndPassword(this.auth, user_email, user_password)
+          .then((userCredential) => {
+            return userCredential.user.uid;
+          })
+          .catch((error) => {
+            console.log('die registrierung ist fehlgeschlagen');
+            return;
+          });
   }
 
   async authServiceSignInWithEmailAndPassword(
