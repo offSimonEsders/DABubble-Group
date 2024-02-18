@@ -66,7 +66,7 @@ export class AuthService {
       // if a user forgets to sign out.
       // ...
       
-      return this.authServiceSignInWithEmailAndPassword(user_email, user_password);
+      this.authServiceSignInWithEmailAndPassword(user_email, user_password);
       
     })
     .catch((error) => {
